@@ -1,0 +1,125 @@
+@import "./_reset";
+.flexBox-between {
+  display: flex;
+  justify-content: space-between;
+}
+.flexBox {
+  display: flex;
+}
+header {
+  padding: 20px 0;
+  .top {
+    > div {
+      align-items: center;
+      h1 {
+        img {
+          border: 1px solid #000;
+          width: 500px;
+        }
+      }
+      .search {
+        position: relative;
+        height: 35px;
+        input {
+          height: inherit;
+          width: 350px;
+          background-color: #f5f6f7;
+          border: none;
+          border-radius: 20px;
+          padding: 10px 20px;
+          margin-left: 20px;
+        }
+        &::before {
+          cursor: pointer;
+          display: block;
+          content: url("../../public/images/icon_search.svg");
+          width: 26px;
+          height: 22px;
+          z-index: 2;
+          position: absolute;
+          top: 50%;
+          right: 10px;
+          transform: translateY(-50%);
+        }
+      }
+    }
+    .profile {
+      width: 45px;
+      height: 45px;
+      background-color: #ddd;
+      border-radius: 50%;
+    }
+    .icon-box {
+      width: 170px;
+      margin-right: 60px;
+      position: relative;
+      img {
+        cursor: pointer;
+        width: 28px;
+      }
+      &::after {
+        content: "";
+        position: absolute;
+        top: 6px;
+        right: -30px;
+        width: 1px;
+        height: 30px;
+        background-color: #eee;
+      }
+    }
+  }
+  .bottom {
+    padding: 20px 0;
+    ul.navigation {
+      width: 280px;
+      align-items: center;
+      li {
+        font-size: 18px;
+        font-weight: 600;
+        &:nth-child(2) {
+          position: relative;
+          margin-right: 25px;
+          &::before {
+            content: "NEW";
+            position: absolute;
+            top: 2px;
+            right: -27px;
+            font-size: 10px;
+            color: #605cff;
+          }
+        }
+      }
+    }
+    > a {
+      display: block;
+      cursor: pointer;
+      color: #605cff;
+      font-weight: 700;
+      padding: 12px 25px;
+      font-size: 17px;
+      border: 2px solid #605cff;
+      border-radius: 50px;
+    }
+  }
+  .location {
+    background-color: #605cff;
+    height: 50px;
+    .minMax {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      height: inherit;
+      > a,
+      p {
+        cursor: pointer;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: inherit;
+        padding: 0 20px;
+        border-left: 1px solid #eeeeee53;
+      }
+    }
+  }
+}
