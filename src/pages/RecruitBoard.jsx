@@ -9,11 +9,13 @@ import { init } from "../store/modules/study";
 
 export default function RecruitBoard() {
   const dispatch = useDispatch();
+
+  // study 데이터 가져와서 state에 적용시키기
   const getStudyInfo = async () => {
     try {
       const res = await axios.get(`http://localhost:4000/study/getdata`);
       dispatch(init(res.data[0]));
-      console.log(res.data);
+      console.log(res.data[0]);
     } catch (err) {
       console.error(err);
     }
