@@ -1,11 +1,5 @@
 @import "./_reset";
-.flexBox-between {
-  display: flex;
-  justify-content: space-between;
-}
-.flexBox {
-  display: flex;
-}
+
 header {
   padding: 20px 0;
   .top {
@@ -50,7 +44,7 @@ header {
       border-radius: 50%;
     }
     .icon-box {
-      width: 170px;
+      width: 160px;
       margin-right: 60px;
       position: relative;
       img {
@@ -60,7 +54,7 @@ header {
       &::after {
         content: "";
         position: absolute;
-        top: 6px;
+        top: 0px;
         right: -30px;
         width: 1px;
         height: 30px;

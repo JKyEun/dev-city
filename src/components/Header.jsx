@@ -1,9 +1,13 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import "../style/_header.scss";
 
 export default function Header() {
-  const [location, setLocation] = useState("데브시티");
+  const [url, setUrl] = useState("/");
+  const location = useLocation();
+  useEffect(() => {
+    setUrl(location.pathname);
+  }, [location]);
   return (
     <header>
       <div className="minMax">
@@ -18,7 +22,7 @@ export default function Header() {
           </div>
           <div className="flexBox">
             <div className="icon-box flexBox-between">
-              <Link to={"/mycity/interest"}>
+              <Link to={"/mycity/like"}>
                 <img src="/images/icon_interest.svg" alt="" />
               </Link>
               <Link to={"/"}>
@@ -48,7 +52,7 @@ export default function Header() {
             </li>
           </ul>
 
-          <Link to={"/"}>스터디 생성하기</Link>
+          <Link to={"/study/create"}>스터디 생성하기</Link>
         </div>
       </div>
       <div className="location">
@@ -56,8 +60,8 @@ export default function Header() {
           <Link to={"/"}>
             <img src="/images/icon_home.svg" alt="home" />
           </Link>
-          <p>{location}</p>
-          <p>{location}</p>
+          <p>{"데브시티"}</p>
+          <p>{"데브시티"}</p>
         </div>
       </div>
     </header>

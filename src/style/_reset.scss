@@ -25,3 +25,11 @@ a {
   margin: 0 auto;
   width: 1200px;
 }
+
+.flexBox-between {
+  display: flex;
+  justify-content: space-between;
+}
+.flexBox {
+  display: flex;
+}
