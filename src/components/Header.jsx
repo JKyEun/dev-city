@@ -8,6 +8,15 @@ export default function Header() {
   useEffect(() => {
     setUrl(location.pathname);
   }, [location]);
+
+  const headerTitle = {
+    mycity: "나의 도시",
+    todo: "나의 할일",
+    create: "생성하기",
+    study: "스터디",
+    faq: "FAQ",
+  };
+
   return (
     <header>
       <div className="minMax">
@@ -28,7 +37,7 @@ export default function Header() {
               <Link to={"/"}>
                 <img src="/images/icon_bell.svg" alt="" />
               </Link>
-              <Link to={"/mycity/todo"}>
+              <Link to={"/mycity?lo=todo"}>
                 <img src="/images/icon_date.svg" alt="" />
               </Link>
             </div>
@@ -60,8 +69,8 @@ export default function Header() {
           <Link to={"/"}>
             <img src="/images/icon_home.svg" alt="home" />
           </Link>
-          <p>{"데브시티"}</p>
-          <p>{"데브시티"}</p>
+          <p>{headerTitle[url.split("/")[1]]}</p>
+          <p>{url.split("/")[2] && headerTitle[url.split("/")[2]]}</p>
         </div>
       </div>
     </header>

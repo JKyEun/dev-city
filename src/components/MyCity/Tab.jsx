@@ -1,22 +1,27 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import '../../style/tab.scss';
-export default function Tab(props) {
-  const [url, setUrl] = useState('/');
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import "../../style/tab.scss";
+import Study from "./Study";
+
+export default function Tab() {
+  const [tab, setTab] = useState("study");
   const location = useLocation();
+
   useEffect(() => {
-    setUrl(location.pathname);
+    location.search.includes("lo=todo") && setTab("todo");
   }, [location]);
+
   return (
-    <div className='tab'>
-      <ul className='flexBox tabBox'>
-        <li className={url === '/mycity' && 'onPage'}>
-          <Link to={'/mycity'}>나의 스터디</Link>
+    <div className="tab">
+      <ul className="flexBox tabBox">
+        <li className={tab === "study" && "onPage"}>
+          <p onClick={() => setTab("study")}>나의 스터디</p>
         </li>
-        <li className={url === '/mycity/todo' && 'onPage'}>
-          <Link to={'/mycity'}>나의 할일 목록</Link>
+        <li className={tab === "todo" && "onPage"}>
+          <p onClick={() => setTab("todo")}>나의 할일 목록</p>
         </li>
       </ul>
+      {tab === "study" ? <Study /> : <h1>todo</h1>}
     </div>
   );
 }
