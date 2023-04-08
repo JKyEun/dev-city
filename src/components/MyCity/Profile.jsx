@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function Profile() {
   const [userInfo, setUserInfo] = useState({});
@@ -14,11 +14,11 @@ export default function Profile() {
   };
 
   useEffect(() => {
-    getUserInfo('jke');
+    getUserInfo("jke");
   }, []);
 
   return (
-    <>
+    <div className="profile">
       <img />
       <div>{userInfo.nickName}</div>
       <div>{userInfo.name}</div>
@@ -33,6 +33,6 @@ export default function Profile() {
         <div>🐈‍⬛ Github</div>
         <div>{userInfo.githubAddress}</div>
       </div>
-    </>
+    </div>
   );
 }

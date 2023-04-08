@@ -1,0 +1,26 @@
+.profile {
+  width: 20%;
+  border: 1px solid #eeeeee;
+  border-radius: 10px;
+}
+.tab {
+  border: 1px solid #eeeeee;
+  border-radius: 10px;
+  width: 78%;
+  padding: 15px 30px;
+  .tabBox {
+    font-size: 16px;
+    border-bottom: 1px solid #eee;
+    a {
+      display: block;
+      padding: 20px;
+    }
+    .onPage {
+      a {
+        color: #605cff;
+        font-weight: 800;
+        border-bottom: 6px solid #605cff;
+      }
+    }
+  }
+}
