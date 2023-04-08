@@ -1,5 +1,9 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import "../../style/recruitBoard/Board.scss";
+
 export default function Board() {
-  return <div className="study">백엔드 모집 어쩌구!</div>;
+  const title = useSelector((state) => state.study.studyIntro);
+
+  return <div className="study">{title}</div>;
 }
