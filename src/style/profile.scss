@@ -1,0 +1,52 @@
+.profile {
+  height: 464px;
+  padding: 25px;
+  text-align: center;
+  .nickName {
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .userName {
+    color: #999;
+    margin-bottom: 20px;
+  }
+
+  .field {
+    color: #d97500;
+    background-color: #ffdba5;
+    border-radius: 15px;
+    padding: 3px 10px;
+    margin: 5px;
+  }
+
+  .level {
+    color: #8fc001;
+    background-color: #e6f1a4;
+    border-radius: 15px;
+    padding: 3px 10px;
+    margin: 5px;
+  }
+
+  hr {
+    margin-top: 50px;
+    border: 0.1px solid #eee;
+  }
+
+  .email {
+    text-align: start;
+    margin-top: 30px;
+    div:first-child {
+      color: #999;
+    }
+  }
+
+  .github {
+    text-align: start;
+    margin-top: 30px;
+    div:first-child {
+      color: #999;
+    }
+  }
+}
