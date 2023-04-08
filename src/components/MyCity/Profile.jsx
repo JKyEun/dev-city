@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import '../../style/profile.scss';
 
 export default function Profile() {
   const [userInfo, setUserInfo] = useState({});
@@ -7,6 +8,7 @@ export default function Profile() {
   const getUserInfo = async (id) => {
     try {
       const res = await axios.get(`http://localhost:4000/user/${id}`);
+      console.log(res.data);
       setUserInfo(res.data);
     } catch (err) {
       console.error(err);
@@ -14,23 +16,26 @@ export default function Profile() {
   };
 
   useEffect(() => {
-    getUserInfo("jke");
+    getUserInfo('jke');
   }, []);
 
   return (
     <div className="profile">
-      <img />
-      <div>{userInfo.nickName}</div>
-      <div>{userInfo.name}</div>
-      <span>{userInfo.interest}</span>
-      <span>Lv.{userInfo.level}</span>
+      <img src="/images/icon_github.svg" alt="프로필 사진" width="98" />
+      <div className="nickName">{userInfo.nickName}</div>
+      <div className="userName">{userInfo.userName}</div>
+      <span className="field">{userInfo.field}</span>
+      <span className="level">Lv.{userInfo.level}</span>
       <hr />
-      <div>
+      <div className="email">
         <div>✉️ Email</div>
         <div>{userInfo.email}</div>
       </div>
-      <div>
-        <div>🐈‍⬛ Github</div>
+      <div className="github">
+        <div>
+          <img src="/images/icon_github.svg" alt="깃허브 아이콘" width="14" />{' '}
+          Github
+        </div>
         <div>{userInfo.githubAddress}</div>
       </div>
     </div>
