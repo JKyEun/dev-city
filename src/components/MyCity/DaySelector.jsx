@@ -1,16 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import '../../style/daySelector.scss';
 
 export default function DaySelector({ selectedDate }) {
   const day = ['일', '월', '화', '수', '목', '금', '토'];
   const [selectedWeek, setSelectedWeek] = useState([]);
+  const selectedDateNum = useRef(selectedDate.getDate());
 
   const setWeek = () => {
-    const curDay = selectedDate.getDay();
-    const curDate = selectedDate.getDate();
-    const lastDate = new Date(
+    const date = new Date(
       selectedDate.getFullYear(),
-      selectedDate.getMonth() + 1,
+      selectedDate.getMonth(),
+      selectedDateNum.current,
+    );
+    const curDay = date.getDay();
+    const curDate = date.getDate();
+    const lastDate = new Date(
+      date.getFullYear(),
+      date.getMonth() + 1,
       0,
     ).getDate();
     // 이번주 날짜 정보를 담을 배열
@@ -31,6 +37,27 @@ export default function DaySelector({ selectedDate }) {
     setSelectedWeek(week);
   };
 
+  const goPrevWeek = () => {
+    if (selectedDateNum.current <= 7) {
+      selectedDateNum.current = 1;
+    } else {
+      selectedDateNum.current -= 7;
+    }
+  };
+
+  const goNextWeek = () => {
+    const lastDate = new Date(
+      selectedDate.getFullYear(),
+      selectedDate.getMonth() + 1,
+      0,
+    ).getDate();
+    if (selectedDateNum.current + 7 > lastDate) {
+      selectedDateNum.current = lastDate;
+    } else {
+      selectedDateNum.current += 7;
+    }
+  };
+
   useEffect(() => {
     // 선택된 날짜 설정
     setWeek();
@@ -38,14 +65,14 @@ export default function DaySelector({ selectedDate }) {
 
   return (
     <div className="daySelector">
-      <div>{'<'}</div>
+      <div onClick={goPrevWeek}>{'<'}</div>
       {selectedWeek.map((el, idx) => (
         <div className="eachDay">
           <div>{el === 0 ? ' ' : day[idx]}</div>
           <div>{el === 0 ? ' ' : el}</div>
         </div>
       ))}
-      <div>{'>'}</div>
+      <div onClick={goNextWeek}>{'>'}</div>
     </div>
   );
 }
