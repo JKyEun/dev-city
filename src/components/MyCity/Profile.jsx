@@ -8,7 +8,6 @@ export default function Profile() {
   const getUserInfo = async (id) => {
     try {
       const res = await axios.get(`http://localhost:4000/user/${id}`);
-      console.log(res.data);
       setUserInfo(res.data);
     } catch (err) {
       console.error(err);

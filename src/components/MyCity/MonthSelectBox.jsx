@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import '../../style/monthSelectBox.scss';
 
 const yearData = [
   { label: '2020년', value: 2020 },

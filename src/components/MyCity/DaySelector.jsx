@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import '../../style/daySelector.scss';
 
-export default function DaySelector({ selectedDate }) {
+export default function DaySelector({ selectedDate, setSelectedDate }) {
   const day = ['일', '월', '화', '수', '목', '금', '토'];
   const [selectedWeek, setSelectedWeek] = useState([]);
   const selectedDateNum = useRef(selectedDate.getDate());
@@ -24,7 +23,7 @@ export default function DaySelector({ selectedDate }) {
 
     // 이번주 날짜 배열에 설정
     for (let i = 0; i < curDay; i++) {
-      if (curDate - curDay > 0) {
+      if (curDate - curDay + i > 0) {
         week[i] = curDate - curDay + i;
       }
     }
@@ -58,21 +57,54 @@ export default function DaySelector({ selectedDate }) {
     }
   };
 
+  const changeSelectedDate = (curDate) => {
+    selectedDateNum.current = curDate;
+    setSelectedDate(
+      new Date(
+        selectedDate.getFullYear(),
+        selectedDate.getMonth(),
+        selectedDateNum.current,
+      ),
+    );
+  };
+
   useEffect(() => {
-    // 선택된 날짜 설정
+    // 마운트 시 선택된 날짜 설정
     setWeek();
-  });
+  }, [selectedDate]);
 
   return (
     <div className="daySelector">
-      <div onClick={goPrevWeek}>{'<'}</div>
+      <div
+        className="prevBtn"
+        onClick={() => {
+          goPrevWeek();
+          setWeek();
+        }}
+      >
+        {'<'}
+      </div>
       {selectedWeek.map((el, idx) => (
-        <div className="eachDay">
-          <div>{el === 0 ? ' ' : day[idx]}</div>
-          <div>{el === 0 ? ' ' : el}</div>
+        <div
+          key={idx}
+          className={
+            selectedDateNum.current === el ? 'eachDay selected' : 'eachDay'
+          }
+          onClick={() => changeSelectedDate(el)}
+        >
+          <div className="day">{el === 0 ? ' ' : day[idx]}</div>
+          <div className="date">{el === 0 ? ' ' : el}</div>
         </div>
       ))}
-      <div onClick={goNextWeek}>{'>'}</div>
+      <div
+        className="nextBtn"
+        onClick={() => {
+          goNextWeek();
+          setWeek();
+        }}
+      >
+        {'>'}
+      </div>
     </div>
   );
 }
