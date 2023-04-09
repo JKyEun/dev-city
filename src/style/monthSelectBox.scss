@@ -1,0 +1,16 @@
+.selectBoxContainer {
+  display: flex;
+
+  li,
+  p {
+    padding: 10px;
+  }
+
+  li.selected {
+    background-color: #ddd;
+  }
+
+  li:hover {
+    background-color: #ddd;
+  }
+}

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import "../../style/tab.scss";
 import Study from "./Study";
+import TodoList from './TodoList';
 
 export default function Tab() {
   const [tab, setTab] = useState("study");
@@ -21,7 +22,7 @@ export default function Tab() {
           <p onClick={() => setTab("todo")}>나의 할일 목록</p>
         </li>
       </ul>
-      {tab === "study" ? <Study /> : <h1>todo</h1>}
+      {tab === "study" ? <Study /> : <TodoList />}
     </div>
   );
 }
