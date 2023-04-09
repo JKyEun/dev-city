@@ -1,23 +1,24 @@
-import React from "react";
 import { useSelector } from "react-redux";
 import "../../style/recruitBoard/Board.scss";
 
 export default function Board() {
-  const title = useSelector((state) => state.study.studyIntro);
-  const skills = useSelector((state) => state.study.skills);
-  const memberNum = useSelector((state) => state.study.memberNum);
-  const createDate = useSelector((state) => state.study.createDate);
+  const studies = useSelector((state) => state.study.studies);
+  console.log(studies);
+  const studiesRender =
+    studies !== undefined &&
+    studies.map((el, idx) => {
+      return (
+        <div className="study" key={idx}>
+          {el.memberNum.currentNum} / {el.memberNum.maxNum}
+          <hr />
+          {el.createDate}
+          <hr />
+          {el.studyIntro}
+          <hr />
+          {el.skills}
+        </div>
+      );
+    });
 
-  return (
-    <div className="study">
-      {createDate}
-      <hr />
-      {memberNum.currentNum}/{memberNum.maxNum}
-      <hr />
-      Title : {title}
-      <hr />
-      Skill :{skills}
-      <hr />
-    </div>
-  );
+  return <div>{studiesRender}</div>;
 }

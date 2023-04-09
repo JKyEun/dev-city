@@ -1,10 +1,5 @@
 // study 데이터 초기상태 설정
-const initState = {
-  studyIntro: "",
-  skills: [],
-  memberNum: {},
-  createDate: "",
-};
+const initState = {};
 
 // Action Type 설정
 const INIT = "study/INIT";
@@ -23,10 +18,7 @@ export default function study(state = initState, action) {
     case INIT:
       return {
         ...state,
-        studyIntro: action.payload.studyIntro,
-        skills: action.payload.skills,
-        memberNum: action.payload.memberNum,
-        createDate: action.payload.createDate,
+        studies: action.payload,
       };
     default:
       return state;

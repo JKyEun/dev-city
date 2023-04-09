@@ -14,8 +14,7 @@ export default function RecruitBoard() {
   const getStudyInfo = async () => {
     try {
       const res = await axios.get(`http://localhost:4000/study/getdata`);
-      dispatch(init(res.data[0]));
-      console.log(res.data[0]);
+      dispatch(init(res.data));
     } catch (err) {
       console.error(err);
     }
