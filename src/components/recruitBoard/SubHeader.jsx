@@ -1,21 +1,39 @@
-import React from "react";
-import "../../style/recruitBoard/SubHeader.scss";
+import React from 'react';
+import '../../style/recruitBoard/SubHeader.scss';
 
 export default function SubHeader() {
   return (
     <div className="skills">
-      <a className="skill" href="/">
+      <span className="skill" href="/">
         전체
-      </a>
-      <a className="skill" href="/">
+      </span>
+      <span className="skill" href="/">
         JavaScript
-      </a>
-      <a className="skill" href="/">
+      </span>
+      <span className="skill" href="/">
+        Nodejs
+      </span>
+      <span className="skill" href="/">
+        Spring
+      </span>
+      <span className="skill" href="/">
         React
-      </a>
-      <a className="skill" href="/">
+      </span>
+      <span className="skill" href="/">
+        Vue
+      </span>
+      <span className="skill" href="/">
         TypeScript
-      </a>
+      </span>
+      <span className="skill" href="/">
+        Figma
+      </span>
+      <span className="skill" href="/">
+        Go
+      </span>
+      <span className="skill" href="/">
+        Nestjs
+      </span>
     </div>
   );
 }
