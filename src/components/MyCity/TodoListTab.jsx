@@ -7,7 +7,7 @@ import '../../style/todoListTab.scss';
 export default function TodoListTab() {
   const [isBoxOpen, setIsBoxOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  console.log(selectedDate);
+
   return (
     <div className="todoListTabWrap">
       <span className="yearMonth">
