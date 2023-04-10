@@ -1,11 +1,25 @@
-.study {
-  width: 250px;
-  height: 220px;
-  border: 1px solid black;
-  margin: 10px 7px;
-}
-.study_board{
- display: flex;
- flex-wrap: wrap; 
- margin-top: 30px;
+.study_board {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 30px;
+
+  .study {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    width: 250px;
+    height: 220px;
+    border: 1px solid #eeeeee;
+    margin: 10px 7px;
+    .study_info-text {
+      .study_info-text-small {
+        font-size: 12px;
+        margin-bottom: 20px;
+        .member_num {
+        }
+        .create_date {
+        }
+      }
+    }
+  }
 }
