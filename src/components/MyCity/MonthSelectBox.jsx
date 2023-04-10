@@ -34,6 +34,14 @@ export default function MonthSelectBox({ setIsBoxOpen, setSelectedDate }) {
     setSelectedMonth(null);
   }
 
+  const onYearClick = (el) => {
+    setSelectedYear(el.value);
+  };
+
+  const onMonthClick = (el) => {
+    setSelectedMonth(el.value);
+  };
+
   return (
     <div className="selectBoxContainer">
       <div className="yearSelect">
@@ -42,7 +50,7 @@ export default function MonthSelectBox({ setIsBoxOpen, setSelectedDate }) {
           {yearData.map((el) => (
             <li
               onClick={() => {
-                setSelectedYear(el.value);
+                onYearClick(el);
               }}
               className={selectedYear === el.value && 'selected'}
               key={el.label}
@@ -58,7 +66,7 @@ export default function MonthSelectBox({ setIsBoxOpen, setSelectedDate }) {
           {monthData.map((el) => (
             <li
               onClick={() => {
-                setSelectedMonth(el.value);
+                onMonthClick(el);
               }}
               className={selectedMonth === el.value && 'selected'}
               key={el.label}

@@ -9,20 +9,24 @@ export default function TodoListTab() {
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   return (
-    <>
+    <div className="todoListTabWrap">
       <span className="yearMonth">
         {selectedDate.getFullYear() +
           '. ' +
           (selectedDate.getMonth() + 1) +
           '.'}
       </span>
-      <span
+      <img
+        src={
+          isBoxOpen
+            ? '/images/icon_expand_up.svg'
+            : 'images/icon_expand_down.svg'
+        }
+        alt="expand"
         onClick={() => {
           setIsBoxOpen((cur) => !cur);
         }}
-      >
-        ⌵
-      </span>
+      />
       {isBoxOpen && (
         <MonthSelectBox
           setIsBoxOpen={setIsBoxOpen}
@@ -34,7 +38,7 @@ export default function TodoListTab() {
         setSelectedDate={setSelectedDate}
       />
       <hr />
-      <TodoList />
-    </>
+      <TodoList selectedDate={selectedDate} />
+    </div>
   );
 }
