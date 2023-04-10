@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import "../../style/recruitBoard/Board.scss";
 
 export default function Board() {
-  const studies = useSelector((state) => state.study);
+  const studies = useSelector((state) => state.study.studies);
   console.log(studies)
   const studiesRender =
     studies !== undefined &&
@@ -15,7 +15,10 @@ export default function Board() {
           <hr />
           {el.studyIntro}
           <hr />
-          {el.skills}
+          <img
+                src={`/images/${el.skills[0]}.PNG`}
+                alt={`${el.skill}이미지`}
+              />
         </div>
       );
     });

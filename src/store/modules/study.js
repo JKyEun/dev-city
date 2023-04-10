@@ -29,9 +29,10 @@ export function create(payload) {
 export default function study(state = initState, action) {
   switch (action.type) {
     case INIT:
-      return [
-        ...action.payload,
-      ];
+      return {
+        ...state,
+        studies: action.payload,
+      };
     case CREATE:
       console.log(action.payload);
       return {
