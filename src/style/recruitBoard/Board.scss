@@ -5,20 +5,40 @@
 
   .study {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    padding: 20px;
+    justify-content: center;
+    padding: 15px;
     width: 250px;
     height: 220px;
     border: 1px solid #eeeeee;
     margin: 10px 7px;
-    .study_info-text {
-      .study_info-text-small {
-        font-size: 12px;
-        margin-bottom: 20px;
-        .member_num {
+    .study_info {
+      .study_info-text {
+        width: 200px;
+        .study_info-text-small {
+          font-size: 12px;
+          margin-bottom: 20px;
         }
-        .create_date {
-        }
+      }
+    }
+  }
+  .study_button ul {
+    display: flex;
+    height: 30px;
+    margin-top: 20px;
+    .study_button-participate {
+      text-align: center;
+      font-size: 14px;
+      line-height: 30px;
+      width: 71px;
+      height: 30px;
+      background-color: #605cff;
+      border-radius: 30px;
+
+      a {
+        font-weight: 700;
+        color: #fff;
       }
     }
   }
