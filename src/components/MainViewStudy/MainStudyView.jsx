@@ -53,7 +53,7 @@ export default function MainStudyView(props) {
             <ul>
               <div className="flexBox">
                 <li className="participate">
-                  <Link to={'./study'}>참가하기</Link>
+                  <Link to={`/study/detail/${study._id}`}>참가하기</Link>
                 </li>
                 <li className="interst">
                   <span onClick={() => handleInterestClick(index)}>
