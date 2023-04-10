@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import MainStudyView from '../MainViewStudy/MainStudyView';
 import MyStudy from '../MyCity/MyStudy';
 import axios from 'axios';
 import '../../style/study.scss';
+import RecentStudy from '../Main/RecentStudy';
 
 export default function Study() {
   const [studyList, setStudyList] = useState([]);
@@ -86,7 +86,7 @@ export default function Study() {
           </div>
         </div>
         <div className="flexBox-start cardBox">
-          <MainStudyView />
+          <RecentStudy />
         </div>
       </div>
     </div>
