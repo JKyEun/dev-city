@@ -75,15 +75,15 @@ export default function DaySelector({ selectedDate, setSelectedDate }) {
 
   return (
     <div className="daySelector">
-      <div
+      <img
+        src="/images/icon_prev.svg"
+        alt="이전으로"
         className="prevBtn"
         onClick={() => {
           goPrevWeek();
           setWeek();
         }}
-      >
-        {'<'}
-      </div>
+      />
       {selectedWeek.map((el, idx) => (
         <div
           key={idx}
@@ -96,15 +96,15 @@ export default function DaySelector({ selectedDate, setSelectedDate }) {
           <div className="date">{el === 0 ? ' ' : el}</div>
         </div>
       ))}
-      <div
+      <img
+        src="/images/icon_next.svg"
+        alt="다음으로"
         className="nextBtn"
         onClick={() => {
           goNextWeek();
           setWeek();
         }}
-      >
-        {'>'}
-      </div>
+      />
     </div>
   );
 }

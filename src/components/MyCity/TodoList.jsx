@@ -21,13 +21,13 @@ export default function TodoList() {
 
   return (
     <div className="todoListWrap">
-      <div>
-        <div>4월 9일</div>
+      <div className="leftSide">
+        <span>4월 9일</span>
         <div>일요일</div>
       </div>
-      <div>
+      <div className="rightSide">
         <input type="text" placeholder="할 일을 추가해주세요" />
-        <span>⏰</span>
+        <img src="/images/icon_time.svg" alt="시간 설정" />
         <button>추가</button>
         <ul>
           {!loading &&
