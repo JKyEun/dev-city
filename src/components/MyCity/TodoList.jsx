@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-export default function TodoList() {
+export default function TodoList({ selectedDate }) {
+  const day = ['일', '월', '화', '수', '목', '금', '토'];
   const [todoList, setTodoList] = useState({});
   const [loading, setLoading] = useState(true);
 
@@ -22,8 +23,10 @@ export default function TodoList() {
   return (
     <div className="todoListWrap">
       <div className="leftSide">
-        <span>4월 9일</span>
-        <div>일요일</div>
+        <span>
+          {selectedDate.getMonth() + 1 + '월 ' + selectedDate.getDate() + '일'}
+        </span>
+        <div>{day[selectedDate.getDay()] + '요일'}</div>
       </div>
       <div className="rightSide">
         <input type="text" placeholder="할 일을 추가해주세요" />

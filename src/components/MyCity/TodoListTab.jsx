@@ -7,7 +7,7 @@ import '../../style/todoListTab.scss';
 export default function TodoListTab() {
   const [isBoxOpen, setIsBoxOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
-
+  console.log(selectedDate);
   return (
     <div className="todoListTabWrap">
       <span className="yearMonth">
@@ -17,7 +17,11 @@ export default function TodoListTab() {
           '.'}
       </span>
       <img
-        src={isBoxOpen ? '/images/icon_expand_up.svg' : 'images/icon_expand_down.svg'}
+        src={
+          isBoxOpen
+            ? '/images/icon_expand_up.svg'
+            : 'images/icon_expand_down.svg'
+        }
         alt="expand"
         onClick={() => {
           setIsBoxOpen((cur) => !cur);
@@ -34,7 +38,7 @@ export default function TodoListTab() {
         setSelectedDate={setSelectedDate}
       />
       <hr />
-      <TodoList />
+      <TodoList selectedDate={selectedDate} />
     </div>
   );
 }

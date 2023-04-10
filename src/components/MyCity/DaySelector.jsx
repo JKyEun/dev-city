@@ -6,16 +6,11 @@ export default function DaySelector({ selectedDate, setSelectedDate }) {
   const selectedDateNum = useRef(selectedDate.getDate());
 
   const setWeek = () => {
-    const date = new Date(
-      selectedDate.getFullYear(),
-      selectedDate.getMonth(),
-      selectedDateNum.current,
-    );
-    const curDay = date.getDay();
-    const curDate = date.getDate();
+    const curDay = selectedDate.getDay();
+    const curDate = selectedDate.getDate();
     const lastDate = new Date(
-      date.getFullYear(),
-      date.getMonth() + 1,
+      selectedDate.getFullYear(),
+      selectedDate.getMonth() + 1,
       0,
     ).getDate();
     // 이번주 날짜 정보를 담을 배열
@@ -33,6 +28,7 @@ export default function DaySelector({ selectedDate, setSelectedDate }) {
       }
     }
 
+    selectedDateNum.current = curDate;
     setSelectedWeek(week);
   };
 
@@ -42,6 +38,14 @@ export default function DaySelector({ selectedDate, setSelectedDate }) {
     } else {
       selectedDateNum.current -= 7;
     }
+
+    const newDate = new Date(
+      selectedDate.getFullYear(),
+      selectedDate.getMonth(),
+      selectedDateNum.current,
+    );
+
+    setSelectedDate(newDate);
   };
 
   const goNextWeek = () => {
@@ -55,6 +59,14 @@ export default function DaySelector({ selectedDate, setSelectedDate }) {
     } else {
       selectedDateNum.current += 7;
     }
+
+    const newDate = new Date(
+      selectedDate.getFullYear(),
+      selectedDate.getMonth(),
+      selectedDateNum.current,
+    );
+
+    setSelectedDate(newDate);
   };
 
   const changeSelectedDate = (curDate) => {
@@ -69,7 +81,7 @@ export default function DaySelector({ selectedDate, setSelectedDate }) {
   };
 
   useEffect(() => {
-    // 마운트 시 선택된 날짜 설정
+    // 선택된 날짜 설정
     setWeek();
   }, [selectedDate]);
 
@@ -79,10 +91,7 @@ export default function DaySelector({ selectedDate, setSelectedDate }) {
         src="/images/icon_prev.svg"
         alt="이전으로"
         className="prevBtn"
-        onClick={() => {
-          goPrevWeek();
-          setWeek();
-        }}
+        onClick={goPrevWeek}
       />
       {selectedWeek.map((el, idx) => (
         <div
@@ -100,10 +109,7 @@ export default function DaySelector({ selectedDate, setSelectedDate }) {
         src="/images/icon_next.svg"
         alt="다음으로"
         className="nextBtn"
-        onClick={() => {
-          goNextWeek();
-          setWeek();
-        }}
+        onClick={goNextWeek}
       />
     </div>
   );

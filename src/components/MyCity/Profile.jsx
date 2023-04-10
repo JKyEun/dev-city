@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 import '../../style/profile.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { init } from '../../store/modules/user';
 
 export default function Profile() {
-  const [userInfo, setUserInfo] = useState({});
+  const dispatch = useDispatch();
+  const userInfo = useSelector((state) => state.user);
 
   const getUserInfo = async (id) => {
     try {
       const res = await axios.get(`http://localhost:4000/user/${id}`);
-      setUserInfo(res.data);
+      dispatch(init(res.data));
     } catch (err) {
       console.error(err);
     }
