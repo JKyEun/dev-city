@@ -23,9 +23,10 @@ export default function Board() {
               <div className="study_intro">{el.studyIntro}</div>
             </div>
             <div className="study_info-skill">
-              {el.skills.map((skill) => {
+              {el.skills.map((skill, idx) => {
                 return (
                   <img
+                    key={`skill_${idx}`}
                     src={`/images/skill_icon/${skill}.svg`}
                     alt={`${skill}이미지`}
                   />
@@ -36,7 +37,7 @@ export default function Board() {
           <div className="study_button">
             <ul>
               <li className="study_button-participate">
-                <Link to={'./study/detail'}>참가하기</Link>
+                <Link to={`/study/detail/${el._id}`}>참가하기</Link>
               </li>
               <li className="interst">
                 <span>
