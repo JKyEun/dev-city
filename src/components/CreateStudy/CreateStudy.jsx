@@ -3,8 +3,8 @@ import React, { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
-import { create } from '../../store/modules/create_study';
 import { useNavigate } from 'react-router-dom';
+import { create } from '../../store/modules/study';
 
 // react-select
 const animatedComponents = makeAnimated();
@@ -87,6 +87,8 @@ export default function CreateStudy() {
     // 200이 들어오면 백엔드에서 작성한
     // '스터디 생성 성공' 뜸
     // 그리고 밑에 navigate() 주소로 이동
+
+    console.log();
 
     dispatch(
       create({

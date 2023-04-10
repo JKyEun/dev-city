@@ -1,5 +1,4 @@
-import { combineReducers } from "redux";
-import study from "./modules/study";
-import create_study from "./modules/create_study";
+import { combineReducers } from 'redux';
+import study from './modules/study';
 
-export default combineReducers({ study, create_study });
+export default combineReducers({ study });
