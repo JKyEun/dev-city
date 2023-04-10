@@ -20,5 +20,5 @@ export default function Board() {
       );
     });
 
-  return <div>{studiesRender}</div>;
+  return <div className="study_board">{studiesRender}</div>;
 }
