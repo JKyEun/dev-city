@@ -2,8 +2,8 @@ import { useSelector } from "react-redux";
 import "../../style/recruitBoard/Board.scss";
 
 export default function Board() {
-  const studies = useSelector((state) => state.study.studies);
-  console.log(studies);
+  const studies = useSelector((state) => state.study);
+  console.log(studies)
   const studiesRender =
     studies !== undefined &&
     studies.map((el, idx) => {
@@ -11,7 +11,7 @@ export default function Board() {
         <div className="study" key={idx}>
           {el.memberNum.currentNum} / {el.memberNum.maxNum}
           <hr />
-          {el.createDate}
+          {new Date(el.createDate).toISOString().substring(0,10)}
           <hr />
           {el.studyIntro}
           <hr />
