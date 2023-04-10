@@ -1,8 +1,30 @@
 import React, { useEffect, useState } from 'react';
+import MainStudyView from '../MainViewStudy/MainStudyView';
+import MyStudy from '../MyCity/MyStudy';
+import axios from 'axios';
 import '../../style/study.scss';
+
 export default function Study() {
-  const building = [1, 2, 8, 9];
-  const [randomNum, setRandomNum] = useState([]);
+  const [studyList, setStudyList] = useState([]);
+  const [building, setBuilding] = useState([]);
+
+  const [randomNum, setRandomNum] = useState([0]);
+
+  const getLikeStudy = async (id) => {
+    axios
+      .get(`http://localhost:4000/user/${id}`)
+      .then((response) => {
+        setStudyList(response.data.studyList);
+        setBuilding(
+          response.data.studyList.map((el) => {
+            return el.building;
+          }),
+        );
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   const handleRandom = async () => {
     let randomIndexArray = [];
@@ -16,16 +38,16 @@ export default function Study() {
     }
     return await setRandomNum((cur) => randomIndexArray);
   };
-
   useEffect(() => {
     handleRandom();
+    getLikeStudy('kkk');
   }, []);
 
   return (
     <div className="studyTab">
       <div className="buildingBox">
         <img className="bg" src="/images/building-bg.svg" />
-        {building.map((el, idx) => {
+        {building?.map((el, idx) => {
           return (
             <img
               className={
@@ -47,6 +69,12 @@ export default function Study() {
             <p className="totalCnt">총 {building.length}개</p>
             <p>| 현재 참여중인 스터디 정보를 보여드릴게요</p>
           </div>
+          <div className="flexBox-start cardBox"></div>
+        </div>
+        <div className="flexBox-start cardBox">
+          {studyList.map((el, idx) => {
+            return <MyStudy key={idx} studyList={el} />;
+          })}
         </div>
       </div>
       <div className="study-like">
@@ -56,6 +84,9 @@ export default function Study() {
             <p className="totalCnt">총 {}개</p>
             <p>| 관심있는 스터디 정보를 보여드릴게요</p>
           </div>
+        </div>
+        <div className="flexBox-start cardBox">
+          <MainStudyView />
         </div>
       </div>
     </div>

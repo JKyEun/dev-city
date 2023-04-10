@@ -70,6 +70,10 @@ header {
       li {
         font-size: 18px;
         font-weight: 600;
+        &.pageIn a {
+          font-weight: 700;
+          color: #605cff;
+        }
         &:nth-child(2) {
           position: relative;
           margin-right: 25px;

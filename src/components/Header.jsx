@@ -50,13 +50,13 @@ export default function Header() {
         </div>
         <div className="flexBox-between bottom">
           <ul className="flexBox-between navigation">
-            <li>
+            <li className={url === '/mycity' && 'pageIn'}>
               <Link to={'/mycity'}>나의 도시</Link>
             </li>
-            <li>
+            <li className={url === '/study' && 'pageIn'}>
               <Link to={'/study'}>스터디</Link>
             </li>
-            <li>
+            <li className={url === '/faq' && 'pageIn'}>
               <Link to={'/faq'}>FAQ</Link>
             </li>
           </ul>

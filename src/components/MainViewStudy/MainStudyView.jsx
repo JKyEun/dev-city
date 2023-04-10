@@ -12,8 +12,6 @@ export default function MainStudyView(props) {
       .get('http://localhost:4000/')
       .then((response) => {
         setStudyList(response.data);
-
-        //
         const interests = Array(response.data.length).fill(false);
         setInterestList(interests);
       })
