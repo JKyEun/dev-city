@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import '../../style/MainStudyView.scss';
+import '../../style/RecentStudy.scss';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-export default function MainStudyView(props) {
+export default function RecentStudy(props) {
   const [interestList, setInterestList] = useState({});
   const [studyList, setStudyList] = useState([]);
 
@@ -39,7 +39,7 @@ export default function MainStudyView(props) {
             {study.skills.map((skill) => (
               <img
                 key={skill}
-                src={`/images/${skill}.png`}
+                src={`/images/skill_icon/${skill}.svg`}
                 alt={`${skill}이미지`}
               />
             ))}
