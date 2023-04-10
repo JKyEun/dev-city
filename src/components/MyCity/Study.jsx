@@ -1,14 +1,50 @@
-import React from "react";
-import "../../style/study.scss";
+import React, { useEffect, useState } from 'react';
+import '../../style/study.scss';
 export default function Study() {
+  const building = [1, 2, 8, 9];
+  const [randomNum, setRandomNum] = useState([]);
+
+  const handleRandom = async () => {
+    let randomIndexArray = [];
+    for (let i = 0; i < building.length; i++) {
+      const randomNum = Math.floor(Math.random() * 9) + 1;
+      if (randomIndexArray.indexOf(randomNum) === -1) {
+        randomIndexArray.push(randomNum);
+      } else {
+        i--;
+      }
+    }
+    return await setRandomNum((cur) => randomIndexArray);
+  };
+
+  useEffect(() => {
+    handleRandom();
+  }, []);
+
   return (
     <div className="studyTab">
-      <img src="/images/icon_bell.svg" />
+      <div className="buildingBox">
+        <img className="bg" src="/images/building-bg.svg" />
+        {building.map((el, idx) => {
+          return (
+            <img
+              className={
+                randomNum.length !== 0
+                  ? `building building${randomNum[idx]}`
+                  : `building building${el}`
+              }
+              key={el}
+              src={`/images/b-${el}.svg`}
+              alt={`building${el}`}
+            />
+          );
+        })}
+      </div>
       <div className="study-my">
         <div className="title">
           <h4>나의 스터디</h4>
           <div className="flexBox">
-            <p className="totalCnt">총 {}개</p>
+            <p className="totalCnt">총 {building.length}개</p>
             <p>| 현재 참여중인 스터디 정보를 보여드릴게요</p>
           </div>
         </div>
