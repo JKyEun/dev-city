@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
-import "../style/_header.scss";
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import '../style/_header.scss';
 
 export default function Header() {
-  const [url, setUrl] = useState("/");
+  const [url, setUrl] = useState('/');
   const location = useLocation();
   useEffect(() => {
     setUrl(location.pathname);
   }, [location]);
 
   const headerTitle = {
-    mycity: "나의 도시",
-    todo: "나의 할일",
-    create: "생성하기",
-    study: "스터디",
-    faq: "FAQ",
+    mycity: '나의 도시',
+    todo: '나의 할일',
+    create: '생성하기',
+    study: '스터디',
+    faq: 'FAQ',
   };
 
   return (
@@ -31,18 +31,18 @@ export default function Header() {
           </div>
           <div className="flexBox">
             <div className="icon-box flexBox-between">
-              <Link to={"/mycity/like"}>
+              <Link to={'/mycity/like'}>
                 <img src="/images/icon_interest.svg" alt="" />
               </Link>
-              <Link to={"/"}>
+              <Link to={'/'}>
                 <img src="/images/icon_bell.svg" alt="" />
               </Link>
-              <Link to={"/mycity?lo=todo"}>
+              <Link to={'/mycity?lo=todo'}>
                 <img src="/images/icon_date.svg" alt="" />
               </Link>
             </div>
             <div className="profile">
-              <Link to={"/mycity"}>
+              <Link to={'/mycity'}>
                 <img src="" alt="profile" />
               </Link>
             </div>
@@ -50,27 +50,29 @@ export default function Header() {
         </div>
         <div className="flexBox-between bottom">
           <ul className="flexBox-between navigation">
-            <li>
-              <Link to={"/mycity"}>나의 도시</Link>
+            <li className={url === '/mycity' && 'pageIn'}>
+              <Link to={'/mycity'}>나의 도시</Link>
             </li>
-            <li>
-              <Link to={"/study"}>스터디</Link>
+            <li className={url === '/study' && 'pageIn'}>
+              <Link to={'/study'}>스터디</Link>
             </li>
-            <li>
-              <Link to={"/faq"}>FAQ</Link>
+            <li className={url === '/faq' && 'pageIn'}>
+              <Link to={'/faq'}>FAQ</Link>
             </li>
           </ul>
 
-          <Link to={"/study/create"}>스터디 생성하기</Link>
+          <Link to={'/study/create'}>스터디 생성하기</Link>
         </div>
       </div>
       <div className="location">
         <div className="minMax">
-          <Link to={"/"}>
+          <Link to={'/'}>
             <img src="/images/icon_home.svg" alt="home" />
           </Link>
-          <p>{headerTitle[url.split("/")[1]]}</p>
-          <p>{url.split("/")[2] && headerTitle[url.split("/")[2]]}</p>
+          <p>
+            {url.split('/')[1] ? headerTitle[url.split('/')[1]] : '데브시티'}
+          </p>
+          <p>{url.split('/')[2] && headerTitle[url.split('/')[2]]}</p>
         </div>
       </div>
     </header>

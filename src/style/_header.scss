@@ -1,7 +1,7 @@
-@import "./_reset";
+@import './_reset';
 
 header {
-  padding: 20px 0;
+  padding-top: 20px;
   .top {
     > div {
       align-items: center;
@@ -26,7 +26,7 @@ header {
         &::before {
           cursor: pointer;
           display: block;
-          content: url("../../public/images/icon_search.svg");
+          content: url('../../public/images/icon_search.svg');
           width: 26px;
           height: 22px;
           z-index: 2;
@@ -52,7 +52,7 @@ header {
         width: 28px;
       }
       &::after {
-        content: "";
+        content: '';
         position: absolute;
         top: 0px;
         right: -30px;
@@ -70,11 +70,15 @@ header {
       li {
         font-size: 18px;
         font-weight: 600;
+        &.pageIn a {
+          font-weight: 700;
+          color: #605cff;
+        }
         &:nth-child(2) {
           position: relative;
           margin-right: 25px;
           &::before {
-            content: "NEW";
+            content: 'NEW';
             position: absolute;
             top: 2px;
             right: -27px;

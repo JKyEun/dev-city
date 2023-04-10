@@ -1,12 +1,13 @@
 @import './_reset';
 .studyBoard {
-  width: 230px;
+  width: 31.8%;
   height: 220px;
   border-radius: 10px;
   border: 1px solid #eee;
   background-color: #ffffff;
   align-items: center;
-  justify-content: center;
+  margin-right: 20px;
+  margin-bottom: 20px;
   padding: 25px;
   position: relative;
   .createDate {

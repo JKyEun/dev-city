@@ -1,10 +1,81 @@
 .studyTab {
-  div[class^="study"] {
+  .buildingBox {
+    width: 100%;
+    position: relative;
+    margin: 200px 0 100px;
+    img.bg {
+      width: 100%;
+    }
+    .building {
+      // border: 1px solid #000;
+      position: absolute;
+    }
+    .building1 {
+      z-index: 9;
+      bottom: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .building2 {
+      z-index: 8;
+      top: 120px;
+      left: 29%;
+    }
+    .building3 {
+      z-index: 7;
+      top: 100px;
+      left: 50%;
+    }
+    .building4 {
+      z-index: 6;
+      top: 0px;
+      left: 40%;
+    }
+    .building5 {
+      z-index: 5;
+      top: 29px;
+      left: 10%;
+    }
+    .building6 {
+      z-index: 4;
+      top: 30px;
+      right: 10%;
+    }
+    .building7 {
+      z-index: 3;
+      top: -45px;
+      right: 27%;
+    }
+    .building8 {
+      z-index: 2;
+      top: -60px;
+      left: 27%;
+    }
+    .building9 {
+      z-index: 1;
+      top: -130px;
+      left: 40%;
+    }
+  }
+  div[class^='study'] {
     .title {
+      margin-bottom: 30px;
+      h4 {
+        font-size: 20px;
+        margin-bottom: 10px;
+      }
       .totalCnt {
         color: #605cff;
         margin-right: 5px;
       }
     }
+    .cardBox {
+      flex-wrap: wrap;
+    }
+  }
+  div.study-like {
+  }
+  .myStudyBoard:nth-child(3n) {
+    margin-right: 0;
   }
 }
