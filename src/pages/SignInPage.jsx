@@ -1,12 +1,9 @@
 import axios from 'axios';
 import React, { useEffect, useRef } from 'react';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { init } from '../store/modules/user';
 
 export default function SignInPage() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const userIdInput = useRef('');
   const passwordInput = useRef('');
 

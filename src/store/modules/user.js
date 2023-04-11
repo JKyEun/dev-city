@@ -40,7 +40,6 @@ export default function user(state = initState, action) {
         todoList: [...state.todoList, action.payload],
       };
     case DELETE_TODO:
-      console.log(action.payload);
       return {
         ...state,
         todoList: [
