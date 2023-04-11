@@ -16,7 +16,6 @@ import { useEffect } from 'react';
 function App() {
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.user);
-
   const getUserInfo = async (id) => {
     try {
       const res = await axios.get(`http://localhost:4000/user/${id}`);
@@ -29,7 +28,7 @@ function App() {
   useEffect(() => {
     if (userInfo.userId === undefined)
       getUserInfo(localStorage.getItem('userId'));
-  });
+  }, []);
 
   return (
     <div className="App">

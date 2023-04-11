@@ -6,9 +6,11 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { init } from '../store/modules/study';
 import '../style/recruitBoard/RecruitBoard.scss';
+import { useNavigate } from 'react-router-dom';
 
 export default function RecruitBoard() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // study 데이터 가져와서 state에 적용시키기
   const getStudyInfo = async () => {
@@ -21,7 +23,10 @@ export default function RecruitBoard() {
   };
   useEffect(() => {
     getStudyInfo();
-  });
+    if (!localStorage.getItem('userId')) {
+      navigate('/signin');
+    }
+  }, []);
   return (
     <>
       <div className="minMax">
