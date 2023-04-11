@@ -1,9 +1,12 @@
 import axios from 'axios';
 import React, { useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { init } from '../store/modules/user';
 
 export default function SignInPage() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const userIdInput = useRef('');
   const passwordInput = useRef('');
 
@@ -26,11 +29,14 @@ export default function SignInPage() {
         console.log(data);
         localStorage.setItem('JWT', data.token);
         localStorage.setItem('userId', account.userId);
+        window.location.reload();
         navigate('/');
       } else {
+        alert('아이디 또는 비밀번호가 틀렸습니다.');
         console.log(`요청실패, status는 ${res.status}`);
       }
     } catch (err) {
+      alert('백엔드 에러');
       console.error(`요청실패, 에러는 ${err}`);
     }
   };

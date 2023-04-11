@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createTodo, removeTodo } from '../../store/modules/user';
 import axios from 'axios';
+import TodoLiEl from './TodoLiEl';
 
 export default function TodoList({ selectedDate }) {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ export default function TodoList({ selectedDate }) {
 
   const addTodo = async (id, e) => {
     e.preventDefault();
+    if (todoInput.current.value === '') return;
 
     try {
       const newTodo = {
@@ -66,25 +68,21 @@ export default function TodoList({ selectedDate }) {
         <div>{day[selectedDate.getDay()] + '요일'}</div>
       </div>
       <div className="rightSide">
-        <form onSubmit={(e) => addTodo('jke', e)}>
+        <form onSubmit={(e) => addTodo(localStorage.getItem('userId'), e)}>
           <input
             type="text"
             placeholder="할 일을 추가해주세요"
             ref={todoInput}
           />
-          <img src="/images/icon_time.svg" alt="시간 설정" />
-          <button>추가</button>
+          <div className="time">
+            {' '}
+            <img src="/images/icon_time.svg" alt="시간 설정" />
+          </div>
+          <button className="addBtn">추가</button>
         </form>
         <ul>
           {todoToday.map((el, idx) => (
-            <li key={idx}>
-              <input type="checkbox" checked={el.isCompleted} />
-              <span>{el.content}</span>
-              <button className="modify">수정</button>
-              <button onClick={() => deleteTodo('jke', el)} className="delete">
-                삭제
-              </button>
-            </li>
+            <TodoLiEl el={el} idx={idx} deleteTodo={deleteTodo} />
           ))}
         </ul>
       </div>
