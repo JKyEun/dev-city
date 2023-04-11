@@ -1,11 +1,11 @@
 import axios from 'axios';
-import React, { useRef } from 'react';
+import React, { Fragment, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import { useNavigate } from 'react-router-dom';
 import { create } from '../../store/modules/study';
-
+import '../../style/createStudy.scss';
 // react-select
 const animatedComponents = makeAnimated();
 
@@ -45,6 +45,7 @@ export default function CreateStudy() {
   const studyFieldSelect = useRef();
   const memberNumSelect = useRef();
   const skillSelect = useRef();
+  const studySystemInput = useRef();
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -61,7 +62,8 @@ export default function CreateStudy() {
       !studyIntroInput.current.value ||
       !studyFieldSelect.current.props.value ||
       !memberNumSelect.current.props.value ||
-      !skillSelect.current.props.value
+      !skillSelect.current.props.value ||
+      !studySystemInput.current.value
     )
       return alert('필수 값을 입력해주세요.');
 
@@ -81,6 +83,7 @@ export default function CreateStudy() {
         member: {},
         board: {},
         structureImg: 'img',
+        study_system: studySystemInput.current.value,
       },
     );
 
@@ -92,8 +95,6 @@ export default function CreateStudy() {
     // 200이 들어오면 백엔드에서 작성한
     // '스터디 생성 성공' 뜸
     // 그리고 밑에 navigate() 주소로 이동
-
-    console.log();
 
     dispatch(
       create({
@@ -114,57 +115,153 @@ export default function CreateStudy() {
     );
     return navigate('/study'); // 일단 생성 완료 시 /study로 가게 함
   };
-  return (
-    <>
-      <h1>1. 스터디의 기본 정보를 입력해주세요. </h1>
-      <p>* 스터디명</p>
-      <input
-        type="text"
-        ref={studyNameInput}
-        placeholder="3~10자 이내로 입력해주세요."
-      />
-      <p>* 모집인원</p>
-      <Select
-        options={numOptions}
-        placeholder="최대 5명까지 선택할 수 있습니다."
-        ref={memberNumSelect}
-      />
 
-      <p>* 모집분야</p>
-      <Select
-        options={fieldOptions}
-        placeholder="프론트엔드 / 백엔드 / 게임 / 기획 등 추후 추가 예정"
-        ref={studyFieldSelect}
-      />
-      <p>* 사용언어</p>
-      <Select
-        closeMenuOnSelect={false}
-        components={animatedComponents}
-        defaultValue={skillOptions[0]}
-        isMulti
-        options={skillOptions}
-        ref={skillSelect}
-      />
-      <h1>2. 스터디에 대해 소개해주세요. </h1>
-      {/* <p>* 스터디 한 줄 소개</p>
-      <input
-        type="text"
-        ref={studyIntroInput}
-        placeholder="30자 이내로 입력해주세요."
-      />
-      <br /> */}
-      <p>* 스터디 소개</p>
-      <textarea
-        name=""
-        id=""
-        cols={40}
-        rows={8}
-        placeholder="스터디 소개"
-        ref={studyIntroInput}
-      ></textarea>
-      <br />
-      <br />
-      <button onClick={createStudyBtn}>스터디 생성하기</button>
-    </>
+  const elementContent = [
+    {
+      title: '기본정보',
+      detail: [
+        {
+          subTitle: '스터디명',
+          require: true,
+          input: (
+            <input
+              className="inputContainer inputBox"
+              type="text"
+              ref={studyNameInput}
+              placeholder="3~10자 이내로 입력해주세요."
+            />
+          ),
+        },
+        {
+          subTitle: '모집인원',
+          require: true,
+          input: (
+            <Select
+              className="inputContainer"
+              options={numOptions}
+              placeholder="최대 5명까지 선택할 수 있습니다."
+              ref={memberNumSelect}
+            />
+          ),
+        },
+        {
+          subTitle: '모집분야',
+          require: true,
+          input: (
+            <Select
+              className="inputContainer"
+              options={fieldOptions}
+              placeholder="프론트엔드 / 백엔드 / 게임 / 기획 등 추후 추가 예정"
+              ref={studyFieldSelect}
+            />
+          ),
+        },
+        {
+          subTitle: '사용언어',
+          require: true,
+          input: (
+            <Select
+              className="inputContainer"
+              closeMenuOnSelect={false}
+              components={animatedComponents}
+              defaultValue={skillOptions[0]}
+              isMulti
+              options={skillOptions}
+              ref={skillSelect}
+            />
+          ),
+        },
+      ],
+    },
+    {
+      title: '세부정보',
+      detail: [
+        {
+          subTitle: '스터디 한줄 소개',
+          require: true,
+          input: (
+            <textarea
+              className="inputContainer"
+              name=""
+              id=""
+              cols={40}
+              rows={8}
+              placeholder="스터디 소개"
+              ref={studyIntroInput}
+            ></textarea>
+          ),
+        },
+        {
+          subTitle: '회의 진행 / 모임 방식',
+          require: false,
+          input: (
+            <textarea
+              className="inputContainer"
+              name=""
+              id=""
+              cols={40}
+              rows={8}
+              placeholder={`- 1주에 몇 번 정도 회의나 모임을 진행할 계획인가요?\n(ex - 1주일에 1회/2회 정도 정기적으로 회의합니다)\n- 온/오프라인 회의 진행시 진행방식을 적어주세요\n(ex - 온라인은 줌을 활용하고, 오프라인은 강남역 카페등을 대관할예정입니다,\n 커뮤니케이션은 슬랙을 위주로 사용합니다 )`}
+              ref={studySystemInput}
+            ></textarea>
+          ),
+        },
+        {
+          subTitle: '기타',
+          require: false,
+          input: (
+            <input
+              className="inputContainer inputBox"
+              type="text"
+              placeholder="기타사항을 입력하세요"
+            />
+          ),
+        },
+      ],
+    },
+  ];
+  return (
+    <div className="minMax flexBox-between">
+      <div className="box-write">
+        <h1>나의 스터디 생성하기</h1>
+        {elementContent.map((el, idx) => {
+          return (
+            <Fragment key={idx}>
+              <h3>{el.title}</h3>
+              <div className="studyInputBox">
+                {el.detail.map((item, idx) => {
+                  return (
+                    <div
+                      key={idx}
+                      className={`flexBox${
+                        el.title === '기본정보' ? '-alignCenter' : ''
+                      } studyInputSubBox`}
+                    >
+                      <p className="subTitle">
+                        {item.subTitle}
+                        {item.require && <span className="require">*</span>}
+                      </p>
+                      {item.input}
+                    </div>
+                  );
+                })}
+              </div>
+            </Fragment>
+          );
+        })}
+      </div>
+      <div className="box-confirm">
+        <div className="percent">
+          <p>% </p>
+          <p>작성이 완료되었습니다.</p>
+        </div>
+        <a className="btn btn--create" onClick={createStudyBtn}>
+          생성하기
+        </a>
+        <a className="btn btn--cancel" onClick={() => navigate('/')}>
+          취소하기
+        </a>
+      </div>
+    </div>
   );
 }

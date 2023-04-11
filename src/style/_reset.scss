@@ -30,9 +30,17 @@ a {
   display: flex;
   justify-content: space-between;
 }
+.flexBox-center {
+  display: flex;
+  justify-content: center;
+}
 .flexBox-start {
   display: flex;
   justify-content: flex-start;
+}
+.flexBox-alignCenter {
+  display: flex;
+  align-items: center;
 }
 .flexBox {
   display: flex;
