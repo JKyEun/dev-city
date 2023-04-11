@@ -30,10 +30,9 @@ export default function StudyDetail({ match }) {
     <div>
       {!loading && study && (
         <>
-          <div className="minMax">
+          <div className="minMax detailDiv">
             <div className="studyTop">
               <div>
-                <h1>구조 수정하는 중~~~</h1>
                 <h1>{study.studyName}</h1>
                 <p>
                   닉네임 |{' '}
@@ -45,10 +44,13 @@ export default function StudyDetail({ match }) {
               <div>
                 <button>참여하기</button>
                 <a href="/">하트</a>
+                <a href="/">수정</a>
+                <a href="/">공유</a>
               </div>
             </div>
             <div className="studyContent">
-              <p>스터디 소개</p>
+              <h2>스터디 소개</h2>
+              <br />
               <p>{study.studyIntro}</p>
             </div>
             <div className="skillsImg">
@@ -60,14 +62,23 @@ export default function StudyDetail({ match }) {
                 />
               ))}
             </div>
-            <div className="studyMember">
-              <p>스터디 멤버</p>
+            <div className="studyMemberDiv">
+              <h2>스터디 멤버</h2>
+              <div className="studyMember">
+                <div>멤버 1</div>
+                <div>멤버 2</div>
+                <div>멤버 3</div>
+                <div>멤버 4</div>
+                <div>멤버 5</div>
+              </div>
             </div>
             <div className="commonGoal">
-              <p>공동목표</p>
+              <h2>공동목표</h2>
+              <div>공동목표</div>
             </div>
-            <div className="studyBoard">
-              <p>스터디 게시판</p>
+            <div className="detailStudyBoard">
+              <h2>스터디 게시판</h2>
+              <div>스터디</div>
             </div>
           </div>
         </>
