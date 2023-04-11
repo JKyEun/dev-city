@@ -7,15 +7,13 @@ export default function Profile() {
   const userInfo = useSelector((state) => state.user);
 
   return (
-    <div className="profile">
-      <ProfileCard
-        nickName={userInfo.nickName}
-        userName={userInfo.userName}
-        field={userInfo.field}
-        level={userInfo.level}
-        email={userInfo.email}
-        githubAddress={userInfo.githubAddress}
-      />
-    </div>
+    <ProfileCard
+      nickName={userInfo.nickName}
+      userName={userInfo.userName}
+      field={userInfo.field}
+      level={userInfo.level}
+      email={userInfo.email}
+      githubAddress={userInfo.githubAddress}
+    />
   );
 }
