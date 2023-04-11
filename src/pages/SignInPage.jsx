@@ -54,7 +54,7 @@ export default function SignInPage() {
         <input
           type="text"
           ref={userIdInput}
-          placeholder="이메일을 입력하세요"
+          placeholder="아이디를 입력하세요"
         />
         <input
           type="password"

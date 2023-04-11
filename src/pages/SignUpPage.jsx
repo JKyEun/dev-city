@@ -1,14 +1,29 @@
 import axios from 'axios';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export default function SignUpPage() {
   const navigate = useNavigate();
   const userIdInput = useRef('');
   const passwordInput = useRef('');
+  const [isAccountValid, setIsAccountValid] = useState(false);
+
+  const checkPassword = () => {
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    if (passwordRegex.test(passwordInput.current.value)) {
+      setIsAccountValid(true);
+    } else {
+      setIsAccountValid(false);
+    }
+  };
 
   const addAccount = async (e) => {
     e.preventDefault();
+
+    if (!isAccountValid) {
+      passwordInput.current.value = '';
+      return alert('비밀번호는 숫자와 영문 조합 8글자 이상이어야 합니다.');
+    }
 
     const account = {
       userId: userIdInput.current.value,
@@ -46,12 +61,13 @@ export default function SignUpPage() {
         <input
           type="text"
           ref={userIdInput}
-          placeholder="이메일을 입력하세요"
+          placeholder="아이디를 입력하세요"
         />
         <input
           type="password"
           ref={passwordInput}
           placeholder="비밀번호를 입력하세요"
+          onChange={checkPassword}
         />
         <button type="submit">회원가입</button>
       </form>
