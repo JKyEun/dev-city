@@ -4,7 +4,9 @@ import '../../style/recruitBoard/Board.scss';
 
 export default function Board() {
   const studies = useSelector((state) => state.study.studies);
-  console.log(studies);
+  const category = useSelector((state) => state.study.category);
+  console.log(category);
+
   const studiesRender =
     studies !== undefined &&
     studies.map((el, idx) => {
