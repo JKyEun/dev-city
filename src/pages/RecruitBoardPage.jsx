@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
-import '../style/recruitBoard/RecruitBoard.scss';
 import Board from '../components/recruitBoard/Board';
 import Sidebar from '../components/recruitBoard/Sidebar';
 import SubHeader from '../components/recruitBoard/SubHeader';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { init } from '../store/modules/study';
+import '../style/recruitBoard/RecruitBoard.scss';
 
 export default function RecruitBoard() {
   const dispatch = useDispatch();
