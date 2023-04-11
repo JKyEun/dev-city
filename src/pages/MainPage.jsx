@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../style/main.scss';
 import RecentStudy from '../components/Main/RecentStudy';
+import Profile from '../components/MyCity/Profile';
 export default function MainPage() {
   return (
     <>
@@ -85,8 +86,10 @@ export default function MainPage() {
       {/* 추천친구 */}
       <div>
         <div className="minMax">
-          <div className="subText">추천친구</div>
-          <div>{/* <AllUsers /> */}</div>
+          <div className="random">
+            <div className="subText">추천친구</div>
+            <div className="randomUsers">{/* <AllUsers /> */}</div>
+          </div>
         </div>
       </div>
     </>

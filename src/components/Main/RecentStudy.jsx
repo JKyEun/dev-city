@@ -7,13 +7,28 @@ export default function RecentStudy(props) {
   const [interestList, setInterestList] = useState({});
   const [studyList, setStudyList] = useState([]);
 
+  // useEffect(() => {
+  //   axios
+  //     .get('http://localhost:4000/study?_sort=createDate&_order=desc&_limit=5')
+  //     .then((response) => {
+  //       setStudyList(response.data);
+  //       const interests = Array(response.data.length).fill(false);
+  //       setInterestList(interests);
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // }, []);
+
   useEffect(() => {
     axios
-      .get('http://localhost:4000/')
+      .get('http://localhost:4000/study')
       .then((response) => {
-        setStudyList(response.data);
-        const interests = Array(response.data.length).fill(false);
-        setInterestList(interests);
+        const sortedStudies = response.data.sort(
+          (a, b) => new Date(b.createDate) - new Date(a.createDate),
+        );
+        const latestStudies = sortedStudies.slice(0, 5);
+        setStudyList(latestStudies);
       })
       .catch((error) => {
         console.error(error);
