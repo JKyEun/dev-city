@@ -30,8 +30,13 @@ const skillOptions = [
   { value: 'javascript', label: 'JavaScript' },
   { value: 'typescript', label: 'TypeScript' },
   { value: 'react', label: 'React' },
-  { value: 'html', label: 'HTML' },
-  { value: 'css', label: 'CSS' },
+  { value: 'vue', label: 'Vue' },
+  { value: 'spring', label: 'Spring' },
+  { value: 'go', label: 'Go' },
+  { value: 'java', label: 'Java' },
+  { value: 'nestjs', label: 'Nestjs' },
+  { value: 'nodejs', label: 'Nodejs' },
+  { value: 'figma', label: 'Figma' },
 ];
 
 export default function CreateStudy() {

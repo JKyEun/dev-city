@@ -5,6 +5,7 @@ const initState = {
   field: '',
   skills: '',
   memberNum: '',
+  loading: false,
 };
 
 // Action Type 설정
@@ -18,6 +19,7 @@ export function init(data) {
     payload: data,
   };
 }
+
 export function create(payload) {
   return {
     type: CREATE,
@@ -42,6 +44,7 @@ export default function study(state = initState, action) {
         field: action.payload.study_field,
         skills: action.payload.skills,
         memberNum: action.payload.member_num,
+        loading: false,
       };
     default:
       return state;
