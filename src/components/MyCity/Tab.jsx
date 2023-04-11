@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import '../../style/tab.scss';
 import Study from './Study';
 import TodoListTab from './TodoListTab';
+import '../../style/tab.scss';
 
 export default function Tab() {
   const [tab, setTab] = useState('study');
@@ -15,10 +15,10 @@ export default function Tab() {
   return (
     <div className="tab">
       <ul className="flexBox tabBox">
-        <li className={tab === 'study' && 'onPage'}>
+        <li className={tab === 'study' ? 'onPage' : ''}>
           <p onClick={() => setTab('study')}>나의 스터디</p>
         </li>
-        <li className={tab === 'todo' && 'onPage'}>
+        <li className={tab === 'todo' ? 'onPage' : ''}>
           <p onClick={() => setTab('todo')}>나의 할일 목록</p>
         </li>
       </ul>

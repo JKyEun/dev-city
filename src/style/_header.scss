@@ -1,19 +1,55 @@
 @import './_reset';
 
 header {
-  padding-top: 20px;
-  .top {
+  .mainHeader {
+    padding: 20px 0;
     > div {
       align-items: center;
       h1 {
         img {
           border: 1px solid #000;
           width: 500px;
+          margin-right: 50px;
         }
+      }
+      ul.navigation {
+        width: 280px;
+        align-items: center;
+        li {
+          font-size: 18px;
+          font-weight: 600;
+          &.pageIn a {
+            font-weight: 700;
+            color: #605cff;
+          }
+          &:nth-child(2) {
+            position: relative;
+            margin-right: 25px;
+            &::before {
+              content: 'NEW';
+              position: absolute;
+              top: 2px;
+              right: -27px;
+              font-size: 10px;
+              color: #605cff;
+            }
+          }
+        }
+      }
+      > a {
+        display: block;
+        cursor: pointer;
+        color: #605cff;
+        font-weight: 700;
+        padding: 12px 25px;
+        font-size: 17px;
+        border: 2px solid #605cff;
+        border-radius: 50px;
       }
       .search {
         position: relative;
         height: 35px;
+        margin-right: 20px;
         input {
           height: inherit;
           width: 350px;
@@ -21,7 +57,6 @@ header {
           border: none;
           border-radius: 20px;
           padding: 10px 20px;
-          margin-left: 20px;
         }
         &::before {
           cursor: pointer;
@@ -37,7 +72,7 @@ header {
         }
       }
     }
-    .profile {
+    .profileImg {
       width: 45px;
       height: 45px;
       background-color: #ddd;
@@ -62,43 +97,7 @@ header {
       }
     }
   }
-  .bottom {
-    padding: 20px 0;
-    ul.navigation {
-      width: 280px;
-      align-items: center;
-      li {
-        font-size: 18px;
-        font-weight: 600;
-        &.pageIn a {
-          font-weight: 700;
-          color: #605cff;
-        }
-        &:nth-child(2) {
-          position: relative;
-          margin-right: 25px;
-          &::before {
-            content: 'NEW';
-            position: absolute;
-            top: 2px;
-            right: -27px;
-            font-size: 10px;
-            color: #605cff;
-          }
-        }
-      }
-    }
-    > a {
-      display: block;
-      cursor: pointer;
-      color: #605cff;
-      font-weight: 700;
-      padding: 12px 25px;
-      font-size: 17px;
-      border: 2px solid #605cff;
-      border-radius: 50px;
-    }
-  }
+
   .location {
     background-color: #605cff;
     height: 50px;

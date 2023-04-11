@@ -5,6 +5,7 @@ import '../style/_header.scss';
 export default function Header() {
   const [url, setUrl] = useState('/');
   const location = useLocation();
+
   useEffect(() => {
     setUrl(location.pathname);
   }, [location]);
@@ -20,48 +21,33 @@ export default function Header() {
   return (
     <header>
       <div className="minMax">
-        <div className="flexBox-between top">
+        <div className="flexBox-between mainHeader">
           <div className="flexBox">
             <h1>
               <img src="" alt="logo" />
             </h1>
+            <ul className="flexBox-between navigation">
+              <li className={url === '/mycity' && 'pageIn'}>
+                <Link to={'/mycity'}>나의 도시</Link>
+              </li>
+              <li className={url === '/study' && 'pageIn'}>
+                <Link to={'/study'}>스터디</Link>
+              </li>
+              <li className={url === '/faq' && 'pageIn'}>
+                <Link to={'/faq'}>FAQ</Link>
+              </li>
+            </ul>
+          </div>
+          <div className="flexBox">
             <div className="search">
               <input type="text" placeholder="스터디 / 챌린지를 검색해주세요" />
             </div>
-          </div>
-          <div className="flexBox">
-            <div className="icon-box flexBox-between">
-              <Link to={'/mycity/like'}>
-                <img src="/images/icon_interest.svg" alt="" />
-              </Link>
-              <Link to={'/'}>
-                <img src="/images/icon_bell.svg" alt="" />
-              </Link>
-              <Link to={'/mycity?lo=todo'}>
-                <img src="/images/icon_date.svg" alt="" />
-              </Link>
-            </div>
-            <div className="profile">
+            <div className="profileImg">
               <Link to={'/mycity'}>
                 <img src="" alt="profile" />
               </Link>
             </div>
           </div>
-        </div>
-        <div className="flexBox-between bottom">
-          <ul className="flexBox-between navigation">
-            <li className={url === '/mycity' && 'pageIn'}>
-              <Link to={'/mycity'}>나의 도시</Link>
-            </li>
-            <li className={url === '/study' && 'pageIn'}>
-              <Link to={'/study'}>스터디</Link>
-            </li>
-            <li className={url === '/faq' && 'pageIn'}>
-              <Link to={'/faq'}>FAQ</Link>
-            </li>
-          </ul>
-
-          <Link to={'/study/create'}>스터디 생성하기</Link>
         </div>
       </div>
       <div className="location">
