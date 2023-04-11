@@ -5,6 +5,11 @@ const initState = {
   field: '',
   skills: '',
   memberNum: '',
+  member: '',
+  board: '',
+  structureImg: '',
+  createDate: '',
+  leaderId: '',
   loading: false,
   category: [],
 };
@@ -47,11 +52,7 @@ export default function study(state = initState, action) {
     case CREATE:
       return {
         ...state,
-        studyName: action.payload.study_name,
-        studyIntro: action.payload.study_intro,
-        field: action.payload.study_field,
-        skills: action.payload.skills,
-        memberNum: action.payload.member_num,
+        ...action.payload,
         loading: false,
       };
     case CHANGE_CATEGORY:
