@@ -47,6 +47,20 @@
   height: 400px;
   .percent {
     text-align: center;
+    margin-bottom: 40px;
+    .percentText {
+      color: #605cff;
+      font-size: 40px;
+      font-weight: 900;
+      span {
+        font-size: 14px;
+      }
+    }
+    .percentSubText {
+      font-size: 14px;
+      margin-top: 5px;
+      color: #999;
+    }
   }
   .btn {
     display: flex;
