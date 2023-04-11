@@ -1,10 +1,16 @@
 import axios from 'axios';
-import React, { Fragment, useRef } from 'react';
+import React, { Fragment, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import { useNavigate } from 'react-router-dom';
 import { create } from '../../store/modules/study';
+import {
+  CircularProgressbar,
+  buildStyles,
+  CircularProgressbarWithChildren,
+} from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 import '../../style/createStudy.scss';
 // react-select
 const animatedComponents = makeAnimated();
@@ -40,6 +46,9 @@ const skillOptions = [
 ];
 
 export default function CreateStudy() {
+  const [percent, setPercent] = useState({
+    skills: [{ value: 'javascript', label: 'JavaScript' }],
+  });
   const studyNameInput = useRef();
   const studyIntroInput = useRef();
   const studyFieldSelect = useRef();
@@ -70,6 +79,7 @@ export default function CreateStudy() {
     const resCreate = await axios.post(
       'http://localhost:4000/study/create_study',
       {
+        userId: localStorage.getItem('userId'),
         study_name: studyNameInput.current.value,
         study_intro: studyIntroInput.current.value,
         study_field: studyFieldSelect.current.props.value.label,
@@ -116,6 +126,13 @@ export default function CreateStudy() {
     return navigate('/study'); // 일단 생성 완료 시 /study로 가게 함
   };
 
+  const handleValue = (e, key) => {
+    if (e !== '') {
+      setPercent({ ...percent, [key]: e });
+    } else {
+      setPercent({ ...percent, [key]: 'empty' });
+    }
+  };
   const elementContent = [
     {
       title: '기본정보',
@@ -125,6 +142,7 @@ export default function CreateStudy() {
           require: true,
           input: (
             <input
+              onChange={(e) => handleValue(e.target.value, 'study_name')}
               className="inputContainer inputBox"
               type="text"
               ref={studyNameInput}
@@ -137,6 +155,7 @@ export default function CreateStudy() {
           require: true,
           input: (
             <Select
+              onChange={(e) => handleValue(e.value, 'member_num')}
               className="inputContainer"
               options={numOptions}
               placeholder="최대 5명까지 선택할 수 있습니다."
@@ -149,6 +168,7 @@ export default function CreateStudy() {
           require: true,
           input: (
             <Select
+              onChange={(e) => handleValue(e.value, 'study_field')}
               className="inputContainer"
               options={fieldOptions}
               placeholder="프론트엔드 / 백엔드 / 게임 / 기획 등 추후 추가 예정"
@@ -161,6 +181,7 @@ export default function CreateStudy() {
           require: true,
           input: (
             <Select
+              onChange={(e) => handleValue(e, 'skills')}
               className="inputContainer"
               closeMenuOnSelect={false}
               components={animatedComponents}
@@ -181,6 +202,7 @@ export default function CreateStudy() {
           require: true,
           input: (
             <textarea
+              onChange={(e) => handleValue(e.target.value, 'study_intro')}
               className="inputContainer"
               name=""
               id=""
@@ -196,6 +218,7 @@ export default function CreateStudy() {
           require: false,
           input: (
             <textarea
+              onChange={(e) => handleValue(e.target.value, 'study')}
               className="inputContainer"
               name=""
               id=""
@@ -220,6 +243,11 @@ export default function CreateStudy() {
       ],
     },
   ];
+
+  const perventage = Object.values(percent).filter((el) => {
+    return el !== 'empty';
+  });
+  console.log(percent);
   return (
     <div className="minMax flexBox-between">
       <div className="box-write">
@@ -252,10 +280,41 @@ export default function CreateStudy() {
       </div>
       <div className="box-confirm">
         <div className="percent">
-          <p>% </p>
-          <p>작성이 완료되었습니다.</p>
+          <CircularProgressbarWithChildren
+            value={perventage.length !== 0 ? (perventage.length / 5) * 100 : 0}
+            // text={`${
+            //   perventage.length !== 0 ? (perventage.length / 5) * 100 : 0
+            // }%`}
+            styles={
+              (buildStyles({
+                textSize: '16px',
+                textColor: '#605CFF',
+              }),
+              {
+                path: {
+                  stroke: `#605CFF`,
+                },
+                text: {
+                  // Text color
+                  fill: '#605CFF',
+                  // Text size
+                  fontSize: '16px',
+                  fontWeight: 700,
+                },
+              })
+            }
+          >
+            <p className="percentText">
+              {perventage.length !== 0 ? (perventage.length / 5) * 100 : 0}
+              <span>%</span>
+            </p>
+            <p className="percentSubText">작성이 완료되었습니다.</p>
+          </CircularProgressbarWithChildren>
         </div>
-        <a className="btn btn--create" onClick={createStudyBtn}>
+        <a
+          className={`btn btn--create ${perventage.length !== 5 && 'disabled'}`}
+          onClick={createStudyBtn}
+        >
           생성하기
         </a>
         <a className="btn btn--cancel" onClick={() => navigate('/')}>
