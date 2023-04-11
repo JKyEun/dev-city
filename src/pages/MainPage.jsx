@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../style/main.scss';
-import AllUsers from '../components/Main/AllUsers';
 import RecentStudy from '../components/Main/RecentStudy';
 export default function MainPage() {
   return (

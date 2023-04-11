@@ -105,9 +105,38 @@
         border: none;
       }
 
+      .time {
+        display: inline-block;
+        border: 1px solid black;
+      }
+
+      .addBtn {
+        width: 70px;
+        height: 35px;
+        border: none;
+        color: white;
+        background-color: #605cff;
+        border-radius: 20px;
+        font-size: 12px;
+        padding: 5px;
+      }
+
       li {
         width: 550px;
         height: 45px;
+
+        .checkbox {
+          display: inline-block;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          border: 1px solid black;
+        }
+
+        .checkbox.checked {
+          border: none;
+          background-color: #605cff;
+        }
 
         .modify {
           border: 1px solid #47cddf;

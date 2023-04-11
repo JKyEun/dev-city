@@ -24,11 +24,11 @@ export default function SignUpPage() {
       if (res.status === 201) {
         navigate('/signin');
       } else {
-        alert('회원가입에 실패했습니다. 다시 시도해주세요.');
+        alert('실패');
         console.log(`요청실패, status는 ${res.status}`);
       }
     } catch (err) {
-      alert('회원가입에 실패했습니다. 다시 시도해주세요.');
+      alert('회원가입에 실패했습니다. 백엔드 에러');
       console.error(`요청실패, 에러는 ${err}`);
     }
   };
