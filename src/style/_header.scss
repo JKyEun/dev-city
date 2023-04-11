@@ -96,6 +96,32 @@ header {
         background-color: #eee;
       }
     }
+    // 로그인X
+
+    .login {
+      width: 70px;
+      height: 25px;
+      border-radius: 30px;
+      text-align: center;
+      line-height: 25px;
+      margin-right: 5px;
+      a {
+        font-size: 14px;
+        color: #222;
+      }
+    }
+    .join {
+      width: 70px;
+      height: 25px;
+      border-radius: 30px;
+      background-color: #222;
+      text-align: center;
+      line-height: 25px;
+      a {
+        font-size: 14px;
+        color: #fff;
+      }
+    }
   }
 
   .location {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import '../style/_header.scss';
+import HeaderDropdown from './HeaderDropdown';
 
 export default function Header() {
   const [url, setUrl] = useState('/');
@@ -17,6 +18,21 @@ export default function Header() {
     study: '스터디',
     faq: 'FAQ',
   };
+
+  // 로그인 상태
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem('JWT');
+    if (token) {
+      setIsLoggedIn(true); // 토큰이 있다면 로그인 상태로 변경
+    } else {
+      setIsLoggedIn(false); // 토큰이 없다면 로그아웃 상태로 변경
+    }
+  }, []);
+
+  // profile 클릭시 드롭다운
+  const [view, setView] = useState(false);
 
   return (
     <header>
@@ -42,11 +58,26 @@ export default function Header() {
             <div className="search">
               <input type="text" placeholder="스터디 / 챌린지를 검색해주세요" />
             </div>
-            <div className="profileImg">
-              <Link to={'/mycity'}>
-                <img src="" alt="profile" />
-              </Link>
-            </div>
+            {/* 로그인 유무 */}
+            {isLoggedIn ? (
+              <div>
+                <div className="profileImg">
+                  <Link to={'/mycity'}>
+                    <img src="" alt="profile" />
+                  </Link>
+                  <HeaderDropdown />
+                </div>
+              </div>
+            ) : (
+              <div className="flexBox">
+                <div className="login">
+                  <Link to={'/signin'}>로그인</Link>
+                </div>
+                <div className="join">
+                  <Link to={'/signup'}>회원가입</Link>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
