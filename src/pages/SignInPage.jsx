@@ -23,7 +23,9 @@ export default function SignInPage() {
 
       if (res.status === 200) {
         const data = res.data;
-        localStorage.setItem('JWT', data);
+        console.log(data);
+        localStorage.setItem('JWT', data.token);
+        localStorage.setItem('userId', account.userId);
         navigate('/');
       } else {
         console.log(`요청실패, status는 ${res.status}`);
