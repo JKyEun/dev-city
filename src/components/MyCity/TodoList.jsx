@@ -28,7 +28,7 @@ export default function TodoList({ selectedDate }) {
         id: Number(new Date()),
         isCompleted: false,
         content: todoInput.current.value,
-        date: new Date().toString(),
+        date: new Date(selectedDate).toString(),
       };
       const res = await axios.post(
         `http://localhost:4000/user/setlist/${id}`,
@@ -76,22 +76,16 @@ export default function TodoList({ selectedDate }) {
           <button>추가</button>
         </form>
         <ul>
-          {todoToday.map((el, idx) => {
-            console.log(el);
-            return (
-              <li key={idx}>
-                <input type="checkbox" checked={el.isCompleted} />
-                <span>{el.content}</span>
-                <button className="modify">수정</button>
-                <button
-                  onClick={() => deleteTodo('jke', el)}
-                  className="delete"
-                >
-                  삭제
-                </button>
-              </li>
-            );
-          })}
+          {todoToday.map((el, idx) => (
+            <li key={idx}>
+              <input type="checkbox" checked={el.isCompleted} />
+              <span>{el.content}</span>
+              <button className="modify">수정</button>
+              <button onClick={() => deleteTodo('jke', el)} className="delete">
+                삭제
+              </button>
+            </li>
+          ))}
         </ul>
       </div>
     </div>
