@@ -1,8 +1,15 @@
 import React from 'react';
 
-export default function ProfileCard({nickName, userName, field, level, email, githubAddress}) {
+export default function ProfileCard({
+  nickName,
+  userName,
+  field,
+  level,
+  email,
+  githubAddress,
+}) {
   return (
-    <>
+    <div className="profile">
       <img src="/images/icon_github.svg" alt="프로필 사진" width="98" />
       <div className="nickName">{nickName}</div>
       <div className="userName">{userName}</div>
@@ -20,6 +27,6 @@ export default function ProfileCard({nickName, userName, field, level, email, gi
         </div>
         <div>{githubAddress}</div>
       </div>
-    </>
+    </div>
   );
 }
