@@ -130,12 +130,12 @@
       .flexBox {
         position: absolute;
         top: 120px;
-        width: 1200px;
+        left: 30px;
+        width: 1100px;
         justify-content: space-around;
         div {
           color: #222;
           text-align: center;
-          // margin-right: 90px;
           img {
           }
           p {
@@ -146,6 +146,11 @@
             }
           }
         }
+        .arrow {
+          margin-top: 70px;
+          width: 23px;
+          height: 23px;
+        }
       }
       .pointImg {
         position: absolute;
@@ -155,5 +160,3 @@
     }
   }
 }
-
-// 추천친구

@@ -15,7 +15,7 @@ export default function RecruitedStudy() {
             </div>
           </div>
           <div className="showStudy flexBox">
-            {/* <RecentStudy /> */}
+            <RecentStudy />
             <div className="plusStudy">
               <Link to={'/study'}>
                 <img src="/images/icon_plus.svg" alt="스터디 더보기"></img>

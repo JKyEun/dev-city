@@ -14,7 +14,7 @@ export default function RecentStudy(props) {
         const sortedStudies = response.data.sort(
           (a, b) => new Date(b.createDate) - new Date(a.createDate),
         );
-        const latestStudies = sortedStudies.slice(0, 5);
+        const latestStudies = sortedStudies.slice(0, 4);
         setStudyList(latestStudies);
       })
       .catch((error) => {
@@ -33,10 +33,11 @@ export default function RecentStudy(props) {
       {studyList.map((study, index) => (
         <div key={study._id} className="studyBoard">
           <div className="createDate">
-            {new Date(study.createDate).toLocaleString()}
+            {new Date(study.createDate).toLocaleString()}|{study.field}
           </div>
+
           <div className="studyName">{study.studyName}</div>
-          <div className="field">{study.field}</div>
+
           <div className="skills">
             {study.skills.map((skill) => (
               <img

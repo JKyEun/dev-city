@@ -30,29 +30,37 @@
         background: #ffffff;
         border: 1px solid #eeeeee;
         border-radius: 10px;
-
+        position: relative;
         div {
           .nickName {
+            margin-bottom: 10px;
           }
           .field {
           }
           .level {
           }
           .friend {
+            position: absolute;
+            left: 50px;
+            bottom: 80px;
             color: #999999;
             font-weight: 400;
             .follow {
+              margin-right: 10px;
               span {
+                margin-left: 5px;
                 font-weight: 600;
               }
             }
             .following {
               span {
+                margin-left: 5px;
                 font-weight: 600;
               }
             }
           }
           .btnFollow {
+            position: absolute;
             width: 226px;
             height: 35px;
             margin-top: 30px;
@@ -61,6 +69,8 @@
             background: #ffffff;
             border: 1px solid #605cff;
             border-radius: 30px;
+            left: 26px;
+            bottom: 25px;
           }
         }
       }
