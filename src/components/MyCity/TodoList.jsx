@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createTodo, removeTodo } from '../../store/modules/user';
+import { createTodo } from '../../store/modules/user';
 import axios from 'axios';
 import TodoLiEl from './TodoLiEl';
 
@@ -56,20 +56,6 @@ export default function TodoList({ selectedDate }) {
     todoInput.current.value = '';
   };
 
-  const deleteTodo = async (id, el) => {
-    try {
-      const todo = { id: el.id };
-      const res = await axios.post(
-        `http://localhost:4000/user/deletelist/${id}`,
-        todo,
-      );
-      console.log(res.data);
-      dispatch(removeTodo(todo));
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
   useEffect(() => {
     setMidnight();
   }, []);
@@ -94,7 +80,7 @@ export default function TodoList({ selectedDate }) {
         </form>
         <ul>
           {todoToday.map((el) => (
-            <TodoLiEl el={el} deleteTodo={deleteTodo} />
+            <TodoLiEl el={el} selectedDate={selectedDate} />
           ))}
         </ul>
       </div>
