@@ -1,5 +1,12 @@
 @import '../_reset';
-
-.center {
-  width: 100%;
+.minMax {
+  .flexBox {
+    margin-top: 30px;
+  }
+  .side {
+    width: 5%;
+  }
+  .center {
+    width: 95%;
+  }
 }

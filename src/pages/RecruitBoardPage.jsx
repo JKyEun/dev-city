@@ -5,8 +5,8 @@ import SubHeader from '../components/recruitBoard/SubHeader';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { init } from '../store/modules/study';
-import '../style/recruitBoard/RecruitBoard.scss';
 import { useNavigate } from 'react-router-dom';
+import '../style/recruitBoard/RecruitBoard.scss';
 
 export default function RecruitBoard() {
   const dispatch = useDispatch();
@@ -30,12 +30,14 @@ export default function RecruitBoard() {
   return (
     <>
       <div className="minMax">
-        <div className="side">
-          <Sidebar />
-        </div>
-        <div className="center">
-          <SubHeader />
-          <Board />
+        <div className="flexBox">
+          <div className="side">
+            <Sidebar />
+          </div>
+          <div className="center">
+            <SubHeader />
+            <Board />
+          </div>
         </div>
       </div>
     </>
