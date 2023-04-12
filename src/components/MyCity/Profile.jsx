@@ -8,6 +8,7 @@ export default function Profile() {
 
   return (
     <ProfileCard
+      profileImg={userInfo.profileImg}
       nickName={userInfo.nickName}
       userName={userInfo.userName}
       field={userInfo.field}

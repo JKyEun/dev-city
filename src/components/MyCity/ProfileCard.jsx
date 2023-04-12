@@ -1,6 +1,7 @@
 import React from 'react';
 
 export default function ProfileCard({
+  profileImg,
   nickName,
   userName,
   field,
@@ -10,7 +11,7 @@ export default function ProfileCard({
 }) {
   return (
     <div className="profile">
-      <img src="/images/icon_github.svg" alt="프로필 사진" width="98" />
+      <img src={profileImg} alt="프로필 사진" width="98" />
       <div className="nickName">{nickName}</div>
       <div className="userName">{userName}</div>
       <span className="field">{field}</span>

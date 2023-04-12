@@ -1,8 +1,14 @@
 import axios from 'axios';
 import React, { useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function SignInPage() {
+  const KAKAO_CLIENT_ID = '8b9d9e6f2ac1ce6697298e70eb30186c';
+  const KAKAO_REDIRECT_URI = 'http://localhost:3000/oauth/callback/kakao';
+  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`;
+  // const KAKAO_LOGOUT_URI = 'http://localhost:3000';
+  // const KAKAO_LOGOUT_URL = `https://kauth.kakao.com/oauth/logout?client_id=${KAKAO_CLIENT_ID}&logout_redirect_uri=${KAKAO_LOGOUT_URI}`;
+
   const navigate = useNavigate();
   const userIdInput = useRef('');
   const passwordInput = useRef('');
@@ -60,6 +66,7 @@ export default function SignInPage() {
         />
         <button type="submit">로그인</button>
       </form>
+      <Link to={KAKAO_AUTH_URL}>카카오 로그인</Link>
     </>
   );
 }

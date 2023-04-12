@@ -36,8 +36,13 @@ export default function SignUpPage() {
         account,
       );
 
+      const data = res.data;
+
       if (res.status === 201) {
-        navigate('/signin');
+        localStorage.setItem('JWT', data.token);
+        localStorage.setItem('userId', account.userId);
+        navigate('/information');
+        window.location.reload();
       } else {
         alert('실패');
         console.log(`요청실패, status는 ${res.status}`);

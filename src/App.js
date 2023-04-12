@@ -12,10 +12,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { init } from './store/modules/user';
 import { useEffect } from 'react';
+import KakaoRedirectHandler from './KakaoRedirectHandler';
+import InsertInformationPage from './pages/InsertInformationPage';
 
 function App() {
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.user);
+
   const getUserInfo = async (id) => {
     try {
       const res = await axios.get(`http://localhost:4000/user/${id}`);
@@ -37,10 +40,15 @@ function App() {
         <Route path="/" element={<MainPage />} />
         <Route path="/signin" element={<SignInPage />} />
         <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/information" element={<InsertInformationPage />} />
         <Route path="/mycity" element={<MyCityPage />} />
         <Route path="/study" element={<RecruitBoardPage />} />
         <Route path="/study/detail/:id" element={<StudyDetailPage />} />
         <Route path="/study/create" element={<CreateStudyPage />} />
+        <Route
+          path="/oauth/callback/kakao"
+          element={<KakaoRedirectHandler />}
+        />
       </Routes>
     </div>
   );
