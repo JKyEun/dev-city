@@ -1,6 +1,6 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createTodo, removeTodo } from '../../store/modules/user';
+import { createTodo } from '../../store/modules/user';
 import axios from 'axios';
 import TodoLiEl from './TodoLiEl';
 
@@ -20,6 +20,11 @@ export default function TodoList({ selectedDate }) {
       curDate,
   );
   const todoInput = useRef();
+  const timeInput = useRef();
+
+  const setMidnight = () => {
+    timeInput.current.value = '00:00';
+  };
 
   const addTodo = async (id, e) => {
     e.preventDefault();
@@ -30,7 +35,13 @@ export default function TodoList({ selectedDate }) {
         id: Number(new Date()),
         isCompleted: false,
         content: todoInput.current.value,
-        date: new Date(selectedDate).toString(),
+        date: new Date(
+          selectedDate.getFullYear(),
+          selectedDate.getMonth(),
+          selectedDate.getDate(),
+          timeInput.current.value.split(':')[0],
+          timeInput.current.value.split(':')[1],
+        ).toString(),
       };
       const res = await axios.post(
         `http://localhost:4000/user/setlist/${id}`,
@@ -45,19 +56,9 @@ export default function TodoList({ selectedDate }) {
     todoInput.current.value = '';
   };
 
-  const deleteTodo = async (id, el) => {
-    try {
-      const todo = { id: el.id };
-      const res = await axios.post(
-        `http://localhost:4000/user/deletelist/${id}`,
-        todo,
-      );
-      console.log(res.data);
-      dispatch(removeTodo(todo));
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  useEffect(() => {
+    setMidnight();
+  }, []);
 
   return (
     <div className="todoListWrap">
@@ -74,15 +75,12 @@ export default function TodoList({ selectedDate }) {
             placeholder="할 일을 추가해주세요"
             ref={todoInput}
           />
-          <div className="time">
-            {' '}
-            <img src="/images/icon_time.svg" alt="시간 설정" />
-          </div>
+          <input type="time" ref={timeInput} />
           <button className="addBtn">추가</button>
         </form>
         <ul>
-          {todoToday.map((el, idx) => (
-            <TodoLiEl el={el} idx={idx} deleteTodo={deleteTodo} />
+          {todoToday.map((el) => (
+            <TodoLiEl el={el} selectedDate={selectedDate} />
           ))}
         </ul>
       </div>

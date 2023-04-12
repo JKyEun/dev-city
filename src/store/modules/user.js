@@ -4,6 +4,8 @@ const initState = {};
 const INIT = 'user/INIT';
 const CREATE_TODO = 'user/CREATE_TODO';
 const DELETE_TODO = 'user/DELETE_TODO';
+const CONVERT_CHECKED = 'user/CONVERT_CHECKED';
+const MODIFY_TODO = 'user/MODIFY_TODO';
 
 // Action 생성 함수
 export function init(payload) {
@@ -27,6 +29,20 @@ export function removeTodo(payload) {
   };
 }
 
+export function convertChecked(payload) {
+  return {
+    type: CONVERT_CHECKED,
+    payload,
+  };
+}
+
+export function modifyTodo(payload) {
+  return {
+    type: MODIFY_TODO,
+    payload,
+  };
+}
+
 // Reducer
 export default function user(state = initState, action) {
   switch (action.type) {
@@ -40,12 +56,27 @@ export default function user(state = initState, action) {
         todoList: [...state.todoList, action.payload],
       };
     case DELETE_TODO:
-      console.log(action.payload);
       return {
         ...state,
         todoList: [
           ...state.todoList.filter((el) => el.id !== action.payload.id),
         ],
+      };
+    case CONVERT_CHECKED:
+      return {
+        ...state,
+        todoList: state.todoList.map((el) =>
+          el.id === action.payload.id
+            ? { ...el, isCompleted: !el.isCompleted }
+            : el,
+        ),
+      };
+    case MODIFY_TODO:
+      return {
+        ...state,
+        todoList: state.todoList.map((el) =>
+          el.id === action.payload.id ? { ...el, ...action.payload } : el,
+        ),
       };
     default:
       return {

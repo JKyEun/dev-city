@@ -95,22 +95,31 @@
     }
 
     .rightSide {
+      position: relative;
       width: 674px;
       input[type='text'] {
         padding-left: 20px;
         background-color: #f5f6f7;
-        width: 450px;
+        width: 464px;
         height: 35px;
         border-radius: 20px;
         border: none;
       }
 
-      .time {
-        display: inline-block;
-        border: 1px solid black;
+      input[type='time'] {
+        margin-left: 10px;
+        width: 120px;
+        height: 35px;
+        background-color: #fff;
+        color: #999;
+        border: 1px solid #eee;
+        border-radius: 20px;
+        padding: 10px;
       }
 
       .addBtn {
+        position: absolute;
+        right: 0px;
         width: 70px;
         height: 35px;
         border: none;
@@ -122,36 +131,122 @@
       }
 
       li {
-        width: 550px;
-        height: 45px;
+        position: relative;
+        width: 674px;
+        height: 50px;
+        margin: 20px 0px 20px;
 
-        .checkbox {
+        .checkDiv {
           display: inline-block;
+          position: relative;
           width: 20px;
           height: 20px;
-          border-radius: 50%;
-          border: 1px solid black;
+          transform: translateY(-16px);
+          .checkbox {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 1px solid #ddd;
+          }
+
+          .checkbox.checked {
+            border: none;
+            background-color: #605cff;
+          }
+
+          .checkImg {
+            position: absolute;
+            top: 3.5px;
+            left: 3.5px;
+            width: 13px;
+            height: 13px;
+          }
         }
 
-        .checkbox.checked {
-          border: none;
-          background-color: #605cff;
+        .contentWrap {
+          margin-left: 15px;
+          .content,
+          .time {
+            height: 25px;
+            line-height: 25px;
+          }
+          .content {
+            font-size: 16px;
+            font-weight: 800;
+          }
+          input.content {
+            width: 300px;
+            padding-left: 10px;
+            font-size: 14px;
+          }
+          .time {
+            color: #999;
+          }
         }
 
         .modify {
+          position: absolute;
           border: 1px solid #47cddf;
+          background-color: #fff;
           color: #47cddf;
           border-radius: 20px;
           font-size: 12px;
-          padding: 5px;
+          padding: 3px 8px;
+          right: 47px;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+
+        form {
+          display: inline-block;
+          .contentWrapInForm {
+            margin-left: 15px;
+            .contentInForm,
+            .timeInForm {
+              height: 22.5px;
+              line-height: 22.5px;
+            }
+            input.contentInForm {
+              font-size: 16px;
+              font-weight: 800;
+              width: 300px;
+              padding-left: 10px;
+              font-size: 14px;
+            }
+            .timeInForm {
+              margin-top: 4.3px;
+              display: block;
+              color: #999;
+              margin-left: -1px;
+            }
+          }
+
+          .modifyInForm {
+            position: absolute;
+            border: 1px solid #47cddf;
+            background-color: #fff;
+            color: #47cddf;
+            border-radius: 20px;
+            font-size: 12px;
+            padding: 3px 8px;
+            right: 47px;
+            top: 50%;
+            transform: translateY(-50%);
+          }
         }
 
         .delete {
+          position: absolute;
           border: 1px solid #ff6868;
+          background-color: #fff;
           color: #ff6868;
           border-radius: 20px;
           font-size: 12px;
-          padding: 5px;
+          padding: 3px 8px;
+          right: 0px;
+          top: 50%;
+          transform: translateY(-50%);
         }
       }
     }
