@@ -66,8 +66,8 @@ export default function Header() {
             {/* 로그인 유무 */}
             {isLoggedIn ? (
               <div>
-                <div className="profileImg">
-                  <img src="" alt="profile" onClick={handleImageClick} />
+                <div className="profileImg" onClick={handleImageClick}>
+                  <img src="" alt="profile" />
                   {showDropdown && <HeaderDropdown />}
                 </div>
               </div>
