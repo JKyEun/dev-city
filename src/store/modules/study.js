@@ -56,9 +56,6 @@ export default function study(state = initState, action) {
         loading: false,
       };
     case CHANGE_CATEGORY:
-      if (action.payload === '전체') {
-        return { ...state, category: [...initState.category] };
-      }
       if (state.category.includes(action.payload)) {
         return {
           ...state,

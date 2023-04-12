@@ -2,6 +2,8 @@
   display: flex;
 }
 .skill {
+  user-select: none;
+  display: inline-block;
   border: 1.5px solid #9999;
   border-radius: 20px;
   padding: 6px 13px;
