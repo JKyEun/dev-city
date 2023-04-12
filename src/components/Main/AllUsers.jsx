@@ -37,10 +37,10 @@ export default function AllUsers() {
                   <span className="level">{`Lv.${user.level}`}</span>
                   <div className="friend">
                     <span className="follow">
-                      Follow<span>{user.follower}</span>
+                      Follow<span>{/* {user.follower} */}10</span>
                     </span>
                     <span className="following">
-                      Following<span>{user.folloing}</span>
+                      Following<span>{/* {user.folloing} */}12</span>
                     </span>
                   </div>
                   <button className="btnFollow">팔로우</button>

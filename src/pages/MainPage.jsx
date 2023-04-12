@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../style/main.scss';
-import RecentStudy from '../components/Main/RecentStudy';
-import Profile from '../components/MyCity/Profile';
 import RecruitedStudy from '../components/Main/RecruitedStudy';
 import CreateProcessStudy from '../components/Main/CreateProcessStudy';
 import AllUsers from '../components/Main/AllUsers';
