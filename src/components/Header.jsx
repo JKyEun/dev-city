@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import '../style/_header.scss';
 import HeaderDropdown from './HeaderDropdown';
@@ -32,7 +32,12 @@ export default function Header() {
   }, []);
 
   // profile 클릭시 드롭다운
-  const [view, setView] = useState(false);
+
+  const [showDropdown, setShowDropdown] = useState(false);
+
+  const handleImageClick = () => {
+    setShowDropdown(!showDropdown); // showDropdown 값을 반전시킴
+  };
 
   return (
     <header>
@@ -62,10 +67,8 @@ export default function Header() {
             {isLoggedIn ? (
               <div>
                 <div className="profileImg">
-                  <Link to={'/mycity'}>
-                    <img src="" alt="profile" />
-                  </Link>
-                  <HeaderDropdown />
+                  <img src="" alt="profile" onClick={handleImageClick} />
+                  {showDropdown && <HeaderDropdown />}
                 </div>
               </div>
             ) : (
