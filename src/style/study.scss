@@ -67,11 +67,15 @@
       .totalCnt {
         color: #605cff;
         margin-right: 5px;
+        font-weight: 600;
       }
     }
     .cardBox {
       flex-wrap: wrap;
     }
+  }
+  div.study-my {
+    margin-bottom: 20px;
   }
   div.study-like {
   }

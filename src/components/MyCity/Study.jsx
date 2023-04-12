@@ -37,11 +37,7 @@ export default function Study() {
         {building?.map((el, idx) => {
           return (
             <img
-              className={
-                // randomNum.length !== 0
-                //   ? `building building${randomNum[idx]}`:
-                `building building${randomNum[idx]}`
-              }
+              className={`building building${randomNum[idx]}`}
               src={`/images/b-${el}.svg`}
               key={el}
               alt={`building${el}`}
@@ -56,7 +52,6 @@ export default function Study() {
             <p className="totalCnt">총 {building.length}개</p>
             <p>| 현재 참여중인 스터디 정보를 보여드릴게요</p>
           </div>
-          <div className="flexBox-start cardBox"></div>
         </div>
         <div className="flexBox-start cardBox">
           {studyList.map((el, idx) => {
