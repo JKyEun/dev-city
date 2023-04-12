@@ -11,7 +11,7 @@ export default function Board() {
     if (selectedCategory.length === 0) {
       return true;
     }
-    if (intersectionArr.length > 0) {
+    if (intersectionArr.length === selectedCategory.length) {
       return true;
     } else {
       return false;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { changeCategory } from '../../store/modules/study';
 import '../../style/recruitBoard/SubHeader.scss';
@@ -9,38 +9,34 @@ export default function SubHeader() {
     const action = changeCategory(skillName);
     dispatch(action);
   };
+
+  const element = [
+    '전체',
+    'JavaScript',
+    'Nodejs',
+    'React',
+    'Vue',
+    'TypeScript',
+    'Nextjs',
+    'Java',
+    'Spring',
+    'Go',
+    'Nestjs',
+  ];
+
   return (
     <div className="skills">
-      <span className="skill" onClick={() => handleSkillClick('전체')}>
-        전체
-      </span>
-      <span className="skill" onClick={() => handleSkillClick('JavaScript')}>
-        JavaScript
-      </span>
-      <span className="skill" onClick={() => handleSkillClick('Nodejs')}>
-        Nodejs
-      </span>
-      <span className="skill" onClick={() => handleSkillClick('Spring')}>
-        Spring
-      </span>
-      <span className="skill" onClick={() => handleSkillClick('React')}>
-        React
-      </span>
-      <span className="skill" onClick={() => handleSkillClick('Vue')}>
-        Vue
-      </span>
-      <span className="skill" onClick={() => handleSkillClick('TypeScript')}>
-        TypeScript
-      </span>
-      <span className="skill" onClick={() => handleSkillClick('Figma')}>
-        Figma
-      </span>
-      <span className="skill" onClick={() => handleSkillClick('Go')}>
-        Go
-      </span>
-      <span className="skill" onClick={() => handleSkillClick('Nestjs')}>
-        Nestjs
-      </span>
+      {element.map((el) => {
+        return (
+          <span
+            key={el}
+            className={'skill'}
+            onClick={() => handleSkillClick(el)}
+          >
+            {el}
+          </span>
+        );
+      })}
     </div>
   );
 }
