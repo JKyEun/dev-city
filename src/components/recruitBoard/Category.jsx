@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { changeCategory } from '../../store/modules/study';
-import '../../style/recruitBoard/SubHeader.scss';
+import '../../style/recruitBoard/Category.scss';
 
 export default function SubHeader() {
   const dispatch = useDispatch();
