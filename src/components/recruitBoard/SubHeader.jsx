@@ -14,7 +14,7 @@ export default function SubHeader() {
       <span className="skill" onClick={() => handleSkillClick('전체')}>
         전체
       </span>
-      <span className="skill" onClick={() => handleSkillClick('Javascript')}>
+      <span className="skill" onClick={() => handleSkillClick('JavaScript')}>
         JavaScript
       </span>
       <span className="skill" onClick={() => handleSkillClick('Nodejs')}>
