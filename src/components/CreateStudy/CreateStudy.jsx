@@ -36,6 +36,7 @@ const skillOptions = [
   { value: 'javascript', label: 'JavaScript' },
   { value: 'typescript', label: 'TypeScript' },
   { value: 'react', label: 'React' },
+  { value: 'nextjs', label: 'Nextjs' },
   { value: 'vue', label: 'Vue' },
   { value: 'spring', label: 'Spring' },
   { value: 'go', label: 'Go' },
@@ -46,9 +47,7 @@ const skillOptions = [
 ];
 
 export default function CreateStudy() {
-  const [percent, setPercent] = useState({
-    skills: [{ value: 'javascript', label: 'JavaScript' }],
-  });
+  const [percent, setPercent] = useState({});
   const studyNameInput = useRef();
   const studyIntroInput = useRef();
   const studyFieldSelect = useRef();
@@ -229,7 +228,6 @@ export default function CreateStudy() {
           require: false,
           input: (
             <textarea
-              onChange={(e) => handleValue(e.target.value, 'study')}
               className="inputContainer"
               name=""
               id=""
