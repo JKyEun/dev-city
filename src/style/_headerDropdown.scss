@@ -1,0 +1,37 @@
+.dropdown {
+  width: 101px;
+  height: 119px;
+  margin-top: 18px;
+  margin-left: -30px;
+  background: #ffffff;
+  border: 1px solid #eeeeee;
+  box-shadow: 0px 2px 10px rgba(174, 174, 174, 0.23);
+  border-radius: 5px;
+  text-align: center;
+  font-size: 14px;
+  z-index: 1;
+  ul {
+    padding: 7px 0;
+
+    li {
+      margin-top: 13px;
+      a {
+        color: #222222;
+      }
+    }
+  }
+  hr {
+    margin: 15px 0;
+    width: 90%;
+    margin: 0 auto;
+    border: none;
+    height: 1px;
+    background-color: #eeeeee;
+  }
+  div {
+    margin-top: 10px;
+    a {
+      color: #ff7b7b;
+    }
+  }
+}

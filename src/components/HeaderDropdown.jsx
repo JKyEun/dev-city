@@ -1,14 +1,23 @@
 import React from 'react';
 import '../style/_headerDropdown.scss';
+import { Link } from 'react-router-dom';
 export default function HeaderDropdown() {
   return (
     <>
-      <ul>
-        <li>나의 스터디</li>
-        <li>나의 할일</li>
+      <div className="dropdown">
+        <ul>
+          <li>
+            <Link to={'/mycity'}>나의 스터디</Link>
+          </li>
+          <li>
+            <Link to={'/mycity'}>나의 할일</Link>
+          </li>
+        </ul>
         <hr />
-        <li>로그아웃</li>
-      </ul>
+        <div>
+          <Link to={'/'}>로그아웃</Link>
+        </div>
+      </div>
     </>
   );
 }
