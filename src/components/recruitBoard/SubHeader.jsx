@@ -1,17 +1,30 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { changeCategory } from '../../store/modules/study';
 import '../../style/recruitBoard/SubHeader.scss';
 
 export default function SubHeader() {
   const dispatch = useDispatch();
-  const handleSkillClick = (skillName) => {
+  const handleSkillClick = (e, skillName) => {
+    if (e.target.style.borderColor === '' || e.target.style.color === '') {
+      e.target.style.borderColor = 'rgba(153,153,153,0.6)';
+      e.target.style.color = 'rgba(153,153,153,0.6)';
+    }
+    if (
+      e.target.style.borderColor === 'rgba(153, 153, 153, 0.6)' ||
+      e.target.style.color === 'rgba(153, 153, 153, 0.6)'
+    ) {
+      e.target.style.borderColor = '#605cff';
+      e.target.style.color = '#605cff';
+    } else {
+      e.target.style.borderColor = 'rgba(153,153,153,0.6)';
+      e.target.style.color = '#000000';
+    }
     const action = changeCategory(skillName);
     dispatch(action);
   };
 
   const element = [
-    '전체',
     'JavaScript',
     'Nodejs',
     'React',
@@ -31,7 +44,7 @@ export default function SubHeader() {
           <span
             key={el}
             className={'skill'}
-            onClick={() => handleSkillClick(el)}
+            onClick={(e) => handleSkillClick(e, el)}
           >
             {el}
           </span>
