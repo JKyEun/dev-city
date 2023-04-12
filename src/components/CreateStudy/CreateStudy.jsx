@@ -55,6 +55,7 @@ export default function CreateStudy() {
   const memberNumSelect = useRef();
   const skillSelect = useRef();
   const studySystemInput = useRef();
+  const etcInput = useRef();
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -71,8 +72,8 @@ export default function CreateStudy() {
       !studyIntroInput.current.value ||
       !studyFieldSelect.current.props.value ||
       !memberNumSelect.current.props.value ||
-      !skillSelect.current.props.value ||
-      !studySystemInput.current.value
+      !skillSelect.current.props.value
+      // || !studySystemInput.current.value
     )
       return alert('필수 값을 입력해주세요.');
 
@@ -82,6 +83,7 @@ export default function CreateStudy() {
         userId: localStorage.getItem('userId'),
         study_name: studyNameInput.current.value,
         study_intro: studyIntroInput.current.value,
+        study_system: studySystemInput.current.value,
         study_field: studyFieldSelect.current.props.value.label,
         skills: skillsArr,
         member_num: {
@@ -90,10 +92,16 @@ export default function CreateStudy() {
             memberNumSelect.current.props.value.label.split('명'),
           ),
         },
-        member: {},
+        member: [
+          {
+            isLeader: true,
+            memberId: localStorage.getItem('userId'),
+          },
+        ],
         board: {},
         structureImg: 'img',
         study_system: studySystemInput.current.value,
+        study_etc: etcInput.current.value,
       },
     );
 
@@ -108,8 +116,10 @@ export default function CreateStudy() {
 
     dispatch(
       create({
+        userId: localStorage.getItem('userId'),
         study_name: studyNameInput.current.value,
         study_intro: studyIntroInput.current.value,
+        study_system: studySystemInput.current.value,
         study_field: studyFieldSelect.current.props.value.label,
         skills: skillsArr,
         member_num: {
@@ -121,6 +131,7 @@ export default function CreateStudy() {
         member: {},
         board: {},
         structureImg: 'img',
+        study_etc: etcInput.current.value,
       }),
     );
     return navigate('/study'); // 일단 생성 완료 시 /study로 가게 함
@@ -185,9 +196,9 @@ export default function CreateStudy() {
               className="inputContainer"
               closeMenuOnSelect={false}
               components={animatedComponents}
-              defaultValue={skillOptions[0]}
               isMulti
               options={skillOptions}
+              placeholder="사용 언어를 선택해주세요."
               ref={skillSelect}
             />
           ),
@@ -237,6 +248,7 @@ export default function CreateStudy() {
               className="inputContainer inputBox"
               type="text"
               placeholder="기타사항을 입력하세요"
+              ref={etcInput}
             />
           ),
         },

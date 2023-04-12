@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import '../../style/detail.scss';
@@ -26,6 +26,44 @@ export default function StudyDetail({ match }) {
     fetchStudyData();
   }, [dispatch, match.params.id]);
 
+  // useEffect(() => {
+  //   const fetchStudyData = async () => {
+  //     try {
+  //       dispatch(fetchStudy(match.params.id));
+  //       const response = await axios.get(
+  //         `http://localhost:4000/study/detail/${match.params.id}`,
+  //       );
+  //       const study = response.data;
+
+  //       const currentUserMemberId = localStorage.getItem('userId');
+  //       const isLeader =
+  //         Array.isArray(study.member) &&
+  //         study.member.some(
+  //           (member) =>
+  //             member.isLeader && member.memberId === currentUserMemberId,
+  //         );
+  //       const canJoin =
+  //         !isLeader &&
+  //         Array.isArray(study.member) &&
+  //         !study.member.some(
+  //           (member) => member.memberId === currentUserMemberId,
+  //         );
+
+  //       dispatch(
+  //         setStudy({
+  //           ...study,
+  //           canJoin: canJoin,
+  //           isLeader: isLeader,
+  //         }),
+  //       );
+  //     } catch (err) {
+  //       console.error(err);
+  //     }
+  //   };
+
+  //   fetchStudyData();
+  // }, [dispatch, match.params.id]);
+
   return (
     <div>
       {!loading && study && (
@@ -41,6 +79,8 @@ export default function StudyDetail({ match }) {
                     : '날짜 정보 없음'}
                 </p>
               </div>
+
+              {/* 해당 스터디 가입 유무 */}
               <div>
                 <button>참여하기</button>
                 <a href="/">하트</a>
@@ -48,6 +88,7 @@ export default function StudyDetail({ match }) {
                 <a href="/">공유</a>
               </div>
             </div>
+
             <div className="studyContent">
               <h2>스터디 소개</h2>
               <br />
