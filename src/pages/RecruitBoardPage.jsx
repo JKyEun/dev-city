@@ -30,7 +30,7 @@ export default function RecruitBoard() {
   return (
     <>
       <div className="minMax">
-        <div className="flexBox">
+        <div className="studyboard_main">
           <div className="side">
             <Sidebar />
           </div>
