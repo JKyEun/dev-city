@@ -8,6 +8,9 @@ export default function Board() {
 
   const findCategory = (el) => {
     const intersectionArr = selectedCategory.filter((x) => el.includes(x));
+    if (selectedCategory.length === 0) {
+      return true;
+    }
     if (intersectionArr.length > 0) {
       return true;
     } else {
