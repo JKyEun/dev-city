@@ -42,7 +42,7 @@ export default function ReadyStudy({ item, idx, userId }) {
             );
           })}
         </ul>
-        <span className="ellipsis">{item?.skills.length >= 4 && '...'}</span>
+        <span className="ellipsis">{item?.skills.length > 4 && '...'}</span>
       </div>
       <p className="memberCount">
         <span>{`${item.memberNum.maxNum}`}</span>명 중{' '}

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import '../../style/MyStudy.scss';
 
 export default function MyStudy({ studyList }) {
+  console.log(studyList);
   const date = new Date(studyList.createDate);
 
   return (
@@ -29,7 +30,7 @@ export default function MyStudy({ studyList }) {
           })}
         </ul>
         <span className="ellipsis">
-          {studyList?.skills.length >= 4 && '...'}
+          {studyList?.skills.length > 4 && '...'}
         </span>
       </div>
     </Link>

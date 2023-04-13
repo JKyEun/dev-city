@@ -3,12 +3,10 @@ import MyStudy from '../MyCity/MyStudy';
 import ReadyStudy from '../Main/ReadyStudy';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
 import { init } from '../../store/modules/study';
 import '../../style/study.scss';
 
 import axios from 'axios';
-import Studies from '../recruitBoard/Studies';
 export default function Study() {
   const [num, setNum] = useState(0);
   const userInfo = useSelector((state) => state.user);
@@ -23,7 +21,7 @@ export default function Study() {
       const id = localStorage.getItem('userId');
       const resUser = await axios.get(`http://localhost:4000/user/${id}`);
       const result = resStudy.data?.filter((study) => {
-        return resUser.data?.likeStudyList?.includes(study._id);
+        return resUser.data?.likedStudy?.includes(study._id);
       });
       setLikeStudy(result);
     } catch (err) {
@@ -90,7 +88,7 @@ export default function Study() {
         <div className="title">
           <h4>관심 스터디</h4>
           <div className="flexBox">
-            <p className="totalCnt">총 {userInfo?.likeStudyList?.length}개</p>
+            <p className="totalCnt">총 {userInfo?.likedStudy?.length}개</p>
             <p>| 관심있는 스터디 정보를 보여드릴게요</p>
           </div>
         </div>
