@@ -17,7 +17,6 @@ const animatedComponents = makeAnimated();
 
 // select 데이터들
 const numOptions = [
-  { value: 'one', label: '1명' },
   { value: 'two', label: '2명' },
   { value: 'three', label: '3명' },
   { value: 'four', label: '4명' },
@@ -60,80 +59,78 @@ export default function CreateStudy() {
   const navigate = useNavigate();
 
   const createStudyBtn = async () => {
-    let skills = skillSelect.current.props.value;
-    let skillsArr = [];
-    for (let i = 0; i < skills.length; i++) {
-      skillsArr.push(skills[i].label);
-    }
+    try {
+      let skills = skillSelect.current.props.value;
+      let skillsArr = [];
+      for (let i = 0; i < skills.length; i++) {
+        skillsArr.push(skills[i].label);
+      }
 
-    if (
-      !studyNameInput.current.value ||
-      !studyIntroInput.current.value ||
-      !studyFieldSelect.current.props.value ||
-      !memberNumSelect.current.props.value ||
-      !skillSelect.current.props.value
-      // || !studySystemInput.current.value
-    )
-      return alert('필수 값을 입력해주세요.');
+      if (
+        !studyNameInput.current.value ||
+        !studyIntroInput.current.value ||
+        !studyFieldSelect.current.props.value ||
+        !memberNumSelect.current.props.value ||
+        !skillSelect.current.props.value
+        // || !studySystemInput.current.value
+      )
+        return alert('필수 값을 입력해주세요.');
 
-    const resCreate = await axios.post(
-      'http://localhost:4000/study/create_study',
-      {
-        userId: localStorage.getItem('userId'),
-        study_name: studyNameInput.current.value,
-        study_intro: studyIntroInput.current.value,
-        study_system: studySystemInput.current.value,
-        study_field: studyFieldSelect.current.props.value.label,
-        skills: skillsArr,
-        member_num: {
-          currentNum: 0,
-          maxNum: parseInt(
-            memberNumSelect.current.props.value.label.split('명'),
-          ),
-        },
-        member: [
-          {
-            isLeader: true,
-            memberId: localStorage.getItem('userId'),
+      const resCreate = await axios.post(
+        'http://localhost:4000/study/create_study',
+        {
+          userId: localStorage.getItem('userId'),
+          study_name: studyNameInput.current.value,
+          study_intro: studyIntroInput.current.value,
+          study_system: studySystemInput.current.value,
+          study_field: studyFieldSelect.current.props.value.label,
+          skills: skillsArr,
+          member_num: {
+            currentNum: 1,
+            maxNum: parseInt(
+              memberNumSelect.current.props.value.label.split('명'),
+            ),
           },
-        ],
-        board: {},
-        structureImg: 'img',
-        study_system: studySystemInput.current.value,
-        study_etc: etcInput.current.value,
-      },
-    );
-
-    if (resCreate.status !== 200) return alert(resCreate.data);
-    // 백엔드에서 에러 멘트 적어둔거
-    // 200이 아니면 여기서 함수 자체가 종료
-
-    alert(resCreate.data);
-    // 200이 들어오면 백엔드에서 작성한
-    // '스터디 생성 성공' 뜸
-    // 그리고 밑에 navigate() 주소로 이동
-
-    dispatch(
-      create({
-        userId: localStorage.getItem('userId'),
-        study_name: studyNameInput.current.value,
-        study_intro: studyIntroInput.current.value,
-        study_system: studySystemInput.current.value,
-        study_field: studyFieldSelect.current.props.value.label,
-        skills: skillsArr,
-        member_num: {
-          currentNum: 0,
-          maxNum: parseInt(
-            memberNumSelect.current.props.value.label.split('명'),
-          ),
+          member: [
+            {
+              isLeader: true,
+              memberId: localStorage.getItem('userId'),
+            },
+          ],
+          board: {},
+          structureImg: 'img',
+          study_system: studySystemInput.current.value,
+          study_etc: etcInput.current.value,
         },
-        member: {},
-        board: {},
-        structureImg: 'img',
-        study_etc: etcInput.current.value,
-      }),
-    );
-    return navigate('/study'); // 일단 생성 완료 시 /study로 가게 함
+      );
+
+      alert(resCreate.data);
+
+      dispatch(
+        create({
+          userId: localStorage.getItem('userId'),
+          study_name: studyNameInput.current.value,
+          study_intro: studyIntroInput.current.value,
+          study_system: studySystemInput.current.value,
+          study_field: studyFieldSelect.current.props.value.label,
+          skills: skillsArr,
+          member_num: {
+            currentNum: 1,
+            maxNum: parseInt(
+              memberNumSelect.current.props.value.label.split('명'),
+            ),
+          },
+          member: {},
+          board: {},
+          structureImg: 'img',
+          study_etc: etcInput.current.value,
+        }),
+      );
+      return navigate('/study');
+    } catch (err) {
+      alert(err.response.data);
+      console.error(err);
+    }
   };
 
   const handleValue = (e, key) => {
