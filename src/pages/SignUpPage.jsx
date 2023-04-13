@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../style/signUpPage.scss';
 
 export default function SignUpPage() {
   const navigate = useNavigate();
@@ -60,22 +61,54 @@ export default function SignUpPage() {
   });
 
   return (
-    <>
-      <h1>회원 가입</h1>
+    <div className="signUpWrap">
+      <h2>회원가입</h2>
+      <div className="intro">Dev-City에 오신 것을 환영합니다</div>
       <form onSubmit={addAccount} className="sign-form">
-        <input
-          type="text"
-          ref={userIdInput}
-          placeholder="아이디를 입력하세요"
-        />
-        <input
-          type="password"
-          ref={passwordInput}
-          placeholder="비밀번호를 입력하세요"
-          onChange={checkPassword}
-        />
-        <button type="submit">회원가입</button>
+        <div>
+          <label for="idInput">
+            아이디 <span>*</span>
+          </label>
+          <input
+            id="idInput"
+            type="text"
+            ref={userIdInput}
+            placeholder="아이디를 입력해주세요"
+          />
+        </div>
+        <div className="pwInputWrap">
+          <label for="pwInput">
+            비밀번호 <span>*</span>
+          </label>
+          <input
+            id="pwInput"
+            type="password"
+            ref={passwordInput}
+            placeholder="비밀번호를 입력해주세요"
+            onChange={checkPassword}
+          />
+        </div>
+        <div>
+          <div className="filler"> </div>
+          <span className="valid">* 숫자, 영문 포함 8글자 이상</span>
+        </div>
+        <div>
+          <label for="pwInputRepeat">
+            비밀번호 확인 <span>*</span>
+          </label>
+          <input
+            id="pwInputRepeat"
+            type="password"
+            placeholder="다시 한 번 입력해주세요"
+            disabled
+          />
+        </div>
+
+        <button className="signUpBtn" type="submit">
+          회원가입
+        </button>
       </form>
-    </>
+      <div className="returnLogin">로그인으로 돌아가기</div>
+    </div>
   );
 }

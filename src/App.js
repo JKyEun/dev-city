@@ -14,6 +14,7 @@ import { init } from './store/modules/user';
 import { useEffect } from 'react';
 import KakaoRedirectHandler from './KakaoRedirectHandler';
 import InsertInformationPage from './pages/InsertInformationPage';
+import GithubRedirectHandler from './GithubRedirectHandler';
 
 function App() {
   const dispatch = useDispatch();
@@ -29,7 +30,7 @@ function App() {
   };
 
   useEffect(() => {
-    if (userInfo.userId === undefined)
+    if (userInfo.userId === undefined && localStorage.getItem('JWT'))
       getUserInfo(localStorage.getItem('userId'));
   }, []);
 
@@ -48,6 +49,10 @@ function App() {
         <Route
           path="/oauth/callback/kakao"
           element={<KakaoRedirectHandler />}
+        />
+        <Route
+          path="/oauth/callback/github"
+          element={<GithubRedirectHandler />}
         />
       </Routes>
     </div>
