@@ -1,12 +1,32 @@
-.skiils {
+.subheader {
   display: flex;
-}
-.skill {
-  user-select: none;
-  display: inline-block;
-  border: 1.5px solid #9999;
-  border-radius: 20px;
-  padding: 6px 13px;
-  margin: 0 7px;
-  cursor: pointer;
+  justify-content: space-between;
+  align-items: center;
+  padding: 35px 0px;
+  border-bottom: 1px solid #dddddd;
+  .subheader_text {
+    p:first-child {
+      font-size: 25px;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+    p:nth-child(2) {
+      span {
+        color: #605cff;
+      }
+    }
+  }
+  .subheader_createbutton {
+    text-align: center;
+    font-size: 16px;
+    line-height: 40px;
+    padding: 0 20px;
+    height: 40px;
+    background-color: #605cff;
+    border-radius: 20px;
+    a {
+      color: #fff;
+      font-weight: 700;
+    }
+  }
 }

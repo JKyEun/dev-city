@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import Board from '../components/recruitBoard/Board';
 import Sidebar from '../components/recruitBoard/Sidebar';
+import Category from '../components/recruitBoard/Category';
 import SubHeader from '../components/recruitBoard/SubHeader';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
@@ -30,12 +31,15 @@ export default function RecruitBoard() {
   return (
     <>
       <div className="minMax">
+        <div className="studyboard_subheader">
+          <SubHeader />
+        </div>
         <div className="studyboard_main">
           <div className="side">
             <Sidebar />
           </div>
           <div className="center">
-            <SubHeader />
+            <Category />
             <Board />
           </div>
         </div>

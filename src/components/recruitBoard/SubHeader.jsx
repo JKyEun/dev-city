@@ -1,55 +1,25 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { changeCategory } from '../../store/modules/study';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import '../../style/recruitBoard/SubHeader.scss';
-
 export default function SubHeader() {
-  const dispatch = useDispatch();
-  const handleSkillClick = (e, skillName) => {
-    if (e.target.style.borderColor === '' || e.target.style.color === '') {
-      e.target.style.borderColor = 'rgba(153,153,153,0.6)';
-      e.target.style.color = 'rgba(153,153,153,0.6)';
+  const studies = useSelector((state) => state.study.studies);
+  const totalStudyNumber = () => {
+    if (studies !== undefined) {
+      return studies.length;
     }
-    if (
-      e.target.style.borderColor === 'rgba(153, 153, 153, 0.6)' ||
-      e.target.style.color === 'rgba(153, 153, 153, 0.6)'
-    ) {
-      e.target.style.borderColor = '#605cff';
-      e.target.style.color = '#605cff';
-    } else {
-      e.target.style.borderColor = 'rgba(153,153,153,0.6)';
-      e.target.style.color = '#000000';
-    }
-    const action = changeCategory(skillName);
-    dispatch(action);
   };
-
-  const element = [
-    'JavaScript',
-    'Nodejs',
-    'React',
-    'Vue',
-    'TypeScript',
-    'Nextjs',
-    'Java',
-    'Spring',
-    'Go',
-    'Nestjs',
-  ];
-
   return (
-    <div className="skills">
-      {element.map((el) => {
-        return (
-          <span
-            key={el}
-            className={'skill'}
-            onClick={(e) => handleSkillClick(e, el)}
-          >
-            {el}
-          </span>
-        );
-      })}
+    <div className="subheader">
+      <div className="subheader_text">
+        <p>스터디</p>
+        <p>
+          <span>총 {totalStudyNumber()}개</span> | 다양한 스터디를 확인 해보세요
+        </p>
+      </div>
+      <div className="subheader_createbutton">
+        <Link to={'/study/create'}>스터디 생성하기</Link>
+      </div>
     </div>
   );
 }
