@@ -1,12 +1,11 @@
 import { useSelector } from 'react-redux';
 import '../../style/recruitBoard/Board.scss';
 import ReadyStudy from '../Main/ReadyStudy';
-import Studies from './Studies';
 
 export default function Board() {
   const studies = useSelector((state) => state.study.studies);
   const selectedCategory = useSelector((state) => state.study.category);
-  const user = useSelector((state) => state.user._id);
+  const user = useSelector((state) => state.user.userId);
   const findCategory = (el) => {
     const intersectionArr = selectedCategory.filter((x) => el.includes(x));
     if (selectedCategory.length === 0) {
@@ -23,8 +22,7 @@ export default function Board() {
     studies !== undefined &&
     studies.map((el, idx) => {
       if (findCategory(el.skills)) {
-        return <ReadyStudy item={el} />;
-        // return <Studies el={el} idx={idx} userId={user} />;
+        return <ReadyStudy item={el} userId={user} />;
       }
     });
 
