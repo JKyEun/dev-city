@@ -5,7 +5,7 @@ import Studies from './Studies';
 export default function Board() {
   const studies = useSelector((state) => state.study.studies);
   const selectedCategory = useSelector((state) => state.study.category);
-
+  const user = useSelector((state) => state.user._id);
   const findCategory = (el) => {
     const intersectionArr = selectedCategory.filter((x) => el.includes(x));
     if (selectedCategory.length === 0) {
@@ -22,7 +22,7 @@ export default function Board() {
     studies !== undefined &&
     studies.map((el, idx) => {
       if (findCategory(el.skills)) {
-        return <Studies el={el} idx={idx} />;
+        return <Studies el={el} idx={idx} userId={user} />;
       }
     });
 

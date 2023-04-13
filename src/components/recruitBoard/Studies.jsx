@@ -1,12 +1,21 @@
+import axios from 'axios';
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import '../../style/recruitBoard/Board.scss';
+import '../../style/recruitBoard/Studies.scss';
 
-export default function Studies({ el, idx }) {
-  const [toggle, setToggle] = useState(false);
-
-  const likeBtnClickEvenet = () => {
-    setToggle((cur) => !cur);
+export default function Studies({ el, idx, userId }) {
+  const [btnToggle, setBtnToggle] = useState('off');
+  const likeBtnClickEvenet = async () => {
+    if (btnToggle === 'off') {
+      setBtnToggle('on');
+      await axios.post('http://localhost:4000/study/like', {
+        userId: userId,
+        studyId: el._id,
+      });
+    } else {
+      setBtnToggle('off');
+    }
   };
 
   return (
@@ -46,7 +55,9 @@ export default function Studies({ el, idx }) {
                 onClick={(e) => {
                   likeBtnClickEvenet(e);
                 }}
-                src={`./images/icon_heart${toggle ? 'on' : 'off'}.svg`}
+                src={`./images/icon_heart${
+                  btnToggle === 'on' ? 'on' : 'off'
+                }.svg`}
                 alt="heart"
               />
             </span>

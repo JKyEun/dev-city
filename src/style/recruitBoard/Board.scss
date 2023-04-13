@@ -3,44 +3,4 @@
   flex-wrap: wrap;
   width: 100%;
   margin-top: 30px;
-
-  .study {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 15px;
-    width: 23.64%;
-    height: 220px;
-    border: 1px solid #eeeeee;
-    margin: 10px 7px;
-    .study_info {
-      .study_info-text {
-        width: 200px;
-        .study_info-text-small {
-          font-size: 12px;
-          margin-bottom: 20px;
-        }
-      }
-    }
-  }
-  .study_button ul {
-    display: flex;
-    height: 30px;
-    margin-top: 20px;
-    .study_button-participate {
-      text-align: center;
-      font-size: 14px;
-      line-height: 30px;
-      width: 71px;
-      height: 30px;
-      background-color: #605cff;
-      border-radius: 30px;
-
-      a {
-        font-weight: 700;
-        color: #fff;
-      }
-    }
-  }
 }
