@@ -1,15 +1,29 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../../style/study.scss';
-export default function ReadyStudy({ item }) {
+
+export default function ReadyStudy({ item, idx, userId }) {
   const date = new Date(item.createDate);
 
-  const handleLike = (e) => {
+  const [btnToggle, setBtnToggle] = useState('off');
+
+  const handleLike = async (e) => {
     e.preventDefault();
-    console.log('click');
+    if (btnToggle === 'off') {
+      setBtnToggle('on');
+      await axios.post('http://localhost:4000/study/like', {
+        userId: userId,
+        studyId: item._id,
+      });
+    } else {
+      setBtnToggle('off');
+    }
   };
+
   return (
     <Link
+      key={idx}
       to={`/study/detail/${item._id}`}
       className="likeStudyBox studyContainer"
     >
@@ -35,7 +49,10 @@ export default function ReadyStudy({ item }) {
         <span> {`${item.memberNum.currentNum}`}</span>명 모집됨
       </p>
       <div className="clickHeart" onClick={(e) => handleLike(e)}>
-        <img src="/images/icon_heartOn.svg" alt="heart" />
+        <img
+          src={`./images/icon_heart${btnToggle === 'on' ? 'on' : 'off'}.svg`}
+          alt="heart"
+        />
       </div>
     </Link>
   );
