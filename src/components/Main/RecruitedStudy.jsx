@@ -24,7 +24,7 @@ export default function RecruitedStudy() {
   useEffect(() => {
     getStudyInfo();
     if (!localStorage.getItem('userId')) {
-      navigate('/signin');
+      navigate('/');
     }
   }, []);
   return (

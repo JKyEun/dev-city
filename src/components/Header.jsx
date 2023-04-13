@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import '../style/_header.scss';
 import HeaderDropdown from './HeaderDropdown';
 
-export default function Header() {
+export default function Header({ profileImg }) {
   const [url, setUrl] = useState('/');
   const location = useLocation();
 
@@ -80,7 +80,7 @@ export default function Header() {
             {isLoggedIn ? (
               <div ref={dropdownRef}>
                 <div className="profileImg" onClick={handleImageClick}>
-                  <img src="" alt="profile" />
+                  <img src="/" alt="profile" />
                   {showDropdown && <HeaderDropdown />}
                 </div>
               </div>
