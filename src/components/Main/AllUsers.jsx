@@ -24,23 +24,23 @@ export default function AllUsers() {
             <div className="subText">비슷한 분야의 사람들을 팔로우해보세요</div>
           </div>
           <div className="flexBox">
-            {randomUsers.map((user) => (
+            {randomUsers.map((allUser) => (
               <div className="profile">
-                <div key={user.id}>
+                <div key={allUser.id}>
                   <img
                     src="/images/icon_github.svg"
                     alt="프로필 사진"
                     width="98"
                   />
-                  <div className="nickName">{user.nickName}</div>
-                  <span className="field">{user.field}</span>
-                  <span className="level">{`Lv.${user.level}`}</span>
+                  <div className="nickName">{allUser.nickName}</div>
+                  <span className="field">{allUser.field}</span>
+                  <span className="level">{`Lv.${allUser.level}`}</span>
                   <div className="friend">
                     <span className="follow">
-                      Follow<span>{/* {user.follower} */}10</span>
+                      Follow<span>{/* {allUser.follower} */}10</span>
                     </span>
                     <span className="following">
-                      Following<span>{/* {user.folloing} */}12</span>
+                      Following<span>{/* {allUser.folloing} */}12</span>
                     </span>
                   </div>
                   <button className="btnFollow">팔로우</button>
