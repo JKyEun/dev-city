@@ -80,7 +80,7 @@ export default function TodoList({ selectedDate }) {
         </form>
         <ul>
           {todoToday.map((el) => (
-            <TodoLiEl el={el} selectedDate={selectedDate} />
+            <TodoLiEl key={el} el={el} selectedDate={selectedDate} />
           ))}
         </ul>
       </div>

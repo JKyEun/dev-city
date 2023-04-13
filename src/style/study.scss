@@ -109,8 +109,25 @@
     margin-bottom: 20px;
   }
   div.study-like {
+    .likeStudyBox {
+      position: relative;
+      .memberCount {
+        margin-top: 15px;
+
+        color: #999;
+        span {
+          font-weight: 600;
+          color: #605cff;
+        }
+      }
+      .clickHeart {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+      }
+    }
   }
-  .myStudyBoard:nth-child(3n) {
+  .studyContainer:nth-child(3n) {
     margin-right: 0;
   }
 }

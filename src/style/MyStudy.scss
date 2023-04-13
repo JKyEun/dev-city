@@ -1,4 +1,4 @@
-.myStudyBoard {
+.studyContainer {
   width: 31.8%;
   position: relative;
   border-radius: 10px;
@@ -19,9 +19,7 @@
     padding: 4px 12px;
     font-size: 13px;
   }
-  &:hover {
-    border: 1px solid #605cff;
-  }
+
   p.date {
     color: #999;
   }
@@ -49,6 +47,10 @@
   span.ellipsis {
     position: absolute;
     right: 25px;
-    bottom: 40px;
+  }
+}
+.myStudyContainer {
+  &:hover {
+    border: 1px solid #605cff;
   }
 }

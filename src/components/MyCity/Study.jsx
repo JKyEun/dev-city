@@ -1,72 +1,64 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MyStudy from '../MyCity/MyStudy';
-import axios from 'axios';
-import '../../style/study.scss';
 import ReadyStudy from '../Main/ReadyStudy';
+import { useSelector, useDispatch } from 'react-redux';
+import '../../style/study.scss';
+import { init } from '../../store/modules/study';
 
+import axios from 'axios';
 export default function Study() {
-  const [randomNum, setRandomNum] = useState();
-  const [studyList, setStudyList] = useState([]);
-  const [likeStudyList, setLikeStudyList] = useState([]);
-  const [building, setBuilding] = useState([]);
-  const [info, setInfo] = useState({ studyName: 'null', date: 'null' });
   const [num, setNum] = useState(0);
+  const userInfo = useSelector((state) => state.user);
+  const studies = useSelector((el) => el.study.studies);
+  const [likeStudy, setLikeStudy] = useState([]);
+  const dispatch = useDispatch();
 
-  const getStudy = async (id) => {
+  const getStudyInfo = async () => {
     try {
-      const res = await axios.get(`http://localhost:4000/user/${id}`);
-      const studyBuilding = res.data.studyList.map((el) => {
-        return el.building;
-      });
-      const buildingLocation = res.data.studyList.map((el) => {
-        return el.buildingLocation;
-      });
-      setStudyList(res.data.studyList);
-      setBuilding(studyBuilding);
-      setRandomNum(buildingLocation);
-      setLikeStudyList(res.data.likeStudyList);
+      const res = await axios.get(`http://localhost:4000/study/`);
+      dispatch(init(res.data));
+      setLikeStudy(
+        res.data?.filter((study) => {
+          return study._id.includes('64378f260da9ea82c3f228eb');
+        }),
+      );
     } catch (err) {
       console.error(err);
     }
   };
 
   useEffect(() => {
-    getStudy('kkk');
+    getStudyInfo();
   }, []);
 
-  const handleOver = async (number) => {
-    setNum(number);
-    await studyList
-      ?.filter((item, idx) => {
-        return number === item.building;
-      })
-      .map((el) => {
-        setInfo(el);
-      });
-  };
-  console.log(info);
   return (
     <div className="studyTab">
       <div className="buildingBox">
-        <img className="bg" src="/images/building-bg.svg" />
-
-        {building?.map((el, idx) => {
-          const date = new Date(info.date);
+        <img className="bg" src="/images/building-bg.svg" alt="bg" />
+        {userInfo?.studyList?.map((el, idx) => {
+          const date = new Date(el.createDate);
           return (
-            <div className={`building building${randomNum[idx]}`}>
+            <div
+              key={idx}
+              className={`building building${el.buildingLocation}`}
+            >
               <div className="contentBox">
-                <div className={el !== num ? `hoverBox disable` : `hoverBox`}>
-                  <h4>{info.studyName}</h4>
+                <div
+                  className={
+                    el.building !== num ? `hoverBox disable` : `hoverBox`
+                  }
+                >
+                  <h4>{el.studyName}</h4>
                   <p>
                     {`${date.getFullYear()}.${date.getMonth()}.${date.getDate()}`}
                   </p>
                 </div>
                 <img
-                  onMouseEnter={() => handleOver(el)}
+                  onMouseEnter={() => setNum(el.building)}
                   onMouseLeave={() => setNum(0)}
-                  src={`/images/b-${el}.svg`}
-                  key={el}
-                  alt={`building${el}`}
+                  src={`/images/b-${el.building}.svg`}
+                  key={el.building}
+                  alt={`building${el.building}`}
                 />
               </div>
             </div>
@@ -77,12 +69,12 @@ export default function Study() {
         <div className="title">
           <h4>나의 스터디</h4>
           <div className="flexBox">
-            <p className="totalCnt">총 {building.length}개</p>
+            <p className="totalCnt">총 {userInfo?.studyList?.length}개</p>
             <p>| 현재 참여중인 스터디 정보를 보여드릴게요</p>
           </div>
         </div>
         <div className="flexBox-start cardBox">
-          {studyList.map((el, idx) => {
+          {userInfo?.studyList?.map((el, idx) => {
             return <MyStudy key={idx} studyList={el} />;
           })}
         </div>
@@ -91,12 +83,14 @@ export default function Study() {
         <div className="title">
           <h4>관심 스터디</h4>
           <div className="flexBox">
-            <p className="totalCnt">총 {}개</p>
+            <p className="totalCnt">총 {userInfo?.likeStudyList?.length}개</p>
             <p>| 관심있는 스터디 정보를 보여드릴게요</p>
           </div>
         </div>
         <div className="flexBox-start cardBox">
-          <ReadyStudy studyList={likeStudyList} />
+          {likeStudy?.map((el, idx) => {
+            return <ReadyStudy key={idx} item={el} />;
+          })}
         </div>
       </div>
     </div>
