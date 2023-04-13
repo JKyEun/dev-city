@@ -1,0 +1,85 @@
+.signInWrap {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 270px;
+  height: calc(100vh - 81px - 50px);
+  .intro {
+    margin-top: 10px;
+    color: #605cff;
+    strong {
+      font-weight: 800;
+    }
+  }
+  form {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .idInput,
+    .pwInput {
+      display: block;
+      padding-left: 15px;
+      margin-top: 10px;
+      border: 1px solid #9a9a9a;
+      border-radius: 2px;
+      width: 270px;
+      height: 30px;
+    }
+    .loginBtn {
+      margin-top: 30px;
+      background-color: #605cff;
+      color: #fff;
+      font-weight: 700;
+      width: 210px;
+      height: 35px;
+      border: none;
+      border-radius: 30px;
+      font-size: 14px;
+    }
+    .loginBtn:hover {
+      cursor: pointer;
+    }
+  }
+  hr {
+    width: 210px;
+    margin-top: 20px;
+    border: 0.1px solid #eee;
+  }
+  .kakaoBtn {
+    margin-top: 20px;
+    width: 210px;
+    height: 35px;
+    background-color: #fbe44d;
+    border-radius: 30px;
+    text-align: center;
+    color: #000;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 35px;
+    img {
+      vertical-align: middle;
+      margin-right: 5px;
+    }
+  }
+  .githubBtn {
+    margin-top: 10px;
+    margin-bottom: 100px;
+    width: 210px;
+    height: 35px;
+    background-color: #fff;
+    border-radius: 30px;
+    border: 1px solid #999;
+    text-align: center;
+    color: #000;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 35px;
+    img {
+      vertical-align: middle;
+      margin-right: 5px;
+    }
+  }
+}

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import '../style/signInPage.scss';
 
 export default function SignInPage() {
   const KAKAO_CLIENT_ID = '8b9d9e6f2ac1ce6697298e70eb30186c';
@@ -54,23 +55,37 @@ export default function SignInPage() {
   });
 
   return (
-    <>
-      <h1>로그인</h1>
+    <div className="signInWrap">
+      <img src="/images/icon_github.svg" alt="데브시티 로고" width="100" />
+      <div className="intro">
+        Building the Future with <strong>Dev-City</strong>
+      </div>
       <form onSubmit={login} className="sign-form">
         <input
           type="text"
           ref={userIdInput}
-          placeholder="아이디를 입력하세요"
+          placeholder="아이디를 입력해주세요"
+          className="idInput"
         />
         <input
           type="password"
           ref={passwordInput}
-          placeholder="비밀번호를 입력하세요"
+          placeholder="비밀번호를 입력해주세요"
+          className="pwInput"
         />
-        <button type="submit">로그인</button>
+        <button className="loginBtn" type="submit">
+          로그인
+        </button>
       </form>
-      <Link to={KAKAO_AUTH_URL}>카카오 로그인</Link>
-      <Link to={GITHUB_AUTH_URL}>깃허브 로그인</Link>
-    </>
+      <hr />
+      <Link to={KAKAO_AUTH_URL} className="kakaoBtn">
+        <img src="/images/icon_kakao.svg" alt="카카오 아이콘" />
+        카카오 로그인
+      </Link>
+      <Link to={GITHUB_AUTH_URL} className="githubBtn">
+        <img src="/images/icon_github.svg" alt="깃허브 아이콘" />
+        깃허브 로그인
+      </Link>
+    </div>
   );
 }
