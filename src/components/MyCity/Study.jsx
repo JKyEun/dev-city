@@ -2,14 +2,17 @@ import React, { useEffect, useState } from 'react';
 import MyStudy from '../MyCity/MyStudy';
 import axios from 'axios';
 import '../../style/study.scss';
-import RecentStudy from '../Main/RecentStudy';
+import ReadyStudy from '../Main/ReadyStudy';
 
 export default function Study() {
   const [randomNum, setRandomNum] = useState();
   const [studyList, setStudyList] = useState([]);
+  const [likeStudyList, setLikeStudyList] = useState([]);
   const [building, setBuilding] = useState([]);
+  const [info, setInfo] = useState({ studyName: 'null', date: 'null' });
+  const [num, setNum] = useState(0);
 
-  const getLikeStudy = async (id) => {
+  const getStudy = async (id) => {
     try {
       const res = await axios.get(`http://localhost:4000/user/${id}`);
       const studyBuilding = res.data.studyList.map((el) => {
@@ -21,27 +24,52 @@ export default function Study() {
       setStudyList(res.data.studyList);
       setBuilding(studyBuilding);
       setRandomNum(buildingLocation);
+      setLikeStudyList(res.data.likeStudyList);
     } catch (err) {
       console.error(err);
     }
   };
 
   useEffect(() => {
-    getLikeStudy('kkk');
+    getStudy('kkk');
   }, []);
 
+  const handleOver = async (number) => {
+    setNum(number);
+    await studyList
+      ?.filter((item, idx) => {
+        return number === item.building;
+      })
+      .map((el) => {
+        setInfo(el);
+      });
+  };
+  console.log(info);
   return (
     <div className="studyTab">
       <div className="buildingBox">
         <img className="bg" src="/images/building-bg.svg" />
+
         {building?.map((el, idx) => {
+          const date = new Date(info.date);
           return (
-            <img
-              className={`building building${randomNum[idx]}`}
-              src={`/images/b-${el}.svg`}
-              key={el}
-              alt={`building${el}`}
-            />
+            <div className={`building building${randomNum[idx]}`}>
+              <div className="contentBox">
+                <div className={el !== num ? `hoverBox disable` : `hoverBox`}>
+                  <h4>{info.studyName}</h4>
+                  <p>
+                    {`${date.getFullYear()}.${date.getMonth()}.${date.getDate()}`}
+                  </p>
+                </div>
+                <img
+                  onMouseEnter={() => handleOver(el)}
+                  onMouseLeave={() => setNum(0)}
+                  src={`/images/b-${el}.svg`}
+                  key={el}
+                  alt={`building${el}`}
+                />
+              </div>
+            </div>
           );
         })}
       </div>
@@ -68,7 +96,7 @@ export default function Study() {
           </div>
         </div>
         <div className="flexBox-start cardBox">
-          <RecentStudy />
+          <ReadyStudy studyList={likeStudyList} />
         </div>
       </div>
     </div>

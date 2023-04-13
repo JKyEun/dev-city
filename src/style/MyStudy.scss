@@ -9,6 +9,16 @@
   margin-bottom: 20px;
   padding: 25px;
   cursor: pointer;
+  .leaderTag {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: #f7f7ff;
+    color: #605cff;
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 13px;
+  }
   &:hover {
     border: 1px solid #605cff;
   }
@@ -20,6 +30,7 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     margin-top: 7px;
+    color: #222;
   }
   ul.skills {
     margin-top: 15px;

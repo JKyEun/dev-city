@@ -2,13 +2,44 @@
   .buildingBox {
     width: 100%;
     position: relative;
-    margin: 200px 0 100px;
+    margin: 230px 0 100px;
     img.bg {
       width: 100%;
     }
     .building {
-      // border: 1px solid #000;
       position: absolute;
+      cursor: pointer;
+      .contentBox {
+        position: relative;
+        .hoverBox {
+          position: absolute;
+          top: -50px;
+          left: 60%;
+          transform: translateX(-60%);
+          display: block;
+          background-color: white;
+          border: 1px solid #eee;
+          border-radius: 5px;
+          padding: 10px;
+          width: 150px;
+
+          &.disable {
+            opacity: 0;
+          }
+          h4 {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 3px;
+            color: #605cff;
+          }
+          p {
+            color: #999;
+          }
+        }
+      }
     }
     .building1 {
       z-index: 9;
@@ -18,12 +49,12 @@
     }
     .building2 {
       z-index: 8;
-      top: 120px;
+      bottom: 120px;
       left: 29%;
     }
     .building3 {
       z-index: 7;
-      top: 100px;
+      bottom: 210px;
       left: 50%;
     }
     .building4 {
@@ -33,8 +64,8 @@
     }
     .building5 {
       z-index: 5;
-      top: 29px;
-      left: 10%;
+      top: 90px;
+      left: 8%;
     }
     .building6 {
       z-index: 4;
@@ -48,12 +79,12 @@
     }
     .building8 {
       z-index: 2;
-      top: -60px;
+      top: -80px;
       left: 27%;
     }
     .building9 {
       z-index: 1;
-      top: -130px;
+      top: -180px;
       left: 40%;
     }
   }
