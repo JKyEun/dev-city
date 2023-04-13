@@ -6,6 +6,7 @@ const CREATE_TODO = 'user/CREATE_TODO';
 const REMOVE_TODO = 'user/REMOVE_TODO';
 const CONVERT_CHECKED = 'user/CONVERT_CHECKED';
 const MODIFY_TODO = 'user/MODIFY_TODO';
+const UPDATE_USER = 'user/UPDATE_USER';
 
 // Action 생성 함수
 export function init(payload) {
@@ -39,6 +40,13 @@ export function convertChecked(payload) {
 export function modifyTodo(payload) {
   return {
     type: MODIFY_TODO,
+    payload,
+  };
+}
+
+export function updateUser(payload) {
+  return {
+    type: UPDATE_USER,
     payload,
   };
 }
@@ -77,6 +85,11 @@ export default function user(state = initState, action) {
         todoList: state.todoList.map((el) =>
           el.id === action.payload.id ? { ...el, ...action.payload } : el,
         ),
+      };
+    case UPDATE_USER:
+      return {
+        ...state,
+        ...action.payload,
       };
     default:
       return {

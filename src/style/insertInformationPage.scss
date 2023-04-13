@@ -1,0 +1,84 @@
+.insertInformationWrap {
+  display: flex;
+  position: relative;
+  display: flex;
+  margin: 0 auto;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 380px;
+  height: calc(100vh - 81px - 50px);
+  h2 {
+    font-size: 20px;
+    font-weight: 800;
+  }
+  .intro {
+    margin-top: 10px;
+    font-size: 14px;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 380px;
+    margin-top: 30px;
+    div {
+      margin-top: 10px;
+      width: 380px;
+      height: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      label {
+        font-size: 14px;
+        font-weight: 600;
+      }
+      input {
+        padding-left: 15px;
+        border: 1px solid #9a9a9a;
+        border-radius: 2px;
+        width: 270px;
+        height: 30px;
+      }
+      select {
+        padding-left: 15px;
+        border: 1px solid #9a9a9a;
+        border-radius: 2px;
+        width: 270px;
+        height: 30px;
+      }
+    }
+
+    .explain {
+      margin-top: 10px;
+      color: #605cff;
+      font-size: 14px;
+    }
+    .submitBtn {
+      margin-top: 30px;
+      background-color: #605cff;
+      color: #fff;
+      font-weight: 700;
+      width: 210px;
+      height: 35px;
+      border: none;
+      border-radius: 30px;
+      font-size: 14px;
+    }
+    .submitBtn:hover {
+      cursor: pointer;
+    }
+  }
+  .skip {
+    margin-top: 10px;
+    text-decoration: underline;
+    color: #605cff;
+    font-size: 14px;
+    margin-bottom: 130px;
+  }
+
+  .skip:hover {
+    cursor: pointer;
+  }
+}
