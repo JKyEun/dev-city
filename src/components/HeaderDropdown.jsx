@@ -1,12 +1,16 @@
 import React from 'react';
 import '../style/_headerDropdown.scss';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function HeaderDropdown() {
+  const navigate = useNavigate();
+
   // 로그아웃
   const handleLogoutClick = () => {
     localStorage.removeItem('JWT');
     localStorage.removeItem('userId');
+    navigate('/');
     window.location.reload();
   };
 

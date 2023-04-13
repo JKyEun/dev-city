@@ -2,7 +2,12 @@
 
 // 메인
 .mainTop {
-  background-color: #f7f7fb;
+  background: linear-gradient(
+    261.83deg,
+    #fffcf3 5.25%,
+    rgba(243, 243, 249, 0.650924) 41.37%,
+    #f3f3f9 108.71%
+  );
   .main {
     position: relative;
     height: 520px;
@@ -13,7 +18,6 @@
       left: 100px;
       .text {
         font-size: 50px;
-        font-weight: 700;
         text-align: left;
         padding-bottom: 30px;
       }
@@ -30,20 +34,21 @@
         }
       }
     }
-    overflow: hidden;
-    .mycityImg {
-      position: absolute;
-      width: 800px;
-      left: 470px;
-      top: 10px;
-    }
   }
+}
+.mycityImg {
+  position: absolute;
+  width: 700px;
+  top: 185px;
+  right: 50%;
+  transform: translateX(90%);
 }
 
 // 모집 중인 스터디
 .part1 {
   position: relative;
   height: 390px;
+  background-color: #fff;
   .minMax {
     .text {
       position: absolute;
@@ -103,6 +108,7 @@
       }
       .subText {
         font-size: 14px;
+        line-height: 20px;
         color: #222222;
       }
       .createLink {
@@ -115,7 +121,7 @@
         text-align: center;
         a {
           font-weight: 600;
-          font-size: 20px;
+          font-size: 16px;
           line-height: 33px;
           color: #605cff;
         }
@@ -152,11 +158,56 @@
           height: 23px;
         }
       }
-      .pointImg {
-        position: absolute;
-        top: -190px;
-        right: -160px;
-      }
     }
+  }
+}
+
+.pointImg {
+  position: absolute;
+  width: 100%;
+  top: 65px;
+  left: 50%;
+  transform: translateX(-10%);
+  background-color: #100c0b;
+  border-radius: 50px 0px 0px 0px;
+  height: 271px;
+  overflow: hidden;
+  &::before {
+    content: url('../../public/images/main-3.svg');
+    opacity: 60%;
+  }
+  .imgText {
+    position: absolute;
+    color: #eee;
+    font-size: 20px;
+    width: 310px;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-150%);
+    z-index: 999;
+  }
+  // &::after {
+  //   content: 'Building the Future with Dev-City';
+  //   position: absolute;
+  //   color: #eee;
+  //   font-size: 20px;
+  //   width: 310px;
+  //   left: 28%;
+  //   top: 50%;
+  //   transform: translateX(-50%);
+  //   z-index: 999;
+  // }
+}
+.bottom {
+  position: relative;
+  background-color: #24272e;
+  height: 80px;
+
+  .lastImg {
+    position: absolute;
+    right: 50%;
+    transform: translateX(40%);
+    height: inherit;
+    opacity: 50%;
   }
 }

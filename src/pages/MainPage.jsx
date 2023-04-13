@@ -1,9 +1,9 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import '../style/main.scss';
 import RecruitedStudy from '../components/Main/RecruitedStudy';
 import CreateProcessStudy from '../components/Main/CreateProcessStudy';
 import AllUsers from '../components/Main/AllUsers';
+
 export default function MainPage() {
   return (
     <>
@@ -14,19 +14,19 @@ export default function MainPage() {
             <div className="mainText">
               <div className="text">
                 개발공부는
-                <br /> 데브시티에서
+                <br /> <strong>데브시티에서</strong>
               </div>
               <div className="mycityLink">
                 <Link to={'/mycity'}>나의 도시 바로가기</Link>
               </div>
             </div>
-            <img
-              className="mycityImg"
-              src="../images/mycity.svg"
-              alt="도시이미지"
-            />
           </div>
         </div>
+        <img
+          className="mycityImg"
+          src="../images/mycity.svg"
+          alt="도시이미지"
+        />
       </div>
       {/* 모집 중인 스터디 */}
       <RecruitedStudy />
@@ -36,6 +36,9 @@ export default function MainPage() {
 
       {/* 추천친구 */}
       <AllUsers />
+      <div className="bottom">
+        <img src="../images/main-4.svg" alt="" className="lastImg" />
+      </div>
     </>
   );
 }

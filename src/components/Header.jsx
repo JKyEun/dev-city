@@ -32,9 +32,22 @@ export default function Header() {
   }, []);
 
   // profile 클릭시 드롭다운
+  // 드롭다운 포커스 아웃되면 다시 사라지기
 
   const [showDropdown, setShowDropdown] = useState(false);
+  const dropdownRef = useRef(null);
 
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+  const handleClickOutside = (e) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+      setShowDropdown(false);
+    }
+  };
   const handleImageClick = () => {
     setShowDropdown(!showDropdown); // showDropdown 값을 반전시킴
   };
@@ -65,7 +78,7 @@ export default function Header() {
             </div>
             {/* 로그인 유무 */}
             {isLoggedIn ? (
-              <div>
+              <div ref={dropdownRef}>
                 <div className="profileImg" onClick={handleImageClick}>
                   <img src="" alt="profile" />
                   {showDropdown && <HeaderDropdown />}

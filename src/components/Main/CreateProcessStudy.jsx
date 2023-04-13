@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import '../../style/main.scss';
 
 export default function CreateProcessStudy() {
+  const jwtToken = localStorage.getItem('JWT');
   return (
     <>
       <div className="part2">
@@ -14,7 +15,11 @@ export default function CreateProcessStudy() {
               팀원을 모집하여 함께 발전해요
             </div>
             <div className="createLink">
-              <Link to={'/study/create'}> + 생성하기</Link>
+              {jwtToken ? (
+                <Link to={'/study/create'}> + 생성하기</Link>
+              ) : (
+                <Link to={'/signin'}> + 생성하기</Link>
+              )}
             </div>
           </div>
         </div>
@@ -45,7 +50,11 @@ export default function CreateProcessStudy() {
                 <p>사람들과 공부하기</p>
               </div>
             </div>
-            <img src="/images/main-2.svg" alt="" className="pointImg" />
+          </div>
+        </div>
+        <div className="pointImg">
+          <div className="imgText">
+            Building the Future with <strong>Dev-City</strong>
           </div>
         </div>
       </div>
