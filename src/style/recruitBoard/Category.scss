@@ -1,12 +1,11 @@
-.skiils {
-  display: flex;
-}
-.skill {
-  user-select: none;
-  display: inline-block;
-  border: 1.5px solid #9999;
-  border-radius: 20px;
-  padding: 6px 13px;
-  margin: 0 7px;
-  cursor: pointer;
+.skills {
+  .skill {
+    user-select: none;
+    display: inline-block;
+    border: 1.5px solid #9999;
+    border-radius: 20px;
+    padding: 6px 13px;
+    margin: 0 7px;
+    cursor: pointer;
+  }
 }

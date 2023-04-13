@@ -1,0 +1,27 @@
+.subheader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px 0px;
+  border-bottom: 1px solid #999;
+  .subheader_text {
+    p:first-child {
+      font-size: 25px;
+      margin-bottom: 10px;
+    }
+    p:nth-child(2) {
+    }
+  }
+  .subheader_createbutton {
+    text-align: center;
+    font-size: 16px;
+    line-height: 40px;
+    padding: 0 20px;
+    height: 40px;
+    background-color: #605cff;
+    border-radius: 20px;
+    a {
+      color: #fff;
+    }
+  }
+}

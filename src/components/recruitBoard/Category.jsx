@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { changeCategory } from '../../store/modules/study';
 import '../../style/recruitBoard/Category.scss';
 
-export default function SubHeader() {
+export default function Category() {
   const dispatch = useDispatch();
   const handleSkillClick = (e, skillName) => {
     if (e.target.style.borderColor === '' || e.target.style.color === '') {
