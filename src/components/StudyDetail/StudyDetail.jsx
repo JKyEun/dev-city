@@ -48,6 +48,58 @@ export default function StudyDetail({ match }) {
     fetchStudyData();
   }, [dispatch, match.params.id]);
 
+  // 참여하기
+  const joinStudy = async () => {
+    try {
+      const currentUserId = localStorage.getItem('userId');
+      const memberExists = study.member.some(
+        (member) => member.memberId === currentUserId,
+      );
+      if (memberExists) {
+        alert('이미 스터디에 참여한 멤버입니다.');
+        return;
+      }
+      const maxNum = study.memberNum.maxNum;
+      const currentNum = study.memberNum.currentNum;
+
+      if (currentNum >= maxNum) {
+        alert('스터디 최대 참여 인원을 초과하였습니다.');
+        return;
+      }
+
+      const isLeader = study.member.some(
+        (member) => member.isLeader && member.memberId === currentUserId,
+      );
+      const updatedMember = {
+        memberId: currentUserId,
+        isLeader: false,
+      };
+      if (isLeader) {
+        updatedMember.isLeader = true;
+      }
+
+      const response = await axios.put(
+        `http://localhost:4000/study/update/${match.params.id}`,
+        { updatedMember },
+      );
+
+      dispatch(
+        setStudy({
+          ...study,
+          member: [...study.member, updatedMember],
+          memberNum: {
+            ...study.memberNum,
+            currentNum: currentNum + 1, // 현재 참여 인원수 +1
+          },
+        }),
+      );
+      console.log(response.data);
+      alert('스터디 참가 신청이 완료되었습니다.');
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <div>
       {!loading && study && (
@@ -57,7 +109,7 @@ export default function StudyDetail({ match }) {
               <div>
                 <h1>{study.studyName}</h1>
                 <p>
-                  닉네임 |{' '}
+                  {study.leaderId} |{' '}
                   {study.createDate
                     ? new Date(study.createDate).toLocaleString()
                     : '날짜 정보 없음'}
@@ -66,10 +118,17 @@ export default function StudyDetail({ match }) {
 
               {/* 해당 스터디 가입 유무 */}
               <div>
-                {study.isLeader && !study.canJoin ? (
+                {study.isLeader ? (
                   <button>수정하기</button>
+                ) : study.member.some(
+                    (member) =>
+                      member.memberId === localStorage.getItem('userId'),
+                  ) ? (
+                  <button>탈퇴하기</button>
                 ) : (
-                  <button>참여하기</button>
+                  <button onClick={joinStudy} disabled={!study.canJoin}>
+                    참여하기
+                  </button>
                 )}
               </div>
             </div>

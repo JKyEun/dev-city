@@ -81,7 +81,8 @@
       color: #605cff;
     }
     &.disabled {
-      background-color: #999;
+      background-color: #ccc;
+      cursor: default;
     }
   }
 }
