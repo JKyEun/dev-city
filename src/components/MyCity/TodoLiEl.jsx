@@ -9,7 +9,6 @@ import axios from 'axios';
 
 export default function TodoLiEl({ el, selectedDate }) {
   const [isModifyMode, setIsModifyMode] = useState(false);
-  const [isChecked, setIsChecked] = useState(el.isCompleted);
   const modifyInput = useRef(null);
   const timeInput = useRef(null);
   const date = new Date(el.date);
@@ -36,6 +35,7 @@ export default function TodoLiEl({ el, selectedDate }) {
 
   const updateChecked = async (id, el) => {
     try {
+      console.log(el);
       const updatedTodo = {
         id: el.id,
         isCompleted: !el.isCompleted,
@@ -47,7 +47,6 @@ export default function TodoLiEl({ el, selectedDate }) {
         updatedTodo,
       );
       console.log(res.data);
-      setIsChecked((cur) => !cur);
       dispatch(convertChecked(updatedTodo));
     } catch (err) {
       console.error(err);
@@ -90,8 +89,10 @@ export default function TodoLiEl({ el, selectedDate }) {
         onClick={() => updateChecked(localStorage.getItem('userId'), el)}
         className="checkDiv"
       >
-        <span className={isChecked ? 'checkbox checked' : 'checkbox'}></span>
-        {isChecked && (
+        <span
+          className={el.isCompleted ? 'checkbox checked' : 'checkbox'}
+        ></span>
+        {el.isCompleted && (
           <img
             src="/images/icon_checked.svg"
             alt="체크표시"

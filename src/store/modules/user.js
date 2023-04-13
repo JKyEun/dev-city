@@ -3,7 +3,7 @@ const initState = {};
 // Action Type 설정
 const INIT = 'user/INIT';
 const CREATE_TODO = 'user/CREATE_TODO';
-const DELETE_TODO = 'user/DELETE_TODO';
+const REMOVE_TODO = 'user/REMOVE_TODO';
 const CONVERT_CHECKED = 'user/CONVERT_CHECKED';
 const MODIFY_TODO = 'user/MODIFY_TODO';
 
@@ -24,7 +24,7 @@ export function createTodo(payload) {
 
 export function removeTodo(payload) {
   return {
-    type: DELETE_TODO,
+    type: REMOVE_TODO,
     payload,
   };
 }
@@ -55,7 +55,7 @@ export default function user(state = initState, action) {
         ...state,
         todoList: [...state.todoList, action.payload],
       };
-    case DELETE_TODO:
+    case REMOVE_TODO:
       return {
         ...state,
         todoList: [
