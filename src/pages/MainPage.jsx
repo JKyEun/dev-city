@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom';
-import ReadyStudy from '../components/Main/ReadyStudy';
+import RecruitedStudy from '../components/Main/RecruitedStudy';
 import CreateProcessStudy from '../components/Main/CreateProcessStudy';
 import AllUsers from '../components/Main/AllUsers';
+import { useSelector } from 'react-redux';
 import '../style/main.scss';
 
 export default function MainPage() {
+  const studies = useSelector((el) => el.study.studies);
   return (
     <>
       {/* 메인 */}
@@ -29,8 +31,9 @@ export default function MainPage() {
         />
       </div>
       {/* 모집 중인 스터디 */}
-      <ReadyStudy />
-
+      <div className="flexBox cardBox recruitedStudy">
+        <RecruitedStudy />;
+      </div>
       {/* 스터디 생성 프로세스 */}
       <CreateProcessStudy />
 

@@ -1,4 +1,20 @@
 .studyTab {
+  .studyContainer {
+    width: 31.8%;
+    &:nth-child(3n) {
+      margin-right: 0;
+    }
+    ul.skills {
+      p {
+        margin-right: 7px;
+        width: 45px;
+        img {
+          display: block;
+          width: 45px;
+        }
+      }
+    }
+  }
   .buildingBox {
     width: 100%;
     position: relative;
@@ -110,24 +126,6 @@
   }
   div.study-like {
     .likeStudyBox {
-      position: relative;
-      .memberCount {
-        margin-top: 15px;
-
-        color: #999;
-        span {
-          font-weight: 600;
-          color: #605cff;
-        }
-      }
-      .clickHeart {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-      }
     }
-  }
-  .studyContainer:nth-child(3n) {
-    margin-right: 0;
   }
 }

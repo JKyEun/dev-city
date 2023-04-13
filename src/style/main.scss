@@ -48,6 +48,7 @@
 .part1 {
   position: relative;
   height: 390px;
+  margin: 0 auto;
   background-color: #fff;
   .minMax {
     .text {
@@ -85,6 +86,16 @@
             font-weight: 600;
             color: #605cff;
           }
+        }
+      }
+    }
+    ul.skills {
+      p {
+        margin-right: 5px;
+        width: 40px;
+        img {
+          display: block;
+          width: 40px;
         }
       }
     }

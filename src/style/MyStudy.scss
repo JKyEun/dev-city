@@ -1,5 +1,4 @@
 .studyContainer {
-  width: 31.8%;
   position: relative;
   border-radius: 10px;
   border: 1px solid #eee;
@@ -8,6 +7,21 @@
   margin-right: 20px;
   margin-bottom: 20px;
   padding: 25px;
+  position: relative;
+  .memberCount {
+    margin-top: 15px;
+
+    color: #999;
+    span {
+      font-weight: 600;
+      color: #605cff;
+    }
+  }
+  .clickHeart {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
   cursor: pointer;
   .leaderTag {
     position: absolute;
@@ -35,14 +49,14 @@
     width: 205px;
     overflow: hidden;
     text-overflow: ellipsis;
-    p {
-      margin-right: 7px;
-      width: 45px;
-      img {
-        display: block;
-        width: 45px;
-      }
-    }
+    // p {
+    //   margin-right: 7px;
+    //   width: 45px;
+    //   img {
+    //     display: block;
+    //     width: 45px;
+    //   }
+    // }
   }
   span.ellipsis {
     position: absolute;

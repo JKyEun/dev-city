@@ -1,9 +1,13 @@
 import React from 'react';
-import RecentStudy from './RecentStudy';
+import ReadyStudy from '../../components/Main/ReadyStudy';
+
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import '../../style/main.scss';
 
 export default function RecruitedStudy() {
+  const studies = useSelector((el) => el.study.studies);
+
   return (
     <>
       <div className="part1">
@@ -15,7 +19,9 @@ export default function RecruitedStudy() {
             </div>
           </div>
           <div className="showStudy flexBox">
-            <RecentStudy />
+            {studies?.map((item) => {
+              return <ReadyStudy item={item} />;
+            })}
             <div className="plusStudy">
               <Link to={'/study'}>
                 <img src="/images/icon_plus.svg" alt="스터디 더보기"></img>

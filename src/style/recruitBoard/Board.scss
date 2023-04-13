@@ -3,4 +3,20 @@
   flex-wrap: wrap;
   width: 100%;
   margin-top: 30px;
+  .studyContainer {
+    width: 23.5%;
+    &:nth-child(4n) {
+      margin-right: 0;
+    }
+    ul.skills {
+      p {
+        margin-right: 5px;
+        width: 40px;
+        img {
+          display: block;
+          width: 40px;
+        }
+      }
+    }
+  }
 }
