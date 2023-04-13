@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import '../../style/recruitBoard/Board.scss';
+import ReadyStudy from '../Main/ReadyStudy';
 import Studies from './Studies';
 
 export default function Board() {
@@ -22,7 +23,8 @@ export default function Board() {
     studies !== undefined &&
     studies.map((el, idx) => {
       if (findCategory(el.skills)) {
-        return <Studies el={el} idx={idx} userId={user} />;
+        return <ReadyStudy item={el} />;
+        // return <Studies el={el} idx={idx} userId={user} />;
       }
     });
 
