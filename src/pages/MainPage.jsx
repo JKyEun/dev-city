@@ -2,11 +2,9 @@ import { Link } from 'react-router-dom';
 import RecruitedStudy from '../components/Main/RecruitedStudy';
 import CreateProcessStudy from '../components/Main/CreateProcessStudy';
 import AllUsers from '../components/Main/AllUsers';
-import { useSelector } from 'react-redux';
 import '../style/main.scss';
 
 export default function MainPage() {
-  const studies = useSelector((el) => el.study.studies);
   return (
     <>
       {/* 메인 */}
