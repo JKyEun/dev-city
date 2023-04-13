@@ -8,6 +8,9 @@ export default function SignInPage() {
   const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`;
   // const KAKAO_LOGOUT_URI = 'http://localhost:3000';
   // const KAKAO_LOGOUT_URL = `https://kauth.kakao.com/oauth/logout?client_id=${KAKAO_CLIENT_ID}&logout_redirect_uri=${KAKAO_LOGOUT_URI}`;
+  const GITHUB_CLIENT_ID = '92cca3b5a2142e0aa021';
+  const GITHUB_REDIRECT_URI = 'http://localhost:3000/oauth/callback/github';
+  const GITHUB_AUTH_URL = `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&redirect_uri=${GITHUB_REDIRECT_URI}`;
 
   const navigate = useNavigate();
   const userIdInput = useRef('');
@@ -67,6 +70,7 @@ export default function SignInPage() {
         <button type="submit">로그인</button>
       </form>
       <Link to={KAKAO_AUTH_URL}>카카오 로그인</Link>
+      <Link to={GITHUB_AUTH_URL}>깃허브 로그인</Link>
     </>
   );
 }
