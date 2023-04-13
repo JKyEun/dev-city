@@ -1,13 +1,32 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReadyStudy from '../../components/Main/ReadyStudy';
-
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { init } from '../../store/modules/study';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import '../../style/main.scss';
 
 export default function RecruitedStudy() {
   const studies = useSelector((el) => el.study.studies);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
+  // study 데이터 가져와서 state에 적용시키기
+  const getStudyInfo = async () => {
+    try {
+      const res = await axios.get(`http://localhost:4000/study/`);
+      dispatch(init(res.data));
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  useEffect(() => {
+    getStudyInfo();
+    if (!localStorage.getItem('userId')) {
+      navigate('/signin');
+    }
+  }, []);
   return (
     <>
       <div className="part1">
