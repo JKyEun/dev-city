@@ -41,6 +41,13 @@
         width: 270px;
         height: 30px;
       }
+      select {
+        padding-left: 15px;
+        border: 1px solid #9a9a9a;
+        border-radius: 2px;
+        width: 270px;
+        height: 30px;
+      }
     }
 
     .explain {
@@ -67,7 +74,11 @@
     margin-top: 10px;
     text-decoration: underline;
     color: #605cff;
-    font-size: 12px;
+    font-size: 14px;
     margin-bottom: 130px;
+  }
+
+  .skip:hover {
+    cursor: pointer;
   }
 }
