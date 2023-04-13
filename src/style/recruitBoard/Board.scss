@@ -1,7 +1,7 @@
 .study_board {
   display: flex;
   flex-wrap: wrap;
-
+  width: 100%;
   margin-top: 30px;
 
   .study {
@@ -10,7 +10,7 @@
     align-items: center;
     justify-content: center;
     padding: 15px;
-    width: 250px;
+    width: 23.64%;
     height: 220px;
     border: 1px solid #eeeeee;
     margin: 10px 7px;
