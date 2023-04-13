@@ -36,7 +36,6 @@ export default function MainPage() {
       </div>
       {/* 스터디 생성 프로세스 */}
       <CreateProcessStudy />
-
       {/* 추천친구 */}
       <AllUsers />
       <div className="bottom">
