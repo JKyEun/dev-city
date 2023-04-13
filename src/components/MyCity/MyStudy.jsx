@@ -1,24 +1,37 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import '../../style/MyStudy.scss';
 
 export default function MyStudy({ studyList }) {
-  const date = new Date(studyList.date);
+  const date = new Date(studyList.createDate);
+
   return (
-    <div className="myStudyBoard">
-      <div>
-        <img src={`/images/b-${studyList.building}.svg`} alt="building" />
-      </div>
-      <p className="date">{`${date.getFullYear()}.${date.getMonth()}.${date.getDate()}`}</p>
+    <Link
+      to={`/study/detail/${studyList._id}`}
+      className="studyContainer myStudyContainer"
+    >
+      {studyList.isLeader && <span className="leaderTag">Leader</span>}
+      <img src={`/images/inside-b-${studyList.building}.svg`} alt="building" />
+
+      <p className="date">
+        {`${date.getFullYear()}.${date.getMonth()}.${date.getDate()}`}
+        <span>| {studyList.field}</span>
+      </p>
       <h3>{studyList.studyName}</h3>
-      <ul className="flexBox skills">
-        {studyList?.skills?.map((el) => {
-          return (
-            <li key={el}>
-              <img src={`/images/skill_icon/${el}.svg`} alt="" />
-            </li>
-          );
-        })}
-      </ul>
-    </div>
+      <div className="flexBox-alignCenter">
+        <ul className="flexBox skills">
+          {studyList?.skills?.map((el) => {
+            return (
+              <p key={el}>
+                <img src={`/images/skill_icon/${el}.svg`} alt="" />
+              </p>
+            );
+          })}
+        </ul>
+        <span className="ellipsis">
+          {studyList?.skills.length >= 4 && '...'}
+        </span>
+      </div>
+    </Link>
   );
 }

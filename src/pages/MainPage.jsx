@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
-import '../style/main.scss';
-import RecruitedStudy from '../components/Main/RecruitedStudy';
+import ReadyStudy from '../components/Main/ReadyStudy';
 import CreateProcessStudy from '../components/Main/CreateProcessStudy';
 import AllUsers from '../components/Main/AllUsers';
+import '../style/main.scss';
 
 export default function MainPage() {
   return (
@@ -29,7 +29,7 @@ export default function MainPage() {
         />
       </div>
       {/* 모집 중인 스터디 */}
-      <RecruitedStudy />
+      <ReadyStudy />
 
       {/* 스터디 생성 프로세스 */}
       <CreateProcessStudy />

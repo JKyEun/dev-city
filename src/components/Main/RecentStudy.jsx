@@ -7,21 +7,23 @@ export default function RecentStudy(props) {
   const [interestList, setInterestList] = useState({});
   const [studyList, setStudyList] = useState([]);
 
-  useEffect(() => {
-    axios
-      .get('http://localhost:4000/study')
-      .then((response) => {
-        const sortedStudies = response.data.sort(
-          (a, b) => new Date(b.createDate) - new Date(a.createDate),
-        );
-        const latestStudies = sortedStudies.slice(0, 4);
-        setStudyList(latestStudies);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+  const getReadyStudy = async () => {
+    try {
+      const res = await axios.get('http://localhost:4000/study');
+      const study = res.data.sort(
+        (a, b) => new Date(b.createDate) - new Date(a.createDate),
+      );
+      const latestStudies = study.slice(0, 4);
+      setStudyList(latestStudies);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
+  useEffect(() => {
+    getReadyStudy();
+  }, []);
+  console.log(studyList);
   const handleInterestClick = (index) => {
     // interestList의 index 위치의 값을 반대로 변경
     const interests = [...interestList];
