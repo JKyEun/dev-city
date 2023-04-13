@@ -8,6 +8,9 @@
   margin-bottom: 20px;
   padding: 25px;
   position: relative;
+  &:hover {
+    border: 1px solid #605cff;
+  }
   .memberCount {
     margin-top: 15px;
 
@@ -21,6 +24,9 @@
     position: absolute;
     top: 20px;
     right: 20px;
+    &:hover {
+      transform: scale(110%);
+    }
   }
   cursor: pointer;
   .leaderTag {
@@ -64,7 +70,4 @@
   }
 }
 .myStudyContainer {
-  &:hover {
-    border: 1px solid #605cff;
-  }
 }

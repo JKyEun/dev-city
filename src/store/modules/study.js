@@ -12,6 +12,7 @@ const initState = {
   leaderId: '',
   loading: false,
   category: [],
+  studies: [],
 };
 
 // Action Type 설정
@@ -47,7 +48,7 @@ export default function study(state = initState, action) {
     case INIT:
       return {
         ...state,
-        studies: action.payload,
+        studies: [...action.payload],
       };
     case CREATE:
       return {

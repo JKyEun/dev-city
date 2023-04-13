@@ -2,26 +2,30 @@ import React, { useState, useEffect } from 'react';
 import MyStudy from '../MyCity/MyStudy';
 import ReadyStudy from '../Main/ReadyStudy';
 import { useSelector, useDispatch } from 'react-redux';
-import '../../style/study.scss';
+import { useNavigate } from 'react-router-dom';
+
 import { init } from '../../store/modules/study';
+import '../../style/study.scss';
 
 import axios from 'axios';
+import Studies from '../recruitBoard/Studies';
 export default function Study() {
   const [num, setNum] = useState(0);
   const userInfo = useSelector((state) => state.user);
-  const studies = useSelector((el) => el.study.studies);
   const [likeStudy, setLikeStudy] = useState([]);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const getStudyInfo = async () => {
     try {
-      const res = await axios.get(`http://localhost:4000/study/`);
-      dispatch(init(res.data));
-      setLikeStudy(
-        res.data?.filter((study) => {
-          return study._id.includes('64378f260da9ea82c3f228eb');
-        }),
-      );
+      const resStudy = await axios.get(`http://localhost:4000/study/`);
+      dispatch(init(resStudy.data));
+      const id = localStorage.getItem('userId');
+      const resUser = await axios.get(`http://localhost:4000/user/${id}`);
+      const result = resStudy.data?.filter((study) => {
+        return resUser.data?.likeStudyList?.includes(study._id);
+      });
+      setLikeStudy(result);
     } catch (err) {
       console.error(err);
     }
@@ -29,6 +33,9 @@ export default function Study() {
 
   useEffect(() => {
     getStudyInfo();
+    if (!localStorage.getItem('userId')) {
+      navigate('/signin');
+    }
   }, []);
 
   return (
