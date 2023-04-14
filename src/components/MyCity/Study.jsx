@@ -1,19 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import MyStudy from '../MyCity/MyStudy';
-import ReadyStudy from '../Main/ReadyStudy';
+import LikeStudy from './LikeStudy';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { init } from '../../store/modules/study';
 import '../../style/study.scss';
-
 import axios from 'axios';
+
 export default function Study() {
+  const [render, setRender] = useState('');
+
   const [num, setNum] = useState(0);
   const userInfo = useSelector((state) => state.user);
   const [likeStudy, setLikeStudy] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const studies = useSelector((state) => state.study.studies);
+  const userId = useSelector((state) => state.user.userId);
 
+  const handleRender = (params) => {
+    setRender((cur) => cur + params);
+  };
   const getStudyInfo = async () => {
     try {
       const resStudy = await axios.get(`http://localhost:4000/study/`);
@@ -34,7 +41,7 @@ export default function Study() {
     if (!localStorage.getItem('userId')) {
       navigate('/signin');
     }
-  }, []);
+  }, [render]);
 
   return (
     <div className="studyTab">
@@ -94,7 +101,15 @@ export default function Study() {
         </div>
         <div className="flexBox-start cardBox">
           {likeStudy?.map((el, idx) => {
-            return <ReadyStudy key={idx} item={el} />;
+            return (
+              <LikeStudy
+                key={idx}
+                idx={idx}
+                item={el}
+                userId={userId}
+                handleRender={handleRender}
+              />
+            );
           })}
         </div>
       </div>
