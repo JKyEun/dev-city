@@ -79,9 +79,15 @@ export default function TodoList({ selectedDate }) {
           <button className="addBtn">추가</button>
         </form>
         <ul>
-          {todoToday.map((el) => (
-            <TodoLiEl key={el} el={el} selectedDate={selectedDate} />
-          ))}
+          {todoToday.length > 0 ? (
+            todoToday?.map((el) => (
+              <TodoLiEl key={el} el={el} selectedDate={selectedDate} />
+            ))
+          ) : (
+            <div className="emptyTodo flexBox-center">
+              추가된 할일이 없습니다
+            </div>
+          )}
         </ul>
       </div>
     </div>

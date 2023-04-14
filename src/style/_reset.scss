@@ -28,7 +28,11 @@ a {
   margin: 0 auto;
   width: 1200px;
 }
-
+.flexBox-between-start {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
 .flexBox-between {
   display: flex;
   justify-content: space-between;

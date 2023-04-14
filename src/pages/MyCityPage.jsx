@@ -14,7 +14,7 @@ export default function MyCityPage() {
 
   return (
     <div className="minMax">
-      <div className="flexBox-between">
+      <div className="flexBox-between-start">
         <Profile />
         <Tab />
       </div>
