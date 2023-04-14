@@ -4,6 +4,11 @@
   .goToHome {
     color: #605cff;
     margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    .left-arrow {
+      width: 10px;
+    }
   }
   h1 {
     font-size: 23px;

@@ -7,7 +7,7 @@ export default function MyStudy({ joinedStudy }) {
 
   return (
     <Link
-      to={`/study/detail/${joinedStudy?._id}`}
+      to={`/study/detail/${joinedStudy?.objectId}`}
       className="studyContainer myStudyContainer"
     >
       {joinedStudy?.isLeader && <span className="leaderTag">Leader</span>}

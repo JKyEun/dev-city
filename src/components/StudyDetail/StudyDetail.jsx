@@ -116,7 +116,15 @@ export default function StudyDetail({ match }) {
         <>
           <div className="minMax flexBox-between">
             <div className="box-studyInfo">
-              <h4 className="goToHome">&lt; 스터디 홈으로 돌아가기</h4>
+              <h4 className="goToHome">
+                {' '}
+                <img
+                  className="left-arrow"
+                  src="/images/chevron-left-solid.svg"
+                  alt="left-arrow"
+                />{' '}
+                스터디 홈으로 돌아가기
+              </h4>
               <h1>{study.studyName}</h1>
               <Fragment>
                 <h5>
