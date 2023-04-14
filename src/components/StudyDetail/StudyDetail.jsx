@@ -1,10 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
-import '../../style/detail.scss';
+import '../../style/studyDetail.scss';
 import { fetchStudy, setStudy } from '../../store/modules/studyDetail';
+import {
+  CircularProgressbar,
+  buildStyles,
+  CircularProgressbarWithChildren,
+} from 'react-circular-progressbar';
 
 export default function StudyDetail({ match }) {
+  const [percent, setPercent] = useState({});
+  const [elementContent, setElementContent] = useState([]);
   const study = useSelector((state) => state.studyDetail.study);
   const loading = useSelector((state) => state.studyDetail.loading);
 
@@ -93,77 +100,183 @@ export default function StudyDetail({ match }) {
           },
         }),
       );
-      console.log(response.data);
       alert('스터디 참가 신청이 완료되었습니다.');
+      window.location.reload();
     } catch (err) {
       console.error(err);
     }
   };
 
+  // useEffect(() => {
+  //   if (study) {
+  //     const content = [
+  //       {
+  //         title: `${study.studyName}`,
+  //         createInfo: {
+  //           leaderId: `${study.leaderId}`,
+  //           field: `${study.field}`,
+  //           createDate: `${study.createDate}`,
+  //         },
+  //         detail: [
+  //           {
+  //             subTitle: '스터디 소개',
+  //             studyInfo: `${study.studyIntro}`,
+  //           },
+  //           {
+  //             subTitle: '진행방식',
+  //             studyInfo: `${study.studySystem}`,
+  //           },
+  //           {
+  //             subTitle: '사용언어',
+  //             studyInfo: `${study.skills.map((skill) => (
+  //               <img
+  //                 key={skill}
+  //                 src={`/images/skill_icon/${skill}.svg`}
+  //                 alt={`${skill}이미지`}
+  //               />
+  //             ))}`,
+  //           },
+  //           {
+  //             subTitle: '스터디원',
+  //             studyInfo: `${study.member.memberId}`,
+  //           },
+  //         ],
+  //       },
+  //     ];
+  //     setElementContent(content);
+  //   }
+  // }, [study]);
+
+  const handleValue = (e, key) => {
+    if (e !== '') {
+      setPercent({ ...percent, [key]: e });
+    } else {
+      setPercent({ ...percent, [key]: 'empty' });
+    }
+  };
+
+  const perventage = Object.values(percent).filter((el) => {
+    return el !== 'empty';
+  });
+
   return (
     <div>
       {!loading && study && (
         <>
-          <div className="minMax detailDiv">
-            <div className="studyTop">
-              <div>
-                <h1>{study.studyName}</h1>
-                <p>
-                  {study.leaderId} |{' '}
-                  {study.createDate
-                    ? new Date(study.createDate).toLocaleString()
-                    : '날짜 정보 없음'}
+          <div className="minMax flexBox-between">
+            <div className="box-studyInfo">
+              <h4 className="goToHome">&lt; 스터디 홈으로 돌아가기</h4>
+              <h1>{study.studyName}</h1>
+              <Fragment>
+                <h5>
+                  {study.leaderId} | {study.field} |{' '}
+                  {new Date(study.createDate).toLocaleDateString('ko-KR')}{' '}
+                </h5>
+                <div className="studyInfoBox">
+                  <div className="flexBox">
+                    <p className="subTitle">스터디 소개</p>
+                    <p className="studyInfoContent"> {study.studyIntro}</p>
+                  </div>
+                  <br />
+                  <br />
+                  <div className="flexBox">
+                    <p className="subTitle">진행 방식</p>
+                    <p className="studyInfoContent">
+                      {' '}
+                      {study.studySystem
+                        ? study.studySystem
+                        : '진행 방식 정보 없음'}
+                    </p>
+                  </div>
+                  <br />
+                  <br />
+                  <div className="flexBox">
+                    <p className="subTitle">사용 언어</p>
+                    <p>
+                      {' '}
+                      {study.skills.map((skill) => (
+                        <img
+                          key={skill}
+                          src={`/images/skill_icon/${skill}.svg`}
+                          alt={`${skill}이미지`}
+                        />
+                      ))}
+                    </p>
+                  </div>
+                  <br />
+                  <br />
+                  <div className="flexBox">
+                    <p className="subTitle">스터디원</p>
+                  </div>
+                </div>
+              </Fragment>
+            </div>
+            <div className="box-confirm">
+              <div className="percent">
+                <CircularProgressbarWithChildren
+                  value={
+                    perventage.length !== 0 ? (perventage.length / 5) * 100 : 0
+                  }
+                  // text={`${
+                  //   perventage.length !== 0 ? (perventage.length / 5) * 100 : 0
+                  // }%`}
+                  styles={
+                    (buildStyles({
+                      textSize: '16px',
+                      textColor: '#605CFF',
+                    }),
+                    {
+                      path: {
+                        stroke: `#605CFF`,
+                      },
+                      text: {
+                        // Text color
+                        fill: '#605CFF',
+                        // Text size
+                        fontSize: '16px',
+                        fontWeight: 700,
+                      },
+                    })
+                  }
+                >
+                  <p className="percentText">
+                    {study.memberNum.currentNum}
+                    <span>/</span>
+                    {study.memberNum.maxNum}
+                  </p>
+                </CircularProgressbarWithChildren>
+                <p className="percentSubText">
+                  {study.memberNum.maxNum}명 중 {study.memberNum.currentNum}명
+                  모집됨{' '}
                 </p>
               </div>
-
-              {/* 해당 스터디 가입 유무 */}
               <div>
                 {study.isLeader ? (
-                  <button>수정하기</button>
+                  <div>
+                    <a className="btn btn--cancel">공유하기</a>
+                    <a className="btn btn--create">수정하기</a>
+                  </div>
                 ) : study.member.some(
                     (member) =>
                       member.memberId === localStorage.getItem('userId'),
                   ) ? (
-                  <button>탈퇴하기</button>
+                  <div>
+                    <a className="btn btn--cancel">공유하기</a>
+                    <a className="btn btn--create">탈퇴하기</a>
+                  </div>
                 ) : (
-                  <button onClick={joinStudy} disabled={!study.canJoin}>
-                    참여하기
-                  </button>
+                  <div>
+                    <a className="btn btn--cancel">공유하기</a>
+                    <a
+                      className="btn btn--create"
+                      onClick={joinStudy}
+                      disabled={!study.canJoin}
+                    >
+                      참여하기
+                    </a>
+                  </div>
                 )}
               </div>
-            </div>
-
-            <div className="studyContent">
-              <h2>스터디 소개</h2>
-              <br />
-              <p>{study.studyIntro}</p>
-            </div>
-            <div className="skillsImg">
-              {study.skills.map((skill) => (
-                <img
-                  key={skill}
-                  src={`/images/skill_icon/${skill}.svg`}
-                  alt={`${skill}이미지`}
-                />
-              ))}
-            </div>
-            <div className="studyMemberDiv">
-              <h2>스터디 멤버</h2>
-              <div className="studyMember">
-                <div>멤버 1</div>
-                <div>멤버 2</div>
-                <div>멤버 3</div>
-                <div>멤버 4</div>
-                <div>멤버 5</div>
-              </div>
-            </div>
-            <div className="commonGoal">
-              <h2>공동목표</h2>
-              <div>공동목표</div>
-            </div>
-            <div className="detailStudyBoard">
-              <h2>스터디 게시판</h2>
-              <div>스터디</div>
             </div>
           </div>
         </>
