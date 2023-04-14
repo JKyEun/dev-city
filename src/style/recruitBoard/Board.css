@@ -1,0 +1,20 @@
+.study_board {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-top: 30px;
+}
+.study_board .studyContainer {
+  width: 23.5%;
+}
+.study_board .studyContainer:nth-child(4n) {
+  margin-right: 0;
+}
+.study_board .studyContainer ul.skills p {
+  margin-right: 5px;
+  width: 40px;
+}
+.study_board .studyContainer ul.skills p img {
+  display: block;
+  width: 40px;
+}/*# sourceMappingURL=Board.css.map */

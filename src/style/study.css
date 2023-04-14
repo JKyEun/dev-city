@@ -1,0 +1,120 @@
+.studyTab .studyContainer {
+  width: 31.8%;
+}
+.studyTab .studyContainer:nth-child(3n) {
+  margin-right: 0;
+}
+.studyTab .studyContainer ul.skills p {
+  margin-right: 7px;
+  width: 45px;
+}
+.studyTab .studyContainer ul.skills p img {
+  display: block;
+  width: 45px;
+}
+.studyTab .buildingBox {
+  width: 100%;
+  position: relative;
+  margin: 230px 0 100px;
+}
+.studyTab .buildingBox img.bg {
+  width: 100%;
+}
+.studyTab .buildingBox .building {
+  position: absolute;
+  cursor: pointer;
+}
+.studyTab .buildingBox .building .contentBox {
+  position: relative;
+}
+.studyTab .buildingBox .building .contentBox .hoverBox {
+  position: absolute;
+  top: -50px;
+  left: 60%;
+  transform: translateX(-60%);
+  display: block;
+  background-color: white;
+  border: 1px solid #eee;
+  border-radius: 5px;
+  padding: 10px;
+  width: 150px;
+}
+.studyTab .buildingBox .building .contentBox .hoverBox.disable {
+  opacity: 0;
+}
+.studyTab .buildingBox .building .contentBox .hoverBox h4 {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 3px;
+  color: #605cff;
+}
+.studyTab .buildingBox .building .contentBox .hoverBox p {
+  color: #999;
+}
+.studyTab .buildingBox .building1 {
+  z-index: 9;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.studyTab .buildingBox .building2 {
+  z-index: 8;
+  bottom: 120px;
+  left: 29%;
+}
+.studyTab .buildingBox .building3 {
+  z-index: 7;
+  bottom: 210px;
+  left: 50%;
+}
+.studyTab .buildingBox .building4 {
+  z-index: 6;
+  top: 0px;
+  left: 40%;
+}
+.studyTab .buildingBox .building5 {
+  z-index: 5;
+  top: 90px;
+  left: 8%;
+}
+.studyTab .buildingBox .building6 {
+  z-index: 4;
+  top: 30px;
+  right: 10%;
+}
+.studyTab .buildingBox .building7 {
+  z-index: 3;
+  top: -45px;
+  right: 27%;
+}
+.studyTab .buildingBox .building8 {
+  z-index: 2;
+  top: -80px;
+  left: 27%;
+}
+.studyTab .buildingBox .building9 {
+  z-index: 1;
+  top: -180px;
+  left: 40%;
+}
+.studyTab div[class^=study] .title {
+  margin-bottom: 30px;
+}
+.studyTab div[class^=study] .title h4 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+.studyTab div[class^=study] .title .totalCnt {
+  color: #605cff;
+  margin-right: 5px;
+  font-weight: 600;
+}
+.studyTab div[class^=study] .cardBox {
+  flex-wrap: wrap;
+}
+.studyTab div.study-my {
+  margin-bottom: 20px;
+}/*# sourceMappingURL=study.css.map */
