@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Comment from './Comment';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
-export default function Post({ boardDB, setBoardDB }) {
-  console.log(boardDB);
+export default function Post({ boardDB, el, setBoardDB }) {
+  const { id } = useParams();
   const [writerInfo, setWriterInfo] = useState(null);
   const [isCommentOpen, setIsCommentOpen] = useState(false);
-  const date = new Date(boardDB.date);
+  const date = new Date(el.date);
   const dateFormat =
     date.getFullYear() + '. ' + date.getMonth() + '. ' + date.getDate() + '.';
 
@@ -20,8 +21,27 @@ export default function Post({ boardDB, setBoardDB }) {
     }
   };
 
+  const deletePost = async () => {
+    const deletePost = {
+      id: el.id,
+    };
+
+    try {
+      const res = await axios.post(
+        `http://localhost:4000/board/delete/${id}`,
+        deletePost,
+      );
+      console.log(res.data);
+
+      const newBoardDB = boardDB.filter((el) => el.id !== deletePost.id);
+      setBoardDB(newBoardDB);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   useEffect(() => {
-    getWriterInfo(boardDB.writer);
+    getWriterInfo(el.writer);
   }, []);
 
   return (
@@ -44,26 +64,28 @@ export default function Post({ boardDB, setBoardDB }) {
                 <div className="nickname">{writerInfo.nickName}</div>
                 <div className="date">{dateFormat}</div>
               </div>
-              <div className="content">{boardDB.content}</div>
+              <div className="content">{el.content}</div>
               <div
                 onClick={() => {
                   setIsCommentOpen((cur) => !cur);
                 }}
                 className="getComment"
               >
-                {boardDB.comment.length === 0
+                {el.comment.length === 0
                   ? '댓글 달기'
-                  : `${boardDB.comment.length}개의 댓글`}
+                  : `${el.comment.length}개의 댓글`}
               </div>
               <button className="modifyBtn">수정</button>
-              <button className="deleteBtn">삭제</button>
+              <button onClick={deletePost} className="deleteBtn">
+                삭제
+              </button>
             </div>
           </>
         )}
       </div>
       {isCommentOpen && (
         <div className="commentWrap">
-          {boardDB.comment.map((el) => (
+          {el.comment.map((el) => (
             <Comment key={el.id} commentDB={el} setBoardDB={setBoardDB} />
           ))}
           <form className="commentInput">
