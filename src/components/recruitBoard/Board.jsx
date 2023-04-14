@@ -5,7 +5,8 @@ import ReadyStudy from '../Main/ReadyStudy';
 export default function Board() {
   const studies = useSelector((state) => state.study.studies);
   const selectedCategory = useSelector((state) => state.study.category);
-  const user = useSelector((state) => state.user.userId);
+  const userId = useSelector((state) => state.user.userId);
+
   const findCategory = (el) => {
     const intersectionArr = selectedCategory.filter((x) => el.includes(x));
     if (selectedCategory.length === 0) {
@@ -22,7 +23,7 @@ export default function Board() {
     studies !== undefined &&
     studies.map((el, idx) => {
       if (findCategory(el.skills)) {
-        return <ReadyStudy item={el} userId={user} />;
+        return <ReadyStudy item={el} userId={userId} />;
       }
     });
 

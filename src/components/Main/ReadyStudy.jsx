@@ -1,12 +1,22 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { updateLike } from '../../store/modules/user';
 import '../../style/study.scss';
 
 export default function ReadyStudy({ item, idx, userId }) {
   const date = new Date(item.createDate);
-
   const [btnToggle, setBtnToggle] = useState('off');
+  const dispatch = useDispatch();
+  const updateLikeList = async () => {
+    await axios
+      .get(`http://localhost:4000/user/${localStorage.getItem('userId')}`)
+      .then((response) => {
+        dispatch(updateLike(response.data.likedStudy));
+      })
+      .catch((err) => console.error(err));
+  };
 
   const handleLike = async (e) => {
     e.preventDefault();
@@ -25,6 +35,7 @@ export default function ReadyStudy({ item, idx, userId }) {
         isDelete: true,
       });
     }
+    updateLikeList();
   };
 
   return (
