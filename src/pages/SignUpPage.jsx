@@ -7,7 +7,9 @@ export default function SignUpPage() {
   const navigate = useNavigate();
   const userIdInput = useRef('');
   const passwordInput = useRef('');
+  const pwRepeatInput = useRef('');
   const [isAccountValid, setIsAccountValid] = useState(false);
+  const [isPwMatched, setIsPwMatched] = useState(false);
 
   const checkPassword = () => {
     const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
@@ -16,6 +18,12 @@ export default function SignUpPage() {
     } else {
       setIsAccountValid(false);
     }
+
+    if (passwordInput.current.value === pwRepeatInput.current.value) {
+      setIsPwMatched(true);
+    } else {
+      setIsPwMatched(false);
+    }
   };
 
   const addAccount = async (e) => {
@@ -23,7 +31,14 @@ export default function SignUpPage() {
 
     if (!isAccountValid) {
       passwordInput.current.value = '';
+      pwRepeatInput.current.value = '';
       return alert('비밀번호는 숫자와 영문 조합 8글자 이상이어야 합니다.');
+    }
+
+    if (!isPwMatched) {
+      passwordInput.current.value = '';
+      pwRepeatInput.current.value = '';
+      return alert('비밀번호가 일치하지 않습니다.');
     }
 
     const account = {
@@ -99,8 +114,9 @@ export default function SignUpPage() {
           <input
             id="pwInputRepeat"
             type="password"
+            ref={pwRepeatInput}
             placeholder="다시 한 번 입력해주세요"
-            disabled
+            onChange={checkPassword}
           />
         </div>
 
