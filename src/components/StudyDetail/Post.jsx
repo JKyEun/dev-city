@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Comment from './Comment';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
@@ -7,9 +7,18 @@ export default function Post({ boardDB, el, setBoardDB }) {
   const { id } = useParams();
   const [writerInfo, setWriterInfo] = useState(null);
   const [isCommentOpen, setIsCommentOpen] = useState(false);
+  const [isModifyMode, setIsModifyMode] = useState(false);
+  const contentInput = useRef();
   const date = new Date(el.date);
-  const dateFormat =
-    date.getFullYear() + '. ' + date.getMonth() + '. ' + date.getDate() + '.';
+  const dateFormat = el.isModified
+    ? date.getFullYear() +
+      '. ' +
+      date.getMonth() +
+      '. ' +
+      date.getDate() +
+      '.' +
+      ' (수정됨)'
+    : date.getFullYear() + '. ' + date.getMonth() + '. ' + date.getDate() + '.';
 
   const getWriterInfo = async (id) => {
     try {
@@ -40,9 +49,42 @@ export default function Post({ boardDB, el, setBoardDB }) {
     }
   };
 
+  const modifyPost = async () => {
+    try {
+      const modifiedPost = {
+        id: el.id,
+        content: contentInput.current.value,
+        date: el.date,
+        comment: el.comment,
+        writer: el.writer,
+        isModified: true,
+      };
+
+      console.log(modifiedPost);
+
+      const res = await axios.post(
+        `http://localhost:4000/board/modify/${id}`,
+        modifiedPost,
+      );
+
+      console.log(res.data);
+
+      const removedBoardDB = boardDB.filter((el) => el.id !== modifiedPost.id);
+      const newBoardDB = [...removedBoardDB, modifiedPost];
+
+      setBoardDB(newBoardDB);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   useEffect(() => {
     getWriterInfo(el.writer);
   }, []);
+
+  useEffect(() => {
+    if (contentInput.current) contentInput.current.value = el.content;
+  });
 
   return (
     <div className="post">
@@ -64,7 +106,15 @@ export default function Post({ boardDB, el, setBoardDB }) {
                 <div className="nickname">{writerInfo.nickName}</div>
                 <div className="date">{dateFormat}</div>
               </div>
-              <div className="content">{el.content}</div>
+              {isModifyMode ? (
+                <input
+                  type="text"
+                  className="contentInput"
+                  ref={contentInput}
+                />
+              ) : (
+                <div className="content">{el.content}</div>
+              )}
               <div
                 onClick={() => {
                   setIsCommentOpen((cur) => !cur);
@@ -75,7 +125,15 @@ export default function Post({ boardDB, el, setBoardDB }) {
                   ? '댓글 달기'
                   : `${el.comment.length}개의 댓글`}
               </div>
-              <button className="modifyBtn">수정</button>
+              <button
+                onClick={() => {
+                  isModifyMode && modifyPost();
+                  setIsModifyMode((cur) => !cur);
+                }}
+                className="modifyBtn"
+              >
+                수정
+              </button>
               <button onClick={deletePost} className="deleteBtn">
                 삭제
               </button>

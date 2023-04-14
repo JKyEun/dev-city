@@ -27,6 +27,7 @@ export default function StudyBoard() {
       date: new Date().toString(),
       content: boardInput.current.value,
       comment: [],
+      isModified: false,
     };
     try {
       const res = await axios.post(
