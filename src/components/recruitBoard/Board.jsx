@@ -6,6 +6,7 @@ export default function Board() {
   const studies = useSelector((state) => state.study.studies);
   const selectedCategory = useSelector((state) => state.study.category);
   const userId = useSelector((state) => state.user.userId);
+  const likedStudy = useSelector((state) => state.user.likedStudy);
 
   const findCategory = (el) => {
     const intersectionArr = selectedCategory.filter((x) => el.includes(x));
@@ -18,12 +19,20 @@ export default function Board() {
       return false;
     }
   };
-
   const studiesRender =
     studies !== undefined &&
     studies.map((el, idx) => {
       if (findCategory(el.skills)) {
-        return <ReadyStudy item={el} userId={userId} />;
+        return (
+          <ReadyStudy
+            key={idx}
+            className="studyBoard"
+            item={el}
+            liked={likedStudy?.findIndex((study) => study === el._id)}
+            likedStudy={likedStudy}
+            userId={userId}
+          />
+        );
       }
     });
 

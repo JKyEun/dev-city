@@ -1,16 +1,13 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { updateLike } from '../../store/modules/user';
-import '../../style/study.scss';
+import axios from 'axios';
 
-export default function ReadyStudy({ item, idx, liked, likedStudy, userId }) {
-  // user의 likedStudy id와 study의 id를 비교하여 포함되어있으면 버튼이 on
+export default function LikeStudy({ e, item, idx, userId, handleRender }) {
   const date = new Date(item.createDate);
   const dispatch = useDispatch();
-
-  const updateLikeList = async () => {
+  const updateLikeList = async (e) => {
     await axios
       .get(`http://localhost:4000/user/${localStorage.getItem('userId')}`)
       .then((response) => {
@@ -18,22 +15,15 @@ export default function ReadyStudy({ item, idx, liked, likedStudy, userId }) {
       })
       .catch((err) => console.error(err));
   };
-
   const handleLike = async (e) => {
+    handleRender('hi');
     e.preventDefault();
-    if (liked > 0) {
-      await axios.post('http://localhost:4000/study/like', {
-        userId: userId,
-        studyId: item._id,
-        isDelete: true,
-      });
-    } else {
-      await axios.post('http://localhost:4000/study/like', {
-        userId: userId,
-        studyId: item._id,
-        isDelete: false,
-      });
-    }
+
+    await axios.post('http://localhost:4000/study/like', {
+      userId: userId,
+      studyId: item._id,
+      isDelete: true,
+    });
     updateLikeList();
   };
 
@@ -65,10 +55,7 @@ export default function ReadyStudy({ item, idx, liked, likedStudy, userId }) {
         <span> {`${item.memberNum.currentNum}`}</span>명 모집됨
       </p>
       <div className="clickHeart" onClick={(e) => handleLike(e)}>
-        <img
-          src={`./images/icon_heart${liked > 0 ? 'on' : 'off'}.svg`}
-          alt="heart"
-        />
+        <img src="./images/icon_heartOn.svg" alt="heart" />
       </div>
     </Link>
   );
