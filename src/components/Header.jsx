@@ -17,6 +17,8 @@ export default function Header({ profileImg }) {
     create: '생성하기',
     study: '스터디',
     faq: 'FAQ',
+    signin: '로그인',
+    signup: '회원가입',
   };
 
   // 로그인 상태
