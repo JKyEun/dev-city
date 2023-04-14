@@ -2,7 +2,7 @@
 
 .part3 {
   position: relative;
-  height: 600px;
+  height: 560px;
   .minMax {
     .text {
       position: absolute;
@@ -33,6 +33,7 @@
         position: relative;
         div {
           .nickName {
+            margin-top: 20px;
             margin-bottom: 10px;
           }
           .field {

@@ -30,12 +30,13 @@ export default function MainPage() {
       </div>
       {/* 모집 중인 스터디 */}
       <div className="flexBox cardBox recruitedStudy">
-        <RecruitedStudy />;
+        <RecruitedStudy />
       </div>
       {/* 스터디 생성 프로세스 */}
       <CreateProcessStudy />
       {/* 추천친구 */}
       <AllUsers />
+
       <div className="bottom">
         <img src="../images/main-4.svg" alt="" className="lastImg" />
       </div>
