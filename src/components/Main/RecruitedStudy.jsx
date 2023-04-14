@@ -16,7 +16,8 @@ export default function RecruitedStudy() {
   const getStudyInfo = async () => {
     try {
       const res = await axios.get(`http://localhost:4000/study/`);
-      dispatch(init(res.data));
+      const latestStudies = res.data.slice(0, 4);
+      dispatch(init(latestStudies));
     } catch (err) {
       console.error(err);
     }

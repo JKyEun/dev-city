@@ -1,0 +1,61 @@
+.studyContainer {
+  position: relative;
+  border-radius: 10px;
+  border: 1px solid #eee;
+  background-color: #ffffff;
+  align-items: center;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  padding: 25px;
+  position: relative;
+  cursor: pointer;
+}
+.studyContainer:hover {
+  border: 1px solid #605cff;
+}
+.studyContainer .memberCount {
+  margin-top: 15px;
+  color: #999;
+}
+.studyContainer .memberCount span {
+  font-weight: 600;
+  color: #605cff;
+}
+.studyContainer .clickHeart {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+.studyContainer .clickHeart:hover {
+  transform: scale(110%);
+}
+.studyContainer .leaderTag {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: #f7f7ff;
+  color: #605cff;
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 13px;
+}
+.studyContainer p.date {
+  color: #999;
+}
+.studyContainer h3 {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin-top: 7px;
+  color: #222;
+}
+.studyContainer ul.skills {
+  margin-top: 15px;
+  width: 205px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.studyContainer span.ellipsis {
+  position: absolute;
+  right: 25px;
+}/*# sourceMappingURL=MyStudy.css.map */

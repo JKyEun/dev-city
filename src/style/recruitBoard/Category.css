@@ -1,0 +1,11 @@
+.skills .skill {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  display: inline-block;
+  border: 1.5px solid rgba(153, 153, 153, 0.6);
+  border-radius: 20px;
+  padding: 6px 13px;
+  margin: 0 7px;
+  cursor: pointer;
+}/*# sourceMappingURL=Category.css.map */
