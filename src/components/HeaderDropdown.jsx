@@ -22,7 +22,7 @@ export default function HeaderDropdown() {
             <Link to={'/mycity'}>나의 스터디</Link>
           </li>
           <li>
-            <Link to={'/mycity'}>나의 할일</Link>
+            <Link to={'/mycity?lo=todo'}>나의 할일</Link>
           </li>
         </ul>
         <hr />

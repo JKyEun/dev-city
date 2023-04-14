@@ -88,7 +88,7 @@ export default function Study() {
         <div className="title">
           <h4>관심 스터디</h4>
           <div className="flexBox">
-            <p className="totalCnt">총 {userInfo?.likedStudy?.length}개</p>
+            <p className="totalCnt">총 {likeStudy?.length}개</p>
             <p>| 관심있는 스터디 정보를 보여드릴게요</p>
           </div>
         </div>

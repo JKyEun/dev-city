@@ -97,6 +97,11 @@
     .rightSide {
       position: relative;
       width: 674px;
+      .emptyTodo {
+        padding: 70px 0 30px;
+        width: 100%;
+        color: #999;
+      }
       input[type='text'] {
         padding-left: 20px;
         background-color: #f5f6f7;

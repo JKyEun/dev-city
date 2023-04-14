@@ -1,10 +1,40 @@
 .profile {
-  height: 464px;
   padding: 25px;
   text-align: center;
   margin: 30px 0;
+  position: relative;
+  .profileBox {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    overflow: hidden;
+
+    img.profilePhoto {
+      width: 100%;
+    }
+  }
+  .editIcon {
+    cursor: pointer;
+    z-index: 1;
+    position: absolute;
+    top: 115px;
+    right: 45px;
+    background-color: #605cff;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    padding: 12px;
+    img {
+      width: 20px;
+      height: 20px;
+      z-index: 999;
+    }
+  }
   .nickName {
-    margin-top: 20px;
+    margin: 170px 0 7px;
     font-size: 20px;
     font-weight: 700;
   }
@@ -31,23 +61,29 @@
   }
 
   hr {
-    margin-top: 50px;
+    margin-top: 40px;
     border: 0.1px solid #eee;
   }
 
-  .email {
+  .address {
     text-align: start;
     margin-top: 30px;
     div:first-child {
+      margin-bottom: 7px;
       color: #999;
     }
   }
 
-  .github {
-    text-align: start;
-    margin-top: 30px;
-    div:first-child {
-      color: #999;
+  .editor {
+    margin: 40px 0 10px;
+    a {
+      cursor: pointer;
+      color: #ff6868;
+      text-decoration: underline;
+    }
+    a:first-child {
+      color: #605cff;
+      margin-right: 25px;
     }
   }
 }
