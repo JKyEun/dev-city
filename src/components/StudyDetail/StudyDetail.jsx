@@ -10,8 +10,6 @@ import {
 } from 'react-circular-progressbar';
 
 export default function StudyDetail({ match }) {
-  const [percent, setPercent] = useState({});
-  const [elementContent, setElementContent] = useState([]);
   const study = useSelector((state) => state.studyDetail.study);
   const loading = useSelector((state) => state.studyDetail.loading);
 
@@ -85,11 +83,17 @@ export default function StudyDetail({ match }) {
         updatedMember.isLeader = true;
       }
 
-      const response = await axios.put(
+      const responseStudy = await axios.put(
         `http://localhost:4000/study/update/${match.params.id}`,
         { updatedMember },
       );
 
+      const responseUser = await axios.post(
+        `http://localhost:4000/user/joinstudy/`,
+        { userId: currentUserId, studyId: match.params.id },
+      );
+
+      console.log(responseUser);
       dispatch(
         setStudy({
           ...study,
@@ -101,63 +105,10 @@ export default function StudyDetail({ match }) {
         }),
       );
       alert('스터디 참가 신청이 완료되었습니다.');
-      window.location.reload();
     } catch (err) {
       console.error(err);
     }
   };
-
-  // useEffect(() => {
-  //   if (study) {
-  //     const content = [
-  //       {
-  //         title: `${study.studyName}`,
-  //         createInfo: {
-  //           leaderId: `${study.leaderId}`,
-  //           field: `${study.field}`,
-  //           createDate: `${study.createDate}`,
-  //         },
-  //         detail: [
-  //           {
-  //             subTitle: '스터디 소개',
-  //             studyInfo: `${study.studyIntro}`,
-  //           },
-  //           {
-  //             subTitle: '진행방식',
-  //             studyInfo: `${study.studySystem}`,
-  //           },
-  //           {
-  //             subTitle: '사용언어',
-  //             studyInfo: `${study.skills.map((skill) => (
-  //               <img
-  //                 key={skill}
-  //                 src={`/images/skill_icon/${skill}.svg`}
-  //                 alt={`${skill}이미지`}
-  //               />
-  //             ))}`,
-  //           },
-  //           {
-  //             subTitle: '스터디원',
-  //             studyInfo: `${study.member.memberId}`,
-  //           },
-  //         ],
-  //       },
-  //     ];
-  //     setElementContent(content);
-  //   }
-  // }, [study]);
-
-  const handleValue = (e, key) => {
-    if (e !== '') {
-      setPercent({ ...percent, [key]: e });
-    } else {
-      setPercent({ ...percent, [key]: 'empty' });
-    }
-  };
-
-  const perventage = Object.values(percent).filter((el) => {
-    return el !== 'empty';
-  });
 
   return (
     <div>
@@ -215,11 +166,10 @@ export default function StudyDetail({ match }) {
               <div className="percent">
                 <CircularProgressbarWithChildren
                   value={
-                    perventage.length !== 0 ? (perventage.length / 5) * 100 : 0
+                    (`${study.memberNum.currentNum}` /
+                      `${study.memberNum.maxNum}`) *
+                    100
                   }
-                  // text={`${
-                  //   perventage.length !== 0 ? (perventage.length / 5) * 100 : 0
-                  // }%`}
                   styles={
                     (buildStyles({
                       textSize: '16px',
@@ -239,15 +189,20 @@ export default function StudyDetail({ match }) {
                     })
                   }
                 >
-                  <p className="percentText">
-                    {study.memberNum.currentNum}
-                    <span>/</span>
-                    {study.memberNum.maxNum}
-                  </p>
+                  {study.memberNum.currentNum === study.memberNum.maxNum ? (
+                    <p className="percentText">모집 마감</p>
+                  ) : (
+                    <p className="percentText">
+                      {study.memberNum.currentNum}
+                      <span>/</span>
+                      {study.memberNum.maxNum}
+                    </p>
+                  )}
                 </CircularProgressbarWithChildren>
                 <p className="percentSubText">
-                  {study.memberNum.maxNum}명 중 {study.memberNum.currentNum}명
-                  모집됨{' '}
+                  {study.memberNum.currentNum === study.memberNum.maxNum
+                    ? '모집이 마감되었습니다.'
+                    : `${study.memberNum.maxNum}명 중 ${study.memberNum.currentNum}명 모집됨`}
                 </p>
               </div>
               <div>
