@@ -15,9 +15,15 @@ export default function ReadyStudy({ item, idx, userId }) {
       await axios.post('http://localhost:4000/study/like', {
         userId: userId,
         studyId: item._id,
+        isDelete: false,
       });
     } else {
       setBtnToggle('off');
+      await axios.post('http://localhost:4000/study/like', {
+        userId: userId,
+        studyId: item._id,
+        isDelete: true,
+      });
     }
   };
 
