@@ -40,7 +40,7 @@ export default function Study() {
     <div className="studyTab">
       <div className="buildingBox">
         <img className="bg" src="/images/building-bg.svg" alt="bg" />
-        {userInfo?.studyList?.map((el, idx) => {
+        {userInfo?.joinedStudy?.map((el, idx) => {
           const date = new Date(el.createDate);
           return (
             <div
@@ -74,13 +74,13 @@ export default function Study() {
         <div className="title">
           <h4>나의 스터디</h4>
           <div className="flexBox">
-            <p className="totalCnt">총 {userInfo?.studyList?.length}개</p>
+            <p className="totalCnt">총 {userInfo?.joinedStudy?.length}개</p>
             <p>| 현재 참여중인 스터디 정보를 보여드릴게요</p>
           </div>
         </div>
         <div className="flexBox-start cardBox">
-          {userInfo?.studyList?.map((el, idx) => {
-            return <MyStudy key={idx} studyList={el} />;
+          {userInfo?.joinedStudy?.map((el, idx) => {
+            return <MyStudy key={idx} joinedStudy={el} />;
           })}
         </div>
       </div>

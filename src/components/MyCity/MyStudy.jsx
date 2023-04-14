@@ -2,26 +2,28 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../../style/MyStudy.scss';
 
-export default function MyStudy({ studyList }) {
-  console.log(studyList);
-  const date = new Date(studyList.createDate);
+export default function MyStudy({ joinedStudy }) {
+  const date = new Date(joinedStudy?.createDate);
 
   return (
     <Link
-      to={`/study/detail/${studyList._id}`}
+      to={`/study/detail/${joinedStudy?._id}`}
       className="studyContainer myStudyContainer"
     >
-      {studyList.isLeader && <span className="leaderTag">Leader</span>}
-      <img src={`/images/inside-b-${studyList.building}.svg`} alt="building" />
+      {joinedStudy?.isLeader && <span className="leaderTag">Leader</span>}
+      <img
+        src={`/images/inside-b-${joinedStudy?.building}.svg`}
+        alt="building"
+      />
 
       <p className="date">
         {`${date.getFullYear()}.${date.getMonth()}.${date.getDate()}`}
-        <span>| {studyList.field}</span>
+        <span>| {joinedStudy?.field}</span>
       </p>
-      <h3>{studyList.studyName}</h3>
+      <h3>{joinedStudy?.studyName}</h3>
       <div className="flexBox-alignCenter">
         <ul className="flexBox skills">
-          {studyList?.skills?.map((el) => {
+          {joinedStudy?.skills?.map((el) => {
             return (
               <p key={el}>
                 <img src={`/images/skill_icon/${el}.svg`} alt="" />
@@ -30,7 +32,7 @@ export default function MyStudy({ studyList }) {
           })}
         </ul>
         <span className="ellipsis">
-          {studyList?.skills.length > 4 && '...'}
+          {joinedStudy?.skills.length > 4 && '...'}
         </span>
       </div>
     </Link>
