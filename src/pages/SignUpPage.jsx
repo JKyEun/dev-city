@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../style/signUpPage.scss';
 
 export default function SignUpPage() {
@@ -10,6 +10,13 @@ export default function SignUpPage() {
   const pwRepeatInput = useRef('');
   const [isAccountValid, setIsAccountValid] = useState(false);
   const [isPwMatched, setIsPwMatched] = useState(false);
+
+  const KAKAO_CLIENT_ID = '8b9d9e6f2ac1ce6697298e70eb30186c';
+  const KAKAO_REDIRECT_URI = 'http://localhost:3000/oauth/callback/kakao';
+  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`;
+  const GITHUB_CLIENT_ID = '92cca3b5a2142e0aa021';
+  const GITHUB_REDIRECT_URI = 'http://localhost:3000/oauth/callback/github';
+  const GITHUB_AUTH_URL = `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&redirect_uri=${GITHUB_REDIRECT_URI}`;
 
   const checkPassword = () => {
     const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
@@ -124,7 +131,15 @@ export default function SignUpPage() {
           회원가입
         </button>
       </form>
-      <div className="returnLogin">로그인으로 돌아가기</div>
+      <hr />
+      <Link to={KAKAO_AUTH_URL} className="kakaoBtn">
+        <img src="/images/icon_kakao.svg" alt="카카오 아이콘" />
+        카카오 회원가입
+      </Link>
+      <Link to={GITHUB_AUTH_URL} className="githubBtn">
+        <img src="/images/icon_github.svg" alt="깃허브 아이콘" />
+        깃허브 회원가입
+      </Link>
     </div>
   );
 }
