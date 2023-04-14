@@ -1,0 +1,157 @@
+.studyBoardWrap {
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  width: 770px;
+  .createPostForm {
+    input {
+      width: 670px;
+      height: 35px;
+      padding-left: 15px;
+      border-radius: 50px;
+      background-color: #f5f6f7;
+      border: none;
+    }
+    button {
+      background-color: #605cff;
+      color: #fff;
+      font-weight: 700;
+      width: 90px;
+      margin-left: 10px;
+      height: 35px;
+      border: none;
+      border-radius: 30px;
+      font-size: 14px;
+    }
+  }
+  .post {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    .postWrap {
+      display: flex;
+      position: relative;
+      .leftSide {
+        width: 40px;
+        margin-right: 10px;
+        img {
+          width: 40px;
+        }
+      }
+      .rightSide {
+        display: flex;
+        flex-direction: column;
+        width: 730px;
+        .postInfo {
+          .nickname {
+            font-weight: 800;
+          }
+          .date {
+            margin-top: 5px;
+            color: #999;
+          }
+        }
+        .content {
+          margin-top: 10px;
+        }
+        .getComment {
+          margin-top: 10px;
+          text-decoration: underline;
+          color: #605cff;
+        }
+        .modifyBtn,
+        .deleteBtn {
+          position: absolute;
+          right: 0;
+          border: 1px solid #ff6868;
+          background-color: #fff;
+          color: #ff6868;
+          border-radius: 20px;
+          font-size: 12px;
+          padding: 3px 8px;
+        }
+        .modifyBtn {
+          right: 40px;
+          border: 1px solid #47cddf;
+          background-color: #fff;
+          color: #47cddf;
+          border-radius: 20px;
+          font-size: 12px;
+          padding: 3px 8px;
+        }
+      }
+    }
+    .commentWrap {
+      display: flex;
+      margin-top: 10px;
+      flex-direction: column;
+      padding: 20px;
+      border-radius: 10px;
+      margin-left: 30px;
+      position: relative;
+
+      background-color: #f5f6f7;
+      .comment {
+        display: flex;
+        .commentInfo {
+          margin-left: 10px;
+          display: flex;
+          span:first-child {
+            font-weight: 800;
+            padding-right: 7px;
+            border-right: 0.1px solid #999;
+          }
+          span:last-child {
+            color: #999;
+            padding-left: 7px;
+          }
+        }
+        .commentContent {
+          margin-left: 10px;
+          margin-top: 10px;
+        }
+        .modifyBtn,
+        .deleteBtn {
+          position: absolute;
+          top: 15px;
+          right: 15px;
+          border: 1px solid #ff6868;
+          background-color: #fff;
+          color: #ff6868;
+          border-radius: 20px;
+          font-size: 12px;
+          padding: 3px 8px;
+        }
+        .modifyBtn {
+          right: 60px;
+          border: 1px solid #47cddf;
+          background-color: #fff;
+          color: #47cddf;
+          border-radius: 20px;
+          font-size: 12px;
+          padding: 3px 8px;
+        }
+      }
+
+      .commentInput {
+        display: flex;
+        margin-top: 20px;
+        input {
+          margin-left: 10px;
+          padding-right: 40px;
+          width: 660px;
+          height: 40px;
+          border-radius: 50px;
+          border: none;
+          padding-left: 15px;
+        }
+        .commentBtn {
+          position: absolute;
+          transform: translateX(665px);
+          width: 40px;
+          height: 40px;
+        }
+      }
+    }
+  }
+}
