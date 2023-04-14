@@ -37,7 +37,30 @@ export default function InsertInformationPage() {
     } catch (err) {
       console.error(err);
     }
-    
+
+    navigate('/');
+  };
+
+  const setUserInfoGithub = async (e, id) => {
+    e.preventDefault();
+
+    const newInfoGithub = {
+      ...userInfo,
+      nickName: nickNameInput.current.value,
+      field: fieldInput.current.value,
+    };
+
+    try {
+      const res = await axios.post(
+        `http://localhost:4000/user/updateuser/${id}`,
+        newInfoGithub,
+      );
+      console.log(res.data);
+      dispatch(updateUser(newInfoGithub));
+    } catch (err) {
+      console.error(err);
+    }
+
     navigate('/');
   };
 
@@ -46,15 +69,17 @@ export default function InsertInformationPage() {
       <h2>회원가입이 완료되었습니다</h2>
       <div className="intro">추가정보를 입력해주세요</div>
       <form>
-        <div>
-          <label for="nameInput">이름</label>
-          <input
-            ref={nameInput}
-            id="nameInput"
-            type="text"
-            placeholder="이름을 입력해주세요"
-          />
-        </div>
+        {userInfo.userName === '이름을 입력하세요' && (
+          <div>
+            <label for="nameInput">이름</label>
+            <input
+              ref={nameInput}
+              id="nameInput"
+              type="text"
+              placeholder="이름을 입력해주세요"
+            />
+          </div>
+        )}
         <div>
           <label for="nickNameInput">닉네임</label>
           <input
@@ -64,24 +89,28 @@ export default function InsertInformationPage() {
             placeholder="닉네임을 입력해주세요"
           />
         </div>
-        <div>
-          <label for="emailInput">이메일</label>
-          <input
-            ref={emailInput}
-            id="emailInput"
-            type="email"
-            placeholder="이메일을 입력해주세요"
-          />
-        </div>
-        <div>
-          <label for="githubInput">깃허브 주소</label>
-          <input
-            ref={githubInput}
-            id="githubInput"
-            type="text"
-            placeholder="깃허브 주소를 입력해주세요"
-          />
-        </div>
+        {userInfo.userName === '이름을 입력하세요' && (
+          <>
+            <div>
+              <label for="emailInput">이메일</label>
+              <input
+                ref={emailInput}
+                id="emailInput"
+                type="email"
+                placeholder="이메일을 입력해주세요"
+              />
+            </div>
+            <div>
+              <label for="githubInput">깃허브 주소</label>
+              <input
+                ref={githubInput}
+                id="githubInput"
+                type="text"
+                placeholder="깃허브 주소를 입력해주세요"
+              />
+            </div>
+          </>
+        )}
         <div>
           <label for="fieldInput">관심분야</label>
           <select
@@ -100,12 +129,23 @@ export default function InsertInformationPage() {
         <span className="explain">
           추가정보는 나의 도시에서 수정할 수 있습니다
         </span>
-        <button
-          onClick={(e) => setUserInfo(e, localStorage.getItem('userId'))}
-          className="submitBtn"
-        >
-          작성완료
-        </button>
+        {userInfo.userName === '이름을 입력하세요' ? (
+          <button
+            onClick={(e) => setUserInfo(e, localStorage.getItem('userId'))}
+            className="submitBtn"
+          >
+            작성완료
+          </button>
+        ) : (
+          <button
+            onClick={(e) =>
+              setUserInfoGithub(e, localStorage.getItem('userId'))
+            }
+            className="submitBtn"
+          >
+            작성완료
+          </button>
+        )}
       </form>
       <div
         className="skip"
