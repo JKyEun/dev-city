@@ -15,7 +15,6 @@ import { useEffect } from 'react';
 import KakaoRedirectHandler from './KakaoRedirectHandler';
 import InsertInformationPage from './pages/InsertInformationPage';
 import GithubRedirectHandler from './GithubRedirectHandler';
-import Footer from './components/Footer';
 
 function App() {
   const dispatch = useDispatch();
@@ -56,7 +55,6 @@ function App() {
           element={<GithubRedirectHandler />}
         />
       </Routes>
-      <Footer />
     </div>
   );
 }
