@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 export default function RecentStudy(props) {
   const [interestList, setInterestList] = useState({});
-  const [studyList, setStudyList] = useState([]);
+  const [joinedStudy, setjoinedStudy] = useState([]);
 
   const getReadyStudy = async () => {
     try {
@@ -14,7 +14,7 @@ export default function RecentStudy(props) {
         (a, b) => new Date(b.createDate) - new Date(a.createDate),
       );
       const latestStudies = study.slice(0, 4);
-      setStudyList(latestStudies);
+      setjoinedStudy(latestStudies);
     } catch (err) {
       console.error(err);
     }
@@ -23,7 +23,7 @@ export default function RecentStudy(props) {
   useEffect(() => {
     getReadyStudy();
   }, []);
-  console.log(studyList);
+  console.log(joinedStudy);
   const handleInterestClick = (index) => {
     // interestList의 index 위치의 값을 반대로 변경
     const interests = [...interestList];
@@ -32,7 +32,7 @@ export default function RecentStudy(props) {
   };
   return (
     <>
-      {studyList.map((study, index) => (
+      {joinedStudy.map((study, index) => (
         <div key={study._id} className="studyBoard">
           <div className="createDate">
             {new Date(study.createDate).toLocaleString()}|{study.field}
