@@ -11,8 +11,6 @@ export default function StudyBoard() {
   const userInfo = useSelector((state) => state.user);
   const boardInput = useRef();
 
-  console.log(boardDB);
-
   const getBoard = async () => {
     const res = await axios.get(`http://localhost:4000/board/get/${id}`);
     setBoardDB(res.data.board);
@@ -66,6 +64,7 @@ export default function StudyBoard() {
             boardDB={boardDB}
             boardEl={el}
             setBoardDB={setBoardDB}
+            getBoard={getBoard}
           />
         ))}
     </div>
