@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
 import '../../style/MyStudy.scss';
 
 export default function MyStudy({ joinedStudy }) {
+  const userId = useSelector((state) => state.user.userId);
+  const study = useSelector((state) => state.study.studies);
   const date = new Date(joinedStudy?.createDate);
 
   return (
@@ -10,7 +14,9 @@ export default function MyStudy({ joinedStudy }) {
       to={`/study/detail/${joinedStudy?.objectId}`}
       className="studyContainer myStudyContainer"
     >
-      {joinedStudy?.isLeader && <span className="leaderTag">Leader</span>}
+      {joinedStudy?.leaderId === userId && (
+        <span className="leaderTag">Leader</span>
+      )}
       <img
         src={`/images/inside-b-${joinedStudy?.building}.svg`}
         alt="building"
@@ -32,7 +38,7 @@ export default function MyStudy({ joinedStudy }) {
           })}
         </ul>
         <span className="ellipsis">
-          {joinedStudy?.skills.length > 4 && '...'}
+          {joinedStudy?.skills?.length > 4 && '...'}
         </span>
       </div>
     </Link>
