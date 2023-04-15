@@ -1,19 +1,23 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import '../../style/studyDetail.scss';
 import { fetchStudy, setStudy } from '../../store/modules/studyDetail';
 import {
-  CircularProgressbar,
   buildStyles,
   CircularProgressbarWithChildren,
 } from 'react-circular-progressbar';
+import ParticipationRequest from './ParticipationRequest';
 
 export default function StudyDetail({ match }) {
   const study = useSelector((state) => state.studyDetail.study);
   const loading = useSelector((state) => state.studyDetail.loading);
-
   const dispatch = useDispatch();
+  const myMemberEl =
+    study &&
+    study.member.filter((el) => el.memberId === localStorage.getItem('userId'));
+  const isLeader =
+    myMemberEl && myMemberEl.length > 0 ? myMemberEl[0].isLeader : false;
 
   useEffect(() => {
     const fetchStudyData = async () => {
@@ -72,38 +76,34 @@ export default function StudyDetail({ match }) {
         return;
       }
 
-      const isLeader = study.member.some(
-        (member) => member.isLeader && member.memberId === currentUserId,
+      const getRes = await axios.get(
+        `http://localhost:4000/invite/get/${match.params.id}`,
       );
-      const updatedMember = {
-        memberId: currentUserId,
-        isLeader: false,
-      };
-      if (isLeader) {
-        updatedMember.isLeader = true;
+
+      const requestList = getRes.data.request;
+      if (requestList.includes(currentUserId)) {
+        alert('이미 참가신청이 완료되었습니다.');
+        return;
       }
 
-      const responseStudy = await axios.put(
-        `http://localhost:4000/study/update/${match.params.id}`,
-        { updatedMember },
+      const requestUser = {
+        userId: currentUserId,
+      };
+
+      const addRes = await axios.post(
+        `http://localhost:4000/invite/add/${match.params.id}`,
+        requestUser,
       );
 
-      const responseUser = await axios.post(
-        `http://localhost:4000/user/joinstudy/`,
-        { userId: currentUserId, studyId: match.params.id },
-      );
+      console.log(addRes.data);
 
-      console.log(responseUser);
-      dispatch(
-        setStudy({
-          ...study,
-          member: [...study.member, updatedMember],
-          memberNum: {
-            ...study.memberNum,
-            currentNum: currentNum + 1, // 현재 참여 인원수 +1
-          },
-        }),
-      );
+      const newStudy = {
+        ...study,
+        request: [...study.request, currentUserId],
+      };
+
+      dispatch(setStudy(newStudy));
+
       alert('스터디 참가 신청이 완료되었습니다.');
     } catch (err) {
       console.error(err);
@@ -117,19 +117,18 @@ export default function StudyDetail({ match }) {
           <div className="minMax flexBox-between">
             <div className="box-studyInfo">
               <h4 className="goToHome">
-                {' '}
                 <img
                   className="left-arrow"
                   src="/images/chevron-left-solid.svg"
                   alt="left-arrow"
-                />{' '}
+                />
                 스터디 홈으로 돌아가기
               </h4>
               <h1>{study.studyName}</h1>
               <Fragment>
                 <h5>
-                  {study.leaderId} | {study.field} |{' '}
-                  {new Date(study.createDate).toLocaleDateString('ko-KR')}{' '}
+                  {study.leaderId} | {study.field} |
+                  {new Date(study.createDate).toLocaleDateString('ko-KR')}
                 </h5>
                 <div className="studyInfoBox">
                   <div className="flexBox">
@@ -141,7 +140,6 @@ export default function StudyDetail({ match }) {
                   <div className="flexBox">
                     <p className="subTitle">진행 방식</p>
                     <p className="studyInfoContent">
-                      {' '}
                       {study.studySystem
                         ? study.studySystem
                         : '진행 방식 정보 없음'}
@@ -152,7 +150,6 @@ export default function StudyDetail({ match }) {
                   <div className="flexBox">
                     <p className="subTitle">사용 언어</p>
                     <p>
-                      {' '}
                       {study.skills.map((skill) => (
                         <img
                           key={skill}
@@ -166,6 +163,11 @@ export default function StudyDetail({ match }) {
                   <br />
                   <div className="flexBox">
                     <p className="subTitle">스터디원</p>
+                    {/* 이걸 지우고 이곳에 스터디 멤버를 map으로 돌리시오 */}
+                    {isLeader &&
+                      study.request.map((el) => (
+                        <ParticipationRequest key={el} userId={el} />
+                      ))}
                   </div>
                 </div>
               </Fragment>
