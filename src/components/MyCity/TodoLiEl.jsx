@@ -138,7 +138,9 @@ export default function TodoLiEl({ el, selectedDate }) {
       ) : (
         <>
           <div style={{ display: 'inline-block' }} className="contentWrap">
-            <div className="content">{el.content}</div>
+            <div className={el.isCompleted ? 'content complete' : 'content'}>
+              {el.content}
+            </div>
             <div className="time">{time}</div>
           </div>
           <button
