@@ -50,10 +50,17 @@ export default function InsertInformationPage() {
       field: fieldInput.current.value,
     };
 
+    const newInfoGithubContainEmail = {
+      ...userInfo,
+      nickName: nickNameInput.current.value,
+      field: fieldInput.current.value,
+      email: emailInput.current.value,
+    };
+
     try {
       const res = await axios.post(
         `http://localhost:4000/user/updateuser/${id}`,
-        newInfoGithub,
+        userInfo.email === null ? newInfoGithubContainEmail : newInfoGithub,
       );
       console.log(res.data);
       dispatch(updateUser(newInfoGithub));
