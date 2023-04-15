@@ -1,4 +1,6 @@
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import '../../style/recruitBoard/Board.scss';
 import ReadyStudy from '../Main/ReadyStudy';
 
@@ -7,7 +9,8 @@ export default function Board() {
   const selectedCategory = useSelector((state) => state.study.category);
   const userId = useSelector((state) => state.user.userId);
   const likedStudy = useSelector((state) => state.user.likedStudy);
-
+  const location = useLocation();
+  const searchValue = location.search.replace('?search=', '');
   const findCategory = (el) => {
     const intersectionArr = selectedCategory.filter((x) => el.includes(x));
     if (selectedCategory.length === 0) {
@@ -19,6 +22,7 @@ export default function Board() {
       return false;
     }
   };
+
   const studiesRender =
     studies !== undefined &&
     studies.map((el, idx) => {
@@ -36,5 +40,30 @@ export default function Board() {
       }
     });
 
-  return <div className="study_board">{studiesRender}</div>;
+  const searchRender = studies
+    .filter((study) => {
+      return study.studyName.includes(
+        decodeURI(decodeURIComponent(searchValue)),
+      );
+    })
+    .map((el, idx) => {
+      return (
+        <ReadyStudy
+          key={idx}
+          className="studyBoard"
+          item={el}
+          liked={likedStudy?.findIndex((study) => study === el._id)}
+          likedStudy={likedStudy}
+          userId={userId}
+        />
+      );
+    });
+
+  return (
+    <div className="study_board">
+      {decodeURI(decodeURIComponent(searchValue)) !== ''
+        ? searchRender
+        : studiesRender}
+    </div>
+  );
 }

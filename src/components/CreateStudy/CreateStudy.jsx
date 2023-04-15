@@ -5,6 +5,7 @@ import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import { useNavigate } from 'react-router-dom';
 import { create } from '../../store/modules/study';
+
 import {
   CircularProgressbar,
   buildStyles,
@@ -126,6 +127,7 @@ export default function CreateStudy() {
           study_etc: etcInput.current.value,
         }),
       );
+
       return navigate('/study');
     } catch (err) {
       alert(err.response.data);

@@ -13,6 +13,7 @@ export default function Study() {
   const [num, setNum] = useState(0);
   const userInfo = useSelector((state) => state.user);
   const [likeStudy, setLikeStudy] = useState([]);
+  const [joinedStudy, setJoinedStudy] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const studies = useSelector((state) => state.study.studies);
@@ -30,6 +31,7 @@ export default function Study() {
       const result = resStudy.data?.filter((study) => {
         return resUser.data?.likedStudy?.includes(study._id);
       });
+      setJoinedStudy(resUser.data.joinedStudy);
       setLikeStudy(result);
     } catch (err) {
       console.error(err);
@@ -81,12 +83,12 @@ export default function Study() {
         <div className="title">
           <h4>나의 스터디</h4>
           <div className="flexBox">
-            <p className="totalCnt">총 {userInfo?.joinedStudy?.length}개</p>
+            <p className="totalCnt">총 {joinedStudy?.length}개</p>
             <p>| 현재 참여중인 스터디 정보를 보여드릴게요</p>
           </div>
         </div>
         <div className="flexBox-start cardBox">
-          {userInfo?.joinedStudy?.map((el, idx) => {
+          {joinedStudy?.map((el, idx) => {
             return <MyStudy key={idx} joinedStudy={el} />;
           })}
         </div>

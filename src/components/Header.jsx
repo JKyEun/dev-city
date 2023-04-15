@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import '../style/_header.scss';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import HeaderDropdown from './HeaderDropdown';
+import '../style/_header.scss';
 
 export default function Header({ profileImg }) {
   const [url, setUrl] = useState('/');
   const location = useLocation();
+  const navigate = useNavigate();
+  const searchInput = useRef();
 
   useEffect(() => {
     setUrl(location.pathname);
@@ -53,7 +55,12 @@ export default function Header({ profileImg }) {
   const handleImageClick = () => {
     setShowDropdown(!showDropdown); // showDropdown 값을 반전시킴
   };
-
+  const handleSearch = (e) => {
+    if (url !== '/study') {
+      navigate('/study');
+    }
+    navigate(`/study?search=${searchInput.current.value}`);
+  };
   return (
     <header>
       <div className="minMax">
@@ -76,7 +83,15 @@ export default function Header({ profileImg }) {
           </div>
           <div className="flexBox">
             <div className="search">
-              <input type="text" placeholder="스터디 / 챌린지를 검색해주세요" />
+              <input
+                onKeyUp={handleSearch}
+                ref={searchInput}
+                type="text"
+                placeholder="찾으시는 스터디가 있으신가요?"
+              />
+              <div type="submit" className="searchIcon" onClick={handleSearch}>
+                <img src="/images/icon_search.svg" alt="search" />
+              </div>
             </div>
             {/* 로그인 유무 */}
             {isLoggedIn ? (
