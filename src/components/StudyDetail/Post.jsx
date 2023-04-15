@@ -2,23 +2,31 @@ import React, { useEffect, useRef, useState } from 'react';
 import Comment from './Comment';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 export default function Post({ boardDB, el, setBoardDB }) {
   const { id } = useParams();
   const [writerInfo, setWriterInfo] = useState(null);
   const [isCommentOpen, setIsCommentOpen] = useState(false);
   const [isModifyMode, setIsModifyMode] = useState(false);
+  const userInfo = useSelector((state) => state.user);
   const contentInput = useRef();
+  const commentInput = useRef();
   const date = new Date(el.date);
   const dateFormat = el.isModified
     ? date.getFullYear() +
       '. ' +
-      date.getMonth() +
+      (date.getMonth() + 1) +
       '. ' +
       date.getDate() +
       '.' +
       ' (수정됨)'
-    : date.getFullYear() + '. ' + date.getMonth() + '. ' + date.getDate() + '.';
+    : date.getFullYear() +
+      '. ' +
+      (date.getMonth() + 1) +
+      '. ' +
+      date.getDate() +
+      '.';
 
   const getWriterInfo = async (id) => {
     try {
@@ -76,6 +84,45 @@ export default function Post({ boardDB, el, setBoardDB }) {
     } catch (err) {
       console.error(err);
     }
+  };
+
+  const addComment = async (e) => {
+    e.preventDefault();
+
+    const newComment = {
+      boardId: el.id,
+      id: +new Date(),
+      writer: userInfo.userId,
+      date: new Date().toString(),
+      content: commentInput.current.value,
+      isModified: false,
+    };
+
+    try {
+      const res = await axios.post(
+        `http://localhost:4000/board/add/comment/${id}`,
+        newComment,
+      );
+
+      console.log(res.data);
+
+      const newBoardDB = boardDB.map((board) => {
+        if (board.id === el.id) {
+          const updatedObj = {
+            ...board,
+            comment: [...board.comment, newComment],
+          };
+          return updatedObj;
+        }
+        return board;
+      });
+
+      setBoardDB(newBoardDB);
+    } catch (err) {
+      console.error(err);
+    }
+
+    commentInput.current.value = '';
   };
 
   useEffect(() => {
@@ -146,14 +193,16 @@ export default function Post({ boardDB, el, setBoardDB }) {
           {el.comment.map((el) => (
             <Comment key={el.id} commentDB={el} setBoardDB={setBoardDB} />
           ))}
-          <form className="commentInput">
+          <form onSubmit={(e) => addComment(e)} className="commentInput">
             <img src="/images/icon_github.svg" alt="본인 프로필" width="40" />
-            <input type="text" placeholder="하고 싶은 말을 적어보세요!" />
-            <img
-              className="commentBtn"
-              src="/images/icon_plus.svg"
-              alt="추가"
+            <input
+              ref={commentInput}
+              type="text"
+              placeholder="하고 싶은 말을 적어보세요!"
             />
+            <button className="commentBtn">
+              <img src="/images/icon_plus.svg" alt="추가" />
+            </button>
           </form>
         </div>
       )}

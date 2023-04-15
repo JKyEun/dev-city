@@ -1,11 +1,20 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 export default function Comment({ commentDB, setBoardDB }) {
+  const { id } = useParams();
   const [commentWriterInfo, setCommentWriterInfo] = useState(null);
+  const userInfo = useSelector((state) => state.user);
   const date = new Date(commentDB.date);
   const dateFormat =
-    date.getFullYear() + '. ' + date.getMonth() + '. ' + date.getDate() + '.';
+    date.getFullYear() +
+    '. ' +
+    (date.getMonth() + 1) +
+    '. ' +
+    date.getDate() +
+    '.';
 
   const getWriterInfo = async (id) => {
     try {
