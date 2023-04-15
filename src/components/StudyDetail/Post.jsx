@@ -167,7 +167,7 @@ export default function Post({ boardDB, boardEl, setBoardDB, getBoard }) {
                       className="contentInput"
                       ref={contentInput}
                     />
-                    <div
+                    <span
                       onClick={() => {
                         setIsCommentOpen((cur) => !cur);
                       }}
@@ -176,7 +176,7 @@ export default function Post({ boardDB, boardEl, setBoardDB, getBoard }) {
                       {boardEl.comment.length === 0
                         ? '댓글 달기'
                         : `${boardEl.comment.length}개의 댓글`}
-                    </div>
+                    </span>
                     <button
                       type="submit"
                       onClick={() => {
@@ -196,7 +196,7 @@ export default function Post({ boardDB, boardEl, setBoardDB, getBoard }) {
                     <div className="date">{dateFormat}</div>
                   </div>
                   <div className="content">{boardEl.content}</div>
-                  <div
+                  <span
                     onClick={() => {
                       setIsCommentOpen((cur) => !cur);
                     }}
@@ -205,7 +205,7 @@ export default function Post({ boardDB, boardEl, setBoardDB, getBoard }) {
                     {boardEl.comment.length === 0
                       ? '댓글 달기'
                       : `${boardEl.comment.length}개의 댓글`}
-                  </div>
+                  </span>
                   {isMyPost && (
                     <button
                       onClick={() => {
