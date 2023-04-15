@@ -88,10 +88,9 @@
       padding: 20px;
       border-radius: 10px;
       margin-left: 30px;
-      position: relative;
-
       background-color: #f5f6f7;
       .comment {
+        position: relative;
         display: flex;
         margin-bottom: 10px;
         .commentInfo {
@@ -114,7 +113,6 @@
         .modifyBtn,
         .deleteBtn {
           position: absolute;
-          top: 15px;
           right: 15px;
           border: 1px solid #ff6868;
           background-color: #fff;

@@ -61,7 +61,12 @@ export default function StudyBoard() {
       </form>
       {boardDB !== null &&
         boardDB.map((el) => (
-          <Post key={el.id} boardDB={boardDB} el={el} setBoardDB={setBoardDB} />
+          <Post
+            key={el.id}
+            boardDB={boardDB}
+            boardEl={el}
+            setBoardDB={setBoardDB}
+          />
         ))}
     </div>
   );

@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-export default function Post({ boardDB, el, setBoardDB }) {
+export default function Post({ boardDB, boardEl, setBoardDB }) {
   const { id } = useParams();
   const [writerInfo, setWriterInfo] = useState(null);
   const [isCommentOpen, setIsCommentOpen] = useState(false);
@@ -12,8 +12,8 @@ export default function Post({ boardDB, el, setBoardDB }) {
   const userInfo = useSelector((state) => state.user);
   const contentInput = useRef();
   const commentInput = useRef();
-  const date = new Date(el.date);
-  const dateFormat = el.isModified
+  const date = new Date(boardEl.date);
+  const dateFormat = boardEl.isModified
     ? date.getFullYear() +
       '. ' +
       (date.getMonth() + 1) +
@@ -40,7 +40,7 @@ export default function Post({ boardDB, el, setBoardDB }) {
 
   const deletePost = async () => {
     const deletePost = {
-      id: el.id,
+      id: boardEl.id,
     };
 
     try {
@@ -60,11 +60,11 @@ export default function Post({ boardDB, el, setBoardDB }) {
   const modifyPost = async () => {
     try {
       const modifiedPost = {
-        id: el.id,
+        id: boardEl.id,
         content: contentInput.current.value,
-        date: el.date,
-        comment: el.comment,
-        writer: el.writer,
+        date: boardEl.date,
+        comment: boardEl.comment,
+        writer: boardEl.writer,
         isModified: true,
       };
 
@@ -90,7 +90,7 @@ export default function Post({ boardDB, el, setBoardDB }) {
     e.preventDefault();
 
     const newComment = {
-      boardId: el.id,
+      boardId: boardEl.id,
       id: +new Date(),
       writer: userInfo.userId,
       date: new Date().toString(),
@@ -107,7 +107,7 @@ export default function Post({ boardDB, el, setBoardDB }) {
       console.log(res.data);
 
       const newBoardDB = boardDB.map((board) => {
-        if (board.id === el.id) {
+        if (board.id === boardEl.id) {
           const updatedObj = {
             ...board,
             comment: [...board.comment, newComment],
@@ -126,11 +126,11 @@ export default function Post({ boardDB, el, setBoardDB }) {
   };
 
   useEffect(() => {
-    getWriterInfo(el.writer);
+    getWriterInfo(boardEl.writer);
   }, []);
 
   useEffect(() => {
-    if (contentInput.current) contentInput.current.value = el.content;
+    if (contentInput.current) contentInput.current.value = boardEl.content;
   });
 
   return (
@@ -160,7 +160,7 @@ export default function Post({ boardDB, el, setBoardDB }) {
                   ref={contentInput}
                 />
               ) : (
-                <div className="content">{el.content}</div>
+                <div className="content">{boardEl.content}</div>
               )}
               <div
                 onClick={() => {
@@ -168,9 +168,9 @@ export default function Post({ boardDB, el, setBoardDB }) {
                 }}
                 className="getComment"
               >
-                {el.comment.length === 0
+                {boardEl.comment.length === 0
                   ? '댓글 달기'
-                  : `${el.comment.length}개의 댓글`}
+                  : `${boardEl.comment.length}개의 댓글`}
               </div>
               <button
                 onClick={() => {
@@ -190,8 +190,14 @@ export default function Post({ boardDB, el, setBoardDB }) {
       </div>
       {isCommentOpen && (
         <div className="commentWrap">
-          {el.comment.map((el) => (
-            <Comment key={el.id} commentDB={el} setBoardDB={setBoardDB} />
+          {boardEl.comment.map((el) => (
+            <Comment
+              key={el.id}
+              boardEl={boardEl}
+              commentEl={el}
+              boardDB={boardDB}
+              setBoardDB={setBoardDB}
+            />
           ))}
           <form onSubmit={(e) => addComment(e)} className="commentInput">
             <img src="/images/icon_github.svg" alt="본인 프로필" width="40" />
