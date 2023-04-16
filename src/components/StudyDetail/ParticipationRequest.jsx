@@ -22,7 +22,6 @@ export default function ParticipationRequest({ userId }) {
   const acceptRequest = async () => {
     try {
       const currentUserId = member.userId;
-      const currentNum = study.memberNum.currentNum;
 
       const isLeader = study.member.some(
         (member) => member.isLeader && member.memberId === currentUserId,
@@ -49,25 +48,55 @@ export default function ParticipationRequest({ userId }) {
 
       console.log(responseUser);
 
-      dispatch(
-        setStudy({
-          ...study,
-          member: [...study.member, updatedMember],
-          memberNum: {
-            ...study.memberNum,
-            currentNum: currentNum + 1, // 현재 참여 인원수 +1
-          },
-        }),
-      );
-
       // request에서 제거해주기
-      removeRequest();
+      acceptRemoveRequest();
     } catch (err) {
       console.error(err);
     }
   };
 
-  const removeRequest = async () => {
+  const acceptRemoveRequest = async () => {
+    try {
+      const currentUserId = member.userId;
+      const removedRequest = study.request.filter((el) => el !== currentUserId);
+      const currentNum = study.memberNum.currentNum;
+      const updatedMember = {
+        memberId: currentUserId,
+        isLeader: false,
+      };
+
+      const newStudy = {
+        ...study,
+        request: removedRequest,
+        member: [...study.member, updatedMember],
+        memberNum: {
+          ...study.memberNum,
+          currentNum: currentNum + 1, // 현재 참여 인원수 +1
+        },
+      };
+
+      dispatch(setStudy(newStudy));
+
+      const toRemoveId = {
+        userId: currentUserId,
+      };
+
+      const requestRes = await axios.post(
+        `http://localhost:4000/invite/remove/${id}`,
+        toRemoveId,
+      );
+
+      console.log(requestRes.data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    getMemberInfo(userId);
+  }, []);
+
+  const refuseRemoveRequest = async () => {
     try {
       const currentUserId = member.userId;
       const removedRequest = study.request.filter((el) => el !== currentUserId);
@@ -124,7 +153,7 @@ export default function ParticipationRequest({ userId }) {
       )}
       <div>
         <button onClick={acceptRequest}>수락</button>
-        <button onClick={removeRequest}>거절</button>
+        <button onClick={refuseRemoveRequest}>거절</button>
       </div>
     </div>
   );

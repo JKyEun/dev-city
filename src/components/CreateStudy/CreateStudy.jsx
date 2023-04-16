@@ -102,6 +102,7 @@ export default function CreateStudy() {
           structureImg: 'img',
           study_system: studySystemInput.current.value,
           study_etc: etcInput.current.value,
+          request: [],
         },
       );
 
@@ -125,6 +126,7 @@ export default function CreateStudy() {
           board: [],
           structureImg: 'img',
           study_etc: etcInput.current.value,
+          request: [],
         }),
       );
 

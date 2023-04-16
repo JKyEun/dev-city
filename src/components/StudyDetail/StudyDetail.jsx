@@ -7,11 +7,15 @@ import {
   buildStyles,
   CircularProgressbarWithChildren,
 } from 'react-circular-progressbar';
+import ParticipationRequest from './ParticipationRequest';
+import { useNavigate } from 'react-router-dom';
 
 export default function StudyDetail({ match, studyDetail }) {
   const study = useSelector((state) => state.studyDetail.study);
   const loading = useSelector((state) => state.studyDetail.loading);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const myMemberEl =
     study &&
     study.member.filter((el) => el.memberId === localStorage.getItem('userId'));
@@ -24,11 +28,11 @@ export default function StudyDetail({ match, studyDetail }) {
         dispatch(fetchStudy(match.params.id));
         // match.params.id로 스터디 상세 정보를 가져옴
         // match.params.id에 해당하는 스터디 정보는 response에
-        const response = await axios.get(
+        const resFetch = await axios.get(
           `http://localhost:4000/study/detail/${match.params.id}`,
         );
 
-        const study = response.data;
+        const study = resFetch.data;
 
         // 현재 사용자의 ID는 로컬스토리지에서 가져옴
         const currentUserId = localStorage.getItem('userId');
@@ -108,6 +112,54 @@ export default function StudyDetail({ match, studyDetail }) {
       console.error(err);
     }
   };
+
+  // 삭제하기
+  const deleteStudy = async () => {
+    if (window.confirm('스터디를 삭제하시겠습니까?')) {
+      try {
+        const resDelete = await axios.delete(
+          `http://localhost:4000/study/delete/${match.params.id}`,
+        );
+        alert(resDelete.data);
+        // 스터디 삭제 후 스터디 리스트 페이지로 이동
+        navigate('/study');
+        dispatch(setStudy(null));
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  };
+
+  // 탈퇴하기
+  const leaveStudy = async () => {
+    if (window.confirm('스터디에서 탈퇴하시겠습니까?')) {
+      try {
+        const resLeave = await axios.delete(
+          `http://localhost:4000/study/leave/${match.params.id}`,
+          { data: { userId: localStorage.getItem('userId') } },
+        );
+
+        const currentNum = study.memberNum.currentNum;
+
+        console.log('1:', resLeave.data.updatedMembers);
+        dispatch(
+          setStudy({
+            ...study,
+            member: resLeave.data.updatedMembers,
+            memberNum: {
+              ...study.memberNum,
+              currentNum: currentNum - 1, // 현재 참여 인원수 -1
+            },
+          }),
+        );
+        console.log('2:', resLeave.data.updatedMembers);
+        alert(resLeave.data.message);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  };
+
   return (
     <div>
       {!loading && study && (
@@ -168,6 +220,10 @@ export default function StudyDetail({ match, studyDetail }) {
                     }).map((memberStudy)=>{
                       return <StudyParticipants member={memberStudy} />;
                     })} */}
+                    {isLeader &&
+                      study.request.map((el) => (
+                        <ParticipationRequest key={el} userId={el} />
+                      ))}
                   </div>
                 </div>
               </Fragment>
@@ -219,7 +275,9 @@ export default function StudyDetail({ match, studyDetail }) {
                 {study.isLeader ? (
                   <div>
                     <a className="btn btn--cancel">공유하기</a>
-                    <a className="btn btn--create">수정하기</a>
+                    <a className="btn btn--create" onClick={deleteStudy}>
+                      삭제하기
+                    </a>
                   </div>
                 ) : study.member.some(
                     (member) =>
@@ -227,7 +285,9 @@ export default function StudyDetail({ match, studyDetail }) {
                   ) ? (
                   <div>
                     <a className="btn btn--cancel">공유하기</a>
-                    <a className="btn btn--create">탈퇴하기</a>
+                    <a className="btn btn--create" onClick={leaveStudy}>
+                      탈퇴하기
+                    </a>
                   </div>
                 ) : (
                   <div>
