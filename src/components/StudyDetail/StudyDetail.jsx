@@ -198,6 +198,14 @@ export default function StudyDetail({ match, studyDetail }) {
       dispatch(closeAndOpenStudy(false));
     }
   };
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      alert('복사 성공!');
+    } catch (error) {
+      alert('복사 실패!');
+    }
+  };
 
   return (
     <div>
@@ -316,7 +324,9 @@ export default function StudyDetail({ match, studyDetail }) {
               <div>
                 {study.isLeader ? (
                   <div>
-                    <a className="btn btn--share">공유하기</a>
+                    <a className="btn btn--share" onClick={handleCopy}>
+                      공유하기
+                    </a>
                     <a className="btn btn--modify" onClick={deleteStudy}>
                       수정하기
                     </a>
@@ -346,14 +356,18 @@ export default function StudyDetail({ match, studyDetail }) {
                       member.memberId === localStorage.getItem('userId'),
                   ) ? (
                   <div className="">
-                    <a className="btn btn--share">공유하기</a>
+                    <a className="btn btn--share" onClick={handleCopy}>
+                      공유하기
+                    </a>
                     <a className="btn btn--leave" onClick={leaveStudy}>
                       탈퇴하기
                     </a>
                   </div>
                 ) : (
                   <div>
-                    <a className="btn btn--share">공유하기</a>
+                    <a className="btn btn--share" onClick={handleCopy}>
+                      공유하기
+                    </a>
                     {study.isClosed ? (
                       <a className="btn btn--close" onClick={leaveStudy}>
                         모집마감
