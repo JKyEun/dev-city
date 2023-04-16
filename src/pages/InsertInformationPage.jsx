@@ -76,20 +76,19 @@ export default function InsertInformationPage() {
       <h2>회원가입이 완료되었습니다</h2>
       <div className="intro">추가정보를 입력해주세요</div>
       <form>
-        {userInfo.userName === '이름을 입력하세요' ||
-          (userInfo.userName === null && (
-            <div>
-              <label for="nameInput">이름</label>
-              <input
-                ref={nameInput}
-                id="nameInput"
-                type="text"
-                placeholder="이름을 입력해주세요"
-              />
-            </div>
-          ))}
+        {(userInfo.userName === '이름을 입력하세요') && (
+          <div>
+            <label htmlFor="nameInput">이름</label>
+            <input
+              ref={nameInput}
+              id="nameInput"
+              type="text"
+              placeholder="이름을 입력해주세요"
+            />
+          </div>
+        )}
         <div>
-          <label for="nickNameInput">닉네임</label>
+          <label htmlFor="nickNameInput">닉네임</label>
           <input
             ref={nickNameInput}
             id="nickNameInput"
@@ -97,9 +96,10 @@ export default function InsertInformationPage() {
             placeholder="닉네임을 입력해주세요"
           />
         </div>
-        {userInfo.email === null && (
+        {(userInfo.email === '이메일을 설정하세요' ||
+          userInfo.email === null) && (
           <div>
-            <label for="emailInput">이메일</label>
+            <label htmlFor="emailInput">이메일</label>
             <input
               ref={emailInput}
               id="emailInput"
@@ -110,7 +110,7 @@ export default function InsertInformationPage() {
         )}
         {userInfo.userName === '이름을 입력하세요' && (
           <div>
-            <label for="githubInput">깃허브 주소</label>
+            <label htmlFor="githubInput">깃허브 주소</label>
             <input
               ref={githubInput}
               id="githubInput"
@@ -120,7 +120,7 @@ export default function InsertInformationPage() {
           </div>
         )}
         <div>
-          <label for="fieldInput">관심분야</label>
+          <label htmlFor="fieldInput">관심분야</label>
           <select
             ref={fieldInput}
             id="fieldInput"
