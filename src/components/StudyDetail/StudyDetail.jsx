@@ -28,7 +28,6 @@ export default function StudyDetail({ match, studyDetail }) {
     study.member.filter((el) => el.memberId === localStorage.getItem('userId'));
   const isLeader =
     myMemberEl && myMemberEl.length > 0 ? myMemberEl[0].isLeader : false;
-
   useEffect(() => {
     const fetchStudyData = async () => {
       try {
@@ -254,16 +253,8 @@ export default function StudyDetail({ match, studyDetail }) {
                   <div className="flexBox">
                     <p className="subTitle">스터디원</p>
                     {study.member.map((e) => (
-                      <StudyParticipants key={e} study={e} />
+                      <StudyParticipants key={e} member={e} />
                     ))}
-                    {/* <StudyParticipants /> */}
-                    {/* {study?.member?.filter((el) => {
-                       el.memberId.inclueds()
-                       // 여기에 비교식넣기
-                      return 
-                    }).map((memberStudy)=>{
-                      return <StudyParticipants member={memberStudy} />;
-                    })} */}
                     {isLeader &&
                       study.request.map((el) => (
                         <ParticipationRequest key={el} userId={el} />

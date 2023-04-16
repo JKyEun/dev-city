@@ -37,10 +37,18 @@ export default function ProfileCard({
 
     const newInfo = {
       ...userInfo,
-      userName: nameInput.current.value,
-      nickName: nickNameInput.current.value,
-      email: emailInput.current.value,
-      githubAddress: githubInput.current.value,
+      userName: nameInput.current.value
+        ? nameInput.current.value
+        : '이름을 설정하세요',
+      nickName: nickNameInput.current.value
+        ? nickNameInput.current.value
+        : '닉네임을 설정하세요',
+      email: emailInput.current.value
+        ? emailInput.current.value
+        : '이메일을 설정하세요',
+      githubAddress: githubInput.current.value
+        ? githubInput.current.value
+        : '깃험 주소를 설정하세요',
       field: fieldInput.current.value,
     };
 
@@ -73,7 +81,6 @@ export default function ProfileCard({
   });
 
   // 프로필 수정하기
-
   const uploadImg = async (e, id) => {
     const file = e.target.files[0];
     const formData = new FormData();
@@ -203,13 +210,9 @@ export default function ProfileCard({
           <hr />
           <div className="email address">
             <div>✉️ Email</div>
-            {email ? (
-              <a href={`mailto:${email}`} target="_blank">
-                {email}
-              </a>
-            ) : (
-              <div>정보가 없습니다.</div>
-            )}
+            <a href={`mailto:${email}`} target="_blank">
+              {email}
+            </a>
           </div>
           <div className="github address">
             <div>
@@ -220,13 +223,9 @@ export default function ProfileCard({
               />
               Github
             </div>
-            {githubAddress ? (
-              <a href={githubAddress} target="_blank">
-                {githubAddress}
-              </a>
-            ) : (
-              <div>정보가 없습니다.</div>
-            )}
+            <a href={githubAddress} target="_blank">
+              {githubAddress}
+            </a>
           </div>
         </>
       )}
