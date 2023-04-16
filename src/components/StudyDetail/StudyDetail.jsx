@@ -12,11 +12,12 @@ import {
   CircularProgressbarWithChildren,
 } from 'react-circular-progressbar';
 import ParticipationRequest from './ParticipationRequest';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function StudyDetail({ match, studyDetail }) {
   const study = useSelector((state) => state.studyDetail.study);
   const loading = useSelector((state) => state.studyDetail.loading);
+  const user = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -80,6 +81,11 @@ export default function StudyDetail({ match, studyDetail }) {
 
   // 참여하기
   const joinStudy = async () => {
+    const joinedStudy = user.joinedStudy || [];
+    if ((joinedStudy.length = 9)) {
+      alert('이미 최대 개수의 스터디에 참여하였습니다.');
+      return;
+    }
     try {
       const currentUserId = localStorage.getItem('userId');
       const memberExists = study.member.some(
@@ -197,20 +203,20 @@ export default function StudyDetail({ match, studyDetail }) {
     <div>
       {!loading && study && (
         <>
-          <div className="minMax flexBox-between">
+          <div className="minMax flexBox-between studyDetailContainer">
             <div className="box-studyInfo">
-              <h4 className="goToHome">
+              <Link to={'/study'}>
                 <img
                   className="left-arrow"
-                  src="/images/chevron-left-solid.svg"
+                  src="/images/left-arrow.svg"
                   alt="left-arrow"
                 />
-                스터디 홈으로 돌아가기
-              </h4>
+                스터디홈으로 돌아가기
+              </Link>
               <h1>{study.studyName}</h1>
               <Fragment>
                 <h5>
-                  {study.leaderId} | {study.field} |
+                  {study.nickName} | {study.field} |{' '}
                   {new Date(study.createDate).toLocaleDateString('ko-KR')}
                 </h5>
                 <div className="studyInfoBox">
@@ -232,7 +238,7 @@ export default function StudyDetail({ match, studyDetail }) {
                   <br />
                   <div className="flexBox">
                     <p className="subTitle">사용 언어</p>
-                    <p>
+                    <p className="studyInfoImg">
                       {study.skills.map((skill) => (
                         <img
                           key={skill}
@@ -261,7 +267,7 @@ export default function StudyDetail({ match, studyDetail }) {
                 </div>
               </Fragment>
             </div>
-            <div className="box-confirm">
+            <div className="box-studyDetail">
               <div className="percent">
                 <CircularProgressbarWithChildren
                   value={
@@ -289,63 +295,76 @@ export default function StudyDetail({ match, studyDetail }) {
                   }
                 >
                   {study.isClosed ? (
-                    <p className="percentText">모집 마감</p>
+                    <p className="closeText">모집 마감</p>
                   ) : (
-                    <p className="percentText">
-                      {study.memberNum.currentNum}
+                    <div className="memberCountText">
+                      <p className="currentNumText">
+                        {study.memberNum.currentNum}
+                      </p>
                       <span>/</span>
-                      {study.memberNum.maxNum}
-                    </p>
+                      <p className="maxNumText">{study.memberNum.maxNum}</p>
+                    </div>
                   )}
                 </CircularProgressbarWithChildren>
-                <p className="percentSubText">
-                  {study.isClosed
-                    ? '모집이 마감되었습니다.'
-                    : `${study.memberNum.maxNum}명 중 ${study.memberNum.currentNum}명 모집됨`}
+                <p className="openCloseText">
+                  <span>
+                    <span className="maxNum">{study.memberNum.maxNum}</span>명
+                    중{' '}
+                    <span className="currentNum">
+                      {study.memberNum.currentNum}
+                    </span>
+                    명 모집됨
+                  </span>
                 </p>
               </div>
               <div>
                 {study.isLeader ? (
                   <div>
-                    <a className="btn btn--cancel">공유하기</a>
-                    <a className="btn btn--create" onClick={deleteStudy}>
-                      삭제하기
+                    <a className="btn btn--share">공유하기</a>
+                    <a className="btn btn--modify" onClick={deleteStudy}>
+                      수정하기
                     </a>
                     {study.memberNum.currentNum ===
                     study.memberNum.maxNum ? null : study.isClosed ? (
-                      <span
-                        className="btn btn--cancel"
-                        onClick={CloseAndOpenEvent}
-                      >
-                        모집 시작하기
-                      </span>
+                      <div className="leaderBtnDiv">
+                        <p className="openBtn" onClick={CloseAndOpenEvent}>
+                          모집시작
+                        </p>
+                        <p className="deleteBtn" onClick={CloseAndOpenEvent}>
+                          스터디삭제
+                        </p>
+                      </div>
                     ) : (
-                      <span
-                        className='"btn btn--create'
-                        onClick={CloseAndOpenEvent}
-                      >
-                        모집 마감 하기
-                      </span>
+                      <div className="leaderBtnDiv">
+                        <p className="closeBtn" onClick={CloseAndOpenEvent}>
+                          모집마감
+                        </p>
+                        <p className="deleteBtn" onClick={CloseAndOpenEvent}>
+                          스터디삭제
+                        </p>
+                      </div>
                     )}
                   </div>
                 ) : study.member.some(
                     (member) =>
                       member.memberId === localStorage.getItem('userId'),
                   ) ? (
-                  <div>
-                    <a className="btn btn--cancel">공유하기</a>
-                    <a className="btn btn--create" onClick={leaveStudy}>
+                  <div className="">
+                    <a className="btn btn--share">공유하기</a>
+                    <a className="btn btn--leave" onClick={leaveStudy}>
                       탈퇴하기
                     </a>
                   </div>
                 ) : (
                   <div>
-                    <a className="btn btn--cancel">공유하기</a>
+                    <a className="btn btn--share">공유하기</a>
                     {study.isClosed ? (
-                      <span>모집이 마감 되었습니다.</span>
+                      <a className="btn btn--close" onClick={leaveStudy}>
+                        모집마감
+                      </a>
                     ) : (
                       <a
-                        className="btn btn--create"
+                        className="btn btn--join"
                         onClick={joinStudy}
                         disabled={!study.canJoin}
                       >
