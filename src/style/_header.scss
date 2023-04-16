@@ -76,7 +76,12 @@ header {
       height: 45px;
       background-color: #ddd;
       border-radius: 50%;
+      overflow: hidden;
+      border: 1px solid #eee;
       cursor: pointer;
+      img {
+        width: 100%;
+      }
     }
     .icon-box {
       width: 160px;

@@ -1,16 +1,32 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import HeaderDropdown from './HeaderDropdown';
+import axios from 'axios';
 import '../style/_header.scss';
 
-export default function Header({ profileImgUpdate }) {
+export default function Header() {
   const [url, setUrl] = useState('/');
   const location = useLocation();
   const navigate = useNavigate();
   const searchInput = useRef();
+  const [profileImgUpdate, setProfileImgUpdate] = useState(null);
+
+  const fetchUserData = async () => {
+    try {
+      const res = await axios.get(
+        `http://localhost:4000/user/${localStorage.getItem('userId')}`,
+      );
+      setProfileImgUpdate(
+        res.data.profileImg ? `/${res.data.profileImg}` : null,
+      );
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   useEffect(() => {
     setUrl(location.pathname);
+    fetchUserData();
   }, [location]);
 
   const headerTitle = {
@@ -64,13 +80,16 @@ export default function Header({ profileImgUpdate }) {
       ? navigate(`/study?search=${searchInput.current.value}`)
       : navigate('/study');
   };
+
   return (
     <header>
       <div className="minMax">
         <div className="flexBox-between mainHeader">
           <div className="flexBox">
             <h1>
-              <img src="/images/logo.svg" alt="logo" />
+              <Link to="/">
+                <img src="/images/logo.svg" alt="logo" />
+              </Link>
             </h1>
             <ul className="flexBox-between navigation">
               <li className={url === '/mycity' && 'pageIn'}>
@@ -101,10 +120,16 @@ export default function Header({ profileImgUpdate }) {
               <div ref={dropdownRef}>
                 <div className="profileImg" onClick={handleImageClick}>
                   <img
-                    src="/http://localhost:4000/uploads/${profileImgUpdate.replace(
-                    '/',
-                    '',
-                  )}"
+                    src={
+                      profileImgUpdate?.includes('/http')
+                        ? profileImgUpdate.replace('/', '')
+                        : !profileImgUpdate
+                        ? '/images/default-profile.png'
+                        : `http://localhost:4000/uploads/${profileImgUpdate?.replace(
+                            '/',
+                            '',
+                          )}`
+                    }
                     alt="profile"
                   />
                   {showDropdown && <HeaderDropdown />}

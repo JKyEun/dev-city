@@ -16,7 +16,8 @@ export default function ProfileCard({
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isModifyMode, setIsModifyMode] = useState(false);
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [profileImgUpdate, setProfileImgUpdate] = useState(null);
+  const userId = localStorage.getItem('userId');
   const userInfo = useSelector((state) => state.user);
   const nameInput = useRef(null);
   const nickNameInput = useRef(null);
@@ -72,11 +73,8 @@ export default function ProfileCard({
   });
 
   // 프로필 수정하기
-  const [profileImgUpdate, setProfileImgUpdate] = useState(null);
-  // const [isUploaded, setIsUploaded] = useState(false);
 
   const uploadImg = async (e, id) => {
-    console.log(id);
     const file = e.target.files[0];
     const formData = new FormData();
     formData.append('img', file);
@@ -90,30 +88,24 @@ export default function ProfileCard({
       );
       console.log(res.data.profileImg);
       setProfileImgUpdate(`/${res.data.profileImg}`);
-      // setIsUploaded(true);
     } catch (err) {
       console.error(err);
     }
   };
-
+  const fetchUserData = async () => {
+    try {
+      const res = await axios.get(`http://localhost:4000/user/${userId}`);
+      setProfileImgUpdate(
+        res.data.profileImg ? `/${res.data.profileImg}` : null,
+      );
+    } catch (err) {
+      console.error(err);
+    }
+  };
   useEffect(() => {
-    // 로컬 스토리지에서 userId 가져오기
-    const userId = localStorage.getItem('userId');
-
-    // 유저 정보 가져오기
-    const fetchUserData = async () => {
-      try {
-        const res = await axios.get(`http://localhost:4000/user/${userId}`);
-        setProfileImgUpdate(
-          res.data.profileImg ? `/${res.data.profileImg}` : null,
-        );
-      } catch (err) {
-        console.error(err);
-      }
-    };
     fetchUserData();
   }, []);
-  console.log(profileImgUpdate);
+
   return (
     <div className="profile">
       <div className="profileBox">
@@ -121,12 +113,14 @@ export default function ProfileCard({
           <img
             className="profilePhoto"
             src={
-              profileImgUpdate
-                ? `http://localhost:4000/uploads/${profileImgUpdate.replace(
+              profileImgUpdate?.includes('/http')
+                ? profileImgUpdate.replace('/', '')
+                : !profileImgUpdate
+                ? '/images/default-profile.png'
+                : `http://localhost:4000/uploads/${profileImgUpdate?.replace(
                     '/',
                     '',
                   )}`
-                : '/images/default-profile.png'
             }
             name="img"
             alt="프로필 사진"
