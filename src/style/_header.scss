@@ -71,6 +71,22 @@ header {
         }
       }
     }
+    .buttons {
+      display: flex;
+      margin-right: 10px;
+      div {
+        width: 20px;
+        height: 20px;
+        margin: 0px 20px;
+        img {
+          width: 20px;
+          height: 20px;
+        }
+      }
+      div:hover {
+        cursor: pointer;
+      }
+    }
     .profileImg {
       width: 45px;
       height: 45px;

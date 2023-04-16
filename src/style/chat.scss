@@ -1,0 +1,51 @@
+.chat {
+  display: flex;
+  position: fixed;
+  z-index: 999;
+  bottom: 0;
+  right: 0;
+  border: 1px solid black;
+  width: 600px;
+  height: 500px;
+  background-color: #fff;
+  .friendList {
+    width: 130px;
+    border: 1px solid orange;
+  }
+  .chatArea {
+    position: relative;
+    display: flex;
+    overflow: auto;
+    width: 470px;
+    border: 1px solid dodgerblue;
+    .chatRoom {
+      width: 469px;
+      height: 500px;
+      .message {
+        display: flex;
+        .yourChat {
+          width: 220px;
+          height: 450px;
+        }
+        .myChat {
+          width: 220px;
+          height: 450px;
+          li {
+            right: 0;
+          }
+        }
+      }
+      form {
+        height: 50px;
+        position: absolute;
+        right: 50%;
+        transform: translateX(50%);
+        bottom: 0;
+      }
+    }
+    .intro {
+      width: 469px;
+      height: 500px;
+    }
+  }
+}
