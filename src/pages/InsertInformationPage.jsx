@@ -4,6 +4,7 @@ import '../style/insertInformationPage.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { updateUser } from '../store/modules/user';
+import Chat from '../components/Chat/Chat';
 
 export default function InsertInformationPage() {
   const navigate = useNavigate();
@@ -54,13 +55,17 @@ export default function InsertInformationPage() {
       ...userInfo,
       nickName: nickNameInput.current.value,
       field: fieldInput.current.value,
-      email: emailInput.current.value,
+      email: emailInput.current?.value,
     };
+
+    const newInfo = !userInfo.email ? newInfoGithubContainEmail : newInfoGithub;
+
+    console.log(newInfo);
 
     try {
       const res = await axios.post(
         `http://localhost:4000/user/updateuser/${id}`,
-        userInfo.email === null ? newInfoGithubContainEmail : newInfoGithub,
+        newInfo,
       );
       console.log(res.data);
       dispatch(updateUser(newInfoGithub));
@@ -166,6 +171,7 @@ export default function InsertInformationPage() {
       >
         건너뛰기
       </div>
+      <Chat />
     </div>
   );
 }
