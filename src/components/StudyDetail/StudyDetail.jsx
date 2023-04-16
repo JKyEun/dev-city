@@ -81,12 +81,12 @@ export default function StudyDetail({ match, studyDetail }) {
 
   // 참여하기
   const joinStudy = async () => {
-    const joinedStudy = user.joinedStudy || [];
-    if (joinedStudy.length === 9) {
-      alert('이미 최대 개수의 스터디에 참여하였습니다.');
-      return;
-    }
     try {
+      const joinedStudy = user.joinedStudy || [];
+      if (joinedStudy.length >= 9) {
+        alert('이미 최대 개수의 스터디에 참여하였습니다.');
+        return;
+      }
       const currentUserId = localStorage.getItem('userId');
       const memberExists = study.member.some(
         (member) => member.memberId === currentUserId,
@@ -164,8 +164,6 @@ export default function StudyDetail({ match, studyDetail }) {
         );
 
         const currentNum = study.memberNum.currentNum;
-
-        console.log('1:', resLeave.data.updatedMembers);
         dispatch(
           setStudy({
             ...study,
@@ -176,7 +174,6 @@ export default function StudyDetail({ match, studyDetail }) {
             },
           }),
         );
-        console.log('2:', resLeave.data.updatedMembers);
         alert(resLeave.data.message);
       } catch (err) {
         console.error(err);
@@ -327,16 +324,17 @@ export default function StudyDetail({ match, studyDetail }) {
                     <a className="btn btn--share" onClick={handleCopy}>
                       공유하기
                     </a>
-                    <a className="btn btn--modify" onClick={deleteStudy}>
-                      수정하기
-                    </a>
-                    {study.memberNum.currentNum ===
-                    study.memberNum.maxNum ? null : study.isClosed ? (
+                    <a className="btn btn--modify">수정하기</a>
+                    {study.memberNum.currentNum >= study.memberNum.maxNum ? (
+                      <p className="onlyDeleteBtn" onClick={deleteStudy}>
+                        스터디삭제
+                      </p>
+                    ) : study.isClosed ? (
                       <div className="leaderBtnDiv">
                         <p className="openBtn" onClick={CloseAndOpenEvent}>
                           모집시작
                         </p>
-                        <p className="deleteBtn" onClick={CloseAndOpenEvent}>
+                        <p className="deleteBtn" onClick={deleteStudy}>
                           스터디삭제
                         </p>
                       </div>
@@ -345,7 +343,7 @@ export default function StudyDetail({ match, studyDetail }) {
                         <p className="closeBtn" onClick={CloseAndOpenEvent}>
                           모집마감
                         </p>
-                        <p className="deleteBtn" onClick={CloseAndOpenEvent}>
+                        <p className="deleteBtn" onClick={deleteStudy}>
                           스터디삭제
                         </p>
                       </div>
@@ -369,9 +367,7 @@ export default function StudyDetail({ match, studyDetail }) {
                       공유하기
                     </a>
                     {study.isClosed ? (
-                      <a className="btn btn--close" onClick={leaveStudy}>
-                        모집마감
-                      </a>
+                      <a className="btn btn--close">모집마감</a>
                     ) : (
                       <a
                         className="btn btn--join"

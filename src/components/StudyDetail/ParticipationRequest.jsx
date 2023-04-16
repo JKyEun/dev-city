@@ -21,6 +21,14 @@ export default function ParticipationRequest({ userId }) {
 
   const acceptRequest = async () => {
     try {
+      const currentNum = study.memberNum.currentNum;
+      const maxNum = study.memberNum.maxNum;
+
+      if (currentNum >= maxNum) {
+        alert('최대 참여 인원에 도달하여 더 이상 수락할 수 없습니다.');
+        return;
+      }
+
       const currentUserId = member.userId;
 
       const isLeader = study.member.some(
@@ -39,14 +47,10 @@ export default function ParticipationRequest({ userId }) {
         { updatedMember },
       );
 
-      console.log(responseStudy);
-
       const responseUser = await axios.post(
         `http://localhost:4000/user/joinstudy/`,
         { userId: currentUserId, studyId: id },
       );
-
-      console.log(responseUser);
 
       // request에서 제거해주기
       acceptRemoveRequest();
@@ -60,12 +64,7 @@ export default function ParticipationRequest({ userId }) {
       const currentUserId = member.userId;
       const removedRequest = study.request.filter((el) => el !== currentUserId);
       const currentNum = study.memberNum.currentNum;
-      const maxNum = study.memberNum.maxNum;
 
-      if (currentNum === maxNum) {
-        alert('최대 참여 인원에 도달하여 더 이상 수락할 수 없습니다.');
-        return;
-      }
       const updatedMember = {
         memberId: currentUserId,
         isLeader: false,
@@ -80,6 +79,10 @@ export default function ParticipationRequest({ userId }) {
           currentNum: currentNum + 1, // 현재 참여 인원수 +1
         },
       };
+
+      if (currentNum + 1 === study.memberNum.maxNum) {
+        newStudy.isClosed = true; // 최대 참여 인원에 도달하면 isClosed를 true로 설정
+      }
 
       dispatch(setStudy(newStudy));
 

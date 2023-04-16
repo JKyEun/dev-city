@@ -99,7 +99,7 @@
     &.disabled,
     &--close {
       background-color: #ccc;
-      cursor: default;
+      pointer-events: none;
       padding: 10px;
       color: #fff;
     }
@@ -119,5 +119,13 @@
       color: #ff6868;
       text-decoration: underline;
     }
+  }
+  .onlyDeleteBtn {
+    cursor: pointer;
+    color: #ff6868;
+    text-decoration: underline;
+    justify-content: center;
+    display: flex;
+    margin-top: 20px;
   }
 }
