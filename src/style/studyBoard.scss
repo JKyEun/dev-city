@@ -94,6 +94,10 @@
           font-size: 12px;
           padding: 3px 8px;
         }
+        .modifyBtn:hover,
+        .deleteBtn:hover {
+          cursor: pointer;
+        }
       }
     }
     .commentWrap {
@@ -166,6 +170,11 @@
           font-size: 12px;
           padding: 3px 8px;
         }
+
+        .modifyBtn:hover,
+        .deleteBtn:hover {
+          cursor: pointer;
+        }
       }
 
       .commentInput {
@@ -195,6 +204,10 @@
             width: 40px;
             height: 40px;
           }
+        }
+
+        .commentBtn:hover {
+          cursor: pointer;
         }
       }
     }

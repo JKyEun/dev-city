@@ -17,6 +17,7 @@ export default function TodoListTab() {
           '.'}
       </span>
       <img
+      className='expandBtn'
         src={
           isBoxOpen
             ? '/images/icon_expand_up.svg'
