@@ -6,76 +6,79 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 380px;
-  height: calc(100vh - 81px - 50px);
-  h2 {
-    font-size: 20px;
-    font-weight: 800;
-  }
+  width: 400px;
+  padding: 100px 0;
+  min-height: calc(100vh - 81px - 50px);
+
   .intro {
     margin-top: 10px;
-    font-size: 14px;
+    font-size: 16px;
+    strong {
+      color: #605cff;
+      font-weight: 800;
+    }
   }
   form {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 380px;
+    width: 400px;
     margin-top: 30px;
     div {
-      margin-top: 10px;
-      width: 380px;
+      margin-top: 20px;
+      width: 400px;
       height: 30px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       label {
-        font-size: 14px;
+        font-size: 16px;
         font-weight: 600;
       }
       input {
         padding-left: 15px;
         border: 1px solid #9a9a9a;
         border-radius: 2px;
-        width: 270px;
-        height: 30px;
+        width: 280px;
+        height: 40px;
+        font-size: 16px;
       }
       select {
         padding-left: 15px;
         border: 1px solid #9a9a9a;
         border-radius: 2px;
-        width: 270px;
-        height: 30px;
+        width: 280px;
+        height: 40px;
+        font-size: 16px;
       }
     }
 
     .explain {
-      margin-top: 10px;
+      margin-top: 15px;
       color: #605cff;
-      font-size: 14px;
+      font-size: 16px;
     }
     .submitBtn {
       margin-top: 30px;
       background-color: #605cff;
       color: #fff;
       font-weight: 700;
-      width: 210px;
-      height: 35px;
+      width: 280px;
+      height: 40px;
       border: none;
       border-radius: 30px;
-      font-size: 14px;
+      font-size: 16px;
     }
     .submitBtn:hover {
       cursor: pointer;
     }
   }
   .skip {
-    margin-top: 10px;
+    margin-top: 15px;
     text-decoration: underline;
     color: #605cff;
-    font-size: 14px;
-    margin-bottom: 130px;
+    font-size: 16px;
   }
 
   .skip:hover {

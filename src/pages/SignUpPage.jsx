@@ -84,8 +84,10 @@ export default function SignUpPage() {
 
   return (
     <div className="signUpWrap">
-      <h2>회원가입</h2>
-      <div className="intro">Dev-City에 오신 것을 환영합니다</div>
+      <img src="/images/logo_deep.svg" alt="데브시티 로고" width="220" />
+      <div className="intro">
+        <strong>회원가입 |</strong> Dev-City에 오신것을 환영합니다
+      </div>
       <form onSubmit={addAccount} className="sign-form">
         <div>
           <label for="idInput">

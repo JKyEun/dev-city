@@ -12,9 +12,9 @@ export default function Footer() {
   return (
     <footer>
       <div className="minMax">
-        <div className="flexBox">
+        <div className="flexBox-alignCenter fooBox">
           <h1>
-            <img src="" alt="logo" />
+            <img src="/images/logo_deep.svg" alt="logo" />
           </h1>
           <div className="pageInfo">
             <div className="footerLink">

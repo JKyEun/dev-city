@@ -56,9 +56,9 @@ export default function SignInPage() {
 
   return (
     <div className="signInWrap">
-      <img src="/images/icon_github.svg" alt="데브시티 로고" width="100" />
+      <img src="/images/logo_deep.svg" alt="데브시티 로고" width="220" />
       <div className="intro">
-        Building the Future with <strong>Dev-City</strong>
+        <strong>로그인 |</strong> Dev-City에 오신것을 환영합니다
       </div>
       <form onSubmit={login} className="sign-form">
         <input
@@ -77,6 +77,9 @@ export default function SignInPage() {
           로그인
         </button>
       </form>
+      <Link className="btn-line" to="/signup">
+        Dev-City 가 처음이신가요?
+      </Link>
       <hr />
       <Link to={KAKAO_AUTH_URL} className="kakaoBtn">
         <img src="/images/icon_kakao.svg" alt="카카오 아이콘" />
