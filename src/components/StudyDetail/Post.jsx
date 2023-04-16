@@ -136,20 +136,22 @@ export default function Post({ boardDB, boardEl, setBoardDB, getBoard }) {
     }
   });
 
+  const profileImg = (info) => {
+    if (info?.profileImg?.includes('http')) {
+      return info?.profileImg;
+    } else if (!info?.profileImg) {
+      return '/images/default-profile.png';
+    } else {
+      return `http://localhost:4000/uploads/${info?.profileImg}`;
+    }
+  };
   return (
     <div className="post">
       <div className="postWrap">
         {writerInfo !== null && (
           <>
             <div className="leftSide">
-              <img
-                src={
-                  writerInfo.profileImg
-                    ? writerInfo.profileImg
-                    : '/images/default-profile.png'
-                }
-                alt="작성자 프로필 사진"
-              />
+              <img src={profileImg(writerInfo)} alt="작성자 프로필 사진" />
             </div>
             <div className="rightSide">
               {isModifyMode ? (
@@ -243,15 +245,7 @@ export default function Post({ boardDB, boardEl, setBoardDB, getBoard }) {
           ))}
           <form onSubmit={(e) => addComment(e)} className="commentInput">
             <div className="imgWrap">
-              <img
-                src={
-                  userInfo.profileImg
-                    ? userInfo.profileImg
-                    : '/images/default-profile.png'
-                }
-                alt="본인 프로필"
-                width="40"
-              />
+              <img src={profileImg(userInfo)} alt="본인 프로필" width="40" />
             </div>
             <input
               ref={commentInput}

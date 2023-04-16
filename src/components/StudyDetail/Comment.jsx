@@ -119,9 +119,11 @@ export default function Comment({
           <div className="imgWrap">
             <img
               src={
-                commentWriterInfo.profileImg
+                commentWriterInfo.profileImg.includes('http')
                   ? commentWriterInfo.profileImg
-                  : '/images/default-profile.png'
+                  : !commentWriterInfo.profileImg
+                  ? '/images/default-profile.png'
+                  : `http://localhost:4000/uploads/${commentWriterInfo?.profileImg}`
               }
               alt="댓글 작성자 프로필"
             />
