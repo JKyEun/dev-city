@@ -311,21 +311,20 @@ export default function StudyDetail({ match, studyDetail }) {
                     <a className="btn btn--create" onClick={deleteStudy}>
                       삭제하기
                     </a>
-                    {study.isClosed ? (
+                    {study.memberNum.currentNum ===
+                    study.memberNum.maxNum ? null : study.isClosed ? (
                       <span
                         className="btn btn--cancel"
                         onClick={CloseAndOpenEvent}
                       >
-                        {' '}
-                        모집 시작하기{' '}
+                        모집 시작하기
                       </span>
                     ) : (
                       <span
                         className='"btn btn--create'
                         onClick={CloseAndOpenEvent}
                       >
-                        {' '}
-                        모집 마감 하기{' '}
+                        모집 마감 하기
                       </span>
                     )}
                   </div>
