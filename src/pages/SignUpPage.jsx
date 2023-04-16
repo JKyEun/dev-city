@@ -9,7 +9,7 @@ export default function SignUpPage() {
   const passwordInput = useRef('');
   const pwRepeatInput = useRef('');
   const [isAccountValid, setIsAccountValid] = useState(false);
-  const [isPwMatched, setIsPwMatched] = useState(false);
+  const [isPwMatched, setIsPwMatched] = useState(true);
 
   const KAKAO_CLIENT_ID = '8b9d9e6f2ac1ce6697298e70eb30186c';
   const KAKAO_REDIRECT_URI = 'http://localhost:3000/oauth/callback/kakao';
@@ -125,13 +125,13 @@ export default function SignUpPage() {
             placeholder="다시 한 번 입력해주세요"
             onChange={checkPassword}
           />
-          
         </div>
-        <div>
-          <div className="filler"> </div>
-          <span className="match">* 비밀번호가 일치하지 않습니다</span>
-        </div>
-
+        {!isPwMatched && (
+          <div>
+            <div className="filler"> </div>
+            <span className="match">* 비밀번호가 일치하지 않습니다</span>
+          </div>
+        )}
         <button className="signUpBtn" type="submit">
           회원가입
         </button>
