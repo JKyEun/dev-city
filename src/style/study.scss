@@ -120,6 +120,22 @@
     }
     .cardBox {
       flex-wrap: wrap;
+      .emptyBox {
+        text-align: center;
+        padding: 70px 0;
+        width: 100%;
+        color: #999;
+        a.btn-basic {
+          display: inline-block;
+          color: #605cff;
+          cursor: pointer;
+          border: 2px solid #605cff;
+          font-weight: 700;
+          padding: 7px 15px;
+          border-radius: 20px;
+          margin-top: 12px;
+        }
+      }
     }
   }
   div.study-my {

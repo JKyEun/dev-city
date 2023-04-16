@@ -2,21 +2,19 @@ import React, { useState, useEffect } from 'react';
 import MyStudy from '../MyCity/MyStudy';
 import LikeStudy from './LikeStudy';
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { init } from '../../store/modules/study';
-import '../../style/study.scss';
 import axios from 'axios';
+import '../../style/study.scss';
 
 export default function Study() {
   const [render, setRender] = useState('');
 
   const [num, setNum] = useState(0);
-  const userInfo = useSelector((state) => state.user);
   const [likeStudy, setLikeStudy] = useState([]);
   const [joinedStudy, setJoinedStudy] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const studies = useSelector((state) => state.study.studies);
   const userId = useSelector((state) => state.user.userId);
 
   const handleRender = (params) => {
@@ -88,9 +86,18 @@ export default function Study() {
           </div>
         </div>
         <div className="flexBox-start cardBox">
-          {joinedStudy?.map((el, idx) => {
-            return <MyStudy key={idx} joinedStudy={el} />;
-          })}
+          {joinedStudy.length > 0 ? (
+            joinedStudy?.map((el, idx) => {
+              return <MyStudy key={idx} joinedStudy={el} />;
+            })
+          ) : (
+            <div className="emptyBox">
+              <p>나의 스터디가 없습니다.</p>
+              <Link className="btn-basic" to="/study/create">
+                스터디 생성하기
+              </Link>
+            </div>
+          )}
         </div>
       </div>
       <div className="study-like">
@@ -102,17 +109,26 @@ export default function Study() {
           </div>
         </div>
         <div className="flexBox-start cardBox">
-          {likeStudy?.map((el, idx) => {
-            return (
-              <LikeStudy
-                key={idx}
-                idx={idx}
-                item={el}
-                userId={userId}
-                handleRender={handleRender}
-              />
-            );
-          })}
+          {likeStudy.length > 0 ? (
+            likeStudy?.map((el, idx) => {
+              return (
+                <LikeStudy
+                  key={idx}
+                  idx={idx}
+                  item={el}
+                  userId={userId}
+                  handleRender={handleRender}
+                />
+              );
+            })
+          ) : (
+            <div className="emptyBox">
+              <p>관심 스터디가 없습니다.</p>
+              <Link className="btn-basic" to="/study">
+                관심 스터디 추가하기
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </div>
