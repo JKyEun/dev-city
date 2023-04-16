@@ -19,6 +19,8 @@ export default function StudyBoard() {
   const addPost = async (e) => {
     e.preventDefault();
 
+    if (boardInput.current.value === '') return;
+
     const newPost = {
       id: +new Date(),
       writer: userInfo.userId,

@@ -23,6 +23,9 @@
       border-radius: 30px;
       font-size: 14px;
     }
+    button:hover {
+      cursor: pointer;
+    }
   }
   .post {
     display: flex;
@@ -33,12 +36,12 @@
       position: relative;
       .leftSide {
         width: 40px;
+        height: 40px;
+        overflow: hidden;
         margin-right: 10px;
+        border-radius: 50%;
         img {
-          width: 40px;
-          height: 40px;
-          border-radius: 50%;
-          overflow: hidden;
+          width: 100%;
         }
       }
       .rightSide {
@@ -58,7 +61,9 @@
           margin-top: 10px;
         }
         .contentInput {
+          display: block;
           margin-top: 5px;
+          margin-bottom: 10px;
           padding-right: 40px;
           width: 600px;
           height: 30px;
@@ -74,10 +79,14 @@
           text-decoration: underline;
           color: #605cff;
         }
+        .getComment:hover {
+          cursor: pointer;
+        }
         .modifyBtn,
         .deleteBtn {
           position: absolute;
           right: 0;
+          top: 0;
           border: 1px solid #ff6868;
           background-color: #fff;
           color: #ff6868;
@@ -108,41 +117,45 @@
         position: relative;
         display: flex;
         margin-bottom: 10px;
-
-        img {
+        .imgWrap {
           width: 40px;
           height: 40px;
-          border-radius: 50%;
           overflow: hidden;
-        }
-
-        .commentInfo {
-          margin-left: 10px;
-          display: flex;
-          span:first-child {
-            font-weight: 800;
-            padding-right: 7px;
-            border-right: 0.1px solid #999;
-          }
-          span:last-child {
-            color: #999;
-            padding-left: 7px;
+          border-radius: 50%;
+          img {
+            width: 40px;
           }
         }
-        .commentContent {
-          margin-left: 10px;
-          margin-top: 5px;
-        }
-        .commentModifyInput {
-          margin-left: 10px;
-          margin-top: 5px;
-          padding-right: 40px;
-          width: 530px;
-          height: 30px;
-          border-radius: 50px;
-          border: none;
-          padding-left: 20px;
-          padding-right: 20px;
+        .rightWrap {
+          width: 660px;
+          .commentInfo {
+            margin-left: 10px;
+            display: flex;
+            span:first-child {
+              font-weight: 800;
+              padding-right: 7px;
+              border-right: 0.1px solid #999;
+            }
+            span:last-child {
+              color: #999;
+              padding-left: 7px;
+            }
+          }
+          .commentContent {
+            margin-left: 10px;
+            margin-top: 5px;
+          }
+          .commentModifyInput {
+            margin-left: 10px;
+            margin-top: 5px;
+            padding-right: 40px;
+            width: 530px;
+            height: 30px;
+            border-radius: 50px;
+            border: none;
+            padding-left: 20px;
+            padding-right: 20px;
+          }
         }
 
         .modifyBtn,
@@ -170,11 +183,14 @@
 
       .commentInput {
         display: flex;
-        img {
+        .imgWrap {
           width: 40px;
           height: 40px;
-          border-radius: 50%;
           overflow: hidden;
+          border-radius: 50%;
+          img {
+            width: 40px;
+          }
         }
         input {
           margin-left: 10px;

@@ -87,6 +87,8 @@ export default function Post({ boardDB, boardEl, setBoardDB, getBoard }) {
   const addComment = async (e) => {
     e.preventDefault();
 
+    if (commentInput.current.value === '') return;
+
     const newComment = {
       boardId: boardEl.id,
       id: +new Date(),
@@ -240,15 +242,17 @@ export default function Post({ boardDB, boardEl, setBoardDB, getBoard }) {
             />
           ))}
           <form onSubmit={(e) => addComment(e)} className="commentInput">
-            <img
-              src={
-                userInfo.profileImg
-                  ? userInfo.profileImg
-                  : '/images/default-profile.png'
-              }
-              alt="본인 프로필"
-              width="40"
-            />
+            <div className="imgWrap">
+              <img
+                src={
+                  userInfo.profileImg
+                    ? userInfo.profileImg
+                    : '/images/default-profile.png'
+                }
+                alt="본인 프로필"
+                width="40"
+              />
+            </div>
             <input
               ref={commentInput}
               type="text"
