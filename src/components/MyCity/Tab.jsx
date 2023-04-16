@@ -19,7 +19,7 @@ export default function Tab() {
           <p onClick={() => setTab('study')}>나의 스터디</p>
         </li>
         <li className={tab === 'todo' ? 'onPage' : ''}>
-          <p onClick={() => setTab('todo')}>나의 할일 목록</p>
+          <p onClick={() => setTab('todo')}>나의 할 일 목록</p>
         </li>
       </ul>
       {tab === 'study' ? <Study /> : <TodoListTab />}

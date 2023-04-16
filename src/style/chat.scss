@@ -1,8 +1,13 @@
 .chat {
   display: flex;
+  position: fixed;
+  z-index: 999;
+  bottom: 0;
+  right: 0;
   border: 1px solid black;
   width: 600px;
   height: 500px;
+  background-color: #fff;
   .friendList {
     width: 130px;
     border: 1px solid orange;

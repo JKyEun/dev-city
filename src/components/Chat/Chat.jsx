@@ -4,7 +4,7 @@ import '../../style/chat.scss';
 import EachStudy from './EachStudy';
 import ChatRoom from './ChatRoom';
 
-export default function Chat() {
+export default function Chat({ setIsChatOpen }) {
   const myStudyList = useSelector((state) => state.user.joinedStudy);
   const [roomId, setRoomId] = useState(null);
 

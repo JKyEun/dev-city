@@ -56,6 +56,7 @@ export default function ChatRoom({ roomId }) {
       setChatLog([...chatLog, newChat]);
     });
   }, [socket, roomId, userName, chatLog]);
+  
   return (
     <div className="chatRoom">
       <div className="message">

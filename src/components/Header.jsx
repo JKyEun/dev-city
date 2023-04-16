@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import HeaderDropdown from './HeaderDropdown';
 import axios from 'axios';
 import '../style/_header.scss';
+import Chat from './Chat/Chat';
 
 export default function Header() {
   const [url, setUrl] = useState('/');
@@ -10,6 +11,7 @@ export default function Header() {
   const navigate = useNavigate();
   const searchInput = useRef();
   const [profileImgUpdate, setProfileImgUpdate] = useState(null);
+  const [isChatOpen, setIsChatOpen] = useState(false);
 
   const fetchUserData = async () => {
     try {
@@ -115,6 +117,25 @@ export default function Header() {
                 <img src="/images/icon_search.svg" alt="search" />
               </div>
             </div>
+            <div className="buttons">
+              <div>
+                <Link to="/mycity">
+                  <img src="/images/icon_heart.svg" alt="관심스터디" />
+                </Link>
+              </div>
+              <div
+                onClick={() => {
+                  setIsChatOpen((cur) => !cur);
+                }}
+              >
+                <img src="/images/icon_message.svg" alt="다이렉트 메시지" />
+              </div>
+              <div>
+                <Link to="/mycity?lo=todo">
+                  <img src="/images/icon_calendar.svg" alt="나의 할 일" />
+                </Link>
+              </div>
+            </div>
             {/* 로그인 유무 */}
             {isLoggedIn ? (
               <div ref={dropdownRef}>
@@ -159,6 +180,7 @@ export default function Header() {
           <p>{url.split('/')[2] && headerTitle[url.split('/')[2]]}</p>
         </div>
       </div>
+      {isChatOpen && <Chat setIsChatOpen={setIsChatOpen} />}
     </header>
   );
 }
