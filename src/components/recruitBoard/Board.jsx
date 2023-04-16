@@ -8,6 +8,8 @@ export default function Board() {
   const selectedCategory = useSelector((state) => state.study.category);
   const userId = useSelector((state) => state.user.userId);
   const likedStudy = useSelector((state) => state.user.likedStudy);
+  const selectedStatus = useSelector((state) => state.study.status);
+
   const location = useLocation();
   const searchValue = location.search.replace('?search=', '');
 
@@ -23,9 +25,14 @@ export default function Board() {
     }
   };
 
+  const studiesFiltered =
+    selectedStatus === 'all'
+      ? studies
+      : studies.filter((el) => el.isClosed === (selectedStatus === 'closed'));
+
   const studiesRender =
-    studies !== undefined &&
-    studies.map((el, idx) => {
+    studiesFiltered !== undefined &&
+    studiesFiltered.map((el, idx) => {
       if (findCategory(el.skills)) {
         return (
           <ReadyStudy
@@ -40,7 +47,7 @@ export default function Board() {
       }
     });
 
-  const searchRender = studies
+  const searchRender = studiesFiltered
     .filter((study) => {
       return study.studyName.includes(
         decodeURI(decodeURIComponent(searchValue)),
