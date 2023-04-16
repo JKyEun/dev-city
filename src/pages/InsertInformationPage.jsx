@@ -73,10 +73,13 @@ export default function InsertInformationPage() {
 
   return (
     <div className="insertInformationWrap">
-      <h2>회원가입이 완료되었습니다</h2>
-      <div className="intro">추가정보를 입력해주세요</div>
+      <img src="/images/logo_deep.svg" alt="데브시티 로고" width="220" />
+      <div className="intro">
+        <strong>회원가입 |</strong> 더 많은 서비스 이용을 위해 추가정보를
+        입력해주세요
+      </div>
       <form>
-        {(userInfo.userName === '이름을 입력하세요') && (
+        {userInfo.userName === '이름을 입력하세요' && (
           <div>
             <label htmlFor="nameInput">이름</label>
             <input

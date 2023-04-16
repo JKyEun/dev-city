@@ -7,19 +7,21 @@ footer {
   background-color: #f5f4fa;
   .minMax {
     height: 170px;
+    .fooBox {
+      height: inherit;
+    }
     h1 {
-      margin-top: 65px;
-      margin-left: 30px;
+      height: inherit;
+      display: flex;
+      align-items: center;
       img {
-        border: 1px solid #000;
-        width: 500px;
+        width: 150px;
         margin-right: 50px;
       }
     }
 
     .pageInfo {
       .footerLink {
-        margin-top: 40px;
         ul.navigation {
           width: 135px;
 

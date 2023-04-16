@@ -5,36 +5,46 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 380px;
-  height: calc(100vh - 81px - 50px);
+  width: 400px;
+  padding: 100px 0;
+  min-height: calc(100vh - 81px - 50px);
   h2 {
     font-size: 20px;
     font-weight: 800;
   }
   .intro {
     margin-top: 10px;
-    font-size: 14px;
+    font-size: 16px;
+    strong {
+      color: #605cff;
+      font-weight: 800;
+    }
   }
   form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 380px;
-    margin-top: 30px;
+    width: 400px;
+    margin-top: 35px;
+
     div {
-      width: 380px;
+      width: 400px;
       height: 30px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      &:nth-child(3) {
+        height: 45px;
+      }
     }
     .pwInputWrap {
-      margin-top: 10px;
+      margin-top: 20px;
     }
   }
   label {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 600;
+    margin-right: 10px;
     span {
       color: #605cff;
     }
@@ -44,9 +54,10 @@
   }
   .valid {
     height: 20px;
-    width: 270px;
+    width: 280px;
     color: #605cff;
-    font-size: 12px;
+    margin-top: 5px;
+    font-size: 14px;
   }
   #idInput,
   #pwInput,
@@ -54,45 +65,47 @@
     padding-left: 15px;
     border: 1px solid #9a9a9a;
     border-radius: 2px;
-    width: 270px;
-    height: 30px;
+    width: 280px;
+    height: 40px;
+    font-size: 16px;
   }
   .match {
     height: 20px;
-    width: 270px;
+    width: 280px;
     color: #ff4040;
-    font-size: 12px;
+    font-size: 14px;
+    margin-top: 10px;
   }
   .signUpBtn {
     margin-top: 30px;
     background-color: #605cff;
     color: #fff;
     font-weight: 700;
-    width: 210px;
-    height: 35px;
+    width: 280px;
+    height: 40px;
     border: none;
     border-radius: 30px;
-    font-size: 14px;
+    font-size: 16px;
   }
   .signUpBtn:hover {
     cursor: pointer;
   }
   hr {
-    width: 210px;
-    margin-top: 20px;
+    width: 280px;
+    margin-top: 25px;
     border: 0.1px solid #eee;
   }
   .kakaoBtn {
-    margin-top: 20px;
-    width: 210px;
-    height: 35px;
+    margin-top: 25px;
+    width: 280px;
+    height: 40px;
     background-color: #fbe44d;
     border-radius: 30px;
     text-align: center;
     color: #000;
     font-weight: 700;
-    font-size: 14px;
-    line-height: 35px;
+    font-size: 16px;
+    line-height: 40px;
     img {
       vertical-align: middle;
       margin-right: 5px;
@@ -100,17 +113,17 @@
   }
   .githubBtn {
     margin-top: 10px;
-    margin-bottom: 100px;
-    width: 210px;
-    height: 35px;
+
+    width: 280px;
+    height: 40px;
     background-color: #fff;
     border-radius: 30px;
     border: 1px solid #999;
     text-align: center;
     color: #000;
     font-weight: 700;
-    font-size: 14px;
-    line-height: 35px;
+    font-size: 16px;
+    line-height: 40px;
     img {
       vertical-align: middle;
       margin-right: 5px;

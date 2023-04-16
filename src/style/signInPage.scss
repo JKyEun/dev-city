@@ -4,17 +4,20 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 270px;
-  height: calc(100vh - 81px - 50px);
+  width: 280px;
+  padding: 100px 0;
+  min-height: calc(100vh - 81px - 50px);
+
   .intro {
     margin-top: 10px;
-    color: #605cff;
+
     strong {
+      color: #605cff;
       font-weight: 800;
     }
   }
   form {
-    margin-top: 10px;
+    margin-top: 35px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -25,40 +28,47 @@
       margin-top: 10px;
       border: 1px solid #9a9a9a;
       border-radius: 2px;
-      width: 270px;
-      height: 30px;
+      width: 280px;
+      height: 35px;
+      font-size: 16px;
     }
     .loginBtn {
-      margin-top: 30px;
+      margin-top: 35px;
       background-color: #605cff;
       color: #fff;
       font-weight: 700;
-      width: 210px;
-      height: 35px;
+      width: 280px;
+      height: 40px;
       border: none;
       border-radius: 30px;
-      font-size: 14px;
+      font-size: 16px;
     }
     .loginBtn:hover {
       cursor: pointer;
     }
   }
+  a.btn-line {
+    color: #605cff;
+    margin-top: 15px;
+    font-size: 15px;
+    text-decoration: underline;
+  }
   hr {
-    width: 210px;
-    margin-top: 20px;
+    width: 280px;
+    margin-top: 25px;
     border: 0.1px solid #eee;
   }
   .kakaoBtn {
-    margin-top: 20px;
-    width: 210px;
-    height: 35px;
+    margin-top: 25px;
+    width: 280px;
+    height: 40px;
     background-color: #fbe44d;
     border-radius: 30px;
     text-align: center;
     color: #000;
     font-weight: 700;
-    font-size: 14px;
-    line-height: 35px;
+    font-size: 16px;
+    line-height: 40px;
     img {
       vertical-align: middle;
       margin-right: 5px;
@@ -66,17 +76,16 @@
   }
   .githubBtn {
     margin-top: 10px;
-    margin-bottom: 100px;
-    width: 210px;
-    height: 35px;
+    width: 280px;
+    height: 40px;
     background-color: #fff;
     border-radius: 30px;
     border: 1px solid #999;
     text-align: center;
     color: #000;
     font-weight: 700;
-    font-size: 14px;
-    line-height: 35px;
+    font-size: 16px;
+    line-height: 40px;
     img {
       vertical-align: middle;
       margin-right: 5px;

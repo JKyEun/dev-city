@@ -21,6 +21,7 @@ export default function Header({ profileImgUpdate }) {
     faq: 'FAQ',
     signin: '로그인',
     signup: '회원가입',
+    information: '추가정보입력',
   };
 
   // 로그인 상태
@@ -69,7 +70,7 @@ export default function Header({ profileImgUpdate }) {
         <div className="flexBox-between mainHeader">
           <div className="flexBox">
             <h1>
-              <img src="" alt="logo" />
+              <img src="/images/logo.svg" alt="logo" />
             </h1>
             <ul className="flexBox-between navigation">
               <li className={url === '/mycity' && 'pageIn'}>
