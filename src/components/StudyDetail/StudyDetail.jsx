@@ -13,6 +13,7 @@ import {
 } from 'react-circular-progressbar';
 import ParticipationRequest from './ParticipationRequest';
 import { Link, useNavigate } from 'react-router-dom';
+import StudyParticipants from './StudyParticipants';
 
 export default function StudyDetail({ match, studyDetail }) {
   const study = useSelector((state) => state.studyDetail.study);
@@ -252,6 +253,10 @@ export default function StudyDetail({ match, studyDetail }) {
                   <br />
                   <div className="flexBox">
                     <p className="subTitle">스터디원</p>
+                    {study.member.map((e) => (
+                      <StudyParticipants key={e} study={e} />
+                    ))}
+                    {/* <StudyParticipants /> */}
                     {/* {study?.member?.filter((el) => {
                        el.memberId.inclueds()
                        // 여기에 비교식넣기
