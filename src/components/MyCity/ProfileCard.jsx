@@ -17,7 +17,7 @@ export default function ProfileCard({
   const dispatch = useDispatch();
   const [isModifyMode, setIsModifyMode] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
-  const userInfo = useSelector((state) => state);
+  const userInfo = useSelector((state) => state.user);
   const nameInput = useRef(null);
   const nickNameInput = useRef(null);
   const emailInput = useRef(null);
