@@ -1,6 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import '../../style/chat.scss';
 import EachStudy from './EachStudy';
+import ChatRoom from './ChatRoom';
 
 export default function Chat() {
   const myStudyList = useSelector((state) => state.user.joinedStudy);
@@ -16,7 +18,9 @@ export default function Chat() {
           </ul>
         )}
       </div>
-      <div className="chatArea"></div>
+      <div className="chatArea">
+        <ChatRoom />
+      </div>
     </div>
   );
 }
