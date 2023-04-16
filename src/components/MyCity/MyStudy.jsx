@@ -23,7 +23,7 @@ export default function MyStudy({ joinedStudy }) {
       />
 
       <p className="date">
-        {`${date.getFullYear()}.${date.getMonth()}.${date.getDate()}`}
+        {`${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}`}
         <span>| {joinedStudy?.field}</span>
       </p>
       <h3>{joinedStudy?.studyName}</h3>

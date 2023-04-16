@@ -34,7 +34,7 @@ export default function LikeStudy({ e, item, idx, userId, handleRender }) {
       className="likeStudyBox studyContainer"
     >
       <p className="date">
-        {`${date.getFullYear()}.${date.getMonth()}.${date.getDate()}`} |{' '}
+        {`${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}`} |{' '}
         {item.field}
       </p>
       <h3>{item.studyName}</h3>

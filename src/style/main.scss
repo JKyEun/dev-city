@@ -69,6 +69,15 @@
     .showStudy {
       position: absolute;
       top: 140px;
+
+      a {
+        width: 253px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        h3 {
+        }
+      }
       .plusStudy {
         position: relative;
         width: 110px;
@@ -91,6 +100,7 @@
       }
     }
     ul.skills {
+      width: 180px;
       p {
         margin-right: 5px;
         width: 40px;

@@ -59,7 +59,9 @@ export default function Header({ profileImg }) {
     if (url !== '/study') {
       navigate('/study');
     }
-    navigate(`/study?search=${searchInput.current.value}`);
+    searchInput.current.value
+      ? navigate(`/study?search=${searchInput.current.value}`)
+      : navigate('/study');
   };
   return (
     <header>
@@ -76,9 +78,9 @@ export default function Header({ profileImg }) {
               <li className={url === '/study' && 'pageIn'}>
                 <Link to={'/study'}>스터디</Link>
               </li>
-              <li className={url === '/faq' && 'pageIn'}>
+              {/* <li className={url === '/faq' && 'pageIn'}>
                 <Link to={'/faq'}>FAQ</Link>
-              </li>
+              </li> */}
             </ul>
           </div>
           <div className="flexBox">
