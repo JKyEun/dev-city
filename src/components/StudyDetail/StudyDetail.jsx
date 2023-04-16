@@ -7,9 +7,8 @@ import {
   buildStyles,
   CircularProgressbarWithChildren,
 } from 'react-circular-progressbar';
-import ParticipationRequest from './ParticipationRequest';
 
-export default function StudyDetail({ match }) {
+export default function StudyDetail({ match, studyDetail }) {
   const study = useSelector((state) => state.studyDetail.study);
   const loading = useSelector((state) => state.studyDetail.loading);
   const dispatch = useDispatch();
@@ -109,7 +108,6 @@ export default function StudyDetail({ match }) {
       console.error(err);
     }
   };
-
   return (
     <div>
       {!loading && study && (
@@ -163,11 +161,13 @@ export default function StudyDetail({ match }) {
                   <br />
                   <div className="flexBox">
                     <p className="subTitle">스터디원</p>
-                    {/* 이걸 지우고 이곳에 스터디 멤버를 map으로 돌리시오 */}
-                    {isLeader &&
-                      study.request.map((el) => (
-                        <ParticipationRequest key={el} userId={el} />
-                      ))}
+                    {/* {study?.member?.filter((el) => {
+                       el.memberId.inclueds()
+                       // 여기에 비교식넣기
+                      return 
+                    }).map((memberStudy)=>{
+                      return <StudyParticipants member={memberStudy} />;
+                    })} */}
                   </div>
                 </div>
               </Fragment>

@@ -25,8 +25,8 @@ export default function AllUsers() {
           </div>
           <div className="flexBox">
             {randomUsers.map((allUser) => (
-              <div className="profile">
-                <div key={allUser.id}>
+              <div className="profile" key={allUser.userId}>
+                <div>
                   <img
                     src="/images/icon_github.svg"
                     alt="프로필 사진"

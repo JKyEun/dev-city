@@ -31,11 +31,6 @@ export default function ProfileCard({
     window.location.reload();
   };
 
-  const handleImageChange = (e) => {
-    setSelectedFile(e.target.files[0]);
-    console.log(e, 'asdf');
-  };
-
   const saveProfileInfo = async (e, id) => {
     e.preventDefault();
 
@@ -60,29 +55,6 @@ export default function ProfileCard({
     }
   };
 
-  const handleSaveClick = async () => {
-    if (selectedFile) {
-      const formData = new FormData();
-      formData.append('profileImg', selectedFile);
-      formData.append('_id', localStorage.getItem('userId'));
-      try {
-        const response = await axios.post(
-          'http://localhost:4000/user/updateImg',
-          formData,
-          {
-            headers: {
-              'Content-Type': 'multipart/form-data',
-              Authorization: `Bearer ${localStorage.getItem('JWT')}`,
-            },
-          },
-        );
-        console.log(response.data); // 프로필 사진 변경 성공
-      } catch (err) {
-        console.error(err); //프로필 변경 실패
-      }
-    }
-  };
-
   useEffect(() => {
     if (
       nameInput.current &&
@@ -99,32 +71,76 @@ export default function ProfileCard({
     }
   });
 
+  // 프로필 수정하기
+  const [profileImgUpdate, setProfileImgUpdate] = useState(null);
+
+  const uploadImg = async (e, id) => {
+    console.log(id);
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append('img', file);
+    try {
+      const res = await axios.post(
+        `http://localhost:4000/user/updateuser/images/${id}`,
+        formData,
+        {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        },
+      );
+      console.log(res.data.profileImg);
+      setProfileImgUpdate(`/uploads/${res.data.profileImg}`);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    // 로컬 스토리지에서 userId 가져오기
+    const userId = localStorage.getItem('userId');
+
+    // 유저 정보 가져오기
+    const fetchUserData = async () => {
+      try {
+        const res = await axios.get(`http://localhost:4000/user/${userId}`);
+        setProfileImgUpdate(`/uploads/${res.data.profileImg}`);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchUserData();
+  }, []);
+
   return (
     <div className="profile">
       <div className="profileBox">
-        <img
-          className="profilePhoto"
-          src={profileImg ? profileImg : '/images/default-profile.png'}
-          alt="프로필 사진"
-        />
-
-        {/* </div>
-      <div onClick={handleImageChange} className="editIcon">
-        <img src="/images/editIcon.svg" alt="" />
-      </div> */}
+        <div>
+          <img
+            className="profilePhoto"
+            src={
+              profileImgUpdate
+                ? `${profileImgUpdate}`
+                : '/images/default-profile.png'
+            }
+            name="img"
+            alt="프로필 사진"
+          />
+        </div>
       </div>
-      <div className="editIcon">
-        {/* <input
-          type="file"
-          accept="image/*"
-          onChange={handleImageChange}
-          style={{ display: 'none' }}
-          id="profileImgInput"
-        /> */}
+
+      <div className="edit">
         <label htmlFor="profileImgInput" className="editIcon">
           <img src="/images/editIcon.svg" alt="" />
         </label>
+        <input
+          id="profileImgInput"
+          name="img"
+          type="file"
+          accept="image/*"
+          style={{ display: 'none' }}
+          onChange={(e) => uploadImg(e, localStorage.getItem('userId'))}
+        />
       </div>
+
       {isModifyMode ? (
         <>
           <form
@@ -207,7 +223,6 @@ export default function ProfileCard({
           onClick={(e) => {
             setIsModifyMode((cur) => !cur);
             isModifyMode && saveProfileInfo(e, localStorage.getItem('userId'));
-            handleSaveClick();
           }}
         >
           프로필 편집

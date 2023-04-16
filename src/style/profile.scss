@@ -16,21 +16,23 @@
       width: 100%;
     }
   }
-  .editIcon {
-    cursor: pointer;
-    z-index: 1;
-    position: absolute;
-    top: 55px;
-    right: 25px;
-    background-color: #605cff;
-    border-radius: 50%;
-    width: 45px;
-    height: 45px;
-    padding: 12px;
-    img {
-      width: 20px;
-      height: 20px;
-      z-index: 999;
+  .edit {
+    .editIcon {
+      cursor: pointer;
+      z-index: 1;
+      position: absolute;
+      top: 105px;
+      right: 40px;
+      background-color: #605cff;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      padding: 12px;
+      img {
+        width: 20px;
+        height: 20px;
+        z-index: 999;
+      }
     }
   }
   form {
