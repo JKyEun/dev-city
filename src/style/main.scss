@@ -62,12 +62,12 @@
         margin-bottom: 10px;
       }
       .subText {
-        font-size: 14px;
         color: #222222;
       }
     }
     .showStudy {
       position: absolute;
+      width: 1400px;
       top: 140px;
 
       a {
@@ -85,6 +85,9 @@
         border: 1px solid #eeeeee;
         border-radius: 10px;
         text-align: center;
+        &:hover {
+          border: 1px solid #605cff;
+        }
         a {
           position: absolute;
           top: 50%;
@@ -129,7 +132,6 @@
         margin-bottom: 10px;
       }
       .subText {
-        font-size: 14px;
         line-height: 20px;
         color: #222222;
       }

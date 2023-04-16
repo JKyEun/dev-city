@@ -73,6 +73,7 @@ export default function ProfileCard({
 
   // 프로필 수정하기
   const [profileImgUpdate, setProfileImgUpdate] = useState(null);
+  // const [isUploaded, setIsUploaded] = useState(false);
 
   const uploadImg = async (e, id) => {
     console.log(id);
@@ -89,6 +90,7 @@ export default function ProfileCard({
       );
       console.log(res.data.profileImg);
       setProfileImgUpdate(`/${res.data.profileImg}`);
+      // setIsUploaded(true);
     } catch (err) {
       console.error(err);
     }
@@ -102,7 +104,9 @@ export default function ProfileCard({
     const fetchUserData = async () => {
       try {
         const res = await axios.get(`http://localhost:4000/user/${userId}`);
-        setProfileImgUpdate(`/${res.data.profileImg}`);
+        setProfileImgUpdate(
+          res.data.profileImg ? `/${res.data.profileImg}` : null,
+        );
       } catch (err) {
         console.error(err);
       }
@@ -118,7 +122,10 @@ export default function ProfileCard({
             className="profilePhoto"
             src={
               profileImgUpdate
-                ? `${profileImgUpdate.replace('/', '')}`
+                ? `http://localhost:4000/uploads/${profileImgUpdate.replace(
+                    '/',
+                    '',
+                  )}`
                 : '/images/default-profile.png'
             }
             name="img"

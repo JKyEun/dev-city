@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import HeaderDropdown from './HeaderDropdown';
 import '../style/_header.scss';
 
-export default function Header({ profileImg }) {
+export default function Header({ profileImgUpdate }) {
   const [url, setUrl] = useState('/');
   const location = useLocation();
   const navigate = useNavigate();
@@ -99,7 +99,13 @@ export default function Header({ profileImg }) {
             {isLoggedIn ? (
               <div ref={dropdownRef}>
                 <div className="profileImg" onClick={handleImageClick}>
-                  <img src="/" alt="profile" />
+                  <img
+                    src="/http://localhost:4000/uploads/${profileImgUpdate.replace(
+                    '/',
+                    '',
+                  )}"
+                    alt="profile"
+                  />
                   {showDropdown && <HeaderDropdown />}
                 </div>
               </div>

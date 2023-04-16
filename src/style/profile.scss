@@ -6,14 +6,17 @@
   .profileBox {
     position: absolute;
     left: 50%;
-    transform: translateX(-50%);
-    width: 140px;
-    height: 140px;
+    transform: translateX(-55%);
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     overflow: hidden;
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
     img.profilePhoto {
-      width: 100%;
+      width: 105%;
+      object-fit: cover;
     }
   }
   .edit {
@@ -22,7 +25,7 @@
       z-index: 1;
       position: absolute;
       top: 105px;
-      right: 40px;
+      right: 55px;
       background-color: #605cff;
       border-radius: 50%;
       width: 45px;
