@@ -49,7 +49,7 @@ export default function Study() {
     <div className="studyTab">
       <div className="buildingBox">
         <img className="bg" src="/images/building-bg.svg" alt="bg" />
-        {userInfo?.joinedStudy?.map((el, idx) => {
+        {joinedStudy?.map((el, idx) => {
           const date = new Date(el.createDate);
           return (
             <div

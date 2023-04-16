@@ -88,7 +88,7 @@ export default function ProfileCard({
         },
       );
       console.log(res.data.profileImg);
-      setProfileImgUpdate(`/uploads/${res.data.profileImg}`);
+      setProfileImgUpdate(`/${res.data.profileImg}`);
     } catch (err) {
       console.error(err);
     }
@@ -102,14 +102,14 @@ export default function ProfileCard({
     const fetchUserData = async () => {
       try {
         const res = await axios.get(`http://localhost:4000/user/${userId}`);
-        setProfileImgUpdate(`/uploads/${res.data.profileImg}`);
+        setProfileImgUpdate(`/${res.data.profileImg}`);
       } catch (err) {
         console.error(err);
       }
     };
     fetchUserData();
   }, []);
-
+  console.log(profileImgUpdate);
   return (
     <div className="profile">
       <div className="profileBox">
@@ -118,7 +118,7 @@ export default function ProfileCard({
             className="profilePhoto"
             src={
               profileImgUpdate
-                ? `${profileImgUpdate}`
+                ? `${profileImgUpdate.replace('/', '')}`
                 : '/images/default-profile.png'
             }
             name="img"
@@ -202,7 +202,13 @@ export default function ProfileCard({
           <hr />
           <div className="email address">
             <div>✉️ Email</div>
-            <div>{email}</div>
+            {email ? (
+              <a href={`mailto:${email}`} target="_blank">
+                {email}
+              </a>
+            ) : (
+              <div>정보가 없습니다.</div>
+            )}
           </div>
           <div className="github address">
             <div>
@@ -213,7 +219,13 @@ export default function ProfileCard({
               />
               Github
             </div>
-            <div>{githubAddress}</div>
+            {githubAddress ? (
+              <a href={githubAddress} target="_blank">
+                {githubAddress}
+              </a>
+            ) : (
+              <div>정보가 없습니다.</div>
+            )}
           </div>
         </>
       )}

@@ -1,7 +1,7 @@
 import React from 'react';
-import '../../style/profile.scss';
 import { useSelector } from 'react-redux';
 import ProfileCard from './ProfileCard';
+import '../../style/profile.scss';
 
 export default function Profile() {
   const userInfo = useSelector((state) => state.user);

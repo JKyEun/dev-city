@@ -330,7 +330,7 @@ export default function CreateStudy() {
         >
           생성하기
         </a>
-        <a className="btn btn--cancel" onClick={() => navigate('/')}>
+        <a className="btn btn--cancel" onClick={() => navigate(-1)}>
           취소하기
         </a>
       </div>

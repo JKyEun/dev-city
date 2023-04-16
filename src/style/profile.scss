@@ -107,9 +107,16 @@
   .address {
     text-align: start;
     margin-top: 30px;
-    div:first-child {
+    div {
       margin-bottom: 7px;
       color: #999;
+    }
+    a {
+      display: block;
+      width: inherit;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
   }
 
