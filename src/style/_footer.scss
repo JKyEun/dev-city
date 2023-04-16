@@ -21,7 +21,7 @@ footer {
       .footerLink {
         margin-top: 40px;
         ul.navigation {
-          width: 200px;
+          width: 135px;
 
           li {
             &:after {
@@ -52,12 +52,16 @@ footer {
             font-size: 14px;
             color: #605cff;
             a {
+              color: #605cff;
               padding-left: 10px;
             }
           }
           &:last-child {
             font-size: 14px;
             color: #222;
+            a {
+              padding: 0 5px;
+            }
           }
         }
       }

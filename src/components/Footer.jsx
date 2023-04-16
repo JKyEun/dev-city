@@ -25,9 +25,6 @@ export default function Footer() {
                 <li className={url === '/study' && 'pageIn'}>
                   <Link to={'/study'}>스터디</Link>
                 </li>
-                <li className={url === '/faq' && 'pageIn'}>
-                  <Link to={'/faq'}>FAQ</Link>
-                </li>
               </ul>
             </div>
             <hr />
@@ -39,8 +36,26 @@ export default function Footer() {
                 </a>
               </p>
               <p>
-                © Copyright.2023.Dev-city | 김민정 · 박지원 · 송수빈 · 장경은 ·
-                조성희
+                © Copyright.2023.Dev-city |
+                <a href="https://github.com/minjeong19" target="_blank">
+                  김민정
+                </a>
+                ·
+                <a href="https://github.com/KingJiwon" target="_blank">
+                  박지원
+                </a>
+                ·
+                <a href="https://github.com/ssb1565b" target="_blank">
+                  송수빈
+                </a>
+                ·
+                <a href="https://github.com/JKyEun" target="_blank">
+                  장경은
+                </a>
+                ·
+                <a href="https://github.com/HeeHeeHee-github" target="_blank">
+                  조성희
+                </a>
               </p>
             </div>
           </div>
