@@ -2,7 +2,11 @@ import React, { Fragment, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import '../../style/studyDetail.scss';
-import { fetchStudy, setStudy } from '../../store/modules/studyDetail';
+import {
+  fetchStudy,
+  setStudy,
+  closeAndOpenStudy,
+} from '../../store/modules/studyDetail';
 import {
   buildStyles,
   CircularProgressbarWithChildren,
@@ -13,6 +17,7 @@ import { useNavigate } from 'react-router-dom';
 export default function StudyDetail({ match, studyDetail }) {
   const study = useSelector((state) => state.studyDetail.study);
   const loading = useSelector((state) => state.studyDetail.loading);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -46,11 +51,24 @@ export default function StudyDetail({ match, studyDetail }) {
           !isLeader &&
           !study.member?.some((member) => member.memberId === currentUserId);
 
+        // study 멤버가 꽉 차거나 이미 isClosed가 true 라면 isClosed를 true 로 바꾸기 (리덕스)
+        const isClosed =
+          study.memberNum.currentNum === study.memberNum.maxNum ||
+          study.isClosed
+            ? true
+            : false;
+        // 사람 꽉차면 백엔드 isClosed를 true로 바꾸기
+        if (study.memberNum.currentNum === study.memberNum.maxNum) {
+          await axios.post(
+            `http://localhost:4000/study/detail/${match.params.id}/close`,
+          );
+        }
         dispatch(
           setStudy({
             ...study,
             canJoin: canJoin,
             isLeader: isLeader,
+            isClosed: isClosed,
           }),
         );
       } catch (err) {
@@ -159,6 +177,21 @@ export default function StudyDetail({ match, studyDetail }) {
       }
     }
   };
+  // 모집 마감, 모집 재시작하기
+
+  const CloseAndOpenEvent = async () => {
+    if (!study.isClosed) {
+      await axios.post(
+        `http://localhost:4000/study/detail/${match.params.id}/close`,
+      );
+      dispatch(closeAndOpenStudy(true));
+    } else {
+      await axios.post(
+        `http://localhost:4000/study/detail/${match.params.id}/open`,
+      );
+      dispatch(closeAndOpenStudy(false));
+    }
+  };
 
   return (
     <div>
@@ -255,7 +288,7 @@ export default function StudyDetail({ match, studyDetail }) {
                     })
                   }
                 >
-                  {study.memberNum.currentNum === study.memberNum.maxNum ? (
+                  {study.isClosed ? (
                     <p className="percentText">모집 마감</p>
                   ) : (
                     <p className="percentText">
@@ -266,7 +299,7 @@ export default function StudyDetail({ match, studyDetail }) {
                   )}
                 </CircularProgressbarWithChildren>
                 <p className="percentSubText">
-                  {study.memberNum.currentNum === study.memberNum.maxNum
+                  {study.isClosed
                     ? '모집이 마감되었습니다.'
                     : `${study.memberNum.maxNum}명 중 ${study.memberNum.currentNum}명 모집됨`}
                 </p>
@@ -278,6 +311,23 @@ export default function StudyDetail({ match, studyDetail }) {
                     <a className="btn btn--create" onClick={deleteStudy}>
                       삭제하기
                     </a>
+                    {study.isClosed ? (
+                      <span
+                        className="btn btn--cancel"
+                        onClick={CloseAndOpenEvent}
+                      >
+                        {' '}
+                        모집 시작하기{' '}
+                      </span>
+                    ) : (
+                      <span
+                        className='"btn btn--create'
+                        onClick={CloseAndOpenEvent}
+                      >
+                        {' '}
+                        모집 마감 하기{' '}
+                      </span>
+                    )}
                   </div>
                 ) : study.member.some(
                     (member) =>
@@ -292,13 +342,17 @@ export default function StudyDetail({ match, studyDetail }) {
                 ) : (
                   <div>
                     <a className="btn btn--cancel">공유하기</a>
-                    <a
-                      className="btn btn--create"
-                      onClick={joinStudy}
-                      disabled={!study.canJoin}
-                    >
-                      참여하기
-                    </a>
+                    {study.isClosed ? (
+                      <span>모집이 마감 되었습니다.</span>
+                    ) : (
+                      <a
+                        className="btn btn--create"
+                        onClick={joinStudy}
+                        disabled={!study.canJoin}
+                      >
+                        참여하기
+                      </a>
+                    )}
                   </div>
                 )}
               </div>
