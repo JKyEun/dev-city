@@ -40,7 +40,7 @@ export default function RecruitedStudy() {
           </div>
           <div className="showStudy flexBox">
             {studies?.map((item) => {
-              return <ReadyStudy item={item} />;
+              return <ReadyStudy key={item._id} item={item} />;
             })}
             <div className="plusStudy">
               <Link to={'/study'}>
