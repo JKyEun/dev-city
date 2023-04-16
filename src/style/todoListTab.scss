@@ -7,6 +7,10 @@
     margin-right: 10px;
   }
 
+  .expandBtn:hover {
+    cursor: pointer;
+  }
+
   .selectBoxContainer {
     display: flex;
     position: absolute;
@@ -15,9 +19,11 @@
 
     .yearSelect {
       overflow: auto;
+      border: 1px solid #eee;
     }
     .monthSelect {
       overflow: auto;
+      border: 1px solid #eee;
     }
 
     li,
@@ -122,6 +128,10 @@
         padding: 10px;
       }
 
+      input[type='time']:hover {
+        cursor: pointer;
+      }
+
       .addBtn {
         position: absolute;
         right: 0px;
@@ -131,8 +141,13 @@
         color: white;
         background-color: #605cff;
         border-radius: 20px;
-        font-size: 12px;
+        font-size: 14px;
+        font-weight: 800;
         padding: 5px;
+      }
+
+      .addBtn:hover {
+        cursor: pointer;
       }
 
       li {
@@ -206,6 +221,24 @@
           transform: translateY(-50%);
         }
 
+        .delete {
+          position: absolute;
+          border: 1px solid #ff6868;
+          background-color: #fff;
+          color: #ff6868;
+          border-radius: 20px;
+          font-size: 12px;
+          padding: 3px 8px;
+          right: 0px;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+
+        .modify:hover,
+        .delete:hover {
+          cursor: pointer;
+        }
+
         form {
           display: inline-block;
           .contentWrapInForm {
@@ -242,19 +275,10 @@
             top: 50%;
             transform: translateY(-50%);
           }
-        }
 
-        .delete {
-          position: absolute;
-          border: 1px solid #ff6868;
-          background-color: #fff;
-          color: #ff6868;
-          border-radius: 20px;
-          font-size: 12px;
-          padding: 3px 8px;
-          right: 0px;
-          top: 50%;
-          transform: translateY(-50%);
+          .modifyInForm:hover {
+            cursor: pointer;
+          }
         }
       }
     }
