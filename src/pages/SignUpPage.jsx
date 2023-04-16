@@ -125,6 +125,11 @@ export default function SignUpPage() {
             placeholder="다시 한 번 입력해주세요"
             onChange={checkPassword}
           />
+          
+        </div>
+        <div>
+          <div className="filler"> </div>
+          <span className="match">* 비밀번호가 일치하지 않습니다</span>
         </div>
 
         <button className="signUpBtn" type="submit">
