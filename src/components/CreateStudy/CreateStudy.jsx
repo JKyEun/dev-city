@@ -103,6 +103,7 @@ export default function CreateStudy() {
           study_system: studySystemInput.current.value,
           study_etc: etcInput.current.value,
           request: [],
+          isClosed: false,
         },
       );
 
@@ -127,6 +128,7 @@ export default function CreateStudy() {
           structureImg: 'img',
           study_etc: etcInput.current.value,
           request: [],
+          isClosed: false,
         }),
       );
 
