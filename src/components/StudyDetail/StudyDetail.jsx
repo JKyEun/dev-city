@@ -82,7 +82,7 @@ export default function StudyDetail({ match, studyDetail }) {
   // 참여하기
   const joinStudy = async () => {
     const joinedStudy = user.joinedStudy || [];
-    if ((joinedStudy.length = 9)) {
+    if (joinedStudy.length === 9) {
       alert('이미 최대 개수의 스터디에 참여하였습니다.');
       return;
     }
