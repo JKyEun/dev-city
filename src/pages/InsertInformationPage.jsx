@@ -171,7 +171,6 @@ export default function InsertInformationPage() {
       >
         건너뛰기
       </div>
-      <Chat />
     </div>
   );
 }

@@ -13,26 +13,34 @@
     overflow: auto;
     width: 470px;
     border: 1px solid dodgerblue;
-    .message {
-      display: flex;
-      .yourChat {
-        width: 235px;
-        height: 450px;
-      }
-      .myChat {
-        width: 235px;
-        height: 450px;
-        li {
-          right: 0;
+    .chatRoom {
+      width: 469px;
+      height: 500px;
+      .message {
+        display: flex;
+        .yourChat {
+          width: 220px;
+          height: 450px;
+        }
+        .myChat {
+          width: 220px;
+          height: 450px;
+          li {
+            right: 0;
+          }
         }
       }
+      form {
+        height: 50px;
+        position: absolute;
+        right: 50%;
+        transform: translateX(50%);
+        bottom: 0;
+      }
     }
-    form {
-      height: 50px;
-      position: absolute;
-      right: 50%;
-      transform: translateX(50%);
-      bottom: 0;
+    .intro {
+      width: 469px;
+      height: 500px;
     }
   }
 }
