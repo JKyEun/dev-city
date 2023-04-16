@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import '../../style/recruitBoard/Board.scss';
@@ -11,6 +10,7 @@ export default function Board() {
   const likedStudy = useSelector((state) => state.user.likedStudy);
   const location = useLocation();
   const searchValue = location.search.replace('?search=', '');
+
   const findCategory = (el) => {
     const intersectionArr = selectedCategory.filter((x) => el.includes(x));
     if (selectedCategory.length === 0) {
