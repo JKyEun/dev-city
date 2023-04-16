@@ -3,7 +3,7 @@ import React, { Fragment, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { create } from '../../store/modules/study';
 
 import {
@@ -72,10 +72,10 @@ export default function CreateStudy() {
         !studyIntroInput.current.value ||
         !studyFieldSelect.current.props.value ||
         !memberNumSelect.current.props.value ||
-        !skillSelect.current.props.value
-        // || !studySystemInput.current.value
+        !skillSelect.current.props.value ||
+        !studySystemInput.current.value
       )
-        return alert('필수 값을 입력해주세요.');
+        return alert('필수 값을 입력해 주세요.');
 
       const resCreate = await axios.post(
         'http://localhost:4000/study/create_study',
@@ -107,7 +107,7 @@ export default function CreateStudy() {
         },
       );
 
-      alert(resCreate.data);
+      alert(resCreate.data.message);
 
       dispatch(
         create({
@@ -123,12 +123,18 @@ export default function CreateStudy() {
               memberNumSelect.current.props.value.label.split('명'),
             ),
           },
-          member: {},
+          member: [
+            {
+              isLeader: true,
+              memberId: localStorage.getItem('userId'),
+            },
+          ],
           board: [],
           structureImg: 'img',
           study_etc: etcInput.current.value,
           request: [],
           isClosed: false,
+          nickName: resCreate.data.nickName,
         }),
       );
 
@@ -159,7 +165,8 @@ export default function CreateStudy() {
               className="inputContainer inputBox"
               type="text"
               ref={studyNameInput}
-              placeholder="3~10자 이내로 입력해주세요."
+              placeholder="30자 이내로 입력해 주세요."
+              maxLength={30}
             />
           ),
         },
@@ -200,7 +207,7 @@ export default function CreateStudy() {
               components={animatedComponents}
               isMulti
               options={skillOptions}
-              placeholder="사용 언어를 선택해주세요."
+              placeholder="사용 언어를 선택해 주세요."
               ref={skillSelect}
             />
           ),
@@ -211,7 +218,7 @@ export default function CreateStudy() {
       title: '세부정보',
       detail: [
         {
-          subTitle: '스터디 한줄 소개',
+          subTitle: '스터디 한 줄 소개',
           require: true,
           input: (
             <textarea
@@ -220,15 +227,15 @@ export default function CreateStudy() {
               name=""
               id=""
               cols={40}
-              rows={8}
-              placeholder="스터디 소개"
+              rows={2}
+              placeholder="스터디를 소개하는 글을 작성해 주세요."
               ref={studyIntroInput}
             ></textarea>
           ),
         },
         {
           subTitle: '회의 진행 / 모임 방식',
-          require: false,
+          require: true,
           input: (
             <textarea
               className="inputContainer"
@@ -236,7 +243,7 @@ export default function CreateStudy() {
               id=""
               cols={40}
               rows={8}
-              placeholder={`- 1주에 몇 번 정도 회의나 모임을 진행할 계획인가요?\n(ex - 1주일에 1회/2회 정도 정기적으로 회의합니다)\n- 온/오프라인 회의 진행시 진행방식을 적어주세요\n(ex - 온라인은 줌을 활용하고, 오프라인은 강남역 카페등을 대관할예정입니다,\n 커뮤니케이션은 슬랙을 위주로 사용합니다 )`}
+              placeholder={`- 1주에 몇 번 정도 회의나 모임을 진행할 계획인가요?\n(ex - 일주일에 1회, 2회 정도 정기적으로 회의합니다.)\n\n- 온/오프라인 회의 진행시 진행 방식을 적어주세요.\n(ex - 온라인은 줌을 활용하고, 오프라인은 강남역 카페를 대관할 예정입니다.)`}
               ref={studySystemInput}
             ></textarea>
           ),
@@ -248,7 +255,7 @@ export default function CreateStudy() {
             <input
               className="inputContainer inputBox"
               type="text"
-              placeholder="기타사항을 입력하세요"
+              placeholder="기타 사항을 입력하세요."
               ref={etcInput}
             />
           ),
@@ -264,6 +271,14 @@ export default function CreateStudy() {
   return (
     <div className="minMax flexBox-between">
       <div className="box-write">
+        <Link to={'/study'}>
+          <img
+            className="left-arrow"
+            src="/images/left-arrow.svg"
+            alt="left-arrow"
+          />
+          스터디홈으로 돌아가기
+        </Link>
         <h1>나의 스터디 생성하기</h1>
         {elementContent.map((el, idx) => {
           return (

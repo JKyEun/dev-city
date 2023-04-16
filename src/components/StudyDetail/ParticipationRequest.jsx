@@ -60,6 +60,12 @@ export default function ParticipationRequest({ userId }) {
       const currentUserId = member.userId;
       const removedRequest = study.request.filter((el) => el !== currentUserId);
       const currentNum = study.memberNum.currentNum;
+      const maxNum = study.memberNum.maxNum;
+
+      if (currentNum === maxNum) {
+        alert('최대 참여 인원에 도달하여 더 이상 수락할 수 없습니다.');
+        return;
+      }
       const updatedMember = {
         memberId: currentUserId,
         isLeader: false,
