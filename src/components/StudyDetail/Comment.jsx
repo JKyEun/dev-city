@@ -116,7 +116,7 @@ export default function Comment({
     <>
       {commentWriterInfo !== null && (
         <div className="comment">
-          <div>
+          <div className="imgWrap">
             <img
               src={
                 commentWriterInfo.profileImg
@@ -124,7 +124,6 @@ export default function Comment({
                   : '/images/default-profile.png'
               }
               alt="댓글 작성자 프로필"
-              width="40"
             />
           </div>
           {isModifyMode ? (
@@ -135,7 +134,7 @@ export default function Comment({
                   modifyComment();
                 }}
               >
-                <div>
+                <div className="rightWrap">
                   <div className="commentInfo">
                     <span>{commentWriterInfo.nickName}</span>
                     <span>{dateFormat}</span>
@@ -163,7 +162,7 @@ export default function Comment({
             </>
           ) : (
             <>
-              <div>
+              <div className="rightWrap">
                 <div className="commentInfo">
                   <span>{commentWriterInfo.nickName}</span>
                   <span>{dateFormat}</span>
