@@ -5,13 +5,11 @@ import { init } from '../../store/modules/user';
 import '../../style/studyProfile.scss';
 
 export default function StudyParticipants({ member }) {
-  const dispatch = useDispatch();
   const [userInfo, setUserInfo] = useState([]);
 
   const getUserInfo = async (id) => {
     try {
       const res = await axios.get(`http://localhost:4000/user/${id}`);
-      dispatch(init(res.data));
       setUserInfo(res.data);
     } catch (err) {
       console.error(err);
