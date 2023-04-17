@@ -161,20 +161,20 @@ export default function ParticipationRequest({ userId }) {
             <div className="userNameStudy">
               {member?.userName ? member.userName : '이름 정보없음'}
             </div>
-            <div>
+            <div className="userFieldLevel">
               <span className="fieldStudy">{member.field}</span>
               <span className="levelStudy">Lv.{member.level}</span>
             </div>
+            <div className="requestBtn">
+              <button className="acceptBtn" onClick={acceptRequest}>
+                수락
+              </button>
+              <button className="refuseBtn" onClick={refuseRemoveRequest}>
+                거절
+              </button>
+            </div>
           </>
         )}
-        <div className="requestBtn">
-          <button className="acceptBtn" onClick={acceptRequest}>
-            수락
-          </button>
-          <button className="refuseBtn" onClick={refuseRemoveRequest}>
-            거절
-          </button>
-        </div>
       </div>
     </div>
   );

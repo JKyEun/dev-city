@@ -129,12 +129,14 @@ export default function StudyDetail({ match, studyDetail }) {
                     </div>
                   </div>
                   <div className="studyDetail">
-                    {isLeader ? <p className="subTitle">신청현황</p> : null}
-
-                    {isLeader &&
-                      study.request.map((el) => (
-                        <ParticipationRequest key={el} userId={el} />
-                      ))}
+                    {isLeader && <p className="subTitle">신청현황</p>}
+                    <div className="studyMember-profile">
+                      {isLeader && study.request.length > 0
+                        ? study.request.map((el) => (
+                            <ParticipationRequest key={el} userId={el} />
+                          ))
+                        : isLeader && <p>참가신청인원 없음</p>}
+                    </div>
                   </div>
                 </div>
               </Fragment>

@@ -46,7 +46,7 @@ export default function StudyParticipants({ member }) {
         <div className="userNameStudy">
           {userInfo?.userName ? userInfo.userName : '이름 정보없음'}
         </div>
-        <div>
+        <div className="userFieldLevel">
           <span className="fieldStudy">{userInfo?.field}</span>
           <span className="levelStudy">Lv.{userInfo?.level}</span>
         </div>

@@ -2,11 +2,14 @@
   margin-left: 5px;
 
   .profile {
-    width: 230px;
+    width: 210px;
     height: 330px;
 
     img {
       border-radius: 50%;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
     }
     .nickNameStudy {
       margin-top: 20px;
@@ -16,19 +19,24 @@
       color: #999;
       margin-bottom: 20px;
     }
-    .fieldStudy {
-      color: #d97500;
-      background-color: #ffdba5;
-      border-radius: 15px;
-      padding: 3px 10px;
-      margin: 5px;
-    }
-    .levelStudy {
-      color: #8fc001;
-      background-color: #e6f1a4;
-      border-radius: 15px;
-      padding: 3px 10px;
-      margin: 5px;
+    .userFieldLevel {
+      display: flex;
+      justify-content: space-evenly;
+      .fieldStudy {
+        color: #d97500;
+        background-color: #ffdba5;
+        border-radius: 15px;
+        padding: 3px 10px;
+        margin: 5px;
+        min-width: fit-content;
+      }
+      .levelStudy {
+        color: #8fc001;
+        background-color: #e6f1a4;
+        border-radius: 15px;
+        padding: 3px 10px;
+        margin: 5px;
+      }
     }
 
     .btnFollowStudy {
