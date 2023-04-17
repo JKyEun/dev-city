@@ -58,6 +58,8 @@ export default function study(state = initState, action) {
       return {
         ...state,
         studies: [...action.payload],
+        category: [],
+        status: 'all',
       };
     case CREATE:
       return {
