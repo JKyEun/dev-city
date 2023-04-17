@@ -51,6 +51,9 @@ export default function ReadyStudy({ item, idx, liked, isMain, userId }) {
       <div className="flexBox-alignCenter">
         <ul className="flexBox skills">
           {item?.skills?.map((el) => {
+            if (el === 'C#') {
+              el = 'cSharp';
+            }
             return (
               <p key={el}>
                 <img src={`/images/skill_icon/${el}.svg`} alt="" />
