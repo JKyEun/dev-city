@@ -139,43 +139,40 @@ export default function ParticipationRequest({ userId }) {
 
   return (
     <div className="studyProfile">
-      <div className="profile">
-        {member && (
-          <>
-            <img
-              className="profilePhoto"
-              src={
-                member.profileImg
-                  ? member.profileImg
-                  : '/images/default-profile.png'
-              }
-              alt="프로필 사진"
-              width="98"
-              height="98"
-            />
-            <img src="/images/editIcon.svg" alt="" />
+      {member && (
+        <>
+          <img
+            className="profilePhoto"
+            src={
+              member.profileImg
+                ? member.profileImg
+                : '/images/default-profile.png'
+            }
+            alt="프로필 사진"
+            width="98"
+            height="98"
+          />
 
-            <div className="nickNameStudy">
-              {member?.nickName ? member.nickName : '닉네임 정보없음'}
-            </div>
-            <div className="userNameStudy">
-              {member?.userName ? member.userName : '이름 정보없음'}
-            </div>
-            <div className="userFieldLevel">
-              <span className="fieldStudy">{member.field}</span>
-              <span className="levelStudy">Lv.{member.level}</span>
-            </div>
-            <div className="requestBtn">
-              <button className="acceptBtn" onClick={acceptRequest}>
-                수락
-              </button>
-              <button className="refuseBtn" onClick={refuseRemoveRequest}>
-                거절
-              </button>
-            </div>
-          </>
-        )}
-      </div>
+          <div className="nickNameStudy">
+            {member?.nickName ? member.nickName : '닉네임 정보없음'}
+          </div>
+          <div className="userNameStudy">
+            {member?.userName ? member.userName : '이름 정보없음'}
+          </div>
+          <div className="userFieldLevel">
+            <span className="fieldStudy">{member.field}</span>
+            <span className="levelStudy">Lv.{member.level}</span>
+          </div>
+          <div className="requestBtn">
+            <button className="acceptBtn" onClick={acceptRequest}>
+              수락
+            </button>
+            <button className="refuseBtn" onClick={refuseRemoveRequest}>
+              거절
+            </button>
+          </div>
+        </>
+      )}
     </div>
   );
 }

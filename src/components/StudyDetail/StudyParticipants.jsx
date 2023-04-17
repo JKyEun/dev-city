@@ -1,7 +1,5 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { init } from '../../store/modules/user';
 import '../../style/studyProfile.scss';
 
 export default function StudyParticipants({ member }) {
@@ -19,11 +17,11 @@ export default function StudyParticipants({ member }) {
   useEffect(() => {
     getUserInfo(member.memberId);
   }, []);
+
   return (
     <div className="studyProfile">
-      <div className="profile">
+      <div className="profilePhoto">
         <img
-          className="profilePhoto"
           src={
             userInfo?.profileImg?.includes('http')
               ? userInfo?.profileImg
@@ -35,23 +33,21 @@ export default function StudyParticipants({ member }) {
                 )}`
           }
           alt="프로필 사진"
-          width="98"
-          height="98"
         />
-
-        <div className="nickNameStudy">
-          {userInfo?.nickName ? userInfo.nickName : '닉네임 정보없음'}
-        </div>
-
-        <div className="userNameStudy">
-          {userInfo?.userName ? userInfo.userName : '이름 정보없음'}
-        </div>
-        <div className="userFieldLevel">
-          <span className="fieldStudy">{userInfo?.field}</span>
-          <span className="levelStudy">Lv.{userInfo?.level}</span>
-        </div>
-        <button className="btnFollowStudy">팔로우</button>
       </div>
+
+      <div className="nickNameStudy">
+        {userInfo?.nickName ? userInfo.nickName : '닉네임 정보없음'}
+      </div>
+
+      <div className="userNameStudy">
+        {userInfo?.userName ? userInfo.userName : '이름 정보없음'}
+      </div>
+      <div className="userFieldLevel">
+        <span className="fieldStudy">{userInfo?.field}</span>
+        <span className="levelStudy">Lv.{userInfo?.level}</span>
+      </div>
+      <button className="btnFollowStudy">팔로우</button>
     </div>
   );
 }

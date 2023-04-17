@@ -8,15 +8,6 @@ import DetailTab from '../components/StudyDetail/DetailTab';
 export default function StudyDetailPage() {
   const { id } = useParams();
   return (
-    // {/* <StudyDetail match={{ params: { id } }} /> */}
-    // <div className="minMax">
-    // <div className="flexBox-between-start">
-    // <DetailTab />
-    // <MemberBox match={{ params: { id } }} />
-    // {/* <StudyBoard /> */}
-    // </div>
-    // </div>
-
     <div className="minMax">
       <div className="flexBox-between-start">
         <DetailTab />
