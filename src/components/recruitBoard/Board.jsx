@@ -62,6 +62,7 @@ export default function Board() {
           liked={likedStudy?.findIndex((study) => study === el._id)}
           likedStudy={likedStudy}
           userId={userId}
+          idx={`study_${idx}`}
         />
       );
     });
