@@ -24,9 +24,6 @@ export default function RecruitBoard() {
   };
   useEffect(() => {
     getStudyInfo();
-    if (!localStorage.getItem('userId')) {
-      navigate('/signin');
-    }
   }, []);
   return (
     <>

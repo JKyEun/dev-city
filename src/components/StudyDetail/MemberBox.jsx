@@ -79,6 +79,9 @@ export default function MemberBox({ match, studyDetail }) {
 
   // 참여하기
   const joinStudy = async () => {
+    if (!localStorage.getItem('userId')) {
+      return navigate('/signin');
+    }
     try {
       const joinedStudy = user.joinedStudy || [];
       if (joinedStudy.length >= 9) {
