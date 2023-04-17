@@ -1,12 +1,12 @@
 @import './_reset';
 
 .box-studyInfo {
-  width: 77%;
+  width: 73%;
   padding: 40px 40px 20px;
   a {
     color: #605cff;
     font-weight: 700;
-    img {
+    .left-arrow {
       margin-right: 10px;
     }
   }
@@ -22,20 +22,29 @@
     font-size: 15px;
     font-weight: 300;
   }
+
   .studyInfoBox {
     justify-content: space-between;
     margin: 30px 0;
-    .subTitle {
-      color: #777;
-      width: 150px;
-      font-weight: 700;
-    }
-    .studyInfoContent {
-      width: 650px;
-    }
-    .studyInfoImg {
-      img {
-        margin-right: 7px;
+    .studyDetail {
+      display: flex;
+
+      .subTitle {
+        color: #777;
+        width: 130px;
+        font-weight: 700;
+      }
+      .studyInfoContent {
+        width: 650px;
+      }
+      .studyMember-profile {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .studyInfoImg {
+        img {
+          margin-right: 7px;
+        }
       }
     }
   }

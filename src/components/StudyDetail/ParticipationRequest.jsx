@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setStudy } from '../../store/modules/studyDetail';
 import { useParams } from 'react-router-dom';
+import '../../style/studyProfile.scss';
 
 export default function ParticipationRequest({ userId }) {
   const { id } = useParams();
@@ -137,10 +138,10 @@ export default function ParticipationRequest({ userId }) {
   }, []);
 
   return (
-    <div className="profile">
-      {member && (
-        <>
-          <div className="profileBox">
+    <div className="studyProfile">
+      <div className="profile">
+        {member && (
+          <>
             <img
               className="profilePhoto"
               src={
@@ -149,20 +150,31 @@ export default function ParticipationRequest({ userId }) {
                   : '/images/default-profile.png'
               }
               alt="프로필 사진"
+              width="98"
+              height="98"
             />
             <img src="/images/editIcon.svg" alt="" />
-          </div>
-          <div className="nickName">{member.nickName}</div>
-          <div className="userName">{member.userName}</div>
-          <div>
-            <span className="field">{member.field}</span>
-            <span className="level">Lv.{member.level}</span>
-          </div>
-        </>
-      )}
-      <div>
-        <button onClick={acceptRequest}>수락</button>
-        <button onClick={refuseRemoveRequest}>거절</button>
+
+            <div className="nickNameStudy">
+              {member?.nickName ? member.nickName : '닉네임 정보없음'}
+            </div>
+            <div className="userNameStudy">
+              {member?.userName ? member.userName : '이름 정보없음'}
+            </div>
+            <div>
+              <span className="fieldStudy">{member.field}</span>
+              <span className="levelStudy">Lv.{member.level}</span>
+            </div>
+          </>
+        )}
+        <div className="requestBtn">
+          <button className="acceptBtn" onClick={acceptRequest}>
+            수락
+          </button>
+          <button className="refuseBtn" onClick={refuseRemoveRequest}>
+            거절
+          </button>
+        </div>
       </div>
     </div>
   );

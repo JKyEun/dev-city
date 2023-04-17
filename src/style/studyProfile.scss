@@ -1,8 +1,13 @@
 .studyProfile {
   margin-left: 5px;
+
   .profile {
     width: 230px;
     height: 330px;
+
+    img {
+      border-radius: 50%;
+    }
     .nickNameStudy {
       margin-top: 20px;
       margin-bottom: 10px;
@@ -35,9 +40,25 @@
       background: #ffffff;
       border: 1px solid #605cff;
       border-radius: 30px;
-      left: 26px;
-      bottom: 25px;
+
       cursor: pointer;
+    }
+
+    .requestBtn {
+      display: flex;
+      justify-content: space-evenly;
+      .acceptBtn,
+      .refuseBtn {
+        width: 45%;
+        color: #605cff;
+        text-align: center;
+        background: #ffffff;
+        border: 1px solid #605cff;
+        height: 35px;
+        margin-top: 30px;
+        border-radius: 30px;
+        cursor: pointer;
+      }
     }
   }
 }

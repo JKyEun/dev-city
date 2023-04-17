@@ -39,8 +39,13 @@ export default function StudyParticipants({ member }) {
           height="98"
         />
 
-        <div className="nickNameStudy">{userInfo?.nickName}</div>
-        <div className="userNameStudy">{userInfo?.userName}</div>
+        <div className="nickNameStudy">
+          {userInfo?.nickName ? userInfo.nickName : '닉네임 정보없음'}
+        </div>
+
+        <div className="userNameStudy">
+          {userInfo?.userName ? userInfo.userName : '이름 정보없음'}
+        </div>
         <div>
           <span className="fieldStudy">{userInfo?.field}</span>
           <span className="levelStudy">Lv.{userInfo?.level}</span>
