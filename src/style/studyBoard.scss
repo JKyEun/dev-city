@@ -2,10 +2,11 @@
   font-size: 14px;
   display: flex;
   flex-direction: column;
-  width: 770px;
+  align-items: center;
+  padding: 40px 0;
   .createPostForm {
     input {
-      width: 670px;
+      width: 710px;
       height: 35px;
       padding-left: 20px;
       border-radius: 50px;
