@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import '../../style/studyDetail.scss';
@@ -6,6 +6,7 @@ import {
   fetchStudy,
   setStudy,
   closeAndOpenStudy,
+  modifyStudy,
 } from '../../store/modules/studyDetail';
 import {
   buildStyles,
@@ -13,13 +14,20 @@ import {
 } from 'react-circular-progressbar';
 import { useNavigate } from 'react-router-dom';
 
-export default function MemberBox({ match, studyDetail }) {
+export default function MemberBox({ match, studyDetail, setIsModifyMode }) {
   const study = useSelector((state) => state.studyDetail.study);
   const loading = useSelector((state) => state.studyDetail.loading);
+  const modifyStatus = useSelector((state) => state.studyDetail.isModify);
   const user = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  // const [isModifyMode, setIsModifyMode] = useState(false);
+  // const [profileImgUpdate, setProfileImgUpdate] = useState(null);
+
+  // const saveStudyInfo = async (e, id) => {
+  //   e.preventDefault();
 
   const myMemberEl =
     study &&
@@ -181,8 +189,8 @@ export default function MemberBox({ match, studyDetail }) {
       }
     }
   };
-  // 모집 마감, 모집 재시작하기
 
+  // 모집 마감, 모집 재시작하기
   const CloseAndOpenEvent = async () => {
     if (!study.isClosed) {
       await axios.post(
@@ -204,6 +212,26 @@ export default function MemberBox({ match, studyDetail }) {
       alert('복사 실패!');
     }
   };
+
+  // 스터디 수정
+  const modifyStudyBtn = async () => {
+    dispatch(modifyStudy(true));
+    // try {
+
+    //   dispatch(modifyStudy(true))
+    //   setIsModifyMode(true); // 수정 모드로 변경
+    //   const response = await axios.put(`http://localhost:4000/study/modify/${match.params.id}`);
+    //   return response.data;
+    // } catch (error) {
+    //   console.log(error);
+    //   throw new Error('Failed to modify study info');
+    // }
+  };
+
+  const updateStudyBtn = async () => {
+    dispatch(modifyStudy(false));
+  };
+
   return (
     <>
       {!loading && study && (
@@ -258,7 +286,15 @@ export default function MemberBox({ match, studyDetail }) {
                 <a className="btn btn--share" onClick={handleCopy}>
                   공유하기
                 </a>
-                <a className="btn btn--modify">수정하기</a>
+                {modifyStatus ? (
+                  <a className="btn btn--modify" onClick={updateStudyBtn}>
+                    수정완료
+                  </a>
+                ) : (
+                  <a className="btn btn--modify" onClick={modifyStudyBtn}>
+                    수정하기
+                  </a>
+                )}
                 {study.memberNum.currentNum >= study.memberNum.maxNum ? (
                   <p className="onlyDeleteBtn" onClick={deleteStudy}>
                     스터디삭제

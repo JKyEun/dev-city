@@ -6,10 +6,12 @@ import ParticipationRequest from './ParticipationRequest';
 import { Link, useNavigate } from 'react-router-dom';
 import StudyParticipants from './StudyParticipants';
 import '../../style/studyDetail.scss';
+import ModifyStudy from './ModifyStudy';
 
 export default function StudyDetail({ match, studyDetail }) {
   const study = useSelector((state) => state.studyDetail.study);
   const loading = useSelector((state) => state.studyDetail.loading);
+  const modifyStatus = useSelector((state) => state.studyDetail.isModify);
 
   const dispatch = useDispatch();
 
@@ -73,61 +75,67 @@ export default function StudyDetail({ match, studyDetail }) {
     <div>
       {!loading && (
         <div className="studyDetailContainer">
-          <div className="studyInfoBox">
-            <div className="studyDetail">
-              <p className="subTitle">스터디 소개</p>
-              <p className="studyInfoContent">{study?.studyIntro}</p>
-            </div>
-            <br />
-            <br />
-            <div className="studyDetail">
-              <p className="subTitle">진행 방식</p>
-              <p className="studyInfoContent">
-                {study?.studySystem
-                  ? study?.studySystem
-                  : '진행 방식 정보 없음'}
-              </p>
-            </div>
-            <br />
-            <br />
-            <div className="studyDetail">
-              <p className="subTitle">사용 언어</p>
-              <p className="studyInfoContent">
-                {study?.skills?.map((skill) => {
-                  if (skill === 'C#') skill = 'cSharp';
-                  return (
-                    <img
-                      key={skill}
-                      src={`/images/skill_icon/${skill}.svg`}
-                      alt={`${skill}이미지`}
-                    />
-                  );
-                })}
-              </p>
-            </div>
-            <br />
-            <br />
-            <div className="studyDetail">
-              <p className="subTitle">스터디원</p>
-              <div className="studyInfoContent studyMember-profile isMember">
-                {study?.member.map((e) => (
-                  <StudyParticipants key={e} member={e} />
-                ))}
+          {modifyStatus ? (
+            <ModifyStudy study={study} />
+          ) : (
+            <div className="studyInfoBox">
+              <div className="studyDetail">
+                <p className="subTitle">스터디 소개</p>
+                <p className="studyInfoContent">{study?.studyIntro}</p>
               </div>
-            </div>
-            <br />
-            <br />
-            <div className="studyDetail">
-              {isLeader && <p className="subTitle">신청현황</p>}
-              <div className="studyInfoContent studyMember-profile">
-                {isLeader && study?.request.length > 0
-                  ? study?.request.map((el) => (
+              <br />
+              <br />
+              <div className="studyDetail">
+                <p className="subTitle">진행 방식</p>
+                <p className="studyInfoContent">
+                  {study?.studySystem
+                    ? study?.studySystem
+                    : '진행 방식 정보 없음'}
+                </p>
+              </div>
+              <br />
+              <br />
+              <div className="studyDetail">
+                <p className="subTitle">사용 언어</p>
+                <p className="studyInfoContent">
+                  {study?.skills?.map((skill) => {
+                    if (skill === 'C#') skill = 'cSharp';
+                    return (
+                      <img
+                        key={skill}
+                        src={`/images/skill_icon/${skill}.svg`}
+                        alt={`${skill}이미지`}
+                      />
+                    );
+                  })}
+                </p>
+              </div>
+              <br />
+              <br />
+              <div className="studyDetail">
+                <p className="subTitle">스터디원</p>
+                <div className="studyInfoContent studyMember-profile isMember">
+                  {study?.member.map((e) => (
+                    <StudyParticipants key={e} member={e} />
+                  ))}
+                </div>
+              </div>
+              <br />
+              <br />
+              <div className="studyDetail">
+                {isLeader && <p className="subTitle">신청현황</p>}
+                <div className="studyInfoContent studyMember-profile">
+                  {isLeader && study?.request.length > 0 ? (
+                    study?.request.map((el) => (
                       <ParticipationRequest key={el} userId={el} />
                     ))
-                  : isLeader && <p>참가신청인원 없음</p>}
+                  ) : isLeader ? (
+                    <p>참가신청인원 없음</p>
+                  ) : null}
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
       )}
     </div>
