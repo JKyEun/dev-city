@@ -20,8 +20,8 @@ export default function StudyParticipants({ member }) {
     getUserInfo(member.memberId);
   }, []);
   return (
-    <div className="profile">
-      <div>
+    <div className="studyProfile">
+      <div className="profile">
         <img
           className="profilePhoto"
           src={
@@ -39,13 +39,13 @@ export default function StudyParticipants({ member }) {
           height="98"
         />
 
-        <div className="nickName">{userInfo?.nickName}</div>
-        <div className="userName">{userInfo?.userName}</div>
+        <div className="nickNameStudy">{userInfo?.nickName}</div>
+        <div className="userNameStudy">{userInfo?.userName}</div>
         <div>
-          <span className="field">{userInfo?.field}</span>
-          <span className="level">Lv.{userInfo?.level}</span>
+          <span className="fieldStudy">{userInfo?.field}</span>
+          <span className="levelStudy">Lv.{userInfo?.level}</span>
         </div>
-        <button className="btnFollow">팔로우</button>
+        <button className="btnFollowStudy">팔로우</button>
       </div>
     </div>
   );
