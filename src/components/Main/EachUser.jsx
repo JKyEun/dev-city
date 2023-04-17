@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 
 export default function EachUser({ eachUser }) {
   const [isFollowing, setIsFollowing] = useState(false);
+  const [num, setNum] = useState(1);
   const userInfo = useSelector((state) => state.user);
 
   const follow = async () => {
@@ -98,8 +99,10 @@ export default function EachUser({ eachUser }) {
     if (!userInfo.following) return;
 
     for (let i = 0; i < userInfo.following.length; i++) {
-      if (userInfo.following[i].userId === eachUser.userId)
+      if (userInfo.following[i].userId === eachUser.userId) {
         setIsFollowing(true);
+        setNum((cur) => cur - 1);
+      }
     }
   }, [userInfo]);
 
@@ -125,8 +128,8 @@ export default function EachUser({ eachUser }) {
             Follower
             <span>
               {isFollowing
-                ? eachUser.follower.length + 1
-                : eachUser.follower.length}
+                ? eachUser.follower.length + num
+                : eachUser.follower.length + (num - 1)}
             </span>
           </span>
           <span className="following">
