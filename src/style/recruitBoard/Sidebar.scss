@@ -1,5 +1,10 @@
 .sidebar {
   .sidebar_category {
     margin-bottom: 15px;
+    cursor: pointer;
+  }
+  .selected {
+    color: #605cff;
+    font-weight: 600;
   }
 }

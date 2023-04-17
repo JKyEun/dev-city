@@ -13,12 +13,14 @@ const initState = {
   loading: false,
   category: [],
   studies: [],
+  status: 'all',
 };
 
 // Action Type 설정
 const INIT = 'study/INIT';
 const CREATE = 'study/CREATE';
 const CHANGE_CATEGORY = 'study/CHANGE_CATEGORY';
+const SET_STATUS = 'study/SET_STATUS';
 
 // Action 생성 함수
 export function init(payload) {
@@ -38,6 +40,13 @@ export function create(payload) {
 export function changeCategory(payload) {
   return {
     type: CHANGE_CATEGORY,
+    payload: payload,
+  };
+}
+
+export function setStatus(payload) {
+  return {
+    type: SET_STATUS,
     payload: payload,
   };
 }
@@ -64,6 +73,11 @@ export default function study(state = initState, action) {
         };
       }
       return { ...state, category: [...state.category, action.payload] };
+    case SET_STATUS:
+      return {
+        ...state,
+        status: action.payload,
+      };
     default:
       return state;
   }

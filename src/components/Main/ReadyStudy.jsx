@@ -1,5 +1,4 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { updateLike } from '../../store/modules/user';
@@ -9,6 +8,7 @@ export default function ReadyStudy({ item, idx, liked, likedStudy, userId }) {
   // user의 likedStudy id와 study의 id를 비교하여 포함되어있으면 버튼이 on
   const date = new Date(item.createDate);
   const dispatch = useDispatch();
+  liked += 1;
 
   const updateLikeList = async () => {
     await axios
@@ -35,6 +35,7 @@ export default function ReadyStudy({ item, idx, liked, likedStudy, userId }) {
       });
     }
     updateLikeList();
+    console.log(liked);
   };
 
   return (
@@ -61,7 +62,7 @@ export default function ReadyStudy({ item, idx, liked, likedStudy, userId }) {
         <span className="ellipsis">{item?.skills.length > 4 && '...'}</span>
       </div>
       <p className="memberCount">
-        <span>{`${item.memberNum.maxNum}`}</span>명 중{' '}
+        <span>{`${item.memberNum.maxNum}`}</span>명 중
         <span> {`${item.memberNum.currentNum}`}</span>명 모집됨
       </p>
       <div className="clickHeart" onClick={(e) => handleLike(e)}>
