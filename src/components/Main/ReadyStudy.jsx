@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { updateLike } from '../../store/modules/user';
 import '../../style/study.scss';
 
-export default function ReadyStudy({ item, idx, liked, likedStudy, userId }) {
+export default function ReadyStudy({ item, idx, liked, isMain, userId }) {
   // user의 likedStudy id와 study의 id를 비교하여 포함되어있으면 버튼이 on
   const date = new Date(item.createDate);
   const dispatch = useDispatch();
@@ -64,12 +64,14 @@ export default function ReadyStudy({ item, idx, liked, likedStudy, userId }) {
         <span>{`${item.memberNum.maxNum}`}</span>명 중
         <span> {`${item.memberNum.currentNum}`}</span>명 모집됨
       </p>
-      <div className="clickHeart" onClick={(e) => handleLike(e)}>
-        <img
-          src={`./images/icon_heart${liked > 0 ? 'on' : 'off'}.svg`}
-          alt="heart"
-        />
-      </div>
+      {isMain ? null : (
+        <div className="clickHeart" onClick={(e) => handleLike(e)}>
+          <img
+            src={`./images/icon_heart${liked > 0 ? 'on' : 'off'}.svg`}
+            alt="heart"
+          />
+        </div>
+      )}
     </Link>
   );
 }
