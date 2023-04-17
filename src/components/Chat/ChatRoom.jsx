@@ -56,20 +56,17 @@ export default function ChatRoom({ roomId }) {
       setChatLog([...chatLog, newChat]);
     });
   }, [socket, roomId, userName, chatLog]);
-  
+
   return (
     <div className="chatRoom">
-      <div className="message">
-        <ul className="yourChat"></ul>
-        <ul className="myChat">
-          {chatLog.map((chat, idx) => (
-            <li key={idx}>
-              <span>{chat.userName}: </span>
-              {chat.message}
-            </li>
-          ))}
-        </ul>
-      </div>
+      <ul className="message">
+        {chatLog.map((chat, idx) => (
+          <li key={idx}>
+            <span>{chat.userName}: </span>
+            {chat.message}
+          </li>
+        ))}
+      </ul>
       <form onSubmit={sendMessage}>
         <input type="text" ref={chatInput} placeholder="메시지를 입력하세요." />
         <button type="submit">보내기</button>
