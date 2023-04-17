@@ -31,13 +31,16 @@
         border-radius: 10px;
         position: relative;
         div {
+          .profileImg {
+            height: 98px;
+            width: 98px;
+            overflow: hidden;
+            border-radius: 50%;
+            margin: 0 auto;
+          }
           .nickName {
             margin-top: 20px;
             margin-bottom: 10px;
-          }
-          .field {
-          }
-          .level {
           }
           .friend {
             display: flex;
@@ -67,7 +70,23 @@
             color: #605cff;
             text-align: center;
             background: #ffffff;
+            font-size: 16px;
             border: 1px solid #605cff;
+            border-radius: 30px;
+            left: 26px;
+            bottom: 25px;
+            cursor: pointer;
+          }
+          .followed {
+            position: absolute;
+            width: 226px;
+            height: 35px;
+            margin-top: 30px;
+            color: #999;
+            text-align: center;
+            background: #ffffff;
+            font-size: 16px;
+            border: 1px solid #999;
             border-radius: 30px;
             left: 26px;
             bottom: 25px;

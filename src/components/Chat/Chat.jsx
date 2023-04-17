@@ -20,6 +20,7 @@ export default function Chat({ setIsChatOpen }) {
             ))}
           </ul>
         )}
+        <div className="closeBtn"></div>
       </div>
       <div className="chatArea">
         {roomId ? <ChatRoom roomId={roomId} /> : <div className="intro"></div>}
