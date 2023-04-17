@@ -41,7 +41,12 @@ export default function RecruitedStudy() {
           <div className="showStudy flexBox">
             {studies?.map((item) => {
               return (
-                <ReadyStudy className="studyBoard" key={item._id} item={item} />
+                <ReadyStudy
+                  className="studyBoard"
+                  key={item._id}
+                  item={item}
+                  isMain={true}
+                />
               );
             })}
             <div className="plusStudy">
