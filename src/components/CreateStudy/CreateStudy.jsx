@@ -258,6 +258,7 @@ export default function CreateStudy() {
           require: true,
           input: (
             <textarea
+              onChange={(e) => handleValue(e.target.value, 'study_how')}
               className="inputContainer"
               name=""
               id=""
@@ -329,10 +330,11 @@ export default function CreateStudy() {
       <div className="box-confirm">
         <div className="percent">
           <CircularProgressbarWithChildren
-            value={perventage.length !== 0 ? (perventage.length / 5) * 100 : 0}
-            // text={`${
-            //   perventage.length !== 0 ? (perventage.length / 5) * 100 : 0
-            // }%`}
+            value={
+              perventage.length !== 0
+                ? Math.floor((perventage.length / 6) * 100)
+                : 0
+            }
             styles={
               (buildStyles({
                 textSize: '16px',
@@ -353,14 +355,16 @@ export default function CreateStudy() {
             }
           >
             <p className="percentText">
-              {perventage.length !== 0 ? (perventage.length / 5) * 100 : 0}
+              {perventage.length !== 0
+                ? Math.floor((perventage.length / 6) * 100)
+                : 0}
               <span>%</span>
             </p>
             <p className="percentSubText">작성이 완료되었습니다.</p>
           </CircularProgressbarWithChildren>
         </div>
         <a
-          className={`btn btn--create ${perventage.length !== 5 && 'disabled'}`}
+          className={`btn btn--create ${perventage.length !== 6 && 'disabled'}`}
           onClick={createStudyBtn}
         >
           생성하기

@@ -1,58 +1,37 @@
 @import './_reset';
 
-.box-studyInfo {
-  width: 73%;
-  padding: 40px 40px 20px;
-  a {
-    color: #605cff;
-    font-weight: 700;
-    .left-arrow {
-      margin-right: 10px;
+.studyInfoBox {
+  justify-content: space-between;
+  margin: 30px 0;
+  .studyDetail {
+    display: flex;
+    .subTitle {
+      color: #777;
+      width: 20%;
+      font-weight: 700;
     }
-  }
-  h1 {
-    margin-top: 10px;
-    font-size: 23px;
-  }
-  h5 {
-    color: #888;
-    padding-bottom: 20px;
-    margin: 40px 0 20px;
-    border-bottom: 1px solid #eee;
-    font-size: 15px;
-    font-weight: 300;
-  }
-
-  .studyInfoBox {
-    justify-content: space-between;
-    margin: 30px 0;
-    .studyDetail {
-      display: flex;
-
-      .studyProfile {
+    .studyInfoContent {
+      width: 80%;
+      .profilePhoto {
+        width: 120px;
+        height: 120px;
+        overflow: hidden;
+        margin: 0 auto;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+          width: 100%;
+        }
       }
-
-      .subTitle {
-        color: #777;
-        width: 130px;
-        font-weight: 700;
-      }
-      .studyInfoContent {
-        width: 650px;
-      }
-      .studyMember-profile {
+      &.studyMember-profile {
         display: flex;
         flex-wrap: wrap;
-      }
-      .studyInfoImg {
-        img {
-          margin-right: 7px;
-        }
       }
     }
   }
 }
-
 .box-studyDetail {
   padding: 40px 20px;
   width: 20%;

@@ -76,12 +76,18 @@
     }
   }
   .nickName {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     margin: 170px 0 7px;
     font-size: 20px;
     font-weight: 700;
   }
 
   .userName {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     color: #999;
     margin-bottom: 20px;
   }
