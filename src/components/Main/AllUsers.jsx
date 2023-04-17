@@ -1,55 +1,39 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import '../../style/allUsers.scss';
+import EachUser from './EachUser';
+import { useSelector } from 'react-redux';
 
 export default function AllUsers() {
   const [randomUsers, setRandomUsers] = useState([]);
+  const userInfo = useSelector((state) => state.user);
 
   useEffect(() => {
+    if (!userInfo.userId) return;
+
     axios
-      .get('http://localhost:4000/allUser')
+      .get(`http://localhost:4000/allUser/${userInfo.userId}`)
       .then((response) => {
         setRandomUsers(response.data);
       })
       .catch((error) => {
         console.error(error);
       });
-  }, []);
+  }, [userInfo]);
+
   return (
-    <>
-      <div className="part3">
-        <div className="minMax">
-          <div className="text">
-            <div className="mainText">추천 친구</div>
-            <div className="subText">비슷한 분야의 사람들을 팔로우해보세요</div>
-          </div>
-          <div className="flexBox">
-            {randomUsers.map((allUser) => (
-              <div className="profile" key={allUser.userId}>
-                <div>
-                  <img
-                    src="/images/icon_github.svg"
-                    alt="프로필 사진"
-                    width="98"
-                  />
-                  <div className="nickName">{allUser.nickName}</div>
-                  <span className="field">{allUser.field}</span>
-                  <span className="level">{`Lv.${allUser.level}`}</span>
-                  <div className="friend">
-                    <span className="follow">
-                      Follow<span>{allUser.follower} </span>
-                    </span>
-                    <span className="following">
-                      Following<span>{allUser.folloing}</span>
-                    </span>
-                  </div>
-                  <button className="btnFollow">팔로우</button>
-                </div>
-              </div>
-            ))}
-          </div>
+    <div className="part3">
+      <div className="minMax">
+        <div className="text">
+          <div className="mainText">추천 친구</div>
+          <div className="subText">비슷한 분야의 사람들을 팔로우해보세요</div>
+        </div>
+        <div className="flexBox">
+          {randomUsers.map((eachUser) => (
+            <EachUser key={eachUser.userId} eachUser={eachUser} />
+          ))}
         </div>
       </div>
-    </>
+    </div>
   );
 }
