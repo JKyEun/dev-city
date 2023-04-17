@@ -35,7 +35,6 @@ export default function ReadyStudy({ item, idx, liked, likedStudy, userId }) {
       });
     }
     updateLikeList();
-    console.log(liked);
   };
 
   return (
