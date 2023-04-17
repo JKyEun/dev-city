@@ -101,7 +101,7 @@ export default function EachUser({ eachUser }) {
     for (let i = 0; i < userInfo.following.length; i++) {
       if (userInfo.following[i].userId === eachUser.userId) {
         setIsFollowing(true);
-        setNum((cur) => cur - 1);
+        setNum(0);
       }
     }
   }, [userInfo]);
