@@ -20,7 +20,9 @@ export default function Chat({ setIsChatOpen }) {
             ))}
           </ul>
         )}
-        <div className="closeBtn"></div>
+        <div className="closeBtn">
+          <img src="/images/icon_close.svg" alt="닫는 버튼" />
+        </div>
       </div>
       <div className="chatArea">
         {roomId ? <ChatRoom roomId={roomId} /> : <div className="intro"></div>}
