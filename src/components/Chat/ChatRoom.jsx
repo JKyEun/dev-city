@@ -2,12 +2,13 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import io from 'socket.io-client';
 
-export default function ChatRoom({ roomId }) {
+export default function ChatRoom({ roomId, nowChattingWith }) {
   const [chatLog, setChatLog] = useState([]);
   const [userName, setUserName] = useState(null);
   const chatInput = useRef('');
   const userInfo = useSelector((state) => state.user);
   const socket = io('http://localhost:4000');
+  const messageWindow = useRef(null);
 
   const sendMessage = async (e) => {
     e.preventDefault();
@@ -26,14 +27,20 @@ export default function ChatRoom({ roomId }) {
       date: new Date(),
     };
 
-    // 채팅 로그 갱신
-    setChatLog([...chatLog, newChat]);
-
     // 소켓으로 메시지 전송
     await socket.emit('send_message', data);
 
+    // 채팅 로그 갱신
+    setChatLog((cur) => [...cur, newChat]);
+
     // 입력창 비우기
     chatInput.current.value = '';
+  };
+
+  const scrollToBottom = () => {
+    if (messageWindow.current) {
+      messageWindow.current.scrollTop = messageWindow.current.scrollHeight;
+    }
   };
 
   useEffect(() => {
@@ -42,10 +49,12 @@ export default function ChatRoom({ roomId }) {
 
   useEffect(() => {
     socket.emit('join', { roomId, userName });
+    console.log('di');
 
     // 서버에서 메시지를 받으면 채팅 로그 갱신
     socket.on('receive_message', (data) => {
-      console.log(data);
+
+      if (data.userName === userInfo.userId) return;
 
       const newChat = {
         userName: data.userName,
@@ -53,23 +62,62 @@ export default function ChatRoom({ roomId }) {
         date: new Date(),
       };
 
-      setChatLog([...chatLog, newChat]);
+      setChatLog((cur) => [...cur, newChat]);
     });
   }, [socket, roomId, userName, chatLog]);
 
+  useEffect(() => {
+    scrollToBottom();
+  }, [chatLog]);
+
+  console.log(chatLog);
   return (
     <div className="chatRoom">
-      <ul className="message">
+      <div className="roomTitle">
+        <div className="imgWrap">
+          <img
+            src={
+              nowChattingWith.profileImg || nowChattingWith.profileImg !== ''
+                ? nowChattingWith.profileImg
+                : '/images/default-profile.png'
+            }
+            alt="프로필 이미지"
+          />
+        </div>
+        <div className="nickName">{nowChattingWith.nickName}</div>
+      </div>
+      <ul className="message" ref={messageWindow}>
         {chatLog.map((chat, idx) => (
-          <li key={idx}>
-            <span>{chat.userName}: </span>
-            {chat.message}
+          <li
+            key={idx}
+            className={
+              chat.userName === userInfo.userId ? 'myChat' : 'yourChat'
+            }
+          >
+            <div className="content">{chat.message}</div>
           </li>
         ))}
       </ul>
       <form onSubmit={sendMessage}>
-        <input type="text" ref={chatInput} placeholder="메시지를 입력하세요." />
-        <button type="submit">보내기</button>
+        <div className="imgWrap">
+          <img
+            src={
+              userInfo.profileImg || userInfo.profileImg !== ''
+                ? userInfo.profileImg
+                : '/images/default-profile.png'
+            }
+            alt="프로필 이미지"
+          />
+        </div>
+        <input
+          className="messageInput"
+          type="text"
+          ref={chatInput}
+          placeholder="메시지를 입력하세요."
+        />
+        <button className="submitBtn" type="submit">
+          <img src="/images/icon_message_white.svg" alt="전송 버튼" />
+        </button>
       </form>
     </div>
   );

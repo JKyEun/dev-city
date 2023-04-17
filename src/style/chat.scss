@@ -1,51 +1,182 @@
 .chat {
   display: flex;
   position: fixed;
+  overflow: hidden;
   z-index: 999;
-  bottom: 0;
-  right: 0;
-  border: 1px solid black;
+  bottom: 20px;
+  right: 20px;
+  border: 1px solid #605cff;
+  border-radius: 20px;
   width: 600px;
   height: 500px;
   background-color: #fff;
   .friendList {
-    width: 130px;
-    border: 1px solid orange;
+    width: 180px;
+    background-color: #f5f4fa;
+    .friendListTitle {
+      padding: 20px;
+      font-weight: 800;
+      font-size: 20px;
+    }
+    li {
+      display: flex;
+      padding: 10px;
+      .imgWrap {
+        width: 35px;
+        height: 35px;
+        overflow: hidden;
+        border-radius: 50%;
+        img {
+          width: 35px;
+        }
+      }
+      .nickName {
+        margin-left: 10px;
+        font-weight: 800;
+        height: 35px;
+        line-height: 35px;
+      }
+    }
   }
   .chatArea {
     position: relative;
     display: flex;
+    flex-direction: column;
     overflow: auto;
-    width: 470px;
-    border: 1px solid dodgerblue;
+    width: 418px;
+    height: 100%;
     .chatRoom {
-      width: 469px;
-      height: 500px;
+      width: 418px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      .roomTitle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 15%;
+        .imgWrap {
+          width: 35px;
+          height: 35px;
+          overflow: hidden;
+          border-radius: 50%;
+          img {
+            width: 35px;
+          }
+        }
+        .nickName {
+          margin-left: 10px;
+          font-weight: 800;
+          height: 35px;
+          line-height: 35px;
+        }
+      }
       .message {
         display: flex;
-        .yourChat {
-          width: 220px;
-          height: 450px;
-        }
+        flex-direction: column;
+        width: 420px;
+        height: 70%;
+        overflow: auto;
         .myChat {
-          width: 220px;
-          height: 450px;
-          li {
-            right: 0;
+          margin-left: auto;
+          .content {
+            background-color: #605cff;
+            border-radius: 10px;
+            padding: 7px 10px;
+            color: #fff;
+            margin: 5px 10px;
+          }
+        }
+        .yourChat {
+          margin-right: auto;
+          .content {
+            background-color: #fff;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 7px 10px;
+            color: #000;
+            margin: 5px 10px;
           }
         }
       }
       form {
-        height: 50px;
+        height: 15%;
+        display: flex;
         position: absolute;
         right: 50%;
         transform: translateX(50%);
         bottom: 0;
+        justify-content: center;
+        align-items: center;
+        .imgWrap {
+          width: 35px;
+          height: 35px;
+          overflow: hidden;
+          border-radius: 50%;
+          img {
+            width: 35px;
+          }
+        }
+        .messageInput {
+          border-radius: 20px;
+          background-color: #ddd;
+          height: 35px;
+          width: 300px;
+          border: none;
+          margin: 0px 10px;
+          padding: 15px;
+        }
+        .submitBtn {
+          width: 35px;
+          height: 35px;
+          background-color: #605cff;
+          border-radius: 50%;
+          border: none;
+          cursor: pointer;
+          img {
+            width: 20px;
+            height: 20px;
+          }
+        }
       }
     }
     .intro {
-      width: 469px;
-      height: 500px;
     }
   }
+  .closeBtn {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    cursor: pointer;
+  }
+}
+
+// .chat::-webkit-scrollbar {
+//   display: none;
+// }
+
+// .chat {
+//   -ms-overflow-style: none; // 인터넷 익스플로러
+//   scrollbar-width: none; // 파이어폭스
+//   overflow-y: scroll;
+// }
+
+// .chatRoom::-webkit-scrollbar {
+//   display: none;
+// }
+
+// .chatRoom {
+//   -ms-overflow-style: none; // 인터넷 익스플로러
+//   scrollbar-width: none; // 파이어폭스
+//   overflow-y: scroll;
+// }
+
+.message::-webkit-scrollbar {
+  display: none;
+}
+
+.message {
+  -ms-overflow-style: none; // 인터넷 익스플로러
+  scrollbar-width: none; // 파이어폭스
+  overflow-y: scroll;
 }
