@@ -40,9 +40,9 @@
           .level {
           }
           .friend {
-            position: absolute;
-            left: 50px;
-            bottom: 80px;
+            display: flex;
+            justify-content: center;
+            padding-top: 25px;
             color: #999999;
             font-weight: 400;
             .follow {

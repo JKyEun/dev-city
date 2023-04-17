@@ -36,12 +36,12 @@ export default function AllUsers() {
                   <span className="field">{allUser.field}</span>
                   <span className="level">{`Lv.${allUser.level}`}</span>
                   <div className="friend">
-                    <span className="follow">
+                    <div className="follow">
                       Follow<span>{allUser.follower} </span>
-                    </span>
-                    <span className="following">
+                    </div>
+                    <div className="following">
                       Following<span>{allUser.folloing}</span>
-                    </span>
+                    </div>
                   </div>
                   <button className="btnFollow">팔로우</button>
                 </div>
