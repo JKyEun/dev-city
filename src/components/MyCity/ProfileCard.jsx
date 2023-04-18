@@ -221,9 +221,16 @@ export default function ProfileCard({
             <select ref={fieldInput} id="fieldInput" type="text">
               <option value="프론트엔드">프론트엔드</option>
               <option value="백엔드">백엔드</option>
+              <option value="기획">웹</option>
               <option value="앱">앱</option>
               <option value="게임">게임</option>
               <option value="기획">기획</option>
+              <option value="AI">AI</option>
+              <option value="데이터 분석">데이터 분석</option>
+              <option value="블록체인">블록체인</option>
+              <option value="보안">보안</option>
+              <option value="임베디드">임베디드</option>
+              <option value="임베디드">UX/UI</option>
             </select>
           </div>
           <button type="submit" className="hidden"></button>
