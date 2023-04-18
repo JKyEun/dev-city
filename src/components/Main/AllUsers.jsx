@@ -9,6 +9,17 @@ export default function AllUsers() {
   const userInfo = useSelector((state) => state.user);
 
   useEffect(() => {
+    axios
+      .get(`http://localhost:4000/allUser/user`)
+      .then((response) => {
+        setRandomUsers(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
+  useEffect(() => {
     if (!userInfo.userId) return;
     axios
       .get(`http://localhost:4000/allUser/${userInfo.userId}`)
