@@ -4,12 +4,19 @@ import '../../style/studyBoard.scss';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLock } from '@fortawesome/free-solid-svg-icons';
 
 export default function StudyBoard() {
   const { id } = useParams();
   const [boardDB, setBoardDB] = useState(null);
   const userInfo = useSelector((state) => state.user);
   const boardInput = useRef();
+
+  const userId = localStorage.getItem('userId');
+  const isMember = useSelector((state) =>
+    state.studyDetail.study.member.some((member) => member.memberId === userId),
+  );
 
   const getBoard = async () => {
     const res = await axios.get(`http://localhost:4000/board/get/${id}`);
@@ -50,25 +57,40 @@ export default function StudyBoard() {
   }, []);
 
   return (
-    <div className="studyBoardWrap">
-      <form className="createPostForm">
-        <input
-          ref={boardInput}
-          type="text"
-          placeholder="하고 싶은 말을 적어보세요!"
-        />
-        <button onClick={(e) => addPost(e)}>작성하기</button>
-      </form>
-      {boardDB !== null &&
-        boardDB.map((el) => (
-          <Post
-            key={el.id}
-            boardDB={boardDB}
-            boardEl={el}
-            setBoardDB={setBoardDB}
-            getBoard={getBoard}
+    <div className="studyBoardWrapContainer">
+      {isMember ? null : (
+        <div className="lockIconWrap">
+          <FontAwesomeIcon icon={faLock} />
+          <h2>권한이 없습니다</h2>
+        </div>
+      )}
+      <div
+        className="studyBoardWrap"
+        style={{
+          filter: isMember ? 'none' : 'blur(10px)',
+          pointerEvents: isMember ? 'auto' : 'none',
+          userSelect: isMember ? 'auto' : 'none',
+        }}
+      >
+        <form className="createPostForm">
+          <input
+            ref={boardInput}
+            type="text"
+            placeholder="하고 싶은 말을 적어보세요!"
           />
-        ))}
+          <button onClick={(e) => addPost(e)}>작성하기</button>
+        </form>
+        {boardDB !== null &&
+          boardDB.map((el) => (
+            <Post
+              key={el.id}
+              boardDB={boardDB}
+              boardEl={el}
+              setBoardDB={setBoardDB}
+              getBoard={getBoard}
+            />
+          ))}
+      </div>
     </div>
   );
 }
