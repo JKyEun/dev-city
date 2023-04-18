@@ -35,7 +35,8 @@ export default function DetailTab() {
         <h1>{study?.studyName}</h1>
         <h5>
           {study?.nickName} | {study?.field} |{' '}
-          {new Date(study?.createDate).toLocaleDateString('ko-KR')}
+          {new Date(study?.createDate).toLocaleDateString('ko-KR')}{' '}
+          {study?.modified ? '(수정됨)' : ''}
         </h5>
       </div>
       <ul className="flexBox detailTabBox">

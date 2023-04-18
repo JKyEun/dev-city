@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import '../../style/studyDetail.scss';
@@ -6,7 +6,7 @@ import {
   fetchStudy,
   setStudy,
   closeAndOpenStudy,
-  isModify,
+  editMode,
 } from '../../store/modules/studyDetail';
 import {
   buildStyles,
@@ -17,23 +17,11 @@ import { useNavigate } from 'react-router-dom';
 export default function MemberBox({ match, studyDetail, setIsModifyMode }) {
   const study = useSelector((state) => state.studyDetail.study);
   const loading = useSelector((state) => state.studyDetail.loading);
-  const modifyStatus = useSelector((state) => state.studyDetail.isModify);
   const user = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // const [isModifyMode, setIsModifyMode] = useState(false);
-  // const [profileImgUpdate, setProfileImgUpdate] = useState(null);
-
-  // const saveStudyInfo = async (e, id) => {
-  //   e.preventDefault();
-
-  const myMemberEl =
-    study &&
-    study.member.filter((el) => el.memberId === localStorage.getItem('userId'));
-  const isLeader =
-    myMemberEl && myMemberEl.length > 0 ? myMemberEl[0].isLeader : false;
   useEffect(() => {
     const fetchStudyData = async () => {
       try {
@@ -216,7 +204,7 @@ export default function MemberBox({ match, studyDetail, setIsModifyMode }) {
 
   // 스터디 수정 모드로
   const modifyStudyBtn = async () => {
-    dispatch(isModify(true));
+    dispatch(editMode(true));
   };
 
   return (
