@@ -9,7 +9,8 @@ const initState = {
 const FETCH_STUDY = 'studyDetail/FETCH_STUDY';
 const SET_STUDY = 'studyDetail/SET_STUDY';
 const CLOSE_AND_OPEN_STUDY = 'studyDetail/CLOSE_AND_OPEN_STUDY';
-const MODIFY = 'studyDetail/MODIFY';
+const IS_MODIFY = 'studyDetail/IS_MODIFY';
+const MODIFY_STUDY = 'studyDetail/MODIFY_STUDY';
 
 // 액션 생성 함수 정의
 export const fetchStudy = (id) => ({
@@ -27,9 +28,14 @@ export const closeAndOpenStudy = (boolean) => ({
   payload: boolean,
 });
 
-export const modifyStudy = (boolean) => ({
-  type: MODIFY,
+export const isModify = (boolean) => ({
+  type: IS_MODIFY,
   payload: boolean,
+});
+
+export const modify = (payload) => ({
+  type: MODIFY_STUDY,
+  payload,
 });
 
 // 리듀서 정의
@@ -52,11 +58,17 @@ const studyDetail = (state = initState, action) => {
         study: { ...state.study, isClosed: action.payload },
       };
 
-    case MODIFY:
+    case IS_MODIFY:
       console.log(action.payload);
       return {
         ...state,
         isModify: action.payload,
+      };
+    case MODIFY_STUDY:
+      console.log(action.payload);
+      return {
+        ...state,
+        study: action.payload,
       };
     default:
       return state;

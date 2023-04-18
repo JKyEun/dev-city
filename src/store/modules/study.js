@@ -21,6 +21,7 @@ const INIT = 'study/INIT';
 const CREATE = 'study/CREATE';
 const CHANGE_CATEGORY = 'study/CHANGE_CATEGORY';
 const SET_STATUS = 'study/SET_STATUS';
+// const MODIFY = 'study/MODIFY';
 
 // Action 생성 함수
 export function init(payload) {
@@ -51,6 +52,13 @@ export function setStatus(payload) {
   };
 }
 
+// export function modify(payload) {
+//   return {
+//     type: MODIFY,
+//     payload: payload,
+//   };
+// }
+
 // 리듀서
 export default function study(state = initState, action) {
   switch (action.type) {
@@ -80,6 +88,17 @@ export default function study(state = initState, action) {
         ...state,
         status: action.payload,
       };
+    // case MODIFY:
+    //   return {
+    //     ...state,
+    //     studyName: action.payload.study_name,
+    //     studyIntro: action.payload.study_intro,
+    //     field: action.payload.study_field,
+    //     skills: action.payload.skills,
+    //     studySystem: action.payload.study_system,
+    //     studyEtc: action.payload.study_etc,
+    //   };
+
     default:
       return state;
   }
