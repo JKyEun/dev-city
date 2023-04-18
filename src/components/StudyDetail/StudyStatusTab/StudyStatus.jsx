@@ -2,9 +2,9 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import GithubActivity from './GithubActivity';
-import TodoList from './TodoList';
-import UserInfo from './UserInfo';
-
+import TodoListStatus from './TodoListStatus';
+import MemberInfo from './MemberInfo';
+import '../../../style/studyStatus.scss';
 export default function StudyStatus() {
   const members = useSelector((state) => state.studyDetail.study.member);
   const [membersData, setMembersData] = useState([]);
@@ -25,9 +25,9 @@ export default function StudyStatus() {
     <>
       {membersData.map((memberData, index) => (
         <div key={index} className="study_status">
-          <UserInfo className="user_info" data={memberData} />
+          <MemberInfo className="user_info" data={memberData} />
           <GithubActivity className="github_activity" data={memberData} />
-          <TodoList className="todolist" data={memberData} />
+          <TodoListStatus className="todolist" data={memberData} />
         </div>
       ))}
     </>

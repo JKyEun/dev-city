@@ -1,7 +1,7 @@
 import React from 'react';
+import '../../../style/memberInfo.scss';
 
-export default function UserInfo({ data }) {
-  console.log(data);
+export default function MemberInfo({ data }) {
   return (
     <>
       <div className="study_status-profile">
