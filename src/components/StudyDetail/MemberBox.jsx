@@ -121,14 +121,20 @@ export default function MemberBox({ match, studyDetail, setIsModifyMode }) {
       const findPhone = await axios.get(
         `http://localhost:4000/user/${study?.member[0]?.memberId}`,
       );
-      console.log('??????', findPhone.data.phoneNumber, study.studyName);
-      if (findPhone.data.phoneNumber) {
+
+      if (
+        findPhone.data.phoneNumber === '휴대폰 번호를 설정하세요' ||
+        findPhone.data.phoneNumber === ''
+      ) {
+        alert(
+          '리더의 휴대폰번호가 저장되어있지 않아 확인이 늦어질 수 있습니다',
+        );
+      } else {
         const resSend = await axios.post('http://localhost:4000/study/send', {
           phone: findPhone.data.phoneNumber,
           studyName: study.studyName,
         });
         console.log(resSend.data);
-        return;
       }
       const addRes = await axios.post(
         `http://localhost:4000/invite/add/${match.params.id}`,
