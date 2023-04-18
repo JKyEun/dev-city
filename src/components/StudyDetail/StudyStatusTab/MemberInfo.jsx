@@ -2,11 +2,11 @@ import React from 'react';
 import '../../../style/memberInfo.scss';
 
 export default function MemberInfo({ data }) {
+  console.log(data);
   return (
-    <>
-      <div className="study_status-profile">
+    <div className="study_status-profile">
+      <div className="study_status-profile_photo">
         <img
-          className="study_status-profile_photo"
           src={
             data?.profileImg?.includes('http')
               ? data?.profileImg
@@ -18,14 +18,13 @@ export default function MemberInfo({ data }) {
                 )}`
           }
           alt="프로필 사진"
-          width="98"
-          height="98"
         />
-
-        <div className="study_status-profile_nickname">
-          {data?.nickName ? data.nickName : '닉네임 정보없음'}
-        </div>
       </div>
-    </>
+
+      <div className="study_status-profile_nickname">
+        <p>{data?.nickName ? data.nickName : '닉네임 정보없음'}</p>
+        <p>{`Lv.${data.level}  |  ${data.field}`}</p>
+      </div>
+    </div>
   );
 }

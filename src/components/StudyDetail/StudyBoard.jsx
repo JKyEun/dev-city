@@ -61,7 +61,7 @@ export default function StudyBoard() {
       {isMember ? null : (
         <div className="lockIconWrap">
           <FontAwesomeIcon icon={faLock} />
-          <h2>권한이 없습니다</h2>
+          <h2>조회 권한이 없습니다</h2>
         </div>
       )}
       <div

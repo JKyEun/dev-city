@@ -16,16 +16,133 @@
     }
   }
 
-  .lockIconWrap svg {
-    color: #777;
-    font-size: 2rem;
-  }
   .study_status {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 10px;
-    margin: 0px 10px;
-    margin-top: 40px;
+    margin-top: 50px;
+    padding-bottom: 50px;
+    margin-bottom: 50px;
+    border-bottom: 1px dashed #eee;
+    &:last-child {
+      margin-bottom: 0px;
+      border-bottom: none;
+      padding-bottom: none;
+    }
+    .no_github {
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .study_status-profile {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      .study_status-profile_photo {
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        img {
+          width: 100%;
+        }
+      }
+      .study_status-profile_nickname {
+        margin-left: 15px;
+        p:first-child {
+          font-size: 18px;
+          font-weight: 600;
+        }
+        p:last-child {
+          font-size: 16px;
+          color: #999;
+          margin-top: 5px;
+        }
+      }
+    }
+    .github_Grass {
+      border: 1px solid #eee;
+      border-radius: 10px;
+      padding: 20px;
+    }
+    .todo_status {
+      .todo_intro {
+        width: 20%;
+        .todo_count {
+          margin-top: 7px;
+          span {
+            color: #605cff;
+            font-weight: 700;
+          }
+        }
+      }
+      .todo_main {
+        width: 80%;
+        border-left: 1px solid #eee;
+        padding-left: 50px;
+        .empty_todo {
+          color: #999;
+        }
+        .checkDiv {
+          display: inline-block;
+          position: relative;
+          width: 20px;
+          height: 20px;
+          transform: translateY(10px);
+          .checkbox {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 1px solid #ddd;
+          }
+
+          .checkbox.checked {
+            border: none;
+            background-color: #605cff;
+          }
+
+          .checkImg {
+            position: absolute;
+            top: 3.5px;
+            left: 3.5px;
+            width: 13px;
+            height: 13px;
+          }
+        }
+        .listContent {
+          padding-left: 15px;
+          margin-bottom: 20px;
+          p:first-child {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 5px;
+          }
+          p:last-child {
+            color: #999;
+          }
+        }
+      }
+    }
+  }
+}
+
+.lockContainer {
+  position: relative;
+  .lockIconWrap {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #777;
+    font-size: 2rem;
+    h2 {
+      margin-top: 10px;
+      font-size: 16px;
+      color: #222;
+    }
   }
 }

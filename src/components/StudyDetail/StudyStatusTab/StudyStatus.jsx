@@ -30,30 +30,29 @@ export default function StudyStatus() {
   }, [members]);
 
   return (
-    <>
+    <div className="lockContainer">
+      {isMember ? null : (
+        <div className="lockIconWrap">
+          <FontAwesomeIcon icon={faLock} />
+          <h2>조회 권한이 없습니다</h2>
+        </div>
+      )}
       {membersData.map((memberData, index) => (
-        <div className="studyStatusWrapContainer">
-          {isMember ? null : (
-            <div className="lockIconWrap">
-              <FontAwesomeIcon icon={faLock} />
-              <h2>권한이 없습니다</h2>
-            </div>
-          )}
-          <div
-            key={index}
-            className="study_status"
-            style={{
-              filter: isMember ? 'none' : 'blur(10px)',
-              pointerEvents: isMember ? 'auto' : 'none',
-              userSelect: isMember ? 'auto' : 'none',
-            }}
-          >
-            <MemberInfo className="user_info" data={memberData} />
-            <GithubActivity className="github_activity" data={memberData} />
-            <TodoListStatus className="todolist" data={memberData} />
+        <div
+          className="studyStatusWrapContainer"
+          style={{
+            filter: isMember ? 'none' : 'blur(10px)',
+            pointerEvents: isMember ? 'auto' : 'none',
+            userSelect: isMember ? 'auto' : 'none',
+          }}
+        >
+          <div key={index} className="study_status">
+            <MemberInfo data={memberData} />
+            <GithubActivity data={memberData} />
+            <TodoListStatus data={memberData} />
           </div>
         </div>
       ))}
-    </>
+    </div>
   );
 }
