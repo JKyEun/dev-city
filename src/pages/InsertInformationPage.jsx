@@ -4,7 +4,6 @@ import '../style/insertInformationPage.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { updateUser } from '../store/modules/user';
-import Chat from '../components/Chat/Chat';
 
 export default function InsertInformationPage() {
   const navigate = useNavigate();

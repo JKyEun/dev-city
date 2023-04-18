@@ -16,6 +16,7 @@ import KakaoRedirectHandler from './KakaoRedirectHandler';
 import InsertInformationPage from './pages/InsertInformationPage';
 import GithubRedirectHandler from './GithubRedirectHandler';
 import Footer from './components/Footer';
+import IndividualMyCityPage from './pages/IndividualMyCityPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -44,6 +45,7 @@ function App() {
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/information" element={<InsertInformationPage />} />
         <Route path="/mycity" element={<MyCityPage />} />
+        <Route path="/mycity/:id" element={<IndividualMyCityPage />} />
         <Route path="/study" element={<RecruitBoardPage />} />
         <Route path="/study/detail/:id" element={<StudyDetailPage />} />
         <Route path="/study/create" element={<CreateStudyPage />} />

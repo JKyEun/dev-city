@@ -85,10 +85,10 @@
 
   .todoListWrap {
     display: flex;
-    margin-top: 30px;
 
     .leftSide {
       width: 200px;
+      padding-top: 30px;
       span:first-child {
         font-size: 20px;
         font-weight: 700;
@@ -103,6 +103,7 @@
     .rightSide {
       position: relative;
       width: 674px;
+      padding-top: 30px;
       .emptyTodo {
         padding: 70px 0;
         width: 100%;

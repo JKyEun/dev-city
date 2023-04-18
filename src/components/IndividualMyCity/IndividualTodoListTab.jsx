@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import MonthSelectBox from './MonthSelectBox';
-import DaySelector from './DaySelector';
-import TodoList from './TodoList';
 import '../../style/todoListTab.scss';
+import IndividualMonthSelectBox from './IndividualMonthSelectBox';
+import IndividualDaySelector from './IndividualDaySelector';
+import IndividualTodoList from './IndividualTodoList';
 
-export default function TodoListTab() {
+export default function IndividualTodoListTab({ individualInfo }) {
   const [isBoxOpen, setIsBoxOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
 
@@ -29,17 +29,20 @@ export default function TodoListTab() {
         }}
       />
       {isBoxOpen && (
-        <MonthSelectBox
+        <IndividualMonthSelectBox
           setIsBoxOpen={setIsBoxOpen}
           setSelectedDate={setSelectedDate}
         />
       )}
-      <DaySelector
+      <IndividualDaySelector
         selectedDate={selectedDate}
         setSelectedDate={setSelectedDate}
       />
       <hr />
-      <TodoList selectedDate={selectedDate} />
+      <IndividualTodoList
+        individualInfo={individualInfo}
+        selectedDate={selectedDate}
+      />
     </div>
   );
 }
