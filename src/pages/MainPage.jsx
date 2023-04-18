@@ -24,7 +24,7 @@ export default function MainPage() {
         </div>
         <img
           className="mycityImg"
-          src="../images/mycity.svg"
+          src="/images/mycity.svg"
           alt="도시이미지"
         />
       </div>
@@ -42,7 +42,7 @@ export default function MainPage() {
         </div>
       </div>
       <div className="bottom">
-        <img src="../images/main-4.svg" alt="" className="lastImg" />
+        <img src="/images/main-4.svg" alt="" className="lastImg" />
       </div>
     </>
   );

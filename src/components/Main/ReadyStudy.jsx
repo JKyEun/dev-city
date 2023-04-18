@@ -70,7 +70,7 @@ export default function ReadyStudy({ item, idx, liked, isMain, userId }) {
       {isMain ? null : (
         <div className="clickHeart" onClick={(e) => handleLike(e)}>
           <img
-            src={`./images/icon_heart${liked > 0 ? 'on' : 'off'}.svg`}
+            src={`/images/icon_heart${liked > 0 ? 'on' : 'off'}.svg`}
             alt="heart"
           />
         </div>

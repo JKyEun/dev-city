@@ -98,7 +98,11 @@ export default function StudyDetail({ match, studyDetail }) {
                 <p className="subTitle">사용 언어</p>
                 <p className="studyInfoContent">
                   {study?.skills?.map((skill) => {
-                    if (skill === 'C#') skill = 'cSharp';
+                    if (skill === 'C#') {
+                      skill = 'cSharp';
+                    } else {
+                      skill = skill.toLowerCase();
+                    }
                     return (
                       <img
                         style={{ marginRight: '7px' }}

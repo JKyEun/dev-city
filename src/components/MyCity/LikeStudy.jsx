@@ -55,7 +55,7 @@ export default function LikeStudy({ e, item, idx, userId, handleRender }) {
         <span> {`${item.memberNum.currentNum}`}</span>명 모집됨
       </p>
       <div className="clickHeart" onClick={(e) => handleLike(e)}>
-        <img src="./images/icon_heartOn.svg" alt="heart" />
+        <img src="/images/icon_heartOn.svg" alt="heart" />
       </div>
     </Link>
   );
