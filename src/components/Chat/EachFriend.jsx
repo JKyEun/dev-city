@@ -1,30 +1,40 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setOtherSide, setRoomId } from '../../store/modules/chat';
 
-export default function EachFriend({ friend, setRoomId, setNowChattingWith }) {
+export default function EachFriend({ friend }) {
   const userInfo = useSelector((state) => state.user);
-  const arr = [userInfo.userId, friend.userId];
-  const newRoomId = arr.sort();
+  const dispatch = useDispatch();
+
+  const setRoomIdAndOtherSide = () => {
+    const arr = [userInfo.userId, friend.userId];
+    const newRoomId = arr.sort();
+    dispatch(setRoomId(newRoomId));
+    dispatch(setOtherSide(friend));
+  };
 
   return (
-    <li
-      onClick={() => {
-        setRoomId(newRoomId);
-        setNowChattingWith(friend);
-      }}
-      className="member"
-    >
-      <div className="imgWrap">
-        <img
-          src={
-            friend.profileImg || friend.profileImg !== ''
-              ? friend.profileImg
-              : '/images/default-profile.png'
-          }
-          alt="프로필 이미지"
-        />
-      </div>
-      <div className="nickName">{friend.nickName}</div>
-    </li>
+    <>
+      {userInfo && (
+        <li
+          onClick={() => {
+            setRoomIdAndOtherSide();
+          }}
+          className="member"
+        >
+          <div className="imgWrap">
+            <img
+              src={
+                friend.profileImg || friend.profileImg !== ''
+                  ? friend.profileImg
+                  : '/images/default-profile.png'
+              }
+              alt="프로필 이미지"
+            />
+          </div>
+          <div className="nickName">{friend.nickName}</div>
+        </li>
+      )}
+    </>
   );
 }

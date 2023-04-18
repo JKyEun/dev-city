@@ -1,16 +1,21 @@
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import io from 'socket.io-client';
+import { setChatLog } from '../../store/modules/chat';
+import { Oval } from 'react-loader-spinner';
 
-export default function ChatRoom({ roomId, nowChattingWith }) {
-  const [chatLog, setChatLog] = useState([]);
+export default function ChatRoom() {
+  const dispatch = useDispatch();
   const [userName, setUserName] = useState(null);
   const [loading, setLoading] = useState(true);
   const chatInput = useRef('');
   const userInfo = useSelector((state) => state.user);
   const socket = io('http://localhost:4000');
   const messageWindow = useRef(null);
+  const nowChattingWith = useSelector((state) => state.chat.nowChattingWith);
+  const roomId = useSelector((state) => state.chat.roomId);
+  const chatLog = useSelector((state) => state.chat.chatLog);
 
   const sendMessage = async (e) => {
     e.preventDefault();
@@ -39,7 +44,7 @@ export default function ChatRoom({ roomId, nowChattingWith }) {
 
     // 채팅 로그 갱신
     const newChatLog = [...chatLog, newChat];
-    setChatLog(newChatLog);
+    dispatch(setChatLog(newChatLog));
 
     // DB에 전송
     const res = await axios.post(
@@ -63,10 +68,10 @@ export default function ChatRoom({ roomId, nowChattingWith }) {
   const getChatLog = async () => {
     try {
       const res = await axios.get(`http://localhost:4000/chat/get/${roomId}`);
-
       console.log(res.data);
 
-      setChatLog(res.data.chatLog);
+      dispatch(setChatLog(res.data.chatLog));
+
       setLoading(false);
     } catch (err) {
       console.error(err);
@@ -95,22 +100,36 @@ export default function ChatRoom({ roomId, nowChattingWith }) {
         date,
       };
 
-      setChatLog([...chatLog, newChat]);
+      dispatch(setChatLog([...chatLog, newChat]));
     });
   }, [socket, roomId, userName, chatLog]);
 
   useEffect(() => {
     scrollToBottom();
-  }, [chatLog]);
+  }, [chatLog, messageWindow]);
 
   useEffect(() => {
     getChatLog();
-  }, []);
+  }, [nowChattingWith]);
 
-  console.log(chatLog);
   return (
     <div className="chatRoom">
-      {!loading && (
+      {loading ? (
+        <div className="loading">
+          <Oval
+            height={80}
+            width={80}
+            color="#605cff"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+            ariaLabel="oval-loading"
+            secondaryColor="#888"
+            strokeWidth={2}
+            strokeWidthSecondary={2}
+          />
+        </div>
+      ) : (
         <>
           <div className="roomTitle">
             <div className="imgWrap">
@@ -127,34 +146,35 @@ export default function ChatRoom({ roomId, nowChattingWith }) {
             <div className="nickName">{nowChattingWith.nickName}</div>
           </div>
           <ul className="message" ref={messageWindow}>
-            {chatLog.map((chat, idx) => (
-              <li
-                key={idx}
-                className={
-                  chat.userName === userInfo.userId ? 'myChat' : 'yourChat'
-                }
-              >
-                <div className="contentWrap">
-                  <div className="time">{chat.date}</div>
-                  <div className="content">{chat.message}</div>
-                </div>
-                <div className="imgWrap">
-                  <img
-                    src={
-                      chat.userName === userInfo.userId
-                        ? userInfo.profileImg || userInfo.profileImg !== ''
-                          ? userInfo.profileImg
+            {chatLog &&
+              chatLog.map((chat, idx) => (
+                <li
+                  key={idx}
+                  className={
+                    chat.userName === userInfo.userId ? 'myChat' : 'yourChat'
+                  }
+                >
+                  <div className="contentWrap">
+                    <div className="content">{chat.message}</div>
+                    <div className="time">{chat.date}</div>
+                  </div>
+                  <div className="imgWrap">
+                    <img
+                      src={
+                        chat.userName === userInfo.userId
+                          ? userInfo.profileImg || userInfo.profileImg !== ''
+                            ? userInfo.profileImg
+                            : '/images/default-profile.png'
+                          : nowChattingWith.profileImg ||
+                            nowChattingWith.profileImg !== ''
+                          ? nowChattingWith.profileImg
                           : '/images/default-profile.png'
-                        : nowChattingWith.profileImg ||
-                          nowChattingWith.profileImg !== ''
-                        ? nowChattingWith.profileImg
-                        : '/images/default-profile.png'
-                    }
-                    alt="프로필 이미지"
-                  />
-                </div>
-              </li>
-            ))}
+                      }
+                      alt="프로필 이미지"
+                    />
+                  </div>
+                </li>
+              ))}
           </ul>
           <form onSubmit={sendMessage}>
             <div className="imgWrap">
