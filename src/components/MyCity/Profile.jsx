@@ -13,6 +13,7 @@ export default function Profile() {
       userName={userInfo.userName}
       field={userInfo.field}
       level={userInfo.level}
+      phoneNumber={userInfo.phoneNumber}
       email={userInfo.email}
       githubAddress={userInfo.githubAddress}
     />

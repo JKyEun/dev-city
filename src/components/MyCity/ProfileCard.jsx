@@ -11,6 +11,7 @@ export default function ProfileCard({
   userName,
   field,
   level,
+  phoneNumber,
   email,
   githubAddress,
 }) {
@@ -21,6 +22,7 @@ export default function ProfileCard({
   const userId = localStorage.getItem('userId');
   const userInfo = useSelector((state) => state.user);
   const nameInput = useRef(null);
+  const phoneInput = useRef(null);
   const nickNameInput = useRef(null);
   const emailInput = useRef(null);
   const githubInput = useRef(null);
@@ -35,33 +37,46 @@ export default function ProfileCard({
 
   const saveProfileInfo = async (e, id) => {
     e.preventDefault();
+    const regex = /^\d{3}\d{4}\d{4}$/;
+    console.log(
+      !phoneInput.current.value,
+      regex.test(phoneInput.current.value),
+    );
+    if (!phoneInput.current.value) {
+      alert('휴대폰 번호를 필수로 입력해주세요');
+      return;
+    } else if (!regex.test(phoneInput.current.value)) {
+      alert('01012345678 형식으로 입력해주세요');
+      return;
+    } else {
+      const newInfo = {
+        ...userInfo,
+        userName: nameInput.current.value
+          ? nameInput.current.value
+          : '이름을 설정하세요',
+        nickName: nickNameInput.current.value
+          ? nickNameInput.current.value
+          : '닉네임을 설정하세요',
+        email: emailInput.current.value
+          ? emailInput.current.value
+          : '이메일을 설정하세요',
+        githubAddress: githubInput.current.value
+          ? githubInput.current.value
+          : '깃험 주소를 설정하세요',
+        field: fieldInput.current.value,
+        phoneNumber: phoneInput.current.value.replaceAll('-', ''),
+      };
 
-    const newInfo = {
-      ...userInfo,
-      userName: nameInput.current.value
-        ? nameInput.current.value
-        : '이름을 설정하세요',
-      nickName: nickNameInput.current.value
-        ? nickNameInput.current.value
-        : '닉네임을 설정하세요',
-      email: emailInput.current.value
-        ? emailInput.current.value
-        : '이메일을 설정하세요',
-      githubAddress: githubInput.current.value
-        ? githubInput.current.value
-        : '깃험 주소를 설정하세요',
-      field: fieldInput.current.value,
-    };
-
-    try {
-      const res = await axios.post(
-        `http://localhost:4000/user/updateuser/${id}`,
-        newInfo,
-      );
-      console.log(res.data);
-      dispatch(updateUser(newInfo));
-    } catch (err) {
-      console.error(err);
+      try {
+        const res = await axios.post(
+          `http://localhost:4000/user/updateuser/${id}`,
+          newInfo,
+        );
+        console.log(res.data);
+        dispatch(updateUser(newInfo));
+      } catch (err) {
+        console.error(err);
+      }
     }
   };
 
@@ -71,13 +86,15 @@ export default function ProfileCard({
       nickNameInput.current &&
       emailInput.current &&
       githubInput.current &&
-      fieldInput.current
+      fieldInput.current &&
+      phoneInput.current
     ) {
       nameInput.current.value = userName;
       nickNameInput.current.value = nickName;
       emailInput.current.value = email;
       githubInput.current.value = githubAddress;
       fieldInput.current.value = field;
+      phoneInput.current.value = phoneNumber;
     }
   });
 
@@ -100,6 +117,7 @@ export default function ProfileCard({
       console.error(err);
     }
   };
+
   const fetchUserData = async () => {
     try {
       const res = await axios.get(`http://localhost:4000/user/${userId}`);
@@ -110,6 +128,7 @@ export default function ProfileCard({
       console.error(err);
     }
   };
+
   useEffect(() => {
     fetchUserData();
   }, []);
@@ -143,68 +162,87 @@ export default function ProfileCard({
       </div>
 
       {isModifyMode ? (
-        <>
-          <form
-            onSubmit={(e) => {
-              saveProfileInfo(e, localStorage.getItem('userId'));
-              setIsModifyMode((cur) => !cur);
-            }}
-          >
-            <div>
-              <input
-                ref={nameInput}
-                id="nameInput"
-                type="text"
-                placeholder="이름"
-              />
-            </div>
-            <div>
-              <input
-                ref={nickNameInput}
-                id="nickNameInput"
-                type="text"
-                placeholder="닉네임"
-              />
-            </div>
-            <div>
-              <input
-                ref={emailInput}
-                id="emailInput"
-                type="email"
-                placeholder="이메일"
-              />
-            </div>
-            <div>
-              <input
-                ref={githubInput}
-                id="githubInput"
-                type="text"
-                placeholder="깃허브 주소"
-              />
-            </div>
-            <div>
-              <select ref={fieldInput} id="fieldInput" type="text">
-                <option value="프론트엔드">프론트엔드</option>
-                <option value="백엔드">백엔드</option>
-                <option value="앱">앱</option>
-                <option value="게임">게임</option>
-                <option value="기획">기획</option>
-              </select>
-            </div>
-            <button type="submit" className="hidden"></button>
-          </form>
-        </>
+        <form
+          onSubmit={(e) => {
+            saveProfileInfo(e, localStorage.getItem('userId'));
+            setIsModifyMode((cur) => !cur);
+          }}
+        >
+          <div>
+            <input
+              ref={phoneInput}
+              id="phoneInput"
+              type="text"
+              placeholder="필수로 입력해주세요"
+              required
+            />
+          </div>
+          <div>
+            <input
+              ref={nameInput}
+              id="nameInput"
+              type="text"
+              placeholder="이름"
+            />
+          </div>
+          <div>
+            <input
+              ref={nickNameInput}
+              id="nickNameInput"
+              type="text"
+              placeholder="닉네임"
+            />
+          </div>
+          <div>
+            <input
+              ref={emailInput}
+              id="emailInput"
+              type="email"
+              placeholder="이메일"
+            />
+          </div>
+          <div>
+            <input
+              ref={githubInput}
+              id="githubInput"
+              type="text"
+              placeholder="깃허브 주소"
+            />
+          </div>
+          <div>
+            <select ref={fieldInput} id="fieldInput" type="text">
+              <option value="프론트엔드">프론트엔드</option>
+              <option value="백엔드">백엔드</option>
+              <option value="앱">앱</option>
+              <option value="게임">게임</option>
+              <option value="기획">기획</option>
+            </select>
+          </div>
+          <button type="submit" className="hidden"></button>
+        </form>
       ) : (
         <>
-          <div className="nickName">{nickName}</div>
-          <div className="userName">{userName}</div>
-          <span className="field">{field}</span>
+          <div className="nickName">
+            {nickName ? nickName : '닉네임을 설정해주세요'}
+          </div>
+          <div className="userName">
+            {userName ? userName : '이름을 설정해주세요'}
+          </div>
+          <span className="field">
+            {field ? field : '관심분야를 설정해주세요'}
+          </span>
           <span className="level">Lv.{level}</span>
           <hr />
+          <div className="phone address">
+            <div>
+              <img src="/images/call.png" alt="" width="13" /> Phone
+            </div>
+            <a>{phoneNumber ? phoneNumber : '휴대폰 번호를 설정해주세요'}</a>
+          </div>
           <div className="email address">
             <div>✉️ Email</div>
             <a href={`mailto:${email}`} target="_blank">
-              {email}
+              {email ? email : '이메일을 설정해주세요'}
             </a>
           </div>
           <div className="github address">
@@ -217,7 +255,7 @@ export default function ProfileCard({
               Github
             </div>
             <a href={githubAddress} target="_blank">
-              {githubAddress}
+              {githubAddress ? githubAddress : '깃헙 메일을 설정해주세요'}
             </a>
           </div>
         </>
