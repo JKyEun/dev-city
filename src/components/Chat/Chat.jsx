@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import '../../style/chat.scss';
 import ChatRoom from './ChatRoom';
 import EachFriend from './EachFriend';
+import { convertOpen, setOtherSide } from '../../store/modules/chat';
 
-export default function Chat({ setIsChatOpen }) {
+export default function Chat() {
+  const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.user);
+  const nowChattingWith = useSelector((state) => state.chat.nowChattingWith);
   const [friendList, setFriendList] = useState(null);
-  const [roomId, setRoomId] = useState(null);
-  const [nowChattingWith, setNowChattingWith] = useState(null);
 
   useEffect(() => {
     if (!userInfo.following) return;
@@ -33,24 +34,21 @@ export default function Chat({ setIsChatOpen }) {
         {friendList && (
           <ul>
             {friendList.map((friend) => (
-              <EachFriend
-                key={friend.userId}
-                friend={friend}
-                setRoomId={setRoomId}
-                setNowChattingWith={setNowChattingWith}
-              />
+              <EachFriend key={friend.userId} friend={friend} />
             ))}
           </ul>
         )}
       </div>
       <div className="chatArea">
-        {roomId ? (
-          <ChatRoom roomId={roomId} nowChattingWith={nowChattingWith} />
-        ) : (
-          <div className="intro"></div>
-        )}
+        {nowChattingWith ? <ChatRoom /> : <div className="intro"></div>}
       </div>
-      <div onClick={() => setIsChatOpen(false)} className="closeBtn">
+      <div
+        onClick={() => {
+          dispatch(convertOpen());
+          dispatch(setOtherSide(null));
+        }}
+        className="closeBtn"
+      >
         <img src="/images/icon_close.svg" alt="닫는 버튼" />
       </div>
     </div>

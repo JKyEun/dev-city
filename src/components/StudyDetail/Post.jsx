@@ -177,7 +177,9 @@ export default function Post({ boardDB, boardEl, setBoardDB, getBoard }) {
               ref={dropdownRef}
             >
               <img src={profileImg(writerInfo)} alt="작성자 프로필 사진" />{' '}
-              {showDropdown && <PostDropdown />}
+              {showDropdown && userInfo.userId !== writerInfo.userId && (
+                <PostDropdown writerInfo={writerInfo} />
+              )}
             </div>
 
             <div className="rightSide">

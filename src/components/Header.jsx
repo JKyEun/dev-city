@@ -4,14 +4,17 @@ import HeaderDropdown from './HeaderDropdown';
 import axios from 'axios';
 import '../style/_header.scss';
 import Chat from './Chat/Chat';
+import { useDispatch, useSelector } from 'react-redux';
+import { convertOpen, setOtherSide } from '../store/modules/chat';
 
 export default function Header() {
   const [url, setUrl] = useState('/');
   const location = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const searchInput = useRef();
   const [profileImgUpdate, setProfileImgUpdate] = useState(null);
-  const [isChatOpen, setIsChatOpen] = useState(false);
+  const isChatOpen = useSelector((state) => state.chat.isChatOpen);
 
   const fetchUserData = async () => {
     try {
@@ -125,7 +128,8 @@ export default function Header() {
               </div>
               <div
                 onClick={() => {
-                  setIsChatOpen((cur) => !cur);
+                  dispatch(convertOpen());
+                  dispatch(setOtherSide(null));
                 }}
               >
                 <img src="/images/icon_message.svg" alt="다이렉트 메시지" />
@@ -180,7 +184,7 @@ export default function Header() {
           <p>{url.split('/')[2] && headerTitle[url.split('/')[2]]}</p>
         </div>
       </div>
-      {isChatOpen && <Chat setIsChatOpen={setIsChatOpen} />}
+      {isChatOpen && <Chat />}
     </header>
   );
 }

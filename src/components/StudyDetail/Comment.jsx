@@ -147,7 +147,9 @@ export default function Comment({
               }
               alt="댓글 작성자 프로필"
             />
-            {showDropdown && <PostDropdown />}
+            {showDropdown && userInfo.userId !== commentWriterInfo.userId && (
+              <PostDropdown writerInfo={commentWriterInfo} />
+            )}
           </div>
 
           {isModifyMode ? (
