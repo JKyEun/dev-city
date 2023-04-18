@@ -23,7 +23,7 @@ export default function TodoLiEl({ el, selectedDate }) {
     try {
       const todo = { id: el.id };
       const res = await axios.post(
-        `http://localhost:4000/user/deletelist/${id}`,
+        `http://3.34.52.131:4000/user/deletelist/${id}`,
         todo,
       );
       console.log(res.data);
@@ -43,7 +43,7 @@ export default function TodoLiEl({ el, selectedDate }) {
         date: el.date,
       };
       const res = await axios.post(
-        `http://localhost:4000/user/updatelist/${id}`,
+        `http://3.34.52.131:4000/user/updatelist/${id}`,
         updatedTodo,
       );
       console.log(res.data);
@@ -68,7 +68,7 @@ export default function TodoLiEl({ el, selectedDate }) {
         ).toString(),
       };
       const res = await axios.post(
-        `http://localhost:4000/user/updatelist/${id}`,
+        `http://3.34.52.131:4000/user/updatelist/${id}`,
         updatedTodo,
       );
       console.log(res.data);

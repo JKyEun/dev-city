@@ -22,9 +22,9 @@ export default function IndividualStudy({ individualInfo }) {
   };
   const getStudyInfo = async () => {
     try {
-      const resStudy = await axios.get(`http://localhost:4000/study/`);
+      const resStudy = await axios.get(`http://3.34.52.131:4000/study/`);
       dispatch(init(resStudy.data));
-      const resUser = await axios.get(`http://localhost:4000/user/${userId}`);
+      const resUser = await axios.get(`http://3.34.52.131:4000/user/${userId}`);
       const result = resStudy.data?.filter((study) => {
         return resUser.data?.likedStudy?.includes(study._id);
       });

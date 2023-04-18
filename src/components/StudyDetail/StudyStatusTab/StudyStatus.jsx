@@ -20,7 +20,7 @@ export default function StudyStatus() {
   useEffect(() => {
     async function fetchMembersData() {
       const requests = members.map((member) =>
-        axios.get(`http://localhost:4000/user/${member.memberId}`),
+        axios.get(`http://3.34.52.131:4000/user/${member.memberId}`),
       );
       const responses = await Promise.all(requests);
       const data = responses.map((response) => response.data);

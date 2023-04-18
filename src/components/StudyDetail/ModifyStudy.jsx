@@ -119,7 +119,7 @@ export default function ModifyStudy({ match }) {
       };
 
       const resModify = await axios.post(
-        `http://localhost:4000/study/modify/${match.params.id}`,
+        `http://3.34.52.131:4000/study/modify/${match.params.id}`,
         { modifyData, userId: localStorage.getItem('userId') },
       );
 

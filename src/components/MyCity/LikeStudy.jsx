@@ -9,7 +9,7 @@ export default function LikeStudy({ e, item, idx, userId, handleRender }) {
   const dispatch = useDispatch();
   const updateLikeList = async (e) => {
     await axios
-      .get(`http://localhost:4000/user/${localStorage.getItem('userId')}`)
+      .get(`http://3.34.52.131:4000/user/${localStorage.getItem('userId')}`)
       .then((response) => {
         dispatch(updateLike(response.data.likedStudy));
       })
@@ -19,7 +19,7 @@ export default function LikeStudy({ e, item, idx, userId, handleRender }) {
     handleRender('hi');
     e.preventDefault();
 
-    await axios.post('http://localhost:4000/study/like', {
+    await axios.post('http://3.34.52.131:4000/study/like', {
       userId: userId,
       studyId: item._id,
       isDelete: true,

@@ -10,7 +10,7 @@ const KakaoRedirectHandler = () => {
     const CODE = new URL(window.location.href).searchParams.get('code');
     const GRANT_TYPE = 'authorization_code';
     const KAKAO_CLIENT_ID = '8b9d9e6f2ac1ce6697298e70eb30186c';
-    const KAKAO_REDIRECT_URI = 'http://localhost:3000/oauth/callback/kakao';
+    const KAKAO_REDIRECT_URI = 'http://3.34.52.131:3000/oauth/callback/kakao';
 
     async function loginFetch() {
       const tokenResponse = await fetch(
@@ -45,7 +45,7 @@ const KakaoRedirectHandler = () => {
           };
 
           const registerResponse = await axios.post(
-            `http://localhost:4000/user/kakaologin`,
+            `http://3.34.52.131:4000/user/kakaologin`,
             userLoginInfo,
           );
 

@@ -27,7 +27,7 @@ export default function EachUser({ eachUser }) {
       };
 
       const userInfoRes = await axios.post(
-        `http://localhost:4000/user/updateuser/${userInfo.userId}`,
+        `http://3.34.52.131:4000/user/updateuser/${userInfo.userId}`,
         newUserInfo,
       );
       console.log(userInfoRes.data);
@@ -48,7 +48,7 @@ export default function EachUser({ eachUser }) {
       };
 
       const eachUserRes = await axios.post(
-        `http://localhost:4000/user/updateuser/${eachUser.userId}`,
+        `http://3.34.52.131:4000/user/updateuser/${eachUser.userId}`,
         newEachUser,
       );
       console.log(eachUserRes.data);
@@ -72,7 +72,7 @@ export default function EachUser({ eachUser }) {
       console.log(newFollowing);
 
       const userInfoRes = await axios.post(
-        `http://localhost:4000/user/updateuser/${userInfo.userId}`,
+        `http://3.34.52.131:4000/user/updateuser/${userInfo.userId}`,
         newUserInfo,
       );
       console.log(userInfoRes.data);
@@ -88,7 +88,7 @@ export default function EachUser({ eachUser }) {
       };
 
       const eachUserRes = await axios.post(
-        `http://localhost:4000/user/updateuser/${eachUser.userId}`,
+        `http://3.34.52.131:4000/user/updateuser/${eachUser.userId}`,
         newEachUser,
       );
       console.log(eachUserRes.data);
