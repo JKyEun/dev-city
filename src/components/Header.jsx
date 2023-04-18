@@ -128,8 +128,12 @@ export default function Header() {
               </div>
               <div
                 onClick={() => {
-                  dispatch(convertOpen());
-                  dispatch(setOtherSide(null));
+                  if (!localStorage.getItem('userId')) {
+                    navigate('/signin');
+                  } else {
+                    dispatch(convertOpen());
+                    dispatch(setOtherSide(null));
+                  }
                 }}
               >
                 <img src="/images/icon_message.svg" alt="다이렉트 메시지" />
