@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import StudyDetail from './StudyDetail';
 import StudyBoard from './StudyBoard';
+import StudyStatus from './StudyStatusTab/StudyStatus';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import '../../style/detailTab.scss';
@@ -44,8 +45,8 @@ export default function DetailTab() {
         <li className={tab === 'board' ? 'onDetailPage' : ''}>
           <p onClick={() => setTab('board')}>게시판</p>
         </li>
-        <li className={tab === 'currentLearning' ? 'onDetailPage' : ''}>
-          <p onClick={() => setTab('currentLearning')}>학습 현황</p>
+        <li className={tab === 'studyStatus' ? 'onDetailPage' : ''}>
+          <p onClick={() => setTab('studyStatus')}>학습 현황</p>
         </li>
       </ul>
       {tab === 'info' ? (
@@ -53,8 +54,7 @@ export default function DetailTab() {
       ) : tab === 'board' ? (
         <StudyBoard />
       ) : (
-        <div></div>
-        // <CurrentLearning />
+        <StudyStatus />
       )}
     </div>
   );
