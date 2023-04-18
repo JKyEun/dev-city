@@ -19,7 +19,7 @@ export default function StudyBoard() {
   );
 
   const getBoard = async () => {
-    const res = await axios.get(`http://3.34.52.131:4000/board/get/${id}`);
+    const res = await axios.get(`http://localhost:4000/board/get/${id}`);
     setBoardDB(res.data.board);
   };
 
@@ -38,7 +38,7 @@ export default function StudyBoard() {
     };
     try {
       const res = await axios.post(
-        `http://3.34.52.131:4000/board/add/${id}`,
+        `http://localhost:4000/board/add/${id}`,
         newPost,
       );
       console.log(res.data);

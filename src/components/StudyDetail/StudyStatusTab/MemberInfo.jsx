@@ -12,7 +12,7 @@ export default function MemberInfo({ data }) {
               ? data?.profileImg
               : !data?.profileImg
               ? '/images/default-profile.png'
-              : `http://3.34.52.131:4000/uploads/${data?.profileImg?.replace(
+              : `http://localhost:4000/uploads/${data?.profileImg?.replace(
                   '/',
                   '',
                 )}`

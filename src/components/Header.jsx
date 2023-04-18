@@ -19,7 +19,7 @@ export default function Header() {
   const fetchUserData = async () => {
     try {
       const res = await axios.get(
-        `http://3.34.52.131:4000/user/${localStorage.getItem('userId')}`,
+        `http://localhost:4000/user/${localStorage.getItem('userId')}`,
       );
       setProfileImgUpdate(
         res.data.profileImg ? `/${res.data.profileImg}` : null,
@@ -154,7 +154,7 @@ export default function Header() {
                         ? profileImgUpdate.replace('/', '')
                         : !profileImgUpdate
                         ? '/images/default-profile.png'
-                        : `http://3.34.52.131:4000/uploads/${profileImgUpdate?.replace(
+                        : `http://localhost:4000/uploads/${profileImgUpdate?.replace(
                             '/',
                             '',
                           )}`

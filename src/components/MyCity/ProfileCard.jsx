@@ -68,7 +68,7 @@ export default function ProfileCard({
 
       try {
         const res = await axios.post(
-          `http://3.34.52.131:4000/user/updateuser/${id}`,
+          `http://localhost:4000/user/updateuser/${id}`,
           newInfo,
         );
         console.log(res.data);
@@ -104,7 +104,7 @@ export default function ProfileCard({
     formData.append('img', file);
     try {
       const res = await axios.post(
-        `http://3.34.52.131:4000/user/updateuser/images/${id}`,
+        `http://localhost:4000/user/updateuser/images/${id}`,
         formData,
         {
           headers: { 'Content-Type': 'multipart/form-data' },
@@ -120,7 +120,7 @@ export default function ProfileCard({
 
   const fetchUserData = async () => {
     try {
-      const res = await axios.get(`http://3.34.52.131:4000/user/${userId}`);
+      const res = await axios.get(`http://localhost:4000/user/${userId}`);
       setProfileImgUpdate(
         res.data.profileImg ? `/${res.data.profileImg}` : null,
       );
@@ -144,7 +144,7 @@ export default function ProfileCard({
                 ? profileImgUpdate.replace('/', '')
                 : !profileImgUpdate
                 ? '/images/default-profile.png'
-                : `http://3.34.52.131:4000/uploads/${profileImgUpdate?.replace(
+                : `http://localhost:4000/uploads/${profileImgUpdate?.replace(
                     '/',
                     '',
                   )}`

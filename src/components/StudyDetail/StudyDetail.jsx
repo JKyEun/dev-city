@@ -26,7 +26,7 @@ export default function StudyDetail({ match, studyDetail }) {
         // match.params.id로 스터디 상세 정보를 가져옴
         // match.params.id에 해당하는 스터디 정보는 response에
         const resFetch = await axios.get(
-          `http://3.34.52.131:4000/study/detail/${match.params.id}`,
+          `http://localhost:4000/study/detail/${match.params.id}`,
         );
 
         const study = resFetch.data;
@@ -52,7 +52,7 @@ export default function StudyDetail({ match, studyDetail }) {
         // 사람 꽉차면 백엔드 isClosed를 true로 바꾸기
         if (study.memberNum.currentNum === study.memberNum.maxNum) {
           await axios.post(
-            `http://3.34.52.131:4000/study/detail/${match.params.id}/close`,
+            `http://localhost:4000/study/detail/${match.params.id}/close`,
           );
         }
         dispatch(

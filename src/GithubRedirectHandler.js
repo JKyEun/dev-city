@@ -17,7 +17,7 @@ export default function GithubRedirectHandler() {
 
     async function loginFetch() {
       const fetchRes = await axios.post(
-        'http://3.34.52.131:4000/user/githublogin/fetch',
+        'http://localhost:4000/user/githublogin/fetch',
         codeObj,
       );
 
@@ -33,7 +33,7 @@ export default function GithubRedirectHandler() {
       };
 
       const loginRes = await axios.post(
-        'http://3.34.52.131:4000/user/githublogin',
+        'http://localhost:4000/user/githublogin',
         userLoginInfo,
       );
 
