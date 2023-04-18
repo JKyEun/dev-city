@@ -149,6 +149,7 @@ export default function MemberBox({ match, studyDetail, setIsModifyMode }) {
       };
 
       dispatch(setStudy(newStudy));
+      alert('참가 신청이 되었습니다');
     } catch (err) {
       console.error(err);
     }
