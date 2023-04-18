@@ -55,7 +55,7 @@ export default function EachUser({ eachUser }) {
     }
   };
 
-  const unFollow = async (id) => {
+  const unFollow = async () => {
     try {
       // userInfo의 following 배열에서 삭제
       const newFollowing = userInfo.following.filter(
