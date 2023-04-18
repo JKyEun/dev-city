@@ -36,7 +36,11 @@ export default function MainPage() {
       <CreateProcessStudy />
       {/* 추천친구 */}
       <AllUsers />
-
+      <div className="pointImg">
+        <div className="imgText">
+          Building the Future with <strong>Dev-City</strong>
+        </div>
+      </div>
       <div className="bottom">
         <img src="../images/main-4.svg" alt="" className="lastImg" />
       </div>

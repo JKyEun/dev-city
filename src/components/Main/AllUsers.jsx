@@ -9,16 +9,25 @@ export default function AllUsers() {
   const userInfo = useSelector((state) => state.user);
 
   useEffect(() => {
-    if (!userInfo.userId) return;
+    if (!userInfo.userId) {
+      axios
+        .get(`http://localhost:4000/user`)
+        .then((response) => {
+          setRandomUsers(response.data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
 
-    axios
-      .get(`http://localhost:4000/allUser/${userInfo.userId}`)
-      .then((response) => {
-        setRandomUsers(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+      axios
+        .get(`http://localhost:4000/allUser/${userInfo.userId}`)
+        .then((response) => {
+          setRandomUsers(response.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
   }, [userInfo]);
 
   return (
