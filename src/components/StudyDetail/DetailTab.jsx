@@ -47,7 +47,7 @@ export default function DetailTab() {
           <p onClick={() => setTab('board')}>게시판</p>
         </li>
         <li className={tab === 'studyStatus' ? 'onDetailPage' : ''}>
-          <p onClick={() => setTab('studyStatus')}>학습 현황</p>
+          <p onClick={() => setTab('studyStatus')}>오늘 학습 현황</p>
         </li>
       </ul>
       {tab === 'info' ? (

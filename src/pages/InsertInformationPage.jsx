@@ -18,7 +18,8 @@ export default function InsertInformationPage() {
 
   const setUserInfo = async (e, id) => {
     e.preventDefault();
-    if (phoneNumber?.current?.value) {
+    const regex = /^\d{3}\d{4}\d{4}$/;
+    if (regex.test(phoneNumber?.current?.value)) {
       const newInfo = {
         ...userInfo,
         userName: nameInput?.current?.value,
