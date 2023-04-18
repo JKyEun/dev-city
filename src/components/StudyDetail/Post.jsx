@@ -3,6 +3,7 @@ import Comment from './Comment';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import PostDropdown from './PostDropdown';
 
 export default function Post({ boardDB, boardEl, setBoardDB, getBoard }) {
   const { id } = useParams();
@@ -145,14 +146,40 @@ export default function Post({ boardDB, boardEl, setBoardDB, getBoard }) {
       return `http://localhost:4000/uploads/${info?.profileImg}`;
     }
   };
+
+  // 프로필 이미지 클릭 시 드롭 다운
+  const [showDropdown, setShowDropdown] = useState(false);
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+  const handleClickOutside = (e) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+      setShowDropdown(false);
+    }
+  };
+  const handleImgClick = () => {
+    setShowDropdown(!showDropdown); // showDropdown 값을 반전시킴
+  };
+
   return (
     <div className="post">
       <div className="postWrap">
         {writerInfo !== null && (
           <>
-            <div className="leftSide">
-              <img src={profileImg(writerInfo)} alt="작성자 프로필 사진" />
+            <div
+              className="leftSide"
+              onClick={handleImgClick}
+              ref={dropdownRef}
+            >
+              <img src={profileImg(writerInfo)} alt="작성자 프로필 사진" />{' '}
+              {showDropdown && <PostDropdown />}
             </div>
+
             <div className="rightSide">
               {isModifyMode ? (
                 <>

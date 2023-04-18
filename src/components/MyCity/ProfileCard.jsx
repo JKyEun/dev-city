@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { updateUser } from '../../store/modules/user';
+import GetUserImg from './GetUserImg';
 
 export default function ProfileCard({
   profileImg,
@@ -113,22 +114,14 @@ export default function ProfileCard({
     fetchUserData();
   }, []);
 
+  const imgUrl = GetUserImg(profileImg);
   return (
     <div className="profile">
       <div className="profileBox">
         <div>
           <img
             className="profilePhoto"
-            src={
-              profileImgUpdate?.includes('/http')
-                ? profileImgUpdate.replace('/', '')
-                : !profileImgUpdate
-                ? '/images/default-profile.png'
-                : `http://localhost:4000/uploads/${profileImgUpdate?.replace(
-                    '/',
-                    '',
-                  )}`
-            }
+            src={imgUrl}
             name="img"
             alt="프로필 사진"
           />

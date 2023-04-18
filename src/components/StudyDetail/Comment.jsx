@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import PostDropdown from './PostDropdown';
 
 export default function Comment({
   boardEl,
@@ -112,11 +113,30 @@ export default function Comment({
     }
   });
 
+  // 프로필 이미지 클릭 시 드롭 다운
+  const [showDropdown, setShowDropdown] = useState(false);
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+  const handleClickOutside = (e) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+      setShowDropdown(false);
+    }
+  };
+  const handleImgClick = () => {
+    setShowDropdown(!showDropdown); // showDropdown 값을 반전시킴
+  };
+
   return (
     <>
       {commentWriterInfo !== null && (
         <div className="comment">
-          <div className="imgWrap">
+          <div className="imgWrap" onClick={handleImgClick} ref={dropdownRef}>
             <img
               src={
                 commentWriterInfo.profileImg.includes('http')
@@ -127,7 +147,9 @@ export default function Comment({
               }
               alt="댓글 작성자 프로필"
             />
+            {showDropdown && <PostDropdown />}
           </div>
+
           {isModifyMode ? (
             <>
               <form
