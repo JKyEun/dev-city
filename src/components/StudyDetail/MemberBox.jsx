@@ -18,9 +18,14 @@ export default function MemberBox({ match, studyDetail, setIsModifyMode }) {
   const study = useSelector((state) => state.studyDetail.study);
   const loading = useSelector((state) => state.studyDetail.loading);
   const user = useSelector((state) => state.user);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const myMemberEl =
+    study &&
+    study.member.filter((el) => el.memberId === localStorage.getItem('userId'));
+  const isLeader =
+    myMemberEl && myMemberEl.length > 0 ? myMemberEl[0].isLeader : false;
 
   useEffect(() => {
     const fetchStudyData = async () => {
@@ -113,7 +118,18 @@ export default function MemberBox({ match, studyDetail, setIsModifyMode }) {
       const requestUser = {
         userId: currentUserId,
       };
-
+      const findPhone = await axios.get(
+        `http://localhost:4000/user/${study?.member[0]?.memberId}`,
+      );
+      console.log('??????', findPhone.data.phoneNumber, study.studyName);
+      if (findPhone.data.phoneNumber) {
+        const resSend = await axios.post('http://localhost:4000/study/send', {
+          phone: findPhone.data.phoneNumber,
+          studyName: study.studyName,
+        });
+        console.log(resSend.data);
+        return;
+      }
       const addRes = await axios.post(
         `http://localhost:4000/invite/add/${match.params.id}`,
         requestUser,
@@ -127,8 +143,6 @@ export default function MemberBox({ match, studyDetail, setIsModifyMode }) {
       };
 
       dispatch(setStudy(newStudy));
-
-      alert('스터디 참가 신청이 완료되었습니다.');
     } catch (err) {
       console.error(err);
     }

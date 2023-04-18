@@ -14,31 +14,35 @@ export default function InsertInformationPage() {
   const emailInput = useRef();
   const githubInput = useRef();
   const fieldInput = useRef();
+  const phoneNumber = useRef();
 
   const setUserInfo = async (e, id) => {
     e.preventDefault();
+    if (phoneNumber?.current?.value) {
+      const newInfo = {
+        ...userInfo,
+        userName: nameInput?.current?.value,
+        nickName: nickNameInput?.current?.value,
+        email: emailInput?.current?.value,
+        githubAddress: githubInput?.current?.value,
+        field: fieldInput?.current?.value,
+        phoneNumber: phoneNumber?.current?.value.replaceAll('-', ''),
+      };
 
-    const newInfo = {
-      ...userInfo,
-      userName: nameInput.current.value,
-      nickName: nickNameInput.current.value,
-      email: emailInput.current.value,
-      githubAddress: githubInput.current.value,
-      field: fieldInput.current.value,
-    };
-
-    try {
-      const res = await axios.post(
-        `http://localhost:4000/user/updateuser/${id}`,
-        newInfo,
-      );
-      console.log(res.data);
-      dispatch(updateUser(newInfo));
-    } catch (err) {
-      console.error(err);
+      try {
+        const res = await axios.post(
+          `http://localhost:4000/user/updateuser/${id}`,
+          newInfo,
+        );
+        console.log(res.data);
+        dispatch(updateUser(newInfo));
+      } catch (err) {
+        console.error(err);
+      }
+      navigate('/');
+    } else {
+      alert('휴대폰 번호를 입력하세요');
     }
-
-    navigate('/');
   };
 
   const setUserInfoGithub = async (e, id) => {
@@ -75,6 +79,8 @@ export default function InsertInformationPage() {
     navigate('/');
   };
 
+  console.log(phoneNumber?.current?.value);
+
   return (
     <div className="insertInformationWrap">
       <img src="/images/logo_deep.svg" alt="데브시티 로고" width="220" />
@@ -83,6 +89,20 @@ export default function InsertInformationPage() {
         입력해주세요
       </div>
       <form>
+        <div>
+          <label htmlFor="phoneNumberInput">
+            휴대폰 번호<span className="require">*</span>
+          </label>
+          <input
+            ref={phoneNumber}
+            id="phoneNumber"
+            type="tel"
+            pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
+            required
+            placeholder="- 제외하여 입력해주세요"
+          />
+        </div>
+
         {userInfo.userName === '이름을 입력하세요' && (
           <div>
             <label htmlFor="nameInput">이름</label>
@@ -111,10 +131,13 @@ export default function InsertInformationPage() {
               ref={emailInput}
               id="emailInput"
               type="email"
+              oninvalid="this.setCustomValidity('Please select the item.')"
+              oninput="this.setCustomValidity('Okay')"
               placeholder="이메일을 입력해주세요"
             />
           </div>
         )}
+
         {userInfo.userName === '이름을 입력하세요' && (
           <div>
             <label htmlFor="githubInput">깃허브 주소</label>
@@ -141,9 +164,6 @@ export default function InsertInformationPage() {
             <option value="기획">기획</option>
           </select>
         </div>
-        <span className="explain">
-          추가정보는 나의 도시에서 수정할 수 있습니다
-        </span>
         {userInfo.userName === '이름을 입력하세요' ? (
           <button
             onClick={(e) => setUserInfo(e, localStorage.getItem('userId'))}
@@ -162,14 +182,7 @@ export default function InsertInformationPage() {
           </button>
         )}
       </form>
-      <div
-        className="skip"
-        onClick={() => {
-          navigate('/');
-        }}
-      >
-        건너뛰기
-      </div>
+      <div className="explain">추가정보는 나의 도시에서 수정할 수 있습니다</div>
     </div>
   );
 }
