@@ -2,17 +2,23 @@
 const initState = {
   study: null,
   loading: false,
-  isModify: false,
 };
 
 // 액션 타입 정의
+const INIT = 'studyDetail/INIT';
 const FETCH_STUDY = 'studyDetail/FETCH_STUDY';
 const SET_STUDY = 'studyDetail/SET_STUDY';
 const CLOSE_AND_OPEN_STUDY = 'studyDetail/CLOSE_AND_OPEN_STUDY';
-const IS_MODIFY = 'studyDetail/IS_MODIFY';
+const EDIT_MODE = 'studyDetail/EDIT_MODE';
 const MODIFY_STUDY = 'studyDetail/MODIFY_STUDY';
 
 // 액션 생성 함수 정의
+export function init() {
+  return {
+    type: INIT,
+  };
+}
+
 export const fetchStudy = (id) => ({
   type: FETCH_STUDY,
   payload: id,
@@ -28,8 +34,8 @@ export const closeAndOpenStudy = (boolean) => ({
   payload: boolean,
 });
 
-export const isModify = (boolean) => ({
-  type: IS_MODIFY,
+export const editMode = (boolean) => ({
+  type: EDIT_MODE,
   payload: boolean,
 });
 
@@ -41,6 +47,11 @@ export const modify = (payload) => ({
 // 리듀서 정의
 const studyDetail = (state = initState, action) => {
   switch (action.type) {
+    case INIT:
+      return {
+        ...state,
+        editMode: false,
+      };
     case FETCH_STUDY:
       return {
         ...state,
@@ -51,6 +62,7 @@ const studyDetail = (state = initState, action) => {
         ...state,
         study: action.payload,
         loading: false,
+        editMode: false,
       };
     case CLOSE_AND_OPEN_STUDY:
       return {
@@ -58,14 +70,12 @@ const studyDetail = (state = initState, action) => {
         study: { ...state.study, isClosed: action.payload },
       };
 
-    case IS_MODIFY:
-      console.log(action.payload);
+    case EDIT_MODE:
       return {
         ...state,
-        isModify: action.payload,
+        editMode: action.payload,
       };
     case MODIFY_STUDY:
-      console.log(action.payload);
       return {
         ...state,
         study: action.payload,

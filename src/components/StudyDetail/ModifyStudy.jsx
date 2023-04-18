@@ -1,10 +1,10 @@
 import axios from 'axios';
-import React, { Fragment, useEffect, useRef } from 'react';
+import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import { Link, useNavigate } from 'react-router-dom';
-import { isModify, modify } from '../../store/modules/studyDetail';
+import { editMode, modify } from '../../store/modules/studyDetail';
 import 'react-circular-progressbar/dist/styles.css';
 import '../../style/modifyStudy.scss';
 
@@ -87,7 +87,6 @@ export default function ModifyStudy({ match }) {
 
   const modifyStudy = async () => {
     try {
-      // dispatch(fetchStudy(match.params.id));
       let skills = skillSelect.current.props.value;
       let skillsArr = [];
       for (let i = 0; i < skills.length; i++) {
@@ -114,7 +113,7 @@ export default function ModifyStudy({ match }) {
 
       const resModify = await axios.post(
         `http://localhost:4000/study/modify/${match.params.id}`,
-        { modifyData },
+        { modifyData, userId: localStorage.getItem('userId') },
       );
 
       alert(resModify.data);
@@ -129,16 +128,13 @@ export default function ModifyStudy({ match }) {
           studySystem: studySystemInput.current.value,
           etc: etcInput.current.value,
         }),
-        dispatch(isModify(false)),
+        dispatch(editMode(false)),
       );
-
-      console.log(resModify.data);
     } catch (err) {
       alert(err.response.data.message);
       console.error(err);
     }
   };
-
   const elementContent = [
     {
       title: '기본정보',

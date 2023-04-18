@@ -1,9 +1,8 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { fetchStudy, setStudy } from '../../store/modules/studyDetail';
 import ParticipationRequest from './ParticipationRequest';
-import { Link, useNavigate } from 'react-router-dom';
 import StudyParticipants from './StudyParticipants';
 import '../../style/studyDetail.scss';
 import ModifyStudy from './ModifyStudy';
@@ -11,7 +10,7 @@ import ModifyStudy from './ModifyStudy';
 export default function StudyDetail({ match, studyDetail }) {
   const study = useSelector((state) => state.studyDetail.study);
   const loading = useSelector((state) => state.studyDetail.loading);
-  const modifyStatus = useSelector((state) => state.studyDetail.isModify);
+  const modifyStatus = useSelector((state) => state.studyDetail.editMode);
 
   const dispatch = useDispatch();
 
