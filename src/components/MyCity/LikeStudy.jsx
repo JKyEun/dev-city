@@ -41,6 +41,11 @@ export default function LikeStudy({ e, item, idx, userId, handleRender }) {
       <div className="flexBox-alignCenter">
         <ul className="flexBox skills">
           {item?.skills?.map((el) => {
+            if (el === 'C#') {
+              el = 'cSharp';
+            } else {
+              el = el.toLowerCase();
+            }
             return (
               <p key={el}>
                 <img src={`/images/skill_icon/${el}.svg`} alt="" />

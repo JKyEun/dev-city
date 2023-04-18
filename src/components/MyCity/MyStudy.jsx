@@ -30,6 +30,11 @@ export default function MyStudy({ joinedStudy }) {
       <div className="flexBox-alignCenter">
         <ul className="flexBox skills">
           {joinedStudy?.skills?.map((el) => {
+            if (el === 'C#') {
+              el = 'cSharp';
+            } else {
+              el = el.toLowerCase();
+            }
             return (
               <p key={el}>
                 <img src={`/images/skill_icon/${el}.svg`} alt="" />
