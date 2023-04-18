@@ -1,233 +1,256 @@
-.studyBoardWrap {
-  font-size: 14px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 40px 0;
-  .createPostForm {
-    width: 100%;
-    input {
-      width: 88%;
-      height: 35px;
-      padding-left: 20px;
-      border-radius: 50px;
-      background-color: #f5f6f7;
-      border: none;
-    }
-    button {
-      background-color: #605cff;
-      color: #fff;
-      font-weight: 700;
-      width: 10%;
-      margin-left: 10px;
-      height: 35px;
-      border: none;
-      border-radius: 30px;
-      font-size: 14px;
-    }
-    button:hover {
-      cursor: pointer;
+.studyBoardWrapContainer {
+  position: relative;
+  .lockIconWrap {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    display: flex;
+    flex-flow: column;
+
+    h2 {
+      font-size: 16px;
+      color: #777;
+      margin-top: 10px;
     }
   }
-  .post {
+
+  .lockIconWrap svg {
+    color: #777;
+    font-size: 2rem;
+  }
+  .studyBoardWrap {
+    font-size: 14px;
     display: flex;
     flex-direction: column;
-    margin-top: 30px;
-    .postWrap {
-      display: flex;
-      position: relative;
-      .leftSide {
-        width: 40px;
-        height: 40px;
-        overflow: hidden;
-        margin-right: 10px;
-        border-radius: 50%;
-        img {
-          cursor: pointer;
-          width: 100%;
-        }
+    align-items: center;
+    padding: 40px 0;
+    .createPostForm {
+      width: 100%;
+      input {
+        width: 88%;
+        height: 35px;
+        padding-left: 20px;
+        border-radius: 50px;
+        background-color: #f5f6f7;
+        border: none;
       }
-      .rightSide {
-        display: flex;
-        flex-direction: column;
-        width: 820px;
-        .postInfo {
-          .nickname {
-            font-weight: 800;
-          }
-          .date {
-            margin-top: 5px;
-            color: #999;
-          }
-        }
-        .content {
-          margin-top: 10px;
-        }
-        .contentInput {
-          display: block;
-          margin-top: 5px;
-          margin-bottom: 10px;
-          padding-right: 40px;
-          width: 600px;
-          height: 30px;
-          border-radius: 50px;
-          border: none;
-          padding-left: 20px;
-          padding-right: 20px;
-          background-color: #f5f6f7;
-        }
-        .getComment {
-          width: 70px;
-          margin-top: 10px;
-          text-decoration: underline;
-          color: #605cff;
-        }
-        .getComment:hover {
-          cursor: pointer;
-        }
-        .modifyBtn,
-        .deleteBtn {
-          position: absolute;
-          right: 0;
-          top: 0;
-          border: 1px solid #ff6868;
-          background-color: #fff;
-          color: #ff6868;
-          border-radius: 20px;
-          font-size: 12px;
-          padding: 3px 8px;
-        }
-        .modifyBtn {
-          right: 45px;
-          border: 1px solid #47cddf;
-          background-color: #fff;
-          color: #47cddf;
-          border-radius: 20px;
-          font-size: 12px;
-          padding: 3px 8px;
-        }
-        .modifyBtn:hover,
-        .deleteBtn:hover {
-          cursor: pointer;
-        }
+      button {
+        background-color: #605cff;
+        color: #fff;
+        font-weight: 700;
+        width: 10%;
+        margin-left: 10px;
+        height: 35px;
+        border: none;
+        border-radius: 30px;
+        font-size: 14px;
+      }
+      button:hover {
+        cursor: pointer;
       }
     }
-    .commentWrap {
+    .post {
       display: flex;
-      margin-top: 10px;
       flex-direction: column;
-      padding: 20px;
-      border-radius: 10px;
-      margin-left: 30px;
-      background-color: #f5f6f7;
-      .comment {
-        position: relative;
+      margin-top: 30px;
+      .postWrap {
         display: flex;
-        margin-bottom: 10px;
-        .imgWrap {
+        position: relative;
+        .leftSide {
           width: 40px;
           height: 40px;
           overflow: hidden;
+          margin-right: 10px;
           border-radius: 50%;
           img {
             cursor: pointer;
-            width: 40px;
+            width: 100%;
           }
         }
-        .rightWrap {
-          width: 660px;
-          .commentInfo {
-            margin-left: 10px;
-            display: flex;
-            span:first-child {
+        .rightSide {
+          display: flex;
+          flex-direction: column;
+          width: 820px;
+          .postInfo {
+            .nickname {
               font-weight: 800;
-              padding-right: 7px;
-              border-right: 0.1px solid #999;
             }
-            span:last-child {
+            .date {
+              margin-top: 5px;
               color: #999;
-              padding-left: 7px;
             }
           }
-          .commentContent {
-            margin-left: 10px;
-            margin-top: 5px;
+          .content {
+            margin-top: 10px;
           }
-          .commentModifyInput {
-            margin-left: 10px;
+          .contentInput {
+            display: block;
             margin-top: 5px;
+            margin-bottom: 10px;
             padding-right: 40px;
-            width: 530px;
+            width: 600px;
             height: 30px;
             border-radius: 50px;
             border: none;
             padding-left: 20px;
             padding-right: 20px;
+            background-color: #f5f6f7;
           }
-        }
-
-        .modifyBtn,
-        .deleteBtn {
-          position: absolute;
-          right: 15px;
-          border: 1px solid #ff6868;
-          background-color: #fff;
-          color: #ff6868;
-          border-radius: 20px;
-          font-size: 12px;
-          padding: 3px 8px;
-        }
-        .modifyBtn {
-          top: 0;
-          right: 60px;
-          border: 1px solid #47cddf;
-          background-color: #fff;
-          color: #47cddf;
-          border-radius: 20px;
-          font-size: 12px;
-          padding: 3px 8px;
-        }
-
-        .modifyBtn:hover,
-        .deleteBtn:hover {
-          cursor: pointer;
+          .getComment {
+            width: 70px;
+            margin-top: 10px;
+            text-decoration: underline;
+            color: #605cff;
+          }
+          .getComment:hover {
+            cursor: pointer;
+          }
+          .modifyBtn,
+          .deleteBtn {
+            position: absolute;
+            right: 0;
+            top: 0;
+            border: 1px solid #ff6868;
+            background-color: #fff;
+            color: #ff6868;
+            border-radius: 20px;
+            font-size: 12px;
+            padding: 3px 8px;
+          }
+          .modifyBtn {
+            right: 45px;
+            border: 1px solid #47cddf;
+            background-color: #fff;
+            color: #47cddf;
+            border-radius: 20px;
+            font-size: 12px;
+            padding: 3px 8px;
+          }
+          .modifyBtn:hover,
+          .deleteBtn:hover {
+            cursor: pointer;
+          }
         }
       }
-
-      .commentInput {
+      .commentWrap {
         display: flex;
-        .imgWrap {
-          width: 40px;
-          height: 40px;
-          overflow: hidden;
-          border-radius: 50%;
-          img {
-            width: 40px;
-          }
-        }
-        input {
-          margin-left: 10px;
-          width: 90%;
-          height: 40px;
-          border-radius: 50px;
-          border: none;
-          padding-left: 20px;
-          padding-right: 20px;
-        }
-        .commentBtn {
-          margin-left: 10px;
-          width: 40px;
-          height: 40px;
-          background-color: transparent;
-          border: none;
-          img {
+        margin-top: 10px;
+        flex-direction: column;
+        padding: 20px;
+        border-radius: 10px;
+        margin-left: 30px;
+        background-color: #f5f6f7;
+        .comment {
+          position: relative;
+          display: flex;
+          margin-bottom: 10px;
+          .imgWrap {
             width: 40px;
             height: 40px;
+            overflow: hidden;
+            border-radius: 50%;
+            img {
+              cursor: pointer;
+              width: 40px;
+            }
+          }
+          .rightWrap {
+            width: 660px;
+            .commentInfo {
+              margin-left: 10px;
+              display: flex;
+              span:first-child {
+                font-weight: 800;
+                padding-right: 7px;
+                border-right: 0.1px solid #999;
+              }
+              span:last-child {
+                color: #999;
+                padding-left: 7px;
+              }
+            }
+            .commentContent {
+              margin-left: 10px;
+              margin-top: 5px;
+            }
+            .commentModifyInput {
+              margin-left: 10px;
+              margin-top: 5px;
+              padding-right: 40px;
+              width: 530px;
+              height: 30px;
+              border-radius: 50px;
+              border: none;
+              padding-left: 20px;
+              padding-right: 20px;
+            }
+          }
+
+          .modifyBtn,
+          .deleteBtn {
+            position: absolute;
+            right: 15px;
+            border: 1px solid #ff6868;
+            background-color: #fff;
+            color: #ff6868;
+            border-radius: 20px;
+            font-size: 12px;
+            padding: 3px 8px;
+          }
+          .modifyBtn {
+            top: 0;
+            right: 60px;
+            border: 1px solid #47cddf;
+            background-color: #fff;
+            color: #47cddf;
+            border-radius: 20px;
+            font-size: 12px;
+            padding: 3px 8px;
+          }
+
+          .modifyBtn:hover,
+          .deleteBtn:hover {
+            cursor: pointer;
           }
         }
 
-        .commentBtn:hover {
-          cursor: pointer;
+        .commentInput {
+          display: flex;
+          .imgWrap {
+            width: 40px;
+            height: 40px;
+            overflow: hidden;
+            border-radius: 50%;
+            img {
+              width: 40px;
+            }
+          }
+          input {
+            margin-left: 10px;
+            width: 90%;
+            height: 40px;
+            border-radius: 50px;
+            border: none;
+            padding-left: 20px;
+            padding-right: 20px;
+          }
+          .commentBtn {
+            margin-left: 10px;
+            width: 40px;
+            height: 40px;
+            background-color: transparent;
+            border: none;
+            img {
+              width: 40px;
+              height: 40px;
+            }
+          }
+
+          .commentBtn:hover {
+            cursor: pointer;
+          }
         }
       }
     }

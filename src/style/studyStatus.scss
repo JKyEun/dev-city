@@ -1,8 +1,31 @@
-.study_status {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 10px;
-  margin: 0px 10px;
-  margin-top: 40px;
+.studyStatusWrapContainer {
+  position: relative;
+  .lockIconWrap {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    display: flex;
+    flex-flow: column;
+
+    h2 {
+      font-size: 16px;
+      color: #777;
+      margin-top: 10px;
+    }
+  }
+
+  .lockIconWrap svg {
+    color: #777;
+    font-size: 2rem;
+  }
+  .study_status {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    margin: 0px 10px;
+    margin-top: 40px;
+  }
 }
