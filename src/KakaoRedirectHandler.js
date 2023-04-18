@@ -45,7 +45,7 @@ const KakaoRedirectHandler = () => {
           };
 
           const registerResponse = await axios.post(
-            `http://localhost:4000/user/kakaologin`,
+            `http://3.34.52.131:4000/user/kakaologin`,
             userLoginInfo,
           );
 

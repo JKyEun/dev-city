@@ -10,7 +10,7 @@ export default function AllUsers() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:4000/allUser/user`)
+      .get(`http://3.34.52.131:4000/allUser/user`)
       .then((response) => {
         setRandomUsers(response.data);
       })
@@ -22,7 +22,7 @@ export default function AllUsers() {
   useEffect(() => {
     if (!userInfo.userId) return;
     axios
-      .get(`http://localhost:4000/allUser/${userInfo.userId}`)
+      .get(`http://3.34.52.131:4000/allUser/${userInfo.userId}`)
       .then((response) => {
         setRandomUsers(response.data);
       })

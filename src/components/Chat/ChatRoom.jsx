@@ -11,7 +11,7 @@ export default function ChatRoom() {
   const [loading, setLoading] = useState(true);
   const chatInput = useRef('');
   const userInfo = useSelector((state) => state.user);
-  const socket = io('http://localhost:4000');
+  const socket = io('http://3.34.52.131:4000');
   const messageWindow = useRef(null);
   const nowChattingWith = useSelector((state) => state.chat.nowChattingWith);
   const roomId = useSelector((state) => state.chat.roomId);
@@ -48,7 +48,7 @@ export default function ChatRoom() {
 
     // DB에 전송
     const res = await axios.post(
-      `http://localhost:4000/chat/push/${roomId}`,
+      `http://3.34.52.131:4000/chat/push/${roomId}`,
       newChat,
     );
 
@@ -67,7 +67,7 @@ export default function ChatRoom() {
 
   const getChatLog = async () => {
     try {
-      const res = await axios.get(`http://localhost:4000/chat/get/${roomId}`);
+      const res = await axios.get(`http://3.34.52.131:4000/chat/get/${roomId}`);
       console.log(res.data);
 
       dispatch(setChatLog(res.data.chatLog));

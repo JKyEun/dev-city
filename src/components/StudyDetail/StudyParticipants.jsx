@@ -7,7 +7,7 @@ export default function StudyParticipants({ member }) {
 
   const getUserInfo = async (id) => {
     try {
-      const res = await axios.get(`http://localhost:4000/user/${id}`);
+      const res = await axios.get(`http://3.34.52.131:4000/user/${id}`);
       setUserInfo(res.data);
     } catch (err) {
       console.error(err);
@@ -27,7 +27,7 @@ export default function StudyParticipants({ member }) {
               ? userInfo?.profileImg
               : !userInfo?.profileImg
               ? '/images/default-profile.png'
-              : `http://localhost:4000/uploads/${userInfo?.profileImg?.replace(
+              : `http://3.34.52.131:4000/uploads/${userInfo?.profileImg?.replace(
                   '/',
                   '',
                 )}`

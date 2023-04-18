@@ -15,7 +15,7 @@ export default function RecruitedStudy() {
   // study 데이터 가져와서 state에 적용시키기
   const getStudyInfo = async () => {
     try {
-      const res = await axios.get(`http://localhost:4000/study`);
+      const res = await axios.get(`http://3.34.52.131:4000/study`);
       const latestStudies = res.data.slice().reverse().slice(0, 4);
       dispatch(init(latestStudies));
     } catch (err) {

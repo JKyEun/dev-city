@@ -13,7 +13,7 @@ export default function ParticipationRequest({ userId }) {
 
   const getMemberInfo = async (id) => {
     try {
-      const res = await axios.get(`http://localhost:4000/user/${id}`);
+      const res = await axios.get(`http://3.34.52.131:4000/user/${id}`);
       setMember(() => res.data);
     } catch (err) {
       console.error(err);
@@ -44,12 +44,12 @@ export default function ParticipationRequest({ userId }) {
       }
 
       const responseStudy = await axios.put(
-        `http://localhost:4000/study/update/${id}`,
+        `http://3.34.52.131:4000/study/update/${id}`,
         { updatedMember },
       );
 
       const responseUser = await axios.post(
-        `http://localhost:4000/user/joinstudy/`,
+        `http://3.34.52.131:4000/user/joinstudy/`,
         { userId: currentUserId, studyId: id },
       );
 
@@ -92,7 +92,7 @@ export default function ParticipationRequest({ userId }) {
       };
 
       const requestRes = await axios.post(
-        `http://localhost:4000/invite/remove/${id}`,
+        `http://3.34.52.131:4000/invite/remove/${id}`,
         toRemoveId,
       );
 
@@ -123,7 +123,7 @@ export default function ParticipationRequest({ userId }) {
       };
 
       const requestRes = await axios.post(
-        `http://localhost:4000/invite/remove/${id}`,
+        `http://3.34.52.131:4000/invite/remove/${id}`,
         toRemoveId,
       );
 

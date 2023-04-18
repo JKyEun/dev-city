@@ -44,7 +44,7 @@ export default function TodoList({ selectedDate }) {
         ).toString(),
       };
       const res = await axios.post(
-        `http://localhost:4000/user/setlist/${id}`,
+        `http://3.34.52.131:4000/user/setlist/${id}`,
         newTodo,
       );
       console.log(res.data);

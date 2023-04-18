@@ -34,7 +34,7 @@ export default function MemberBox({ match, studyDetail, setIsModifyMode }) {
         // match.params.id로 스터디 상세 정보를 가져옴
         // match.params.id에 해당하는 스터디 정보는 response에
         const resFetch = await axios.get(
-          `http://localhost:4000/study/detail/${match.params.id}`,
+          `http://3.34.52.131:4000/study/detail/${match.params.id}`,
         );
 
         const study = resFetch.data;
@@ -60,7 +60,7 @@ export default function MemberBox({ match, studyDetail, setIsModifyMode }) {
         // 사람 꽉차면 백엔드 isClosed를 true로 바꾸기
         if (study.memberNum.currentNum === study.memberNum.maxNum) {
           await axios.post(
-            `http://localhost:4000/study/detail/${match.params.id}/close`,
+            `http://3.34.52.131:4000/study/detail/${match.params.id}/close`,
           );
         }
         dispatch(
@@ -106,7 +106,7 @@ export default function MemberBox({ match, studyDetail, setIsModifyMode }) {
       }
 
       const getRes = await axios.get(
-        `http://localhost:4000/invite/get/${match.params.id}`,
+        `http://3.34.52.131:4000/invite/get/${match.params.id}`,
       );
 
       const requestList = getRes.data.request;
@@ -119,7 +119,7 @@ export default function MemberBox({ match, studyDetail, setIsModifyMode }) {
         userId: currentUserId,
       };
       const findPhone = await axios.get(
-        `http://localhost:4000/user/${study?.member[0]?.memberId}`,
+        `http://3.34.52.131:4000/user/${study?.member[0]?.memberId}`,
       );
 
       if (
@@ -130,14 +130,14 @@ export default function MemberBox({ match, studyDetail, setIsModifyMode }) {
           '리더의 휴대폰 번호가 저장되어 있지 않아 확인이 늦어질 수 있습니다',
         );
       } else {
-        const resSend = await axios.post('http://localhost:4000/study/send', {
+        const resSend = await axios.post('http://3.34.52.131:4000/study/send', {
           phone: findPhone.data.phoneNumber,
           studyName: study.studyName,
         });
         console.log(resSend.data);
       }
       const addRes = await axios.post(
-        `http://localhost:4000/invite/add/${match.params.id}`,
+        `http://3.34.52.131:4000/invite/add/${match.params.id}`,
         requestUser,
       );
 
@@ -160,7 +160,7 @@ export default function MemberBox({ match, studyDetail, setIsModifyMode }) {
     if (window.confirm('스터디를 삭제하시겠습니까?')) {
       try {
         const resDelete = await axios.delete(
-          `http://localhost:4000/study/delete/${match.params.id}`,
+          `http://3.34.52.131:4000/study/delete/${match.params.id}`,
         );
         alert(resDelete.data);
         // 스터디 삭제 후 스터디 리스트 페이지로 이동
@@ -177,7 +177,7 @@ export default function MemberBox({ match, studyDetail, setIsModifyMode }) {
     if (window.confirm('스터디에서 탈퇴하시겠습니까?')) {
       try {
         const resLeave = await axios.delete(
-          `http://localhost:4000/study/leave/${match.params.id}`,
+          `http://3.34.52.131:4000/study/leave/${match.params.id}`,
           { data: { userId: localStorage.getItem('userId') } },
         );
 
@@ -203,12 +203,12 @@ export default function MemberBox({ match, studyDetail, setIsModifyMode }) {
   const CloseAndOpenEvent = async () => {
     if (!study.isClosed) {
       await axios.post(
-        `http://localhost:4000/study/detail/${match.params.id}/close`,
+        `http://3.34.52.131:4000/study/detail/${match.params.id}/close`,
       );
       dispatch(closeAndOpenStudy(true));
     } else {
       await axios.post(
-        `http://localhost:4000/study/detail/${match.params.id}/open`,
+        `http://3.34.52.131:4000/study/detail/${match.params.id}/open`,
       );
       dispatch(closeAndOpenStudy(false));
     }
