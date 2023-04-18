@@ -38,7 +38,8 @@ export default function ChatRoom({ roomId, nowChattingWith }) {
     await socket.emit('send_message', data);
 
     // 채팅 로그 갱신
-    setChatLog((cur) => [...cur, newChat]);
+    const newChatLog = [...chatLog, newChat];
+    setChatLog(newChatLog);
 
     // DB에 전송
     const res = await axios.post(
