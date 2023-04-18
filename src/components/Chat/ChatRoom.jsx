@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import io from 'socket.io-client';
 import { setChatLog } from '../../store/modules/chat';
-import { Oval } from 'react-loader-spinner';
+import Loading from '../Loading';
 
 export default function ChatRoom() {
   const dispatch = useDispatch();
@@ -115,20 +115,7 @@ export default function ChatRoom() {
   return (
     <div className="chatRoom">
       {loading ? (
-        <div className="loading">
-          <Oval
-            height={80}
-            width={80}
-            color="#605cff"
-            wrapperStyle={{}}
-            wrapperClass=""
-            visible={true}
-            ariaLabel="oval-loading"
-            secondaryColor="#888"
-            strokeWidth={2}
-            strokeWidthSecondary={2}
-          />
-        </div>
+        <Loading />
       ) : (
         <>
           <div className="roomTitle">

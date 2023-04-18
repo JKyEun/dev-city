@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Loading from './components/Loading';
 
 export default function GithubRedirectHandler() {
   const navigate = useNavigate();
@@ -54,4 +55,6 @@ export default function GithubRedirectHandler() {
 
     loginFetch();
   });
+
+  return <Loading />;
 }

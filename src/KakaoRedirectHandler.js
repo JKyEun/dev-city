@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Loading from './components/Loading';
 
 const KakaoRedirectHandler = () => {
   const navigate = useNavigate();
@@ -73,6 +74,8 @@ const KakaoRedirectHandler = () => {
     }
     loginFetch();
   }, []);
+
+  return <Loading />;
 };
 
 export default KakaoRedirectHandler;
