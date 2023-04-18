@@ -53,6 +53,8 @@ export default function ReadyStudy({ item, idx, liked, isMain, userId }) {
           {item?.skills?.map((el) => {
             if (el === 'C#') {
               el = 'cSharp';
+            } else {
+              el = el.toLowerCase();
             }
             return (
               <p key={el}>
@@ -70,7 +72,7 @@ export default function ReadyStudy({ item, idx, liked, isMain, userId }) {
       {isMain ? null : (
         <div className="clickHeart" onClick={(e) => handleLike(e)}>
           <img
-            src={`/images/icon_heart${liked > 0 ? 'on' : 'off'}.svg`}
+            src={`/images/icon_heart${liked > 0 ? 'On' : 'Off'}.svg`}
             alt="heart"
           />
         </div>
