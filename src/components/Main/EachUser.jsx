@@ -1,11 +1,13 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 export default function EachUser({ eachUser }) {
   const [isFollowing, setIsFollowing] = useState(false);
   const [num, setNum] = useState(1);
   const userInfo = useSelector((state) => state.user);
+  const navigate = useNavigate();
 
   const follow = async () => {
     try {
@@ -150,6 +152,9 @@ export default function EachUser({ eachUser }) {
         ) : (
           <button
             onClick={() => {
+              if (!localStorage.getItem('userId')) {
+                navigate('/signin');
+              }
               setIsFollowing((cur) => !cur);
               follow();
             }}
