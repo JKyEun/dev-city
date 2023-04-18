@@ -1,29 +1,17 @@
 import axios from 'axios';
-import React, { Fragment, useEffect, useRef, useState } from 'react';
+import React, { Fragment, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import { Link, useNavigate } from 'react-router-dom';
-import { create } from '../../store/modules/study';
-
-import {
-  CircularProgressbar,
-  buildStyles,
-  CircularProgressbarWithChildren,
-} from 'react-circular-progressbar';
+import { isModify, modify } from '../../store/modules/studyDetail';
 import 'react-circular-progressbar/dist/styles.css';
-import '../../style/createStudy.scss';
+import '../../style/modifyStudy.scss';
+
 // react-select
 const animatedComponents = makeAnimated();
 
 // select 데이터들
-const numOptions = [
-  { value: 'two', label: '2명' },
-  { value: 'three', label: '3명' },
-  { value: 'four', label: '4명' },
-  { value: 'five', label: '5명' },
-];
-
 const fieldOptions = [
   { value: 'web', label: '웹' },
   { value: 'app', label: '앱' },
@@ -66,12 +54,10 @@ const skillOptions = [
   { value: 'unreal', label: 'Unreal' },
 ];
 
-export default function ModifyStudy() {
-  const [percent, setPercent] = useState({});
+export default function ModifyStudy({ match }) {
   const studyNameInput = useRef();
   const studyIntroInput = useRef();
   const studyFieldSelect = useRef();
-  const memberNumSelect = useRef();
   const skillSelect = useRef();
   const studySystemInput = useRef();
   const etcInput = useRef();
@@ -99,8 +85,9 @@ export default function ModifyStudy() {
     }
   });
 
-  const createStudyBtn = async () => {
+  const modifyStudy = async () => {
     try {
+      // dispatch(fetchStudy(match.params.id));
       let skills = skillSelect.current.props.value;
       let skillsArr = [];
       for (let i = 0; i < skills.length; i++) {
@@ -111,87 +98,47 @@ export default function ModifyStudy() {
         !studyNameInput.current.value ||
         !studyIntroInput.current.value ||
         !studyFieldSelect.current.props.value ||
-        !memberNumSelect.current.props.value ||
         !skillSelect.current.props.value ||
         !studySystemInput.current.value
       )
         return alert('필수 값을 입력해 주세요.');
 
-      const resCreate = await axios.post(
-        'http://localhost:4000/study/create_study',
-        {
-          userId: localStorage.getItem('userId'),
-          study_name: studyNameInput.current.value,
-          study_intro: studyIntroInput.current.value,
-          study_system: studySystemInput.current.value,
-          study_field: studyFieldSelect.current.props.value.label,
-          skills: skillsArr,
-          member_num: {
-            currentNum: 1,
-            maxNum: parseInt(
-              memberNumSelect.current.props.value.label.split('명'),
-            ),
-          },
-          member: [
-            {
-              isLeader: true,
-              memberId: localStorage.getItem('userId'),
-            },
-          ],
-          board: [],
-          structureImg: 'img',
-          study_system: studySystemInput.current.value,
-          study_etc: etcInput.current.value,
-          request: [],
-          isClosed: false,
-        },
+      const modifyData = {
+        studyName: studyNameInput.current.value,
+        studyIntro: studyIntroInput.current.value,
+        studySystem: studySystemInput.current.value,
+        field: studyFieldSelect.current.props.value.label,
+        skills: skillsArr,
+        etc: etcInput.current.value,
+      };
+
+      const resModify = await axios.post(
+        `http://localhost:4000/study/modify/${match.params.id}`,
+        { modifyData },
       );
 
-      alert(resCreate.data.message);
+      alert(resModify.data);
 
       dispatch(
-        create({
-          userId: localStorage.getItem('userId'),
-          study_name: studyNameInput.current.value,
-          study_intro: studyIntroInput.current.value,
-          study_system: studySystemInput.current.value,
-          study_field: studyFieldSelect.current.props.value.label,
+        modify({
+          ...study,
+          studyName: studyNameInput.current.value,
+          studyIntro: studyIntroInput.current.value,
+          field: studyFieldSelect.current.props.value.label,
           skills: skillsArr,
-          member_num: {
-            currentNum: 1,
-            maxNum: parseInt(
-              memberNumSelect.current.props.value.label.split('명'),
-            ),
-          },
-          member: [
-            {
-              isLeader: true,
-              memberId: localStorage.getItem('userId'),
-            },
-          ],
-          board: [],
-          structureImg: 'img',
-          study_etc: etcInput.current.value,
-          request: [],
-          isClosed: false,
-          nickName: resCreate.data.nickName,
+          studySystem: studySystemInput.current.value,
+          etc: etcInput.current.value,
         }),
+        dispatch(isModify(false)),
       );
 
-      return navigate('/study');
+      console.log(resModify.data);
     } catch (err) {
-      alert(err.response.data);
+      alert(err.response.data.message);
       console.error(err);
     }
   };
 
-  const handleValue = (e, key) => {
-    if (e !== '') {
-      setPercent({ ...percent, [key]: e });
-    } else {
-      setPercent({ ...percent, [key]: 'empty' });
-    }
-  };
   const elementContent = [
     {
       title: '기본정보',
@@ -201,12 +148,10 @@ export default function ModifyStudy() {
           require: true,
           input: (
             <input
-              onChange={(e) => handleValue(e.target.value, 'study_name')}
               className="inputContainer inputBox"
               type="text"
               ref={studyNameInput}
               placeholder="30자 이내로 입력해 주세요."
-              value={study.studyName}
               maxLength={30}
             />
           ),
@@ -216,11 +161,13 @@ export default function ModifyStudy() {
           require: true,
           input: (
             <Select
-              onChange={(e) => handleValue(e.value, 'study_field')}
               className="inputContainer"
               options={fieldOptions}
               placeholder="프론트엔드 / 백엔드 / 게임 / 기획 등 추후 추가 예정"
               ref={studyFieldSelect}
+              defaultValue={fieldOptions.find(
+                (option) => option.label === study.field,
+              )}
             />
           ),
         },
@@ -229,7 +176,6 @@ export default function ModifyStudy() {
           require: true,
           input: (
             <Select
-              onChange={(e) => handleValue(e, 'skills')}
               className="inputContainer"
               closeMenuOnSelect={false}
               components={animatedComponents}
@@ -237,6 +183,9 @@ export default function ModifyStudy() {
               options={skillOptions}
               placeholder="사용 언어를 선택해 주세요."
               ref={skillSelect}
+              defaultValue={skillOptions.filter((option) =>
+                study.skills.includes(option.label),
+              )}
             />
           ),
         },
@@ -250,7 +199,6 @@ export default function ModifyStudy() {
           require: true,
           input: (
             <textarea
-              onChange={(e) => handleValue(e.target.value, 'study_intro')}
               className="inputContainer"
               name=""
               id=""
@@ -266,7 +214,6 @@ export default function ModifyStudy() {
           require: true,
           input: (
             <textarea
-              onChange={(e) => handleValue(e.target.value, 'study_how')}
               className="inputContainer"
               name=""
               id=""
@@ -293,10 +240,6 @@ export default function ModifyStudy() {
     },
   ];
 
-  const perventage = Object.values(percent).filter((el) => {
-    return el !== 'empty';
-  });
-  console.log(percent);
   return (
     <div className="minMax flexBox-between">
       <div className="box-write">
@@ -334,6 +277,15 @@ export default function ModifyStudy() {
             </Fragment>
           );
         })}
+      </div>
+
+      <div className="box-modifyStudy">
+        <a className="btn btn--modify" onClick={modifyStudy}>
+          저장하기
+        </a>
+        <a className="btn btn--cancel" onClick={() => navigate(-1)}>
+          취소하기
+        </a>
       </div>
     </div>
   );

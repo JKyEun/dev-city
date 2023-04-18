@@ -13,13 +13,27 @@ export default function StudyDetailPage() {
   const modifyStatus = useSelector((state) => state.studyDetail.isModify);
   return (
     <div className="minMax">
-      <div className="flexBox-between-start">
+      {/* <div className="flexBox-between-start">
         {modifyStatus ? <ModifyStudy /> : <DetailTab />}
 
         <MemberBox
           match={{ params: { id } }}
           setIsModifyMode={setIsModifyMode}
         />
+      </div> */}
+
+      <div className="flexBox-between-start">
+        {modifyStatus ? (
+          <ModifyStudy match={{ params: { id } }} />
+        ) : (
+          <>
+            <DetailTab />
+            <MemberBox
+              match={{ params: { id } }}
+              setIsModifyMode={setIsModifyMode}
+            />
+          </>
+        )}
       </div>
     </div>
   );

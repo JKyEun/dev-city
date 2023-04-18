@@ -6,7 +6,7 @@ import {
   fetchStudy,
   setStudy,
   closeAndOpenStudy,
-  modifyStudy,
+  isModify,
 } from '../../store/modules/studyDetail';
 import {
   buildStyles,
@@ -204,6 +204,7 @@ export default function MemberBox({ match, studyDetail, setIsModifyMode }) {
       dispatch(closeAndOpenStudy(false));
     }
   };
+
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(window.location.href);
@@ -213,23 +214,9 @@ export default function MemberBox({ match, studyDetail, setIsModifyMode }) {
     }
   };
 
-  // 스터디 수정
+  // 스터디 수정 모드로
   const modifyStudyBtn = async () => {
-    dispatch(modifyStudy(true));
-    // try {
-
-    //   dispatch(modifyStudy(true))
-    //   setIsModifyMode(true); // 수정 모드로 변경
-    //   const response = await axios.put(`http://localhost:4000/study/modify/${match.params.id}`);
-    //   return response.data;
-    // } catch (error) {
-    //   console.log(error);
-    //   throw new Error('Failed to modify study info');
-    // }
-  };
-
-  const updateStudyBtn = async () => {
-    dispatch(modifyStudy(false));
+    dispatch(isModify(true));
   };
 
   return (
@@ -286,15 +273,9 @@ export default function MemberBox({ match, studyDetail, setIsModifyMode }) {
                 <a className="btn btn--share" onClick={handleCopy}>
                   공유하기
                 </a>
-                {modifyStatus ? (
-                  <a className="btn btn--modify" onClick={updateStudyBtn}>
-                    수정완료
-                  </a>
-                ) : (
-                  <a className="btn btn--modify" onClick={modifyStudyBtn}>
-                    수정하기
-                  </a>
-                )}
+                <a className="btn btn--modify" onClick={modifyStudyBtn}>
+                  수정하기
+                </a>
                 {study.memberNum.currentNum >= study.memberNum.maxNum ? (
                   <p className="onlyDeleteBtn" onClick={deleteStudy}>
                     스터디삭제
