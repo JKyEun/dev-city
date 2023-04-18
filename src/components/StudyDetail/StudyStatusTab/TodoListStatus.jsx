@@ -1,13 +1,14 @@
 import React from 'react';
 
-export default function TodoList({ data }) {
+export default function TodoListStatus({ data }) {
   const nickName = data.nickName;
   const userTodo = data.todoList;
+  console.log(userTodo[0]);
   return (
     <>
       <div className="todo_intro">
-        {nickName === '닉네임을 설정하세요'
-          ? nickName
+        {nickName === ''
+          ? '닉네임을 설정해주세요!'
           : `${nickName}님의 오늘 할 일`}
       </div>
 
@@ -30,6 +31,7 @@ export default function TodoList({ data }) {
             </div>
             <div className="content"></div>
             {el.content}
+            {el.date}
           </div>
         ))
       )}
