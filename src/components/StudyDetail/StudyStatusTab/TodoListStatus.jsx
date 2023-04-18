@@ -40,7 +40,14 @@ export default function TodoListStatus({ data }) {
               </div>
               <div className="listContent">
                 <p>{el.content}</p>
-                <p>{new Date(el?.date)?.toLocaleDateString('ko-KR')}</p>
+                <p>
+                  {new Date(el?.date)?.getHours().toString().padStart(2, '0') +
+                    ':' +
+                    new Date(el?.date)
+                      ?.getMinutes()
+                      .toString()
+                      .padStart(2, '0')}
+                </p>
               </div>
             </div>
           ))
