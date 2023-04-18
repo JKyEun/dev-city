@@ -35,6 +35,10 @@
       label {
         font-size: 16px;
         font-weight: 600;
+        .require {
+          margin-left: 5px;
+          color: #605cff;
+        }
       }
       input {
         padding-left: 15px;
@@ -54,11 +58,6 @@
       }
     }
 
-    .explain {
-      margin-top: 15px;
-      color: #605cff;
-      font-size: 16px;
-    }
     .submitBtn {
       margin-top: 30px;
       background-color: #605cff;
@@ -73,6 +72,11 @@
     .submitBtn:hover {
       cursor: pointer;
     }
+  }
+  .explain {
+    margin-top: 15px;
+    color: #605cff;
+    font-size: 16px;
   }
   .skip {
     margin-top: 15px;
