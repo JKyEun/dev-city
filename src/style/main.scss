@@ -195,10 +195,13 @@
   border-radius: 50px 0px 0px 0px;
   height: 271px;
   overflow: hidden;
+  background-image: url('../../public/images/main-3.svg');
+  background-repeat: no-repeat;
+  width: -webkit-fill-available;
   &::before {
-    content: url('../../public/images/main-3.svg');
-    opacity: 60%;
-    padding-bottom: 30px;
+    // content: url('../../public/images/main-3.svg');
+    // opacity: 60%;
+    // padding-bottom: 30px;
   }
   .imgText {
     position: absolute;
@@ -208,7 +211,7 @@
     left: 95%;
     top: 50%;
     transform: translateX(-150%);
-    z-index: 999;
+    z-index: 99;
   }
 }
 .bottom {
