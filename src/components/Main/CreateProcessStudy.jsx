@@ -52,11 +52,6 @@ export default function CreateProcessStudy() {
             </div>
           </div>
         </div>
-        <div className="pointImg">
-          <div className="imgText">
-            Building the Future with <strong>Dev-City</strong>
-          </div>
-        </div>
       </div>
     </>
   );

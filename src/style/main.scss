@@ -67,7 +67,7 @@
     }
     .showStudy {
       position: absolute;
-      width: 1400px;
+      // width: 1400px;
       top: 140px;
 
       a {
@@ -189,8 +189,8 @@
 .pointImg {
   position: absolute;
   width: 100%;
-  top: 65px;
-  left: 50%;
+  top: 1110px;
+  left: 55%;
   transform: translateX(-10%);
   background-color: #100c0b;
   border-radius: 50px 0px 0px 0px;
@@ -205,22 +205,11 @@
     color: #eee;
     font-size: 20px;
     width: 310px;
-    left: 50%;
+    left: 45%;
     top: 50%;
     transform: translateX(-150%);
     z-index: 999;
   }
-  // &::after {
-  //   content: 'Building the Future with Dev-City';
-  //   position: absolute;
-  //   color: #eee;
-  //   font-size: 20px;
-  //   width: 310px;
-  //   left: 28%;
-  //   top: 50%;
-  //   transform: translateX(-50%);
-  //   z-index: 999;
-  // }
 }
 .bottom {
   position: relative;
