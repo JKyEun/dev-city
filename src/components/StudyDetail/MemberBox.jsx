@@ -111,7 +111,7 @@ export default function MemberBox({ match, studyDetail, setIsModifyMode }) {
 
       const requestList = getRes.data.request;
       if (requestList.includes(currentUserId)) {
-        alert('이미 참가신청이 완료되었습니다.');
+        alert('이미 참가 신청이 완료되었습니다.');
         return;
       }
 
@@ -127,7 +127,7 @@ export default function MemberBox({ match, studyDetail, setIsModifyMode }) {
         findPhone.data.phoneNumber === ''
       ) {
         alert(
-          '리더의 휴대폰번호가 저장되어있지 않아 확인이 늦어질 수 있습니다',
+          '리더의 휴대폰 번호가 저장되어 있지 않아 확인이 늦어질 수 있습니다',
         );
       } else {
         const resSend = await axios.post('http://localhost:4000/study/send', {

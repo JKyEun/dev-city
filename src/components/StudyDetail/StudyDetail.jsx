@@ -101,6 +101,7 @@ export default function StudyDetail({ match, studyDetail }) {
                     if (skill === 'C#') skill = 'cSharp';
                     return (
                       <img
+                        style={{ marginRight: '7px' }}
                         key={skill}
                         src={`/images/skill_icon/${skill}.svg`}
                         alt={`${skill}이미지`}
@@ -129,7 +130,7 @@ export default function StudyDetail({ match, studyDetail }) {
                       <ParticipationRequest key={el} userId={el} />
                     ))
                   ) : isLeader ? (
-                    <p>참가신청인원 없음</p>
+                    <p style={{ color: '#999999' }}>참가 신청 인원 없음</p>
                   ) : null}
                 </div>
               </div>
