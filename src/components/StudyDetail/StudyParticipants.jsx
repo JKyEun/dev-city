@@ -47,7 +47,6 @@ export default function StudyParticipants({ member }) {
         <span className="fieldStudy">{userInfo?.field}</span>
         <span className="levelStudy">Lv.{userInfo?.level}</span>
       </div>
-      <button className="btnFollowStudy">팔로우</button>
     </div>
   );
 }
