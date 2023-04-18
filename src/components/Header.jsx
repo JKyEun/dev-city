@@ -71,7 +71,7 @@ export default function Header() {
       setShowDropdown(false);
     }
   };
-  const handleImageClick = () => {
+  const handleImgClick = () => {
     setShowDropdown(!showDropdown); // showDropdown 값을 반전시킴
   };
   const handleSearch = (e) => {
@@ -139,7 +139,7 @@ export default function Header() {
             {/* 로그인 유무 */}
             {isLoggedIn ? (
               <div ref={dropdownRef}>
-                <div className="profileImg" onClick={handleImageClick}>
+                <div className="profileImg" onClick={handleImgClick}>
                   <img
                     src={
                       profileImgUpdate?.includes('/http')

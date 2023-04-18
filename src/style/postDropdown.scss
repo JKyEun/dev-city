@@ -1,0 +1,23 @@
+.postDropdown {
+  position: absolute;
+  top: -1px;
+  left: 48px;
+  width: 80px;
+  height: 70px;
+  background-color: #ffffff;
+  border: 1px solid #eeeeee;
+  box-shadow: 0px 2px 10px rgba(174, 174, 174, 0.23);
+  border-radius: 5px;
+  text-align: center;
+  font-size: 14px;
+  z-index: 999;
+  ul {
+    margin-top: 9px;
+    li {
+      padding: 5px;
+      a {
+        color: #222;
+      }
+    }
+  }
+}
