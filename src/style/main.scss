@@ -188,10 +188,9 @@
 
 .pointImg {
   position: absolute;
-  width: 100%;
+  // width: 1000px;
   top: 1110px;
-  left: 55%;
-  transform: translateX(-10%);
+  left: 51.5%;
   background-color: #100c0b;
   border-radius: 50px 0px 0px 0px;
   height: 271px;
@@ -199,13 +198,14 @@
   &::before {
     content: url('../../public/images/main-3.svg');
     opacity: 60%;
+    padding-bottom: 30px;
   }
   .imgText {
     position: absolute;
     color: #eee;
     font-size: 20px;
     width: 310px;
-    left: 45%;
+    left: 95%;
     top: 50%;
     transform: translateX(-150%);
     z-index: 999;
