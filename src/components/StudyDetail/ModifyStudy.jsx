@@ -13,11 +13,18 @@ const animatedComponents = makeAnimated();
 
 // select 데이터들
 const fieldOptions = [
+  { value: 'front-end', label: '프론트엔드' },
+  { value: 'back-end', label: '백엔드' },
   { value: 'web', label: '웹' },
   { value: 'app', label: '앱' },
   { value: 'game', label: '게임' },
   { value: 'product-manager', label: '기획' },
-  { value: 'etc', label: '기타' },
+  { value: 'ai', label: 'AI' },
+  { value: 'game', label: '데이터 분석' },
+  { value: 'block-chain', label: '블록체인' },
+  { value: 'security', label: '보안' },
+  { value: 'embedded', label: '임베디드' },
+  { value: 'ux-ui', label: 'UX/UI' },
 ];
 
 const skillOptions = [
@@ -159,7 +166,7 @@ export default function ModifyStudy({ match }) {
             <Select
               className="inputContainer"
               options={fieldOptions}
-              placeholder="프론트엔드 / 백엔드 / 게임 / 기획 등 추후 추가 예정"
+              placeholder="모집 분야를 선택해주세요."
               ref={studyFieldSelect}
               defaultValue={fieldOptions.find(
                 (option) => option.label === study.field,
