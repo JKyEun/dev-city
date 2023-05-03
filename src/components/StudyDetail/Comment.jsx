@@ -35,7 +35,7 @@ export default function Comment({
 
   const getWriterInfo = async (id) => {
     try {
-      const res = await axios.get(`http://3.34.52.131:4000/user/${id}`);
+      const res = await axios.get(`http://localhost:4000/user/${id}`);
 
       setCommentWriterInfo(res.data);
     } catch (err) {
@@ -51,7 +51,7 @@ export default function Comment({
 
     try {
       const res = await axios.post(
-        `http://3.34.52.131:4000/board/delete/comment/${id}`,
+        `http://localhost:4000/board/delete/comment/${id}`,
         comment,
       );
 
@@ -89,7 +89,7 @@ export default function Comment({
 
     try {
       const res = await axios.post(
-        `http://3.34.52.131:4000/board/modify/comment/${id}`,
+        `http://localhost:4000/board/modify/comment/${id}`,
         modifiedComment,
       );
 
@@ -143,7 +143,7 @@ export default function Comment({
                   ? commentWriterInfo.profileImg
                   : !commentWriterInfo.profileImg
                   ? '/images/default-profile.png'
-                  : `http://3.34.52.131:4000/uploads/${commentWriterInfo?.profileImg}`
+                  : `http://localhost:4000/uploads/${commentWriterInfo?.profileImg}`
               }
               alt="댓글 작성자 프로필"
             />

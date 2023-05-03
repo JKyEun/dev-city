@@ -11,7 +11,7 @@ export default function IndividualMyCityPage() {
 
   const getIndividualInfo = async () => {
     try {
-      const res = await axios.get(`http://3.34.52.131:4000/user/${id}`);
+      const res = await axios.get(`http://localhost:4000/user/${id}`);
 
       setIndividualInfo(() => res.data);
     } catch (err) {

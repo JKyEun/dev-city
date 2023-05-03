@@ -32,7 +32,7 @@ export default function Post({ boardDB, boardEl, setBoardDB, getBoard }) {
 
   const getWriterInfo = async (id) => {
     try {
-      const res = await axios.get(`http://3.34.52.131:4000/user/${id}`);
+      const res = await axios.get(`http://localhost:4000/user/${id}`);
 
       setWriterInfo(() => res.data);
     } catch (err) {
@@ -47,7 +47,7 @@ export default function Post({ boardDB, boardEl, setBoardDB, getBoard }) {
 
     try {
       const res = await axios.post(
-        `http://3.34.52.131:4000/board/delete/${id}`,
+        `http://localhost:4000/board/delete/${id}`,
         deletePost,
       );
       console.log(res.data);
@@ -73,7 +73,7 @@ export default function Post({ boardDB, boardEl, setBoardDB, getBoard }) {
       console.log(modifiedPost);
 
       const res = await axios.post(
-        `http://3.34.52.131:4000/board/modify/${id}`,
+        `http://localhost:4000/board/modify/${id}`,
         modifiedPost,
       );
 
@@ -101,7 +101,7 @@ export default function Post({ boardDB, boardEl, setBoardDB, getBoard }) {
 
     try {
       const res = await axios.post(
-        `http://3.34.52.131:4000/board/add/comment/${id}`,
+        `http://localhost:4000/board/add/comment/${id}`,
         newComment,
       );
 
@@ -143,7 +143,7 @@ export default function Post({ boardDB, boardEl, setBoardDB, getBoard }) {
     } else if (!info?.profileImg) {
       return '/images/default-profile.png';
     } else {
-      return `http://3.34.52.131:4000/uploads/${info?.profileImg}`;
+      return `http://localhost:4000/uploads/${info?.profileImg}`;
     }
   };
 

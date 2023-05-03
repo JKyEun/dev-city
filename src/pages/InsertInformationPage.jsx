@@ -32,7 +32,7 @@ export default function InsertInformationPage() {
 
       try {
         const res = await axios.post(
-          `http://3.34.52.131:4000/user/updateuser/${id}`,
+          `http://localhost:4000/user/updateuser/${id}`,
           newInfo,
         );
         console.log(res.data);
@@ -68,7 +68,7 @@ export default function InsertInformationPage() {
 
     try {
       const res = await axios.post(
-        `http://3.34.52.131:4000/user/updateuser/${id}`,
+        `http://localhost:4000/user/updateuser/${id}`,
         newInfo,
       );
       console.log(res.data);

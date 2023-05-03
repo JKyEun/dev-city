@@ -5,12 +5,12 @@ import '../style/signInPage.scss';
 
 export default function SignInPage() {
   const KAKAO_CLIENT_ID = '8b9d9e6f2ac1ce6697298e70eb30186c';
-  const KAKAO_REDIRECT_URI = 'http://3.34.52.131:3000/oauth/callback/kakao';
+  const KAKAO_REDIRECT_URI = 'http://localhost:3000/oauth/callback/kakao';
   const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`;
-  // const KAKAO_LOGOUT_URI = 'http://3.34.52.131:3000';
+  // const KAKAO_LOGOUT_URI = 'http://localhost:3000';
   // const KAKAO_LOGOUT_URL = `https://kauth.kakao.com/oauth/logout?client_id=${KAKAO_CLIENT_ID}&logout_redirect_uri=${KAKAO_LOGOUT_URI}`;
   const GITHUB_CLIENT_ID = '92cca3b5a2142e0aa021';
-  const GITHUB_REDIRECT_URI = 'http://3.34.52.131:3000/oauth/callback/github';
+  const GITHUB_REDIRECT_URI = 'http://localhost:3000/oauth/callback/github';
   const GITHUB_AUTH_URL = `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&redirect_uri=${GITHUB_REDIRECT_URI}`;
 
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ export default function SignInPage() {
 
     try {
       const res = await axios.post(
-        `http://3.34.52.131:4000/user/signin`,
+        `http://localhost:4000/user/signin`,
         account,
       );
 

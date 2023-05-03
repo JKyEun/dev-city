@@ -103,7 +103,7 @@ export default function CreateStudyPage() {
         return alert('필수 값을 입력해 주세요.');
 
       const resCreate = await axios.post(
-        'http://3.34.52.131:4000/study/create_study',
+        'http://localhost:4000/study/create_study',
         {
           userId: localStorage.getItem('userId'),
           study_name: studyNameInput.current.value,

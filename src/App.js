@@ -24,7 +24,7 @@ function App() {
 
   const getUserInfo = async (id) => {
     try {
-      const res = await axios.get(`http://3.34.52.131:4000/user/${id}`);
+      const res = await axios.get(`http://localhost:4000/user/${id}`);
       dispatch(init(res.data));
     } catch (err) {
       console.error(err);
