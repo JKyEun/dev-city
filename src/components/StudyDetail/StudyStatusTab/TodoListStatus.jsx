@@ -2,16 +2,18 @@ import React from 'react';
 
 export default function TodoListStatus({ data }) {
   const { todoList } = data;
-  console.log(data);
+  const todayTodo = todoList.filter((el) => {
+    return new Date(el.date).getDay() == new Date().getDay();
+  });
   return (
     <div className="todo_status flexBox-start">
       <div className="todo_intro">
         <h3>할 일 목록</h3>
         <p className="todo_count">
-          <span>{todoList?.length}</span>개 중에{' '}
+          <span>{todayTodo?.length}</span>개 중에{' '}
           <span>
             {
-              todoList?.filter((el) => {
+              todayTodo?.filter((el) => {
                 return el.isCompleted;
               })?.length
             }
@@ -20,10 +22,10 @@ export default function TodoListStatus({ data }) {
         </p>
       </div>
       <div className="todo_main">
-        {todoList?.length === 0 ? (
+        {todayTodo?.length === 0 ? (
           <p className="empty_todo">오늘 할 일을 설정해 주세요!</p>
         ) : (
-          todoList?.map((el, idx) => (
+          todayTodo?.map((el, idx) => (
             <div className="flexBox-start">
               <div className="checkDiv" key={`userTodo_${idx}`}>
                 <span
