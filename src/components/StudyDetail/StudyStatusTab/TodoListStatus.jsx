@@ -3,7 +3,11 @@ import React from 'react';
 export default function TodoListStatus({ data }) {
   const { todoList } = data;
   const todayTodo = todoList.filter((el) => {
-    return new Date(el.date).getDay() == new Date().getDay();
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const todoDate = new Date(el.date);
+    todoDate.setHours(0, 0, 0, 0);
+    return todoDate.getTime() === today.getTime();
   });
   return (
     <div className="todo_status flexBox-start">
