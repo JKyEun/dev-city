@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createTodo } from '../../store/modules/user';
-import axios from 'axios';
 import TodoLiEl from './TodoLiEl';
+import { setList } from '../../apis/user';
 
 export default function TodoList({ selectedDate }) {
   const dispatch = useDispatch();
@@ -30,24 +30,21 @@ export default function TodoList({ selectedDate }) {
     e.preventDefault();
     if (todoInput.current.value === '') return;
 
+    const newTodo = {
+      id: Number(new Date()),
+      isCompleted: false,
+      content: todoInput.current.value,
+      date: new Date(
+        selectedDate.getFullYear(),
+        selectedDate.getMonth(),
+        selectedDate.getDate(),
+        timeInput.current.value.split(':')[0],
+        timeInput.current.value.split(':')[1],
+      ).toString(),
+    };
+
     try {
-      const newTodo = {
-        id: Number(new Date()),
-        isCompleted: false,
-        content: todoInput.current.value,
-        date: new Date(
-          selectedDate.getFullYear(),
-          selectedDate.getMonth(),
-          selectedDate.getDate(),
-          timeInput.current.value.split(':')[0],
-          timeInput.current.value.split(':')[1],
-        ).toString(),
-      };
-      const res = await axios.post(
-        `http://localhost:4000/user/setlist/${id}`,
-        newTodo,
-      );
-      console.log(res.data);
+      await setList(id, newTodo);
       dispatch(createTodo(newTodo));
     } catch (err) {
       console.error(err);
