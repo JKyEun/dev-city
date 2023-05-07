@@ -2,10 +2,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import Post from './Post';
 import '../../style/studyBoard.scss';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
+import { getBoardDB, setPost } from '../../apis/board';
 
 export default function StudyBoard() {
   const { id } = useParams();
@@ -19,13 +19,12 @@ export default function StudyBoard() {
   );
 
   const getBoard = async () => {
-    const res = await axios.get(`http://localhost:4000/board/get/${id}`);
-    setBoardDB(res.data.board);
+    const res = await getBoardDB(id);
+    setBoardDB(res.board);
   };
 
   const addPost = async (e) => {
     e.preventDefault();
-
     if (boardInput.current.value === '') return;
 
     const newPost = {
@@ -36,20 +35,16 @@ export default function StudyBoard() {
       comment: [],
       isModified: false,
     };
+    const newBoardDB = [...boardDB, newPost];
+
     try {
-      const res = await axios.post(
-        `http://localhost:4000/board/add/${id}`,
-        newPost,
-      );
-      console.log(res.data);
-
-      const newBoardDB = [...boardDB, newPost];
+      await setPost(id, newPost);
       setBoardDB(newBoardDB);
-
-      boardInput.current.value = '';
     } catch (err) {
       console.error(err);
     }
+
+    boardInput.current.value = '';
   };
 
   useEffect(() => {

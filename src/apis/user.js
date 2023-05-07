@@ -29,7 +29,7 @@ export const deleteTodoList = async (id, todo) => {
 
 export const updateTodoList = async (id, updatedTodo) => {
   try {
-    const res = await api.post(`/user/deletelist/${id}`, updatedTodo);
+    const res = await api.post(`/user/updatelist/${id}`, updatedTodo);
     console.log(res.data);
   } catch (err) {
     console.error(err);

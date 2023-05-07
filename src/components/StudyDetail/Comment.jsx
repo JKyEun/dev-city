@@ -1,8 +1,9 @@
-import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import PostDropdown from './PostDropdown';
+import { getUser } from '../../apis/user';
+import { removeComment, updateComment } from '../../apis/board';
 
 export default function Comment({
   boardEl,
@@ -35,9 +36,8 @@ export default function Comment({
 
   const getWriterInfo = async (id) => {
     try {
-      const res = await axios.get(`http://localhost:4000/user/${id}`);
-
-      setCommentWriterInfo(res.data);
+      const res = await getUser(id);
+      setCommentWriterInfo(res);
     } catch (err) {
       console.error(err);
     }
@@ -49,28 +49,22 @@ export default function Comment({
       id: commentEl.id,
     };
 
+    const newBoardDB = boardDB.map((board) => {
+      if (board.id === boardEl.id) {
+        const updatedComments = board.comment.filter(
+          (comment) => comment.id !== commentEl.id,
+        );
+        const updatedObj = {
+          ...board,
+          comment: updatedComments,
+        };
+        return updatedObj;
+      }
+      return board;
+    });
+
     try {
-      const res = await axios.post(
-        `http://localhost:4000/board/delete/comment/${id}`,
-        comment,
-      );
-
-      console.log(res.data);
-
-      const newBoardDB = boardDB.map((board) => {
-        if (board.id === boardEl.id) {
-          const updatedComments = board.comment.filter(
-            (comment) => comment.id !== commentEl.id,
-          );
-          const updatedObj = {
-            ...board,
-            comment: updatedComments,
-          };
-          return updatedObj;
-        }
-        return board;
-      });
-
+      await removeComment(id, comment);
       setBoardDB(newBoardDB);
     } catch (err) {
       console.error(err);
@@ -88,13 +82,7 @@ export default function Comment({
     };
 
     try {
-      const res = await axios.post(
-        `http://localhost:4000/board/modify/comment/${id}`,
-        modifiedComment,
-      );
-
-      console.log(res.data);
-
+      await updateComment(id, modifiedComment);
       getBoard();
     } catch (err) {
       console.error(err);
