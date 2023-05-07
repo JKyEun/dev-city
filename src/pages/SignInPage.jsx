@@ -1,18 +1,10 @@
-import axios from 'axios';
 import React, { useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../style/signInPage.scss';
+import { signIn } from '../apis/user';
+import { GITHUB_AUTH_URL, KAKAO_AUTH_URL } from '../utils/constant';
 
 export default function SignInPage() {
-  const KAKAO_CLIENT_ID = '8b9d9e6f2ac1ce6697298e70eb30186c';
-  const KAKAO_REDIRECT_URI = 'http://localhost:3000/oauth/callback/kakao';
-  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`;
-  // const KAKAO_LOGOUT_URI = 'http://localhost:3000';
-  // const KAKAO_LOGOUT_URL = `https://kauth.kakao.com/oauth/logout?client_id=${KAKAO_CLIENT_ID}&logout_redirect_uri=${KAKAO_LOGOUT_URI}`;
-  const GITHUB_CLIENT_ID = '92cca3b5a2142e0aa021';
-  const GITHUB_REDIRECT_URI = 'http://localhost:3000/oauth/callback/github';
-  const GITHUB_AUTH_URL = `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&redirect_uri=${GITHUB_REDIRECT_URI}`;
-
   const navigate = useNavigate();
   const userIdInput = useRef('');
   const passwordInput = useRef('');
@@ -26,13 +18,10 @@ export default function SignInPage() {
     };
 
     try {
-      const res = await axios.post(
-        `http://localhost:4000/user/signin`,
-        account,
-      );
+      const res = await signIn(account);
+      const data = res.data;
 
       if (res.status === 200) {
-        const data = res.data;
         console.log(data);
         localStorage.setItem('JWT', data.token);
         localStorage.setItem('userId', account.userId);

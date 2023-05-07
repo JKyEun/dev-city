@@ -1,5 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
-import './App.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { init } from './store/modules/user';
+import { useEffect } from 'react';
 import Header from './components/Header';
 import MyCityPage from './pages/MyCityPage';
 import RecruitBoardPage from './pages/RecruitBoardPage';
@@ -8,15 +10,12 @@ import MainPage from './pages/MainPage';
 import StudyDetailPage from './pages/StudyDetailPage';
 import SignInPage from './pages/SignInPage';
 import SignUpPage from './pages/SignUpPage';
-import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
-import { init } from './store/modules/user';
-import { useEffect } from 'react';
 import KakaoRedirectHandler from './KakaoRedirectHandler';
 import InsertInformationPage from './pages/InsertInformationPage';
 import GithubRedirectHandler from './GithubRedirectHandler';
 import Footer from './components/Footer';
 import IndividualMyCityPage from './pages/IndividualMyCityPage';
+import { getUser } from './apis/user';
 
 function App() {
   const dispatch = useDispatch();
@@ -24,8 +23,8 @@ function App() {
 
   const getUserInfo = async (id) => {
     try {
-      const res = await axios.get(`http://localhost:4000/user/${id}`);
-      dispatch(init(res.data));
+      const res = await getUser(id);
+      dispatch(init(res));
     } catch (err) {
       console.error(err);
     }

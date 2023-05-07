@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Loading from './components/Loading';
@@ -9,6 +8,7 @@ import {
   JWT_KEY,
   USERID_KEY,
 } from './utils/constant';
+import { kakaoLogin } from './apis/user';
 
 const KakaoRedirectHandler = () => {
   const navigate = useNavigate();
@@ -48,10 +48,7 @@ const KakaoRedirectHandler = () => {
             profileImg: userKaKaoInfo.kakao_account.profile.profile_image_url,
           };
 
-          const registerResponse = await axios.post(
-            `http://localhost:4000/user/kakaologin`,
-            userLoginInfo,
-          );
+          const registerResponse = await kakaoLogin(userLoginInfo);
 
           if (registerResponse.status === 201) {
             localStorage.setItem(JWT_KEY, registerResponse.data.token);

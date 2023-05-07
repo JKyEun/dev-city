@@ -1,7 +1,8 @@
-import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../style/signUpPage.scss';
+import { signUp } from '../apis/user';
+import { GITHUB_AUTH_URL, KAKAO_AUTH_URL } from '../utils/constant';
 
 export default function SignUpPage() {
   const navigate = useNavigate();
@@ -10,13 +11,6 @@ export default function SignUpPage() {
   const pwRepeatInput = useRef('');
   const [isAccountValid, setIsAccountValid] = useState(false);
   const [isPwMatched, setIsPwMatched] = useState(true);
-
-  const KAKAO_CLIENT_ID = '8b9d9e6f2ac1ce6697298e70eb30186c';
-  const KAKAO_REDIRECT_URI = 'http://localhost:3000/oauth/callback/kakao';
-  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`;
-  const GITHUB_CLIENT_ID = '92cca3b5a2142e0aa021';
-  const GITHUB_REDIRECT_URI = 'http://localhost:3000/oauth/callback/github';
-  const GITHUB_AUTH_URL = `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&redirect_uri=${GITHUB_REDIRECT_URI}`;
 
   const checkPassword = () => {
     const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
@@ -54,11 +48,7 @@ export default function SignUpPage() {
     };
 
     try {
-      const res = await axios.post(
-        `http://localhost:4000/user/signup`,
-        account,
-      );
-
+      const res = await signUp(account);
       const data = res.data;
 
       if (res.status === 201) {
@@ -71,7 +61,7 @@ export default function SignUpPage() {
         console.log(`요청실패, status는 ${res.status}`);
       }
     } catch (err) {
-      alert('회원가입에 실패했습니다. 백엔드 에러');
+      alert('회원가입에 실패했습니다.');
       console.error(`요청실패, 에러는 ${err}`);
     }
   };
