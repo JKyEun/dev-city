@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { updateUser } from '../../store/modules/user';
+import { updateUserImg, updateUserInfo } from '../../apis/user';
 
 export default function ProfileCard({
   profileImg,
@@ -67,11 +68,7 @@ export default function ProfileCard({
       };
 
       try {
-        const res = await axios.post(
-          `http://localhost:4000/user/updateuser/${id}`,
-          newInfo,
-        );
-        console.log(res.data);
+        await updateUserInfo(id, newInfo);
         dispatch(updateUser(newInfo));
       } catch (err) {
         console.error(err);
@@ -103,15 +100,8 @@ export default function ProfileCard({
     const formData = new FormData();
     formData.append('img', file);
     try {
-      const res = await axios.post(
-        `http://localhost:4000/user/updateuser/images/${id}`,
-        formData,
-        {
-          headers: { 'Content-Type': 'multipart/form-data' },
-        },
-      );
-      console.log(res.data.profileImg);
-      setProfileImgUpdate(`/${res.data.profileImg}`);
+      const res = await updateUserImg(id, formData);
+      setProfileImgUpdate(`/${res.profileImg}`);
       window.location.reload();
     } catch (err) {
       console.error(err);

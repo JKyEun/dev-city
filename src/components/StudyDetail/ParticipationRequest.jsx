@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setStudy } from '../../store/modules/studyDetail';
 import { useParams } from 'react-router-dom';
 import '../../style/studyProfile.scss';
+import { joinStudy } from '../../apis/user';
 
 export default function ParticipationRequest({ userId }) {
   const { id } = useParams();
@@ -43,15 +44,13 @@ export default function ParticipationRequest({ userId }) {
         updatedMember.isLeader = true;
       }
 
-      const responseStudy = await axios.put(
-        `http://localhost:4000/study/update/${id}`,
-        { updatedMember },
-      );
-
-      const responseUser = await axios.post(
-        `http://localhost:4000/user/joinstudy/`,
-        { userId: currentUserId, studyId: id },
-      );
+      await axios.put(`http://localhost:4000/study/update/${id}`, {
+        updatedMember,
+      });
+      await joinStudy({
+        userId: currentUserId,
+        studyId: id,
+      });
 
       // request에서 제거해주기
       acceptRemoveRequest();

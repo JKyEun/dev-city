@@ -4,6 +4,7 @@ import '../style/insertInformationPage.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { updateUser } from '../store/modules/user';
+import { updateUserInfo } from '../apis/user';
 
 export default function InsertInformationPage() {
   const navigate = useNavigate();
@@ -31,11 +32,7 @@ export default function InsertInformationPage() {
       };
 
       try {
-        const res = await axios.post(
-          `http://localhost:4000/user/updateuser/${id}`,
-          newInfo,
-        );
-        console.log(res.data);
+        await updateUserInfo(id, newInfo);
         dispatch(updateUser(newInfo));
       } catch (err) {
         console.error(err);
@@ -64,23 +61,14 @@ export default function InsertInformationPage() {
 
     const newInfo = !userInfo.email ? newInfoGithubContainEmail : newInfoGithub;
 
-    console.log(newInfo);
-
     try {
-      const res = await axios.post(
-        `http://localhost:4000/user/updateuser/${id}`,
-        newInfo,
-      );
-      console.log(res.data);
+      await updateUserInfo(id, newInfo);
       dispatch(updateUser(newInfoGithub));
     } catch (err) {
       console.error(err);
     }
-
     navigate('/');
   };
-
-  console.log(phoneNumber?.current?.value);
 
   return (
     <div className="insertInformationWrap">

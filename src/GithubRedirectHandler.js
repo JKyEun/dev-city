@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Loading from './components/Loading';
+import { githubLogin, githubLoginFetch } from './apis/user';
 
 export default function GithubRedirectHandler() {
   const navigate = useNavigate();
@@ -16,11 +17,7 @@ export default function GithubRedirectHandler() {
     };
 
     async function loginFetch() {
-      const fetchRes = await axios.post(
-        'http://localhost:4000/user/githublogin/fetch',
-        codeObj,
-      );
-
+      const fetchRes = await githubLoginFetch(codeObj);
       const githubData = fetchRes.data;
 
       const userLoginInfo = {
@@ -32,10 +29,7 @@ export default function GithubRedirectHandler() {
         userName: githubData.name,
       };
 
-      const loginRes = await axios.post(
-        'http://localhost:4000/user/githublogin',
-        userLoginInfo,
-      );
+      const loginRes = await githubLogin(userLoginInfo);
 
       if (loginRes.status === 201) {
         localStorage.setItem('JWT', loginRes.data.token);

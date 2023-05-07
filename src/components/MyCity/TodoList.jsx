@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createTodo } from '../../store/modules/user';
 import TodoLiEl from './TodoLiEl';
-import { setList } from '../../apis/user';
+import { setTodoList } from '../../apis/user';
 
 export default function TodoList({ selectedDate }) {
   const dispatch = useDispatch();
@@ -44,7 +44,7 @@ export default function TodoList({ selectedDate }) {
     };
 
     try {
-      await setList(id, newTodo);
+      await setTodoList(id, newTodo);
       dispatch(createTodo(newTodo));
     } catch (err) {
       console.error(err);

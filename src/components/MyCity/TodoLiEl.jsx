@@ -6,6 +6,7 @@ import {
   removeTodo,
 } from '../../store/modules/user';
 import axios from 'axios';
+import { deleteTodoList, updateTodoList } from '../../apis/user';
 
 export default function TodoLiEl({ el, selectedDate }) {
   const [isModifyMode, setIsModifyMode] = useState(false);
@@ -17,16 +18,12 @@ export default function TodoLiEl({ el, selectedDate }) {
     ':' +
     date.getMinutes().toString().padStart(2, '0');
   const dispatch = useDispatch();
-  // const updateTodoList = async () => {};
 
   const deleteTodo = async (id, el) => {
+    const todo = { id: el.id };
+
     try {
-      const todo = { id: el.id };
-      const res = await axios.post(
-        `http://localhost:4000/user/deletelist/${id}`,
-        todo,
-      );
-      console.log(res.data);
+      await deleteTodoList(id, todo);
       dispatch(removeTodo(todo));
     } catch (err) {
       console.error(err);
@@ -34,19 +31,15 @@ export default function TodoLiEl({ el, selectedDate }) {
   };
 
   const updateChecked = async (id, el) => {
+    const updatedTodo = {
+      id: el.id,
+      isCompleted: !el.isCompleted,
+      content: el.content,
+      date: el.date,
+    };
+
     try {
-      console.log(el);
-      const updatedTodo = {
-        id: el.id,
-        isCompleted: !el.isCompleted,
-        content: el.content,
-        date: el.date,
-      };
-      const res = await axios.post(
-        `http://localhost:4000/user/updatelist/${id}`,
-        updatedTodo,
-      );
-      console.log(res.data);
+      updateTodoList(id, updatedTodo);
       dispatch(convertChecked(updatedTodo));
     } catch (err) {
       console.error(err);
@@ -54,24 +47,21 @@ export default function TodoLiEl({ el, selectedDate }) {
   };
 
   const updateTodo = async (id, el) => {
+    const updatedTodo = {
+      id: el.id,
+      isCompleted: el.isCompleted,
+      content: modifyInput.current.value,
+      date: new Date(
+        selectedDate.getFullYear(),
+        selectedDate.getMonth(),
+        selectedDate.getDate(),
+        timeInput.current.value.split(':')[0],
+        timeInput.current.value.split(':')[1],
+      ).toString(),
+    };
+
     try {
-      const updatedTodo = {
-        id: el.id,
-        isCompleted: el.isCompleted,
-        content: modifyInput.current.value,
-        date: new Date(
-          selectedDate.getFullYear(),
-          selectedDate.getMonth(),
-          selectedDate.getDate(),
-          timeInput.current.value.split(':')[0],
-          timeInput.current.value.split(':')[1],
-        ).toString(),
-      };
-      const res = await axios.post(
-        `http://localhost:4000/user/updatelist/${id}`,
-        updatedTodo,
-      );
-      console.log(res.data);
+      updateTodoList(id, updatedTodo);
       dispatch(modifyTodo(updatedTodo));
     } catch (err) {
       console.error(err);
