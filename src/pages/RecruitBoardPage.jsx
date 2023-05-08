@@ -16,7 +16,7 @@ export default function RecruitBoard() {
   // study 데이터 가져와서 state에 적용시키기
   const getStudyInfo = async () => {
     try {
-      const res = getStudy();
+      const res = await getStudy();
       dispatch(init(res));
     } catch (err) {
       console.error(err);
