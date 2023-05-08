@@ -10,18 +10,6 @@ export default function AllUsers() {
   const userInfo = useSelector((state) => state.user);
 
   useEffect(() => {
-    // FIXME
-    axios
-      .get(`http://localhost:4000/allUser/user`)
-      .then((response) => {
-        setRandomUsers(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
-
-  useEffect(() => {
     const getUserFunc = async () => {
       const res = await getAllUser(userInfo.userId);
       setRandomUsers(res);

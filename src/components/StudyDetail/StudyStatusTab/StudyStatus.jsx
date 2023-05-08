@@ -7,6 +7,7 @@ import MemberInfo from './MemberInfo';
 import '../../../style/studyStatus.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
+import { getUser } from '../../../apis/user';
 
 export default function StudyStatus() {
   const members = useSelector((state) => state.studyDetail.study.member);
@@ -17,14 +18,11 @@ export default function StudyStatus() {
     state.studyDetail.study.member.some((member) => member.memberId === userId),
   );
 
-  // FIXME
   useEffect(() => {
     async function fetchMembersData() {
-      const requests = members.map((member) =>
-        axios.get(`http://localhost:4000/user/${member.memberId}`),
-      );
+      const requests = members.map((member) => getUser(member.memberId));
       const responses = await Promise.all(requests);
-      const data = responses.map((response) => response.data);
+      const data = responses.map((response) => response);
       setMembersData(data);
     }
     fetchMembersData();
