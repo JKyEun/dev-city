@@ -6,6 +6,7 @@ import ParticipationRequest from './ParticipationRequest';
 import StudyParticipants from './StudyParticipants';
 import '../../style/studyDetail.scss';
 import ModifyStudy from './ModifyStudy';
+import { closeStudy, getStudyDetail } from '../../apis/study';
 
 export default function StudyDetail({ match, studyDetail }) {
   const study = useSelector((state) => state.studyDetail.study);
@@ -25,11 +26,7 @@ export default function StudyDetail({ match, studyDetail }) {
         dispatch(fetchStudy(match.params.id));
         // match.params.id로 스터디 상세 정보를 가져옴
         // match.params.id에 해당하는 스터디 정보는 response에
-        const resFetch = await axios.get(
-          `http://localhost:4000/study/detail/${match.params.id}`,
-        );
-
-        const study = resFetch.data;
+        const study = await getStudyDetail(match.params.id);
 
         // 현재 사용자의 ID는 로컬스토리지에서 가져옴
         const currentUserId = localStorage.getItem('userId');
@@ -51,9 +48,7 @@ export default function StudyDetail({ match, studyDetail }) {
             : false;
         // 사람 꽉차면 백엔드 isClosed를 true로 바꾸기
         if (study.memberNum.currentNum === study.memberNum.maxNum) {
-          await axios.post(
-            `http://localhost:4000/study/detail/${match.params.id}/close`,
-          );
+          await closeStudy(match.params.id);
         }
         dispatch(
           setStudy({

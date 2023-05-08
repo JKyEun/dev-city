@@ -6,6 +6,7 @@ import '../style/_header.scss';
 import Chat from './Chat/Chat';
 import { useDispatch, useSelector } from 'react-redux';
 import { convertOpen, setOtherSide } from '../store/modules/chat';
+import { getUser } from '../apis/user';
 
 export default function Header() {
   const [url, setUrl] = useState('/');
@@ -18,12 +19,9 @@ export default function Header() {
 
   const fetchUserData = async () => {
     try {
-      const res = await axios.get(
-        `http://localhost:4000/user/${localStorage.getItem('userId')}`,
-      );
-      setProfileImgUpdate(
-        res.data.profileImg ? `/${res.data.profileImg}` : null,
-      );
+      const userId = localStorage.getItem('userId');
+      const res = await getUser(userId);
+      setProfileImgUpdate(res.profileImg ? `/${res.profileImg}` : null);
     } catch (err) {
       console.error(err);
     }

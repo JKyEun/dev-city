@@ -4,8 +4,9 @@ import LikeStudy from './LikeStudy';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { init } from '../../store/modules/study';
-import axios from 'axios';
 import '../../style/study.scss';
+import { getUser } from '../../apis/user';
+import { getStudy } from '../../apis/study';
 
 export default function Study() {
   const [render, setRender] = useState('');
@@ -22,14 +23,14 @@ export default function Study() {
   };
   const getStudyInfo = async () => {
     try {
-      const resStudy = await axios.get(`http://localhost:4000/study/`);
-      dispatch(init(resStudy.data));
+      const resStudy = await getStudy();
+      dispatch(init(resStudy));
       const id = localStorage.getItem('userId');
-      const resUser = await axios.get(`http://localhost:4000/user/${id}`);
-      const result = resStudy.data?.filter((study) => {
-        return resUser.data?.likedStudy?.includes(study._id);
+      const resUser = await getUser(id);
+      const result = resStudy?.filter((study) => {
+        return resUser?.likedStudy?.includes(study._id);
       });
-      setJoinedStudy(resUser.data.joinedStudy);
+      setJoinedStudy(resUser.joinedStudy);
       setLikeStudy(result);
     } catch (err) {
       console.error(err);

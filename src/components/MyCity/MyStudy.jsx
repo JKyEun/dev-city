@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
@@ -24,7 +24,7 @@ export default function MyStudy({ joinedStudy }) {
 
       <p className="date">
         {`${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}`}
-        <span>| {joinedStudy?.field}</span>
+        <span> | {joinedStudy?.field}</span>
       </p>
       <h3>{joinedStudy?.studyName}</h3>
       <div className="flexBox-alignCenter">

@@ -1,37 +1,8 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { updateLike } from '../../store/modules/user';
-import axios from 'axios';
 
-export default function IndividualLikeStudy({
-  e,
-  item,
-  idx,
-  userId,
-  handleRender,
-}) {
+export default function IndividualLikeStudy({ item, idx }) {
   const date = new Date(item.createDate);
-  const dispatch = useDispatch();
-  const updateLikeList = async (e) => {
-    await axios
-      .get(`http://localhost:4000/user/${localStorage.getItem('userId')}`)
-      .then((response) => {
-        dispatch(updateLike(response.data.likedStudy));
-      })
-      .catch((err) => console.error(err));
-  };
-  const handleLike = async (e) => {
-    handleRender('hi');
-    e.preventDefault();
-
-    await axios.post('http://localhost:4000/study/like', {
-      userId: userId,
-      studyId: item._id,
-      isDelete: true,
-    });
-    updateLikeList();
-  };
 
   return (
     <Link
@@ -41,7 +12,7 @@ export default function IndividualLikeStudy({
     >
       <p className="date">
         {`${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}`} |
-        {item.field}
+        {' ' + item.field}
       </p>
       <h3>{item.studyName}</h3>
       <div className="flexBox-alignCenter">
@@ -65,9 +36,6 @@ export default function IndividualLikeStudy({
         <span>{`${item.memberNum.maxNum}`}</span>명 중
         <span> {`${item.memberNum.currentNum}`}</span>명 모집됨
       </p>
-      <div className="clickHeart" onClick={(e) => handleLike(e)}>
-        <img src="/images/icon_heartOn.svg" alt="heart" />
-      </div>
     </Link>
   );
 }

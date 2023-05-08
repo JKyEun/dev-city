@@ -1,25 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { updateLike } from '../../store/modules/user';
 import axios from 'axios';
+import { getUser } from '../../apis/user';
+import { pushLikeList } from '../../apis/study';
 
 export default function LikeStudy({ e, item, idx, userId, handleRender }) {
   const date = new Date(item.createDate);
   const dispatch = useDispatch();
+
   const updateLikeList = async (e) => {
-    await axios
-      .get(`http://localhost:4000/user/${localStorage.getItem('userId')}`)
-      .then((response) => {
-        dispatch(updateLike(response.data.likedStudy));
-      })
-      .catch((err) => console.error(err));
+    const userId = localStorage.getItem('userId');
+    const res = await getUser(userId);
+    dispatch(updateLike(res.likedStudy));
   };
+
   const handleLike = async (e) => {
     handleRender('hi');
     e.preventDefault();
 
-    await axios.post('http://localhost:4000/study/like', {
+    await pushLikeList({
       userId: userId,
       studyId: item._id,
       isDelete: true,

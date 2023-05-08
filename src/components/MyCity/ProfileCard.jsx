@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { updateUser } from '../../store/modules/user';
-import { updateUserImg, updateUserInfo } from '../../apis/user';
+import { getUser, updateUserImg, updateUserInfo } from '../../apis/user';
 
 export default function ProfileCard({
   profileImg,
@@ -110,10 +110,8 @@ export default function ProfileCard({
 
   const fetchUserData = async () => {
     try {
-      const res = await axios.get(`http://localhost:4000/user/${userId}`);
-      setProfileImgUpdate(
-        res.data.profileImg ? `/${res.data.profileImg}` : null,
-      );
+      const res = await getUser(userId);
+      setProfileImgUpdate(res.profileImg ? `/${res.profileImg}` : null);
     } catch (err) {
       console.error(err);
     }

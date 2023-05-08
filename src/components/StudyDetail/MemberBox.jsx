@@ -13,6 +13,15 @@ import {
   CircularProgressbarWithChildren,
 } from 'react-circular-progressbar';
 import { useNavigate } from 'react-router-dom';
+import { getUser } from '../../apis/user';
+import {
+  closeStudy,
+  deleteStudyInfo,
+  getStudyDetail,
+  leaveStudyInfo,
+  openStudy,
+  sendSMS,
+} from '../../apis/study';
 
 export default function MemberBox({ match, studyDetail, setIsModifyMode }) {
   const study = useSelector((state) => state.studyDetail.study);
@@ -33,11 +42,7 @@ export default function MemberBox({ match, studyDetail, setIsModifyMode }) {
         dispatch(fetchStudy(match.params.id));
         // match.params.id로 스터디 상세 정보를 가져옴
         // match.params.id에 해당하는 스터디 정보는 response에
-        const resFetch = await axios.get(
-          `http://localhost:4000/study/detail/${match.params.id}`,
-        );
-
-        const study = resFetch.data;
+        const study = await getStudyDetail(match.params.id);
 
         // 현재 사용자의 ID는 로컬스토리지에서 가져옴
         const currentUserId = localStorage.getItem('userId');
@@ -59,9 +64,7 @@ export default function MemberBox({ match, studyDetail, setIsModifyMode }) {
             : false;
         // 사람 꽉차면 백엔드 isClosed를 true로 바꾸기
         if (study.memberNum.currentNum === study.memberNum.maxNum) {
-          await axios.post(
-            `http://localhost:4000/study/detail/${match.params.id}/close`,
-          );
+          await closeStudy(match.params.id);
         }
         dispatch(
           setStudy({
@@ -118,23 +121,20 @@ export default function MemberBox({ match, studyDetail, setIsModifyMode }) {
       const requestUser = {
         userId: currentUserId,
       };
-      const findPhone = await axios.get(
-        `http://localhost:4000/user/${study?.member[0]?.memberId}`,
-      );
+      const findPhone = await getUser(study?.member[0]?.memberId);
 
       if (
-        findPhone.data.phoneNumber === '휴대폰 번호를 설정하세요' ||
-        findPhone.data.phoneNumber === ''
+        findPhone.phoneNumber === '휴대폰 번호를 설정하세요' ||
+        findPhone.phoneNumber === ''
       ) {
         alert(
           '리더의 휴대폰 번호가 저장되어 있지 않아 확인이 늦어질 수 있습니다',
         );
       } else {
-        const resSend = await axios.post('http://localhost:4000/study/send', {
-          phone: findPhone.data.phoneNumber,
+        await sendSMS({
+          phone: findPhone.phoneNumber,
           studyName: study.studyName,
         });
-        console.log(resSend.data);
       }
       const addRes = await axios.post(
         `http://localhost:4000/invite/add/${match.params.id}`,
@@ -159,10 +159,9 @@ export default function MemberBox({ match, studyDetail, setIsModifyMode }) {
   const deleteStudy = async () => {
     if (window.confirm('스터디를 삭제하시겠습니까?')) {
       try {
-        const resDelete = await axios.delete(
-          `http://localhost:4000/study/delete/${match.params.id}`,
-        );
-        alert(resDelete.data);
+        const resDelete = await deleteStudyInfo(match.params.id);
+        alert(resDelete);
+
         // 스터디 삭제 후 스터디 리스트 페이지로 이동
         navigate('/study');
         dispatch(setStudy(null));
@@ -176,23 +175,22 @@ export default function MemberBox({ match, studyDetail, setIsModifyMode }) {
   const leaveStudy = async () => {
     if (window.confirm('스터디에서 탈퇴하시겠습니까?')) {
       try {
-        const resLeave = await axios.delete(
-          `http://localhost:4000/study/leave/${match.params.id}`,
-          { data: { userId: localStorage.getItem('userId') } },
-        );
+        const resLeave = await leaveStudyInfo(match.params.id, {
+          data: { userId: localStorage.getItem('userId') },
+        });
 
         const currentNum = study.memberNum.currentNum;
         dispatch(
           setStudy({
             ...study,
-            member: resLeave.data.updatedMembers,
+            member: resLeave.updatedMembers,
             memberNum: {
               ...study.memberNum,
               currentNum: currentNum - 1, // 현재 참여 인원수 -1
             },
           }),
         );
-        alert(resLeave.data.message);
+        alert(resLeave.message);
       } catch (err) {
         console.error(err);
       }
@@ -202,14 +200,10 @@ export default function MemberBox({ match, studyDetail, setIsModifyMode }) {
   // 모집 마감, 모집 재시작하기
   const CloseAndOpenEvent = async () => {
     if (!study.isClosed) {
-      await axios.post(
-        `http://localhost:4000/study/detail/${match.params.id}/close`,
-      );
+      await closeStudy(match.params.id);
       dispatch(closeAndOpenStudy(true));
     } else {
-      await axios.post(
-        `http://localhost:4000/study/detail/${match.params.id}/open`,
-      );
+      await openStudy(match.params.id);
       dispatch(closeAndOpenStudy(false));
     }
   };

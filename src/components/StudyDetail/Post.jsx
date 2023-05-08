@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import PostDropdown from './PostDropdown';
 import { removePost, setComment, updatePost } from '../../apis/board';
+import { getUser } from '../../apis/user';
 
 export default function Post({ boardDB, boardEl, setBoardDB, getBoard }) {
   const { id } = useParams();
@@ -33,9 +34,8 @@ export default function Post({ boardDB, boardEl, setBoardDB, getBoard }) {
 
   const getWriterInfo = async (id) => {
     try {
-      const res = await axios.get(`http://localhost:4000/user/${id}`);
-
-      setWriterInfo(() => res.data);
+      const res = await getUser(id);
+      setWriterInfo(() => res);
     } catch (err) {
       console.error(err);
     }
