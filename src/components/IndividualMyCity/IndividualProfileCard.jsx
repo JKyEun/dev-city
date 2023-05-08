@@ -36,10 +36,9 @@ export default function IndividualProfileCard({
                 ? profileImgUpdate.replace('/', '')
                 : !profileImgUpdate
                 ? '/images/default-profile.png'
-                : `http://localhost:4000/uploads/${profileImgUpdate?.replace(
-                    '/',
-                    '',
-                  )}`
+                : `${
+                    process.env.REACT_APP_API_URL
+                  }/uploads/${profileImgUpdate?.replace('/', '')}`
             }
             name="img"
             alt="프로필 사진"

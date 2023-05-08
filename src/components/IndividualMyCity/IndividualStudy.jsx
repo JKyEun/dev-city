@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { init } from '../../store/modules/study';
-import axios from 'axios';
 import '../../style/study.scss';
 import IndividualLikeStudy from './IndividualLikeStudy';
 import IndividualMyStudy from './IndividualMyStudy';
+import { getUser } from '../../apis/user';
+import { getStudy } from '../../apis/study';
 
 export default function IndividualStudy({ individualInfo }) {
   const [render, setRender] = useState('');
-
   const [num, setNum] = useState(0);
   const [likeStudy, setLikeStudy] = useState([]);
   const [joinedStudy, setJoinedStudy] = useState([]);
@@ -20,15 +20,16 @@ export default function IndividualStudy({ individualInfo }) {
   const handleRender = (params) => {
     setRender((cur) => cur + params);
   };
+
   const getStudyInfo = async () => {
     try {
-      const resStudy = await axios.get(`http://localhost:4000/study/`);
-      dispatch(init(resStudy.data));
-      const resUser = await axios.get(`http://localhost:4000/user/${userId}`);
-      const result = resStudy.data?.filter((study) => {
-        return resUser.data?.likedStudy?.includes(study._id);
+      const resStudy = await getStudy();
+      dispatch(init(resStudy));
+      const resUser = await getUser(userId);
+      const result = resStudy?.filter((study) => {
+        return resUser?.likedStudy?.includes(study._id);
       });
-      setJoinedStudy(resUser.data.joinedStudy);
+      setJoinedStudy(resUser.joinedStudy);
       setLikeStudy(result);
     } catch (err) {
       console.error(err);

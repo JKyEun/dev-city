@@ -4,7 +4,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import {
-  CircularProgressbar,
   buildStyles,
   CircularProgressbarWithChildren,
 } from 'react-circular-progressbar';
@@ -12,6 +11,7 @@ import { create } from '../store/modules/study';
 import axios from 'axios';
 import '../style/createStudy.scss';
 import 'react-circular-progressbar/dist/styles.css';
+import { createStudy } from '../apis/study';
 // react-select
 const animatedComponents = makeAnimated();
 
@@ -102,37 +102,34 @@ export default function CreateStudyPage() {
       )
         return alert('필수 값을 입력해 주세요.');
 
-      const resCreate = await axios.post(
-        'http://localhost:4000/study/create_study',
-        {
-          userId: localStorage.getItem('userId'),
-          study_name: studyNameInput.current.value,
-          study_intro: studyIntroInput.current.value,
-          study_system: studySystemInput.current.value,
-          study_field: studyFieldSelect.current.props.value.label,
-          skills: skillsArr,
-          member_num: {
-            currentNum: 1,
-            maxNum: parseInt(
-              memberNumSelect.current.props.value.label.split('명'),
-            ),
-          },
-          member: [
-            {
-              isLeader: true,
-              memberId: localStorage.getItem('userId'),
-            },
-          ],
-          board: [],
-          structureImg: 'img',
-          study_system: studySystemInput.current.value,
-          study_etc: etcInput.current.value,
-          request: [],
-          isClosed: false,
+      const resCreate = await createStudy({
+        userId: localStorage.getItem('userId'),
+        study_name: studyNameInput.current.value,
+        study_intro: studyIntroInput.current.value,
+        study_system: studySystemInput.current.value,
+        study_field: studyFieldSelect.current.props.value.label,
+        skills: skillsArr,
+        member_num: {
+          currentNum: 1,
+          maxNum: parseInt(
+            memberNumSelect.current.props.value.label.split('명'),
+          ),
         },
-      );
+        member: [
+          {
+            isLeader: true,
+            memberId: localStorage.getItem('userId'),
+          },
+        ],
+        board: [],
+        structureImg: 'img',
+        study_system: studySystemInput.current.value,
+        study_etc: etcInput.current.value,
+        request: [],
+        isClosed: false,
+      });
 
-      alert(resCreate.data.message);
+      alert(resCreate.message);
 
       dispatch(
         create({
@@ -159,7 +156,7 @@ export default function CreateStudyPage() {
           study_etc: etcInput.current.value,
           request: [],
           isClosed: false,
-          nickName: resCreate.data.nickName,
+          nickName: resCreate.nickName,
         }),
       );
 

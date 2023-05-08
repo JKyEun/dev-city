@@ -3,6 +3,8 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { updateLike } from '../../store/modules/user';
 import '../../style/study.scss';
+import { pushLikeList } from '../../apis/study';
+import { getUser } from '../../apis/user';
 
 export default function ReadyStudy({ item, idx, liked, isMain, userId }) {
   // user의 likedStudy id와 study의 id를 비교하여 포함되어있으면 버튼이 on
@@ -11,24 +13,21 @@ export default function ReadyStudy({ item, idx, liked, isMain, userId }) {
   liked += 1;
 
   const updateLikeList = async () => {
-    await axios
-      .get(`http://localhost:4000/user/${localStorage.getItem('userId')}`)
-      .then((response) => {
-        dispatch(updateLike(response.data.likedStudy));
-      })
-      .catch((err) => console.error(err));
+    const userId = localStorage.getItem('userId');
+    const res = await getUser(userId);
+    dispatch(updateLike(res.likedStudy));
   };
 
   const handleLike = async (e) => {
     e.preventDefault();
     if (liked > 0) {
-      await axios.post('http://localhost:4000/study/like', {
+      await pushLikeList({
         userId: userId,
         studyId: item._id,
         isDelete: true,
       });
     } else {
-      await axios.post('http://localhost:4000/study/like', {
+      await pushLikeList({
         userId: userId,
         studyId: item._id,
         isDelete: false,

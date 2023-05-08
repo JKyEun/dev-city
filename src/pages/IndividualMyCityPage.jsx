@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
 import IndividualProfile from '../components/IndividualMyCity/IndividualProfile';
 import IndividualTab from '../components/IndividualMyCity/IndividualTab';
+import { getUser } from '../apis/user';
 
 export default function IndividualMyCityPage() {
   const { id } = useParams();
@@ -11,9 +11,8 @@ export default function IndividualMyCityPage() {
 
   const getIndividualInfo = async () => {
     try {
-      const res = await axios.get(`http://localhost:4000/user/${id}`);
-
-      setIndividualInfo(() => res.data);
+      const res = await getUser(id);
+      setIndividualInfo(() => res);
     } catch (err) {
       console.error(err);
     }

@@ -7,6 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { editMode, modify } from '../../store/modules/studyDetail';
 import 'react-circular-progressbar/dist/styles.css';
 import '../../style/modifyStudy.scss';
+import { modifyStudyInfo } from '../../apis/study';
 
 // react-select
 const animatedComponents = makeAnimated();
@@ -118,12 +119,12 @@ export default function ModifyStudy({ match }) {
         etc: etcInput.current.value,
       };
 
-      const resModify = await axios.post(
-        `http://localhost:4000/study/modify/${match.params.id}`,
-        { modifyData, userId: localStorage.getItem('userId') },
-      );
+      const resModify = await modifyStudyInfo(match.params.id, {
+        modifyData,
+        userId: localStorage.getItem('userId'),
+      });
 
-      alert(resModify.data);
+      alert(resModify);
 
       dispatch(
         modify({

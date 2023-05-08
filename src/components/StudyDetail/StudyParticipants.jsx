@@ -1,14 +1,15 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import '../../style/studyProfile.scss';
+import { getUser } from '../../apis/user';
 
 export default function StudyParticipants({ member }) {
   const [userInfo, setUserInfo] = useState([]);
 
   const getUserInfo = async (id) => {
     try {
-      const res = await axios.get(`http://localhost:4000/user/${id}`);
-      setUserInfo(res.data);
+      const res = await getUser(id);
+      setUserInfo(res);
     } catch (err) {
       console.error(err);
     }
@@ -27,10 +28,9 @@ export default function StudyParticipants({ member }) {
               ? userInfo?.profileImg
               : !userInfo?.profileImg
               ? '/images/default-profile.png'
-              : `http://localhost:4000/uploads/${userInfo?.profileImg?.replace(
-                  '/',
-                  '',
-                )}`
+              : `${
+                  process.env.REACT_APP_API_URL
+                }/uploads/${userInfo?.profileImg?.replace('/', '')}`
           }
           alt="프로필 사진"
         />

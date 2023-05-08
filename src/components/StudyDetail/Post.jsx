@@ -4,6 +4,8 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import PostDropdown from './PostDropdown';
+import { removePost, setComment, updatePost } from '../../apis/board';
+import { getUser } from '../../apis/user';
 
 export default function Post({ boardDB, boardEl, setBoardDB, getBoard }) {
   const { id } = useParams();
@@ -32,9 +34,8 @@ export default function Post({ boardDB, boardEl, setBoardDB, getBoard }) {
 
   const getWriterInfo = async (id) => {
     try {
-      const res = await axios.get(`http://localhost:4000/user/${id}`);
-
-      setWriterInfo(() => res.data);
+      const res = await getUser(id);
+      setWriterInfo(() => res);
     } catch (err) {
       console.error(err);
     }
@@ -44,15 +45,10 @@ export default function Post({ boardDB, boardEl, setBoardDB, getBoard }) {
     const deletePost = {
       id: boardEl.id,
     };
+    const newBoardDB = boardDB.filter((el) => el.id !== deletePost.id);
 
     try {
-      const res = await axios.post(
-        `http://localhost:4000/board/delete/${id}`,
-        deletePost,
-      );
-      console.log(res.data);
-
-      const newBoardDB = boardDB.filter((el) => el.id !== deletePost.id);
+      await removePost(id, deletePost);
       setBoardDB(newBoardDB);
     } catch (err) {
       console.error(err);
@@ -60,25 +56,17 @@ export default function Post({ boardDB, boardEl, setBoardDB, getBoard }) {
   };
 
   const modifyPost = async () => {
+    const modifiedPost = {
+      id: boardEl.id,
+      content: contentInput.current.value,
+      date: boardEl.date,
+      comment: boardEl.comment,
+      writer: boardEl.writer,
+      isModified: true,
+    };
+
     try {
-      const modifiedPost = {
-        id: boardEl.id,
-        content: contentInput.current.value,
-        date: boardEl.date,
-        comment: boardEl.comment,
-        writer: boardEl.writer,
-        isModified: true,
-      };
-
-      console.log(modifiedPost);
-
-      const res = await axios.post(
-        `http://localhost:4000/board/modify/${id}`,
-        modifiedPost,
-      );
-
-      console.log(res.data);
-
+      await updatePost(id, modifiedPost);
       getBoard();
     } catch (err) {
       console.error(err);
@@ -99,25 +87,19 @@ export default function Post({ boardDB, boardEl, setBoardDB, getBoard }) {
       isModified: false,
     };
 
+    const newBoardDB = boardDB.map((board) => {
+      if (board.id === boardEl.id) {
+        const updatedObj = {
+          ...board,
+          comment: [...board.comment, newComment],
+        };
+        return updatedObj;
+      }
+      return board;
+    });
+
     try {
-      const res = await axios.post(
-        `http://localhost:4000/board/add/comment/${id}`,
-        newComment,
-      );
-
-      console.log(res.data);
-
-      const newBoardDB = boardDB.map((board) => {
-        if (board.id === boardEl.id) {
-          const updatedObj = {
-            ...board,
-            comment: [...board.comment, newComment],
-          };
-          return updatedObj;
-        }
-        return board;
-      });
-
+      await setComment(id, newComment);
       setBoardDB(newBoardDB);
     } catch (err) {
       console.error(err);
@@ -143,7 +125,7 @@ export default function Post({ boardDB, boardEl, setBoardDB, getBoard }) {
     } else if (!info?.profileImg) {
       return '/images/default-profile.png';
     } else {
-      return `http://localhost:4000/uploads/${info?.profileImg}`;
+      return `${process.env.REACT_APP_API_URL}/uploads/${info?.profileImg}`;
     }
   };
 

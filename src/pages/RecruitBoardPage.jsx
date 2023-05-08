@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { init } from '../store/modules/study';
 import { useNavigate } from 'react-router-dom';
 import '../style/recruitBoard/RecruitBoard.scss';
+import { getStudy } from '../apis/study';
 
 export default function RecruitBoard() {
   const dispatch = useDispatch();
@@ -16,8 +17,8 @@ export default function RecruitBoard() {
   // study 데이터 가져와서 state에 적용시키기
   const getStudyInfo = async () => {
     try {
-      const res = await axios.get(`http://localhost:4000/study/`);
-      dispatch(init(res.data));
+      const res = getStudy();
+      dispatch(init(res));
     } catch (err) {
       console.error(err);
     }

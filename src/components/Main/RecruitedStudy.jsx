@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { init } from '../../store/modules/study';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import '../../style/main.scss';
+import { getStudy } from '../../apis/study';
 
 export default function RecruitedStudy() {
   const studies = useSelector((el) => el.study.studies);
@@ -14,14 +14,11 @@ export default function RecruitedStudy() {
 
   // study 데이터 가져와서 state에 적용시키기
   const getStudyInfo = async () => {
-    try {
-      const res = await axios.get(`http://localhost:4000/study`);
-      const latestStudies = res.data.slice().reverse().slice(0, 4);
-      dispatch(init(latestStudies));
-    } catch (err) {
-      console.error(err);
-    }
+    const res = await getStudy();
+    const latestStudies = res.slice().reverse().slice(0, 4);
+    dispatch(init(latestStudies));
   };
+
   useEffect(() => {
     getStudyInfo();
     if (!localStorage.getItem('userId')) {

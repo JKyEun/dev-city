@@ -17,6 +17,7 @@ export default function StudyStatus() {
     state.studyDetail.study.member.some((member) => member.memberId === userId),
   );
 
+  // FIXME
   useEffect(() => {
     async function fetchMembersData() {
       const requests = members.map((member) =>

@@ -4,7 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setStudy } from '../../store/modules/studyDetail';
 import { useParams } from 'react-router-dom';
 import '../../style/studyProfile.scss';
-import { joinStudy } from '../../apis/user';
+import { getUser, joinStudy } from '../../apis/user';
+import { updateStudyInfo } from '../../apis/study';
+import { removeRequest } from '../../apis/invite';
 
 export default function ParticipationRequest({ userId }) {
   const { id } = useParams();
@@ -14,8 +16,8 @@ export default function ParticipationRequest({ userId }) {
 
   const getMemberInfo = async (id) => {
     try {
-      const res = await axios.get(`http://localhost:4000/user/${id}`);
-      setMember(() => res.data);
+      const res = await getUser(id);
+      setMember(() => res);
     } catch (err) {
       console.error(err);
     }
@@ -44,9 +46,7 @@ export default function ParticipationRequest({ userId }) {
         updatedMember.isLeader = true;
       }
 
-      await axios.put(`http://localhost:4000/study/update/${id}`, {
-        updatedMember,
-      });
+      await updateStudyInfo(id, { updatedMember });
       await joinStudy({
         userId: currentUserId,
         studyId: id,
@@ -90,12 +90,7 @@ export default function ParticipationRequest({ userId }) {
         userId: currentUserId,
       };
 
-      const requestRes = await axios.post(
-        `http://localhost:4000/invite/remove/${id}`,
-        toRemoveId,
-      );
-
-      console.log(requestRes.data);
+      await removeRequest(id, toRemoveId);
     } catch (err) {
       console.error(err);
     }
@@ -121,12 +116,7 @@ export default function ParticipationRequest({ userId }) {
         userId: currentUserId,
       };
 
-      const requestRes = await axios.post(
-        `http://localhost:4000/invite/remove/${id}`,
-        toRemoveId,
-      );
-
-      console.log(requestRes.data);
+      await removeRequest(id, toRemoveId);
     } catch (err) {
       console.error(err);
     }

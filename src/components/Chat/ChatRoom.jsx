@@ -1,9 +1,9 @@
-import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import io from 'socket.io-client';
 import { setChatLog } from '../../store/modules/chat';
 import Loading from '../Loading';
+import { getChat, pushChat } from '../../apis/chat';
 
 export default function ChatRoom() {
   const dispatch = useDispatch();
@@ -11,7 +11,7 @@ export default function ChatRoom() {
   const [loading, setLoading] = useState(true);
   const chatInput = useRef('');
   const userInfo = useSelector((state) => state.user);
-  const socket = io('http://localhost:4000');
+  const socket = io(process.env.REACT_APP_API_URL);
   const messageWindow = useRef(null);
   const nowChattingWith = useSelector((state) => state.chat.nowChattingWith);
   const roomId = useSelector((state) => state.chat.roomId);
@@ -47,16 +47,10 @@ export default function ChatRoom() {
     dispatch(setChatLog(newChatLog));
 
     // DB에 전송
-    const res = await axios.post(
-      `http://localhost:4000/chat/push/${roomId}`,
-      newChat,
-    );
-
-    console.log(res.data);
+    await pushChat(roomId, newChat);
 
     // 입력창 비우기
     chatInput.current.value = '';
-    console.log(newChat.date);
   };
 
   const scrollToBottom = () => {
@@ -66,16 +60,10 @@ export default function ChatRoom() {
   };
 
   const getChatLog = async () => {
-    try {
-      const res = await axios.get(`http://localhost:4000/chat/get/${roomId}`);
-      console.log(res.data);
+    const res = await getChat(roomId);
+    dispatch(setChatLog(res.chatLog));
 
-      dispatch(setChatLog(res.data.chatLog));
-
-      setLoading(false);
-    } catch (err) {
-      console.error(err);
-    }
+    setLoading(false);
   };
 
   useEffect(() => {
