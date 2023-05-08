@@ -2,13 +2,14 @@
   <br />
   <img src="https://user-images.githubusercontent.com/101779079/236622802-cdf22c91-1da9-487b-8298-09d0023ce339.png" width=50%>
   <br />
-	
-  # 개발자들을 위한 스터디 서비스, dev-city✨
+
+# ✨개발자들을 위한 스터디 서비스, dev-city✨
+
 </div>
 
 <br />
 
-## 목차
+## 🔮 목차
 
 1. [**프로젝트 소개**](#1)
 2. [**기능 소개**](#2)
@@ -17,13 +18,12 @@
 5. [**API 명세**](#5)
 6. [**폴더 구조**](#6)
 7. [**Commit & Branch Convention**](#7)
-8. [**어려웠던 점**](#8)
 
 <br />
 
 <div id="1"></div>
 
-## 프로젝트 소개
+## 📢 프로젝트 소개
 
 ```
 다양한 사용자들과 함께 스터디를 만들어요!
@@ -31,10 +31,10 @@
 dev-city에서 나만의 도시를 만들어보세요!
 ```
 
-> 배포링크
+> 배포링크 : [dev-city]()
 
-- **Demo ID** : dev-city
-- **Demo PW** : test1234
+- **Test ID** : dev-city
+- **Test PW** : test1234
 
 > 프로젝트 기간 : 23.04.06 ~ 23.04.19
 
@@ -44,35 +44,36 @@ dev-city에서 나만의 도시를 만들어보세요!
   <tr>
      <td align="center">
       <a href="https://github.com/JKyEun">
-        <img src="https://user-images.githubusercontent.com/101779079/236624186-7ba84e3d-6350-4b30-af1c-4885f1282b67.png" width=170px alt=“장경은 프로필" />
+        <img src="https://avatars.githubusercontent.com/u/108623656?v=4" width=170px alt=“장경은 프로필" />
       </a>
     </td>
     <td align="center">
        <a href="https://github.com/minjeong19">
-        <img src="https://user-images.githubusercontent.com/101779079/236624186-7ba84e3d-6350-4b30-af1c-4885f1282b67.png" width=170px alt=“김민정 프로필" />
+        <img src="https://avatars.githubusercontent.com/u/55127180?v=4" width=170px alt=“김민정 프로필" />
       </a>
     </td>
     <td align="center">
       <a href="https://github.com/KingJiwon">
-	<img src="https://user-images.githubusercontent.com/101779079/236624186-7ba84e3d-6350-4b30-af1c-4885f1282b67.png" width=170px alt=“박지원 프로필" />
+	<img src="https://avatars.githubusercontent.com/u/98508954?v=4" width=170px alt=“박지원 프로필" />
       </a>
     </td>
     <td align="center">
       <a href="https://github.com/ssb1565b">
-	<img src="https://user-images.githubusercontent.com/101779079/236624186-7ba84e3d-6350-4b30-af1c-4885f1282b67.png" width=170px alt=“송수빈 프로필" />
+	<img src="https://avatars.githubusercontent.com/u/84695884?v=4" width=170px alt=“송수빈 프로필" />
       </a>
     </td>
     <td align="center">
 	<a href="https://github.com/Sung-Heee">
-       <img src="https://user-images.githubusercontent.com/101779079/236624186-7ba84e3d-6350-4b30-af1c-4885f1282b67.png" width=170px alt=“조성희 프로필" />
+       <img src="https://avatars.githubusercontent.com/u/101779079?v=4" width=170px alt=“조성희 프로필" />
     </td>
   </tr>
+
   <tr>
     <td align="center">
       <a href="https://github.com/JKyEun">
         장경은
       </a>
-    </td>                                                                                                                                              
+    </td>                       
     <td align="center">
        <a href="https://github.com/minjeong19">
         김민정
@@ -115,43 +116,57 @@ dev-city에서 나만의 도시를 만들어보세요!
     <td align="center">
     로그인 & 회원가입<br />
     나의 할 일<br />
-    스터디 게시판<br />
+    스터디 내 게시판<br />
+    친구도시 보기<br />
     1:1 채팅
     </td>
     <td align="center">
+    메인페이지<br />
     추천친구<br />
+    프로필 사진 업로드
     </td>
     <td align="center">
     스터디 검색 필터<br />
+    스터디 목록 페이지<br />
+    스터디원 학습 현황<br />
+    스터디 모집 종료 및 관심 스터디 기능
     </td>
     <td align="center">
-    마이페이지<br />
-    문자 전송<br />
+    UI/UX & 브랜딩</br>
+    참여/관심 스터디</br>
+    스터디 검색</br>
+    스터디 공유</br>
+    문자 전송</br>
+    프로그레스 바
     </td>
     <td align="center">
-    스터디 생성<br />
-    스터디 탈퇴<br />
+    스터디 생성</br>
+    스터디 삭제</br>
+    스터디 탈퇴</br>
+    스터디 수정</br>
+    스터디 상세페이지
     </td>
   </tr>
 </table>
 
 <div id="2"></div>
 
-## 기능 소개
+## 🕹 기능 소개
 
-|                                                         로그인&회원가입                                                          |                                                           스터디 생성                                                            |
-| :------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------: |
-|                                                               gif                                                                |                                                               gif                                                                |
-|                                                         **스터디 조회**                                                          |                                                     **스터디 가입 및 수락**                                                      |
-|                                                               gif                                                                |                                                               gif                                                                |
-|                                                     **마이페이지 - 스터디**                                                      |                                                      **마이페이지 - 할 일**                                                      |
-| <img width='350' src='https://user-images.githubusercontent.com/108623656/236862977-0bd9a068-fc5c-4586-9db3-b69ddef7a322.gif' /> | <img width='350' src='https://user-images.githubusercontent.com/108623656/236862977-0bd9a068-fc5c-4586-9db3-b69ddef7a322.gif' /> |
-|                                                       **스터디 상세정보**                                                        |                                                        **스터디 게시판**                                                         |
-|                                                               gif                                                                |                                                               gif                                                                |
-|                                                         **스터디 현황**                                                          |                                                           **맞팔하기**                                                           |
-|                                                               gif                                                                |                                                               gif                                                                |
-|                                                         **DM 주고받기**                                                          |                                                        **친구도시 구경**                                                         |
-| <img width='350' src='https://user-images.githubusercontent.com/108623656/236864610-06208bc9-512f-4eaf-b4c6-44ed27fccbd3.gif' /> |                                                               gif                                                                |
+|                                                         로그인&회원가입                                                          |                                                       스터디 생성 및 삭제                                                       |
+| :------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------: |
+|  <img width='350' src="https://user-images.githubusercontent.com/84695884/236869279-7e4d5e8f-9b07-4f84-82b3-7e3d3754d9d1.gif"/>  | <img width='350' src="https://user-images.githubusercontent.com/101779079/236871856-178ff70f-93bd-49f2-8fdc-c181c878eff1.gif"/> |
+|                                                        **스터디 필터링**                                                         |                                                     **스터디 가입 및 수락**                                                     |
+| <img width='350' src='https://user-images.githubusercontent.com/55127180/236865462-c556beab-68b5-451f-a7a3-6f998bd4dcb9.gif' />  | <img width='350' src="https://user-images.githubusercontent.com/98508954/236869240-cd877665-bce3-4ec7-bf6a-da4efcf0ef34.gif" /> |
+|                                                         **스터디 검색**                                                          |                                                         **스터디 탈퇴**                                                         |
+|  <img width='350' src="https://user-images.githubusercontent.com/84695884/236870782-fd121831-aac7-48ee-9a7a-d47011564279.gif"/>  | <img width='350' src="https://user-images.githubusercontent.com/101779079/236873891-7327cbf3-0fd3-455c-8e4a-8bb54662cf01.gif"/> |
+|                                                                                                                                  |
+|                                                     **마이페이지 - 스터디**                                                      |                                                     **마이페이지 - 할 일**                                                      |
+| <img width='350' src='https://user-images.githubusercontent.com/108623656/236862977-0bd9a068-fc5c-4586-9db3-b69ddef7a322.gif' /> | <img width='350' src="https://user-images.githubusercontent.com/55127180/236868546-fc4cdf41-8e4c-4465-bb20-3b9bcf6f0142.gif"/>  |
+|                                                      **스터디 상세 페이지**                                                      |                                                          **맞팔하기**                                                           |
+| <img width='350' src="https://user-images.githubusercontent.com/101779079/236870339-351f519f-8e2e-45d6-904f-083838b0fb92.gif"/>  | <img width='350' src='https://user-images.githubusercontent.com/98508954/236872031-0e55de46-636a-4b5a-a7d6-ba8c4985464b.gif' /> |
+|                                                         **DM 주고받기**                                                          |                                                        **친구도시 구경**                                                        |
+| <img width='350' src='https://user-images.githubusercontent.com/108623656/236864610-06208bc9-512f-4eaf-b4c6-44ed27fccbd3.gif' /> | <img width='350' src='https://user-images.githubusercontent.com/108623656/236869638-45348ded-5bcd-433d-9295-a2105520f981.gif'/> |
 
 <div id="3"></div>
 
@@ -161,7 +176,6 @@ dev-city에서 나만의 도시를 만들어보세요!
 | <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Google_Chrome_icon_%28February_2022%29.svg/600px-Google_Chrome_icon_%28February_2022%29.svg.png" alt="Python" width="50px" height="50px" /> |
 | :---------------------------------------------------------------------------------------------------------------------: |
 | Chrome |
-
 **IDE**
 
 | <img src="https://cdn.icon-icons.com/icons2/2107/PNG/512/file_type_vscode_icon_130084.png" alt="Python" width="50px" height="50px" /> |
@@ -184,7 +198,7 @@ dev-city에서 나만의 도시를 만들어보세요!
 
 <div id="4"></div>
 
-## 기술 스택
+## 🛠 기술 스택
 
 **Back-end**
 
@@ -204,7 +218,7 @@ dev-city에서 나만의 도시를 만들어보세요!
 
 <div id="5"></div>
 
-## API 명세
+## 📑 API 명세
 
 <details>
 <summary>API 명세서</summary>
@@ -254,10 +268,15 @@ dev-city에서 나만의 도시를 만들어보세요!
 
 <div id="6"></div>
 
-## 폴더 구조
+## 🗂 폴더 구조
+
+**Front-end**
 
 ```
-📦 /src
+📁 /node_modules
+📂 /public
+ ┗ 📂 /images
+📂 /src
  ┣ 📂 /apis
  ┣ 📂 /components
  ┃ ┣ 📂 /Chat
@@ -270,20 +289,52 @@ dev-city에서 나만의 도시를 만들어보세요!
  ┣ 📂 /pages
  ┣ 📂 /store
  ┣ 📂 /style
- ┃ ┣ 📂 /recruitBoard
  ┣ 📂 /utils
  ┣ 📜 App.js
- ┣ 📜 GithubRedirectHandler.js
  ┣ 📜 index.css
  ┣ 📜 index.js
+ ┣ 📜 GithubRedirectHandler.js
  ┗ 📜 KakaoRedirectHandler.js
+  📜 .env
+  📜 .gitignore
+  📜 .prettierrc
+  📜 .pakage.json
+  📜 README.md
 ```
 
-<br>
+**Back-end**
+
+```
+📂 /.vscode
+ ┗ 📜 settings.json
+📁 /node_modules
+📂 /controllers
+ ┣ 📜 boardController.js
+ ┣ 📜 chatController.js
+ ┣ 📜 inviteController.js
+ ┣ 📜 loginController.js
+ ┣ 📜 mainController.js
+ ┣ 📜 mongoConnect.js
+ ┣ 📜 studyController.js
+ ┗ 📜 userController.js
+📂 /routes
+ ┣ 📜 board.js
+ ┣ 📜 chat.js
+ ┣ 📜 invite.js
+ ┣ 📜 main.js
+ ┣ 📜 study.js
+ ┗ 📜 user.js
+  📜 server.js
+  📜 .env
+  📜 .eslintrc.js
+  📜 .prettierrc
+  📜 package.json
+
+```
 
 <div id="7"></div>
 
-## Commit & Branch Convention
+## 🙏 Commit & Branch Convention
 
 | 태그이름 | 설명                                               |
 | -------- | -------------------------------------------------- |
@@ -294,9 +345,3 @@ dev-city에서 나만의 도시를 만들어보세요!
 | Rename   | 파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우 |
 | Remove   | 파일을 삭제하는 작업만 수행하는 경우               |
 | Chore    | 프로젝트 초기설정 및 빌드 관련 부분                |
-
-<br>
-
-<div id="8"></div>
-
-## 어려웠던 점

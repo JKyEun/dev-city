@@ -3,10 +3,22 @@ import '../../style/allUsers.scss';
 import EachUser from './EachUser';
 import { useSelector } from 'react-redux';
 import { getAllUser } from '../../apis/main';
+import axios from 'axios';
 
 export default function AllUsers() {
   const [randomUsers, setRandomUsers] = useState([]);
   const userInfo = useSelector((state) => state.user);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:4000/allUser/user`)
+      .then((response) => {
+        setRandomUsers(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   useEffect(() => {
     const getUserFunc = async () => {
