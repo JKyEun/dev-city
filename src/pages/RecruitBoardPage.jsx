@@ -3,7 +3,6 @@ import Board from '../components/recruitBoard/Board';
 import Sidebar from '../components/recruitBoard/Sidebar';
 import Category from '../components/recruitBoard/Category';
 import SubHeader from '../components/recruitBoard/SubHeader';
-import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { init } from '../store/modules/study';
 import { useNavigate } from 'react-router-dom';
@@ -17,7 +16,7 @@ export default function RecruitBoard() {
   // study 데이터 가져와서 state에 적용시키기
   const getStudyInfo = async () => {
     try {
-      const res = getStudy();
+      const res = await getStudy();
       dispatch(init(res));
     } catch (err) {
       console.error(err);

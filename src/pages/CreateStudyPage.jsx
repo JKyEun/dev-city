@@ -8,7 +8,6 @@ import {
   CircularProgressbarWithChildren,
 } from 'react-circular-progressbar';
 import { create } from '../store/modules/study';
-import axios from 'axios';
 import '../style/createStudy.scss';
 import 'react-circular-progressbar/dist/styles.css';
 import { createStudy } from '../apis/study';

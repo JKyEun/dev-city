@@ -5,7 +5,6 @@ import {
   modifyTodo,
   removeTodo,
 } from '../../store/modules/user';
-import axios from 'axios';
 import { deleteTodoList, updateTodoList } from '../../apis/user';
 
 export default function TodoLiEl({ el, selectedDate }) {

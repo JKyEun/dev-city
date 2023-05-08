@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import '../../style/allUsers.scss';
 import EachUser from './EachUser';
@@ -8,18 +7,6 @@ import { getAllUser } from '../../apis/main';
 export default function AllUsers() {
   const [randomUsers, setRandomUsers] = useState([]);
   const userInfo = useSelector((state) => state.user);
-
-  useEffect(() => {
-    // FIXME
-    axios
-      .get(`http://localhost:4000/allUser/user`)
-      .then((response) => {
-        setRandomUsers(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
 
   useEffect(() => {
     const getUserFunc = async () => {

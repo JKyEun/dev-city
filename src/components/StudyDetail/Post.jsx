@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Comment from './Comment';
-import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import PostDropdown from './PostDropdown';

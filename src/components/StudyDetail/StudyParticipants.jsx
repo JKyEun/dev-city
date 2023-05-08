@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import '../../style/studyProfile.scss';
 import { getUser } from '../../apis/user';

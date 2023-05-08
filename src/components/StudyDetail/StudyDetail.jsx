@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
 import { fetchStudy, setStudy } from '../../store/modules/studyDetail';
 import ParticipationRequest from './ParticipationRequest';
 import StudyParticipants from './StudyParticipants';
