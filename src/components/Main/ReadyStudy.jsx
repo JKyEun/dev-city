@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { updateLike } from '../../store/modules/user';

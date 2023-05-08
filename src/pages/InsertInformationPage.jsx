@@ -2,7 +2,6 @@ import React, { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../style/insertInformationPage.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
 import { updateUser } from '../store/modules/user';
 import { updateUserInfo } from '../apis/user';
 

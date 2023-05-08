@@ -1,6 +1,5 @@
 import React, { Fragment, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
 import '../../style/studyDetail.scss';
 import {
   fetchStudy,

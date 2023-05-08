@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import HeaderDropdown from './HeaderDropdown';
-import axios from 'axios';
 import '../style/_header.scss';
 import Chat from './Chat/Chat';
 import { useDispatch, useSelector } from 'react-redux';
