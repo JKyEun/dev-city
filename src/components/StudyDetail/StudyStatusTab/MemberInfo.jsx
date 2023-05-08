@@ -12,10 +12,9 @@ export default function MemberInfo({ data }) {
               ? data?.profileImg
               : !data?.profileImg
               ? '/images/default-profile.png'
-              : `http://localhost:4000/uploads/${data?.profileImg?.replace(
-                  '/',
-                  '',
-                )}`
+              : `${
+                  process.env.REACT_APP_API_URL
+                }/uploads/${data?.profileImg?.replace('/', '')}`
           }
           alt="프로필 사진"
         />

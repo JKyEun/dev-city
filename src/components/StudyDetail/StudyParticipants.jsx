@@ -28,10 +28,9 @@ export default function StudyParticipants({ member }) {
               ? userInfo?.profileImg
               : !userInfo?.profileImg
               ? '/images/default-profile.png'
-              : `http://localhost:4000/uploads/${userInfo?.profileImg?.replace(
-                  '/',
-                  '',
-                )}`
+              : `${
+                  process.env.REACT_APP_API_URL
+                }/uploads/${userInfo?.profileImg?.replace('/', '')}`
           }
           alt="프로필 사진"
         />

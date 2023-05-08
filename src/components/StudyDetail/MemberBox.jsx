@@ -22,6 +22,7 @@ import {
   openStudy,
   sendSMS,
 } from '../../apis/study';
+import { addRequest, getRequest } from '../../apis/invite';
 
 export default function MemberBox({ match, studyDetail, setIsModifyMode }) {
   const study = useSelector((state) => state.studyDetail.study);
@@ -108,11 +109,8 @@ export default function MemberBox({ match, studyDetail, setIsModifyMode }) {
         return;
       }
 
-      const getRes = await axios.get(
-        `http://localhost:4000/invite/get/${match.params.id}`,
-      );
-
-      const requestList = getRes.data.request;
+      const getRes = await getRequest(match.params.id);
+      const requestList = getRes.request;
       if (requestList.includes(currentUserId)) {
         alert('이미 참가 신청이 완료되었습니다.');
         return;
@@ -136,12 +134,7 @@ export default function MemberBox({ match, studyDetail, setIsModifyMode }) {
           studyName: study.studyName,
         });
       }
-      const addRes = await axios.post(
-        `http://localhost:4000/invite/add/${match.params.id}`,
-        requestUser,
-      );
-
-      console.log(addRes.data);
+      await addRequest(match.params.id, requestUser);
 
       const newStudy = {
         ...study,

@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import '../../style/studyProfile.scss';
 import { getUser, joinStudy } from '../../apis/user';
 import { updateStudyInfo } from '../../apis/study';
+import { removeRequest } from '../../apis/invite';
 
 export default function ParticipationRequest({ userId }) {
   const { id } = useParams();
@@ -89,12 +90,7 @@ export default function ParticipationRequest({ userId }) {
         userId: currentUserId,
       };
 
-      const requestRes = await axios.post(
-        `http://localhost:4000/invite/remove/${id}`,
-        toRemoveId,
-      );
-
-      console.log(requestRes.data);
+      await removeRequest(id, toRemoveId);
     } catch (err) {
       console.error(err);
     }
@@ -120,12 +116,7 @@ export default function ParticipationRequest({ userId }) {
         userId: currentUserId,
       };
 
-      const requestRes = await axios.post(
-        `http://localhost:4000/invite/remove/${id}`,
-        toRemoveId,
-      );
-
-      console.log(requestRes.data);
+      await removeRequest(id, toRemoveId);
     } catch (err) {
       console.error(err);
     }

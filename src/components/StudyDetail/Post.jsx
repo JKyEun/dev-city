@@ -125,7 +125,7 @@ export default function Post({ boardDB, boardEl, setBoardDB, getBoard }) {
     } else if (!info?.profileImg) {
       return '/images/default-profile.png';
     } else {
-      return `http://localhost:4000/uploads/${info?.profileImg}`;
+      return `${process.env.REACT_APP_API_URL}/uploads/${info?.profileImg}`;
     }
   };
 

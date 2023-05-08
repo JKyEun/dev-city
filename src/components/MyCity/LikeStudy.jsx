@@ -2,7 +2,6 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { updateLike } from '../../store/modules/user';
-import axios from 'axios';
 import { getUser } from '../../apis/user';
 import { pushLikeList } from '../../apis/study';
 

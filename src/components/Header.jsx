@@ -152,10 +152,9 @@ export default function Header() {
                         ? profileImgUpdate.replace('/', '')
                         : !profileImgUpdate
                         ? '/images/default-profile.png'
-                        : `http://localhost:4000/uploads/${profileImgUpdate?.replace(
-                            '/',
-                            '',
-                          )}`
+                        : `${
+                            process.env.REACT_APP_API_URL
+                          }/uploads/${profileImgUpdate?.replace('/', '')}`
                     }
                     alt="profile"
                   />

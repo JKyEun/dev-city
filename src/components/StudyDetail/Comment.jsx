@@ -131,7 +131,7 @@ export default function Comment({
                   ? commentWriterInfo.profileImg
                   : !commentWriterInfo.profileImg
                   ? '/images/default-profile.png'
-                  : `http://localhost:4000/uploads/${commentWriterInfo?.profileImg}`
+                  : `${process.env.REACT_APP_API_URL}/uploads/${commentWriterInfo?.profileImg}`
               }
               alt="댓글 작성자 프로필"
             />
