@@ -11,7 +11,7 @@ export const getRequest = async (id) => {
 
 export const removeRequest = async (id, data) => {
   try {
-    const res = await api.get(`/invite/remove/${id}`, data);
+    const res = await api.post(`/invite/remove/${id}`, data);
     console.log(res.data);
   } catch (err) {
     console.error(err);
@@ -20,7 +20,7 @@ export const removeRequest = async (id, data) => {
 
 export const addRequest = async (id, data) => {
   try {
-    const res = await api.get(`/invite/add/${id}`, data);
+    const res = await api.post(`/invite/add/${id}`, data);
     console.log(res.data);
   } catch (err) {
     console.error(err);
