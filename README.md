@@ -153,19 +153,18 @@ dev-city에서 나만의 도시를 만들어보세요!
 
 ## 🕹 기능 소개
 
-|                                                         로그인&회원가입                                                          |                                                       스터디 생성 및 삭제                                                       |
+|                                                        로그인 & 회원가입                                                         |                                                       스터디 생성 및 삭제                                                       |
 | :------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------: |
 |  <img width='350' src="https://user-images.githubusercontent.com/84695884/236869279-7e4d5e8f-9b07-4f84-82b3-7e3d3754d9d1.gif"/>  | <img width='350' src="https://user-images.githubusercontent.com/101779079/236871856-178ff70f-93bd-49f2-8fdc-c181c878eff1.gif"/> |
 |                                                        **스터디 필터링**                                                         |                                                     **스터디 가입 및 수락**                                                     |
 | <img width='350' src='https://user-images.githubusercontent.com/55127180/236865462-c556beab-68b5-451f-a7a3-6f998bd4dcb9.gif' />  | <img width='350' src="https://user-images.githubusercontent.com/98508954/236869240-cd877665-bce3-4ec7-bf6a-da4efcf0ef34.gif" /> |
 |                                                         **스터디 검색**                                                          |                                                         **스터디 탈퇴**                                                         |
 |  <img width='350' src="https://user-images.githubusercontent.com/84695884/236870782-fd121831-aac7-48ee-9a7a-d47011564279.gif"/>  | <img width='350' src="https://user-images.githubusercontent.com/101779079/236873891-7327cbf3-0fd3-455c-8e4a-8bb54662cf01.gif"/> |
-|                                                                                                                                  |
 |                                                     **마이페이지 - 스터디**                                                      |                                                     **마이페이지 - 할 일**                                                      |
 | <img width='350' src='https://user-images.githubusercontent.com/108623656/236862977-0bd9a068-fc5c-4586-9db3-b69ddef7a322.gif' /> | <img width='350' src="https://user-images.githubusercontent.com/55127180/236868546-fc4cdf41-8e4c-4465-bb20-3b9bcf6f0142.gif"/>  |
 |                                                      **스터디 상세 페이지**                                                      |                                                          **맞팔하기**                                                           |
 | <img width='350' src="https://user-images.githubusercontent.com/101779079/236870339-351f519f-8e2e-45d6-904f-083838b0fb92.gif"/>  | <img width='350' src='https://user-images.githubusercontent.com/98508954/236872031-0e55de46-636a-4b5a-a7d6-ba8c4985464b.gif' /> |
-|                                                         **DM 주고받기**                                                          |                                                        **친구도시 구경**                                                        |
+|                                                         **DM 주고받기**                                                          |                                                        **친구도시 방문**                                                        |
 | <img width='350' src='https://user-images.githubusercontent.com/108623656/236864610-06208bc9-512f-4eaf-b4c6-44ed27fccbd3.gif' /> | <img width='350' src='https://user-images.githubusercontent.com/108623656/236869638-45348ded-5bcd-433d-9295-a2105520f981.gif'/> |
 
 <div id="3"></div>
