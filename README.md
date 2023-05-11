@@ -175,6 +175,7 @@ dev-city에서 나만의 도시를 만들어보세요!
 | <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Google_Chrome_icon_%28February_2022%29.svg/600px-Google_Chrome_icon_%28February_2022%29.svg.png" alt="Python" width="50px" height="50px" /> |
 | :---------------------------------------------------------------------------------------------------------------------: |
 | Chrome |
+
 **IDE**
 
 | <img src="https://cdn.icon-icons.com/icons2/2107/PNG/512/file_type_vscode_icon_130084.png" alt="Python" width="50px" height="50px" /> |
