@@ -2,6 +2,7 @@ import api from './index';
 
 export const getUser = async (id) => {
   try {
+    if (!id) return;
     const res = await api.get(`/user/${id}`);
     return res.data;
   } catch (err) {

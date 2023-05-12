@@ -20,7 +20,7 @@ export default function Header() {
     try {
       const userId = localStorage.getItem('userId');
       const res = await getUser(userId);
-      setProfileImgUpdate(res.profileImg ? `/${res.profileImg}` : null);
+      setProfileImgUpdate(res?.profileImg ? `/${res?.profileImg}` : null);
     } catch (err) {
       console.error(err);
     }
