@@ -32,7 +32,7 @@ export default function SignInPage() {
         console.log(`요청실패, status는 ${res.status}`);
       }
     } catch (err) {
-      alert('백엔드 에러');
+      alert('아이디 또는 비밀번호가 틀렸습니다.');
       console.error(`요청실패, 에러는 ${err}`);
     }
   };

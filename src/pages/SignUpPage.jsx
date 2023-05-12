@@ -13,7 +13,7 @@ export default function SignUpPage() {
   const [isPwMatched, setIsPwMatched] = useState(true);
 
   const checkPassword = () => {
-    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d\W]{8,}$/;
     if (passwordRegex.test(passwordInput.current.value)) {
       setIsAccountValid(true);
     } else {
@@ -57,11 +57,11 @@ export default function SignUpPage() {
         navigate('/information');
         window.location.reload();
       } else {
-        alert('실패');
+        alert('이미 존재하는 아이디입니다.');
         console.log(`요청실패, status는 ${res.status}`);
       }
     } catch (err) {
-      alert('회원가입에 실패했습니다.');
+      alert('이미 존재하는 아이디입니다.');
       console.error(`요청실패, 에러는 ${err}`);
     }
   };
