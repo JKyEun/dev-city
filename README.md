@@ -31,7 +31,7 @@
 dev-city에서 나만의 도시를 만들어보세요!
 ```
 
-> 배포링크 : [dev-city]()
+> 배포링크 : http://dev-city.link
 
 - **Test ID** : dev-city
 - **Test PW** : test1234
