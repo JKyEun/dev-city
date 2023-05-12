@@ -13,7 +13,7 @@ export default function SignUpPage() {
   const [isPwMatched, setIsPwMatched] = useState(true);
 
   const checkPassword = () => {
-    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d\W]{8,}$/;
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d\S]{8,}$/;
     if (passwordRegex.test(passwordInput.current.value)) {
       setIsAccountValid(true);
     } else {
