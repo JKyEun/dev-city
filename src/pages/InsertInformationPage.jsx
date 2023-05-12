@@ -147,7 +147,7 @@ export default function InsertInformationPage() {
           >
             <option value="프론트엔드">프론트엔드</option>
             <option value="백엔드">백엔드</option>
-            <option value="기획">웹</option>
+            <option value="웹">웹</option>
             <option value="앱">앱</option>
             <option value="게임">게임</option>
             <option value="기획">기획</option>
@@ -156,7 +156,7 @@ export default function InsertInformationPage() {
             <option value="블록체인">블록체인</option>
             <option value="보안">보안</option>
             <option value="임베디드">임베디드</option>
-            <option value="임베디드">UX/UI</option>
+            <option value="UX/UI">UX/UI</option>
           </select>
         </div>
         {userInfo.userName === '이름을 입력하세요' ? (
