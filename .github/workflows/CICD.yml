@@ -13,10 +13,10 @@ jobs:
           ENV_FILE_CONTENT: ${{ secrets.ENV_FILE_CONTENT }}
         run: echo "$ENV_FILE_CONTENT" > .env.production
 
-      - run: cat .env.production
-
       - uses: actions/checkout@main
       - run: npm ci
+      - name: Copy .env.production
+        run: cp .env.production .env.production
       - name: Build
         run: npm run build
         env:
