@@ -6,10 +6,15 @@ on:
 
 jobs:
   cicd:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@main
-      - run: npm i
+      - run: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+      - run: . ~/.nvm/nvm.sh
+      - run: nvm install 14
+      - run: nvm use 14
+      - run: node -v
+      - run: npm ci
       - run: npm run build
       - name: deploy to s3
         uses: jakejarvis/s3-sync-action@master
