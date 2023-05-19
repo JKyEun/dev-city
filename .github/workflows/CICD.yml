@@ -6,10 +6,10 @@ on:
 
 jobs:
   cicd:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@main
-      - run: npm ci
+      - run: npm i
       - run: npm run build
       - name: deploy to s3
         uses: jakejarvis/s3-sync-action@master
