@@ -11,7 +11,7 @@ jobs:
       - name: setup environment
         env:
           ENV_FILE_CONTENT: ${{ secrets.ENV_FILE_CONTENT }}
-        run: echo "$ENV_FILE_CONTENT" > .env
+        run: echo "$ENV_FILE_CONTENT" > .env.production
 
       - uses: actions/checkout@main
       - run: npm ci
