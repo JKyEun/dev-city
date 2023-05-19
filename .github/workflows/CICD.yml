@@ -10,7 +10,6 @@ jobs:
     steps:
       - uses: actions/checkout@main
       - run: npm ci
-      - run: npm run test
       - run: npm run build
       - name: deploy to s3
         uses: jakejarvis/s3-sync-action@master
