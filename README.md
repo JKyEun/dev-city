@@ -31,7 +31,7 @@
 dev-city에서 나만의 도시를 만들어보세요!
 ```
 
-> 배포링크 : http://dev-city.link
+> 배포링크 : EC2 비용문제로 배포가 종료되었습니다.
 
 - **Test ID** : dev-city
 - **Test PW** : test1234
